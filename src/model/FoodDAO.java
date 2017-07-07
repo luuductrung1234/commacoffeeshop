@@ -63,18 +63,18 @@ public class FoodDAO {
         return 0;
     }
     
-    public static int update(Food f)
+    public static int update(Food old_food, String newname, String newinfo, int newprice, byte newisdrink)
     {
         String sql = "UPDATE tbFood SET name = ?, info = ?, price = ?, isdrink = ? WHERE food_id = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement pst = cn.prepareStatement(sql);){
             
-            pst.setString(1, f.getName());
-            pst.setString(2, f.getInfo());
-            pst.setInt(3, f.getPrice());
-            pst.setByte(4, f.getIsdrink());
-            pst.setString(5, f.getFood_id());
+            pst.setString(1, newname);
+            pst.setString(2, newinfo);
+            pst.setInt(3, newprice);
+            pst.setByte(4, newisdrink);
+            pst.setString(5, old_food.getFood_id());
             
             return pst.executeUpdate();
             

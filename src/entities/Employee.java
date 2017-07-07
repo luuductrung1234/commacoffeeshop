@@ -6,39 +6,41 @@ package entities;
 import java.util.*;
 
 public class Employee {
-    private String em_id, name, addr, email, phone, manager, pass;
-    private Date startday;
-    private int em_role, age;
+    private String em_id, username, pass, name, addr, email, phone, manager;
+    private java.sql.Date birth, startday;
+    private int em_role;
 
     public Employee() {
     }
 
-    public Employee(String em_id, String name, Date startday, String addr, String email, String phone, int em_role, String manager, String pass, int age) {
+    public Employee(String em_id, String username, String pass, String name, java.sql.Date birth, java.sql.Date startday, String addr, String email, String phone, String manager, int em_role) {
         this.em_id = em_id;
+        this.username = username;
         this.pass = pass;
         this.name = name;
-        this.age = age;
+        this.birth = birth;
         this.startday = startday;
         this.addr = addr;
         this.email = email;
         this.phone = phone;
-        this.em_role = em_role;
         this.manager = manager;
+        this.em_role = em_role;
     }
     
     public Vector toVector()
     {
         Vector v = new Vector();
-        v.add(em_id);
-        v.add(pass);
-        v.add(name);
-        v.add(age);
-        v.add(startday);
-        v.add(addr);
-        v.add(email);
-        v.add(phone);
-        v.add(em_role);
-        v.add(manager);
+        v.add(this.em_id);
+        v.add(this.username);
+        v.add(this.pass);
+        v.add(this.name);
+        v.add(this.birth);
+        v.add(this.startday);
+        v.add(this.addr);
+        v.add(this.email);
+        v.add(this.phone);
+        v.add(this.em_role);
+        v.add(this.manager);
         
         return v;
     }
@@ -47,8 +49,24 @@ public class Employee {
         return em_id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public java.sql.Date getBirth() {
+        return birth;
+    }
+
+    public java.sql.Date getStartday() {
+        return startday;
     }
 
     public String getAddr() {
@@ -67,28 +85,32 @@ public class Employee {
         return manager;
     }
 
-    public String getPass() {
-        return pass;
-    }
-
-    public Date getStartday() {
-        return startday;
-    }
-
     public int getEm_role() {
         return em_role;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public void setEm_id(String em_id) {
         this.em_id = em_id;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setBirth(java.sql.Date birth) {
+        this.birth = birth;
+    }
+
+    public void setStartday(java.sql.Date startday) {
+        this.startday = startday;
     }
 
     public void setAddr(String addr) {
@@ -107,20 +129,9 @@ public class Employee {
         this.manager = manager;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
-    public void setStartday(Date startday) {
-        this.startday = startday;
-    }
-
     public void setEm_role(int em_role) {
         this.em_role = em_role;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
     
 }

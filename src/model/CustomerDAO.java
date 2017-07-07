@@ -26,7 +26,9 @@ public class CustomerDAO {
                 Customer newitem = new Customer();
                 newitem.setCus_id(rs.getString(1));
                 newitem.setName(rs.getString(2));
-                newitem.setDis_percent(rs.getInt(3));
+                newitem.setPhone(rs.getString(3));
+                newitem.setEmail(rs.getString(4));
+                newitem.setDiscount(rs.getInt(5));
                 ds.add(newitem);
             }
         } catch (SQLException ex) {
@@ -40,14 +42,16 @@ public class CustomerDAO {
     
     public static int insert(Customer c)
     {
-        String sql = "INSERT INTO tbCustomer VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tbCustomer VALUES (?, ?, ?, ?, ?)";
         
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement st = cn.prepareStatement(sql);)
-        {
+                PreparedStatement st = cn.prepareStatement(sql);){
+            
             st.setString(1, c.getCus_id());
             st.setString(2, c.getName());
-            st.setInt(3, c.getDis_percent());
+            st.setString(3, c.getPhone());
+            st.setString(4, c.getEmail());
+            st.setInt(5, c.getDiscount());
             
             return st.executeUpdate();
         } catch (SQLException ex) {
@@ -59,16 +63,18 @@ public class CustomerDAO {
     }
     
     
-    public static int update(Customer c)
+    public static int update(Customer c, String newname, String newphone, String newemail, int newdiscount)
     {
-        String sql = "UPDATE tbCustomer SET name = ?, dis_percent = ? where cus_id = ?";
+        String sql = "UPDATE tbCustomer SET name = ?, phone = ?, email = ?, discount = ? WHERE cus_id = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);)
         {
-            st.setString(1, c.getName());
-            st.setInt(2, c.getDis_percent());
-            st.setString(3, c.getCus_id());
+            st.setString(1, newname);
+            st.setString(2, newphone);
+            st.setString(3, newemail);
+            st.setInt(4, newdiscount);
+            st.setString(5, c.getCus_id());
             
             return st.executeUpdate();
         } catch (SQLException ex) {

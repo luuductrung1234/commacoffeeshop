@@ -13,36 +13,41 @@ import java.util.logging.Logger;
 public class AdminDAO {
 
 //SELF EDITING
-    public static Admin check(String ad_id, String pass)
+    public static Admin check(String username, String pass)
     {
-        Admin adresult = null;
-        String sql = "SELECT * FROM tbAdmin WHERE ad_id LIKE ? AND pass LIKE ?";
+        String sql = "SELECT * FROM tbAdmin WHERE username = ? AND pass = ?";
         
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement st = cn.prepareStatement(sql);)
-        {
-            st.setString(1, ad_id);
+                PreparedStatement st = cn.prepareStatement(sql);){
+            st.setString(1, username);
             st.setString(2, pass);
-            try (ResultSet rs = st.executeQuery()) {
-                String name = rs.getString(3);
-                int ad_role = rs.getInt(4);
-                adresult = new Admin(ad_id, pass, name, ad_role);
+            
+            try(ResultSet rs = st.executeQuery();)
+            {
+                if(rs.next()){
+                    Admin adresult = new Admin(rs.getString(1), username, pass, rs.getString(4));
+                    return adresult;
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return adresult;
+        return null;
     }
      
-    public static int changePass(Admin a)
+    public static int changePass(Admin old_admin, String newpass)
     {
-        try(Connection cn = new DBConnect().getCon())
-        {
-            String sql = "update tbAdmin set pass = ? where ad_id = ?";
-            PreparedStatement pst = cn.prepareStatement(sql);
-            pst.setString(1, a.getPass());
-            pst.setString(2, a.getAd_id());
+        String sql = "UPDATE tbAdmin SET pass = ? WHERE ad_id = ? AND username = ? AND pass = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement pst = cn.prepareStatement(sql);){
+            
+            pst.setString(1, newpass);
+            pst.setString(2, old_admin.getAd_id());
+            pst.setString(3, old_admin.getUsername());
+            pst.setString(4, old_admin.getUsername());
             
             return pst.executeUpdate();
             
@@ -54,22 +59,25 @@ public class AdminDAO {
     }
     
     
-    public static int update(Admin in_admin)
+    public static int update(Admin old_admin, String newusername, String newpass, String newname)
     {
-        String sql = "update tbAdmin set pass = ?, name = ?, ad_role = ? where ad_id = ?";
+        String sql = "UPDATE tbAdmin SET username = ?, pass = ?, name = ? WHERE ad_id = ? AND username = ? AND pass = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);)
         {
-            st.setString(1, in_admin.getPass());
-            st.setString(2, in_admin.getName());
-            st.setInt(3, in_admin.getAd_role());
-            st.setString(4, in_admin.getAd_id());
+            st.setString(1, newusername);
+            st.setString(2, newpass);
+            st.setString(3, newname);
+            st.setString(4, old_admin.getAd_id());
+            st.setString(5, old_admin.getUsername());
+            st.setString(6, old_admin.getPass());
             
             return st.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
             
+        } catch (SQLException ex) { 
+            ex.printStackTrace();
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return 0;
@@ -77,7 +85,8 @@ public class AdminDAO {
 // END SELF EDITING
     
     
-// REQUIRE ADMIN'S ROLE
+    
+// HIGHT LEVEL PROCESS
     public static List<Admin> getList()
     {
         List<Admin> ds = new ArrayList<>();
@@ -90,9 +99,9 @@ public class AdminDAO {
             while(rs.next()){
                 Admin newitem = new Admin();
                 newitem.setAd_id(rs.getString(1));
-                newitem.setPass(rs.getString(2));
-                newitem.setName(rs.getString(3));
-                newitem.setAd_role(rs.getInt(4));
+                newitem.setUsername(rs.getString(2));
+                newitem.setPass(rs.getString(3));
+                newitem.setName(rs.getString(4));
                 ds.add(newitem);
             }
         } catch (SQLException ex) {
@@ -104,17 +113,14 @@ public class AdminDAO {
     
     public static int insert(Admin new_ad, int your_role)
     {
-        if(new_ad.getAd_role() > your_role)      // không thể add admin có quyền cao hơn bản thân
-            return 0;
-        
         String sql = "INSERT INTO tbAdmin VALUES (?, ?, ?, ?)";
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement pst = cn.prepareStatement(sql);)
         {
             pst.setString(1, new_ad.getAd_id());
-            pst.setString(2, new_ad.getPass());
-            pst.setString(3, new_ad.getName());
-            pst.setInt(4, new_ad.getAd_role());
+            pst.setString(2, new_ad.getUsername());
+            pst.setString(3, new_ad.getPass());
+            pst.setString(4, new_ad.getName());
             
             return pst.executeUpdate();
         } catch (SQLException ex) {
@@ -129,22 +135,7 @@ public class AdminDAO {
     public static int delete(String ad_id, int your_role)
     {
         String sql = "SELECT * FROM tbAdmin WHERE ad_id = ?";
-        try(Connection cn = new DBConnect().getCon();
-                PreparedStatement st = cn.prepareStatement(sql);){
-            
-            st.setString(1, ad_id);
-            ResultSet rs = st.executeQuery();
-            if(rs.next()){
-                if(rs.getInt(4) >= your_role)        // không thể xoá tài khoản cấp độ cao hơn bản thân
-                    return 0;
-            }
-            
-            rs.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
         sql = "DELETE tbAdmin WHERE ad_id = ?";
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);){
@@ -158,5 +149,5 @@ public class AdminDAO {
         
         return 0;
     }
-// END REQUIRE ADMIN'S ROLE
+// END HIGHT LEVEL PROCESS
 }

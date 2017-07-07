@@ -6,32 +6,35 @@ package entities;
 import java.util.*;
 
 public class Admin {
-    private String ad_id, pass, name;
-    private int ad_role;
+    private String ad_id, username, pass, name;
 
     public Admin() {
     }
 
-    public Admin(String ad_id, String pass, String name, int ad_role) {
+    public Admin(String ad_id, String username, String pass, String name) {
         this.ad_id = ad_id;
+        this.username = username;
         this.pass = pass;
         this.name = name;
-        this.ad_role = ad_role;
     }
     
     public Vector toVector()
     {
         Vector v = new Vector();
         v.add(ad_id);
+        v.add(username);
         v.add(pass);
         v.add(name);
-        v.add(ad_role);
         
         return v;
     }
 
     public String getAd_id() {
         return ad_id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPass() {
@@ -42,12 +45,12 @@ public class Admin {
         return name;
     }
 
-    public int getAd_role() {
-        return ad_role;
-    }
-
     public void setAd_id(String ad_id) {
         this.ad_id = ad_id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPass(String pass) {
@@ -58,10 +61,5 @@ public class Admin {
         this.name = name;
     }
 
-    public void setAd_role(int ad_role) {
-        this.ad_role = ad_role;
-    }
-    
-    
     
 }

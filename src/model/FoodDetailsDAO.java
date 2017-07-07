@@ -29,7 +29,6 @@ public class FoodDetailsDAO {
                 newitem.setFm_id(rs.getString(3));
                 newitem.setQuan(rs.getFloat(4));
                 newitem.setUnit_use(rs.getString(5));
-                newitem.setWeight_unit_use(rs.getFloat(6));
                 
                 ds.add(newitem);
             }
@@ -44,7 +43,7 @@ public class FoodDetailsDAO {
     
     public static int insert(FoodDetails fd)
     {
-        String sql = "insert tbFoodDetails values(?, ?, ?, ?, ?, ?)";
+        String sql = "insert tbFoodDetails values(?, ?, ?, ?, ?)";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement pst = cn.prepareStatement(sql);){
@@ -54,7 +53,6 @@ public class FoodDetailsDAO {
             pst.setString(3, fd.getFm_id());
             pst.setFloat(4, fd.getQuan());
             pst.setString(5, fd.getUnit_use());
-            pst.setFloat(6, fd.getWeight_unit_use());
             
             return pst.executeUpdate();
             
@@ -66,19 +64,18 @@ public class FoodDetailsDAO {
         return 0;
     }
     
-    public static int update(FoodDetails fd)
+    public static int update(FoodDetails old_fd, String newfoodid, String newfmid, float newquan, String newunituse)
     {
-        String sql = "update tbFoodDetails set food_id = ?, fm_id = ?, quan = ?, unit_use = ?, weight_unit_use = ? where fd_id = ?";
+        String sql = "UPDATE tbFoodDetails SET food_id = ?, fm_id = ?, quan = ?, unit_use = ? WHERE fd_id = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement pst = cn.prepareStatement(sql);){
             
-            pst.setString(1, fd.getFood_id());
-            pst.setString(2, fd.getFm_id());
-            pst.setFloat(3, fd.getQuan());
-            pst.setString(4, fd.getUnit_use());
-            pst.setFloat(5, fd.getWeight_unit_use());
-            pst.setString(6, fd.getFd_id());
+            pst.setString(1, newfoodid);
+            pst.setString(2, newfmid);
+            pst.setFloat(3, newquan);
+            pst.setString(4, newunituse);
+            pst.setString(5, old_fd.getFd_id());
             
             return pst.executeUpdate();
             

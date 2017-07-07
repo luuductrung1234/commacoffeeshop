@@ -4,4 +4,7 @@ Project 2: Comma Coffee Shop managed system
   - stock managed mechanism
   - managed employee
   - statistic income
-updated 2
+
+
+Note:
+ - the "nn" file is just a scarecrow to keep the folder still existed when it is empty

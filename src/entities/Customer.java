@@ -3,27 +3,31 @@
  */
 package entities;
 
-import java.util.*;
+import java.util.Vector;
 
 public class Customer {
-    private String cus_id, name;
-    private int dis_percent;
+    private String cus_id, name, phone, email;
+    private int discount;
 
     public Customer() {
     }
 
-    public Customer(String cus_id, String name, int dis_percent) {
+    public Customer(String cus_id, String name, String phone, String email, int discount) {
         this.cus_id = cus_id;
         this.name = name;
-        this.dis_percent = dis_percent;
+        this.phone = phone;
+        this.email = email;
+        this.discount = discount;
     }
     
     public Vector toVector()
     {
         Vector v = new Vector();
-        v.add(cus_id);
-        v.add(name);
-        v.add(dis_percent);
+        v.add(this.cus_id);
+        v.add(this.name);
+        v.add(this.phone);
+        v.add(this.email);
+        v.add(discount);
         
         return v;
     }
@@ -36,8 +40,16 @@ public class Customer {
         return name;
     }
 
-    public int getDis_percent() {
-        return dis_percent;
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getDiscount() {
+        return discount;
     }
 
     public void setCus_id(String cus_id) {
@@ -48,8 +60,17 @@ public class Customer {
         this.name = name;
     }
 
-    public void setDis_percent(int dis_percent) {
-        this.dis_percent = dis_percent;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
     
 }

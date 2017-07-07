@@ -8,7 +8,6 @@ import java.util.*;
 public class FoodDetails {
     private String fd_id, food_id, fm_id, unit_use;
     private float quan;
-    private float weight_unit_use;
 
     public FoodDetails() {
     }
@@ -19,7 +18,6 @@ public class FoodDetails {
         this.fm_id = fm_id;
         this.unit_use = unit_use;
         this.quan = quan;
-        this.weight_unit_use = weight_unit_use;
     }
     
     public Vector toVector()
@@ -30,7 +28,6 @@ public class FoodDetails {
         v.add(fm_id);
         v.add(quan);
         v.add(unit_use);
-        v.add(weight_unit_use);
         
         return v;
     }
@@ -55,10 +52,6 @@ public class FoodDetails {
         return quan;
     }
 
-    public float getWeight_unit_use() {
-        return weight_unit_use;
-    }
-
     public void setFd_id(String fd_id) {
         this.fd_id = fd_id;
     }
@@ -78,10 +71,5 @@ public class FoodDetails {
     public void setQuan(float quan) {
         this.quan = quan;
     }
-
-    public void setWeight_unit_use(float weight_unit_use) {
-        this.weight_unit_use = weight_unit_use;
-    }
-
     
 }
