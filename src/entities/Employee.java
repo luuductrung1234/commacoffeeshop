@@ -8,24 +8,28 @@ import java.util.*;
 public class Employee {
     private String em_id, username, pass, name, addr, email, phone, manager;
     private java.sql.Date birth, startday;
+    private int hour_wage;
     private int em_role;
 
     public Employee() {
     }
 
-    public Employee(String em_id, String username, String pass, String name, java.sql.Date birth, java.sql.Date startday, String addr, String email, String phone, String manager, int em_role) {
+    public Employee(String em_id, String username, String pass, String name, String addr, String email, String phone, String manager, java.sql.Date birth, java.sql.Date startday, int hour_wage, int em_role) {
         this.em_id = em_id;
         this.username = username;
         this.pass = pass;
         this.name = name;
-        this.birth = birth;
-        this.startday = startday;
         this.addr = addr;
         this.email = email;
         this.phone = phone;
         this.manager = manager;
+        this.birth = birth;
+        this.startday = startday;
+        this.hour_wage = hour_wage;
         this.em_role = em_role;
     }
+
+    
     
     public Vector toVector()
     {
@@ -45,6 +49,16 @@ public class Employee {
         return v;
     }
 
+    public int getHour_wage() {
+        return hour_wage;
+    }
+
+    public void setHour_wage(int hour_wage) {
+        this.hour_wage = hour_wage;
+    }
+
+    
+    
     public String getEm_id() {
         return em_id;
     }
