@@ -33,11 +33,12 @@ public class EmployeeDAO {
                     empresult.setName(rs.getString(4));
                     empresult.setBirth(rs.getDate(5));
                     empresult.setStartday(rs.getDate(6));
-                    empresult.setAddr(rs.getString(7));
-                    empresult.setEmail(rs.getString(8));
-                    empresult.setPhone(rs.getString(9));
-                    empresult.setEm_role(rs.getInt(10));
-                    empresult.setManager(rs.getString(11));
+                    empresult.setHour_wage(rs.getInt(7));
+                    empresult.setAddr(rs.getString(8));
+                    empresult.setEmail(rs.getString(9));
+                    empresult.setPhone(rs.getString(10));
+                    empresult.setEm_role(rs.getInt(11));
+                    empresult.setManager(rs.getString(12));
 
                     return empresult;
                 }
@@ -104,6 +105,7 @@ public class EmployeeDAO {
 // END SELF EDITING
     
     
+    
 // HIGHT LEVEL PROCESS
     public static List<Employee> getList()
     {
@@ -123,11 +125,12 @@ public class EmployeeDAO {
                 newitem.setName(rs.getString(4));
                 newitem.setBirth(rs.getDate(5));
                 newitem.setStartday(rs.getDate(6));
-                newitem.setAddr(rs.getString(7));
-                newitem.setEmail(rs.getString(8));
-                newitem.setPhone(rs.getString(9));
-                newitem.setEm_role(rs.getInt(10));
-                newitem.setManager(rs.getString(11));
+                newitem.setHour_wage(rs.getInt(7));
+                newitem.setAddr(rs.getString(8));
+                newitem.setEmail(rs.getString(9));
+                newitem.setPhone(rs.getString(10));
+                newitem.setEm_role(rs.getInt(11));
+                newitem.setManager(rs.getString(12));
                 
                 ds.add(newitem);
             }
@@ -139,28 +142,55 @@ public class EmployeeDAO {
         return ds;
     }
     
-    
-    public static int insert(Employee e)
-    {
-        String sql = "INSERT tbEmployee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
+    public static int changeHourWage(String em_id, int newhourwage){
+        String sql = "UPDATE tbEmployee SET hour_wage = ? WHERE em_id = ?";
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement pst = cn.prepareStatement(sql);){
+                PreparedStatement st = cn.prepareStatement(sql)){
+            st.setInt(1, newhourwage);
+            st.setString(2, em_id);
             
-            pst.setString(1, e.getEm_id());
-            pst.setString(2, e.getUsername());
-            pst.setString(3, e.getPass());
-            pst.setString(4, e.getName());
-            pst.setDate(5, e.getBirth());
-            pst.setDate(6, e.getStartday());
-            pst.setString(7, e.getAddr());
-            pst.setString(8, e.getEmail());
-            pst.setString(9, e.getPhone());
-            pst.setInt(10, e.getEm_role());
-            pst.setString(11, e.getManager());
+            return st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
+    }
+    
+    
+    public static int insert(Employee new_emp)
+    {
+        String sql = "SELECT COUNT(em_id) FROM tbEmployee";                        // tạo id mới cho employee cần thêm vào database
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();){
             
-            return pst.executeUpdate();
-            
+            if(rs.next()){
+                int current_number_oftbEmployee = rs.getInt(1);
+                String newid = createid("EM", String.valueOf(current_number_oftbEmployee + 1), 10);
+                new_emp.setEm_id(newid);
+        
+        
+                sql = "INSERT tbEmployee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+
+                    st2.setString(1, new_emp.getEm_id());
+                    st2.setString(2, new_emp.getUsername());
+                    st2.setString(3, new_emp.getPass());
+                    st2.setString(4, new_emp.getName());
+                    st2.setDate(5, new_emp.getBirth());
+                    st2.setDate(6, new_emp.getStartday());
+                    st2.setInt(7, new_emp.getHour_wage());
+                    st2.setString(8, new_emp.getAddr());
+                    st2.setString(9, new_emp.getEmail());
+                    st2.setString(10, new_emp.getPhone());
+                    st2.setInt(11, new_emp.getEm_role());
+                    st2.setString(12, new_emp.getManager());
+
+                    return st2.executeUpdate();
+                }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -188,4 +218,19 @@ public class EmployeeDAO {
         return 0;
     }
 // HIGHT LEVEL PROCESS
+    
+    
+// WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
+    private static String createid(String startid, String number_want_toset, int idsize) {
+        String str_result = "";
+        
+        int blank = idsize - (startid.length() + number_want_toset.length());
+        str_result += startid;
+        for(int i = 0; i < blank; i++){
+            str_result += "0";
+        }
+        str_result += number_want_toset;
+        
+        return str_result;
+    }
 }

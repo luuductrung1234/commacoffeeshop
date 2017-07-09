@@ -7,11 +7,28 @@
 package gui;
 
 import entities.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import model.*;
+import java.util.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import model.FoodDAO;
+import model.SalaryNoteDAO;
+
 /**
  *
  * @author Administrator
@@ -19,18 +36,37 @@ import model.*;
 public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
     /** Creates new form FrEmployeeWorkspace */
-    public FrEmployeeWorkspace() {
-        initComponents();
-    }
-    
-    private Employee e;
     public FrEmployeeWorkspace(Employee e) {
-        this.e = e;
+        if(e != null){
+            this.working_emp.add(e);                                // Thêm nhân viên vào danh sách login
+            String salaryid = SalaryNoteDAO.insert(e);
+            if(salaryid == null){                        // tạo và lưu bảng lương trong tháng/năm cho nhân viên vào database
+                // thất bại
+                JOptionPane.showConfirmDialog(null, "Some problem cause! Can not create the new SalaryNote for Employee", "DATABASE WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                this.dispose();
+                return;
+            }else{
+                // tạo mới thành công hoặc đã có sẵn
+                EmpSchedule emschedule = new EmpSchedule();             // tạo lịch cho nv trong ngày hiện tại
+                emschedule.setEm_id(e.getEm_id());
+                this.setScheduleDate(emschedule);
+                this.setScheduleTime(emschedule, true);
+                emschedule.setResult_salary(salaryid);
+                this.working_schedule.add(emschedule);
+            }
+        }
+        
+        
         this.initComponents();
+       
         this.setFrameIcon();
-        this.setTitle("Employee: " + e.getName());
         
         this.setLocationRelativeTo(this);
+        
+        this.titleSetting();
+        
+        //this.initFoodMenu();
     }
 
     /** This method is called from within the constructor to
@@ -42,19 +78,703 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        pnShow = new javax.swing.JPanel();
+        pnShowControl = new javax.swing.JPanel();
+        btnMenu = new javax.swing.JToggleButton();
+        btnEmployee = new javax.swing.JToggleButton();
+        btnSetting = new javax.swing.JToggleButton();
+        pnDisplay = new javax.swing.JPanel();
+        pnBlank = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                BufferedImage image = null;
+                try{
+                    image = ImageIO.read(new File("src/image/blank_picture.jpg"));
+                }catch(IOException ex){
+                    ex.printStackTrace();
+                }
+                super.paintComponent(g);
+                g.drawImage(image, 100, 0, this); // see javadoc for more info on the parameters
+            }
+        };
+        pnDisplayMenu = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        pnMenuSwitch = new javax.swing.JPanel();
+        btnDrink = new javax.swing.JButton();
+        btnEat = new javax.swing.JButton();
+        btnOtherthing = new javax.swing.JButton();
+        btnStock = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        pnMenuSkip = new javax.swing.JPanel();
+        btnA = new javax.swing.JButton();
+        btnB = new javax.swing.JButton();
+        btnC = new javax.swing.JButton();
+        btnD = new javax.swing.JButton();
+        btnE = new javax.swing.JButton();
+        btnF = new javax.swing.JButton();
+        btnG = new javax.swing.JButton();
+        btnH = new javax.swing.JButton();
+        btnI = new javax.swing.JButton();
+        btnJ = new javax.swing.JButton();
+        btnK = new javax.swing.JButton();
+        btnL = new javax.swing.JButton();
+        btnM = new javax.swing.JButton();
+        btnN = new javax.swing.JButton();
+        btnO = new javax.swing.JButton();
+        btnP = new javax.swing.JButton();
+        btnQ = new javax.swing.JButton();
+        btnR = new javax.swing.JButton();
+        btnS = new javax.swing.JButton();
+        btnT = new javax.swing.JButton();
+        btnU = new javax.swing.JButton();
+        btnV = new javax.swing.JButton();
+        btnW = new javax.swing.JButton();
+        btnX = new javax.swing.JButton();
+        btnY = new javax.swing.JButton();
+        btnZ = new javax.swing.JButton();
+        pnMenuDisplayDetails = new javax.swing.JPanel();
+        pnDrink = new javax.swing.JPanel();
+        pnEat = new javax.swing.JPanel();
+        pnOther = new javax.swing.JPanel();
+        pnStock = new javax.swing.JPanel();
+        pnDisplayEmployee = new javax.swing.JPanel();
+        pnDisplaySetting = new javax.swing.JPanel();
+        pnUsing = new javax.swing.JPanel();
+        pnOrderTable = new javax.swing.JPanel();
+        pnOrderBill = new javax.swing.JPanel();
+        mnbMain = new javax.swing.JMenuBar();
+        mnEdit = new javax.swing.JMenu();
+        mnSystem = new javax.swing.JMenu();
+        miAddemp = new javax.swing.JMenuItem();
         miLogout = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Employee Workplace");
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        pnShow.setBackground(new java.awt.Color(0, 153, 204));
+        pnShow.setPreferredSize(new java.awt.Dimension(1000, 479));
+        pnShow.setLayout(new javax.swing.BoxLayout(pnShow, javax.swing.BoxLayout.LINE_AXIS));
 
-        jMenu2.setText("System");
+        pnShowControl.setBackground(new java.awt.Color(0, 0, 0));
+        pnShowControl.setPreferredSize(new java.awt.Dimension(80, 487));
+        pnShowControl.setLayout(new java.awt.GridLayout(3, 0));
+
+        btnMenu.setBackground(new java.awt.Color(255, 255, 255));
+        btnMenu.setToolTipText("menu display");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnMenu);
+        ImageIcon Menuicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/menu_icon.png")).getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Menuicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnMenu.setIcon(Menuicon);
+
+        btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+        btnEmployee.setToolTipText("employee display");
+        btnEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmployeeActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnEmployee);
+        ImageIcon Employeeicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/employee_icon.png")).getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Employeeicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnEmployee.setIcon(Employeeicon);
+
+        btnSetting.setBackground(new java.awt.Color(255, 255, 255));
+        btnSetting.setToolTipText("setting display");
+        btnSetting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettingActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnSetting);
+        ImageIcon Settingicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/setting_icon.png")).getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Settingicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnSetting.setIcon(Settingicon);
+
+        pnShow.add(pnShowControl);
+
+        pnDisplay.setBackground(new java.awt.Color(149, 175, 216));
+        pnDisplay.setPreferredSize(new java.awt.Dimension(900, 487));
+        pnDisplay.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout pnBlankLayout = new javax.swing.GroupLayout(pnBlank);
+        pnBlank.setLayout(pnBlankLayout);
+        pnBlankLayout.setHorizontalGroup(
+            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        pnBlankLayout.setVerticalGroup(
+            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 487, Short.MAX_VALUE)
+        );
+
+        pnDisplay.add(pnBlank, "card5");
+
+        pnDisplayMenu.setBackground(new java.awt.Color(11, 34, 66));
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+
+        pnMenuSwitch.setBackground(new java.awt.Color(51, 51, 51));
+        pnMenuSwitch.setPreferredSize(new java.awt.Dimension(100, 32));
+        pnMenuSwitch.setLayout(new java.awt.GridLayout());
+
+        btnDrink.setToolTipText("food");
+        pnMenuSwitch.add(btnDrink);
+        ImageIcon Drinkicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/drink_icon.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            Drinkicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnDrink.setIcon(Drinkicon);
+
+        btnEat.setToolTipText("drink");
+        pnMenuSwitch.add(btnEat);
+        ImageIcon Eaticon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/eat_icon.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            Eaticon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnEat.setIcon(Eaticon);
+
+        btnOtherthing.setToolTipText("other");
+        pnMenuSwitch.add(btnOtherthing);
+        ImageIcon Othericon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/other_icon.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            Othericon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnOtherthing.setIcon(Othericon);
+
+        btnStock.setToolTipText("stock materials");
+        pnMenuSwitch.add(btnStock);
+        ImageIcon Stockicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/stock_icon.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            Stockicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnStock.setIcon(Stockicon);
+
+        btnSearch.setToolTipText("search");
+        pnMenuSwitch.add(btnSearch);
+        ImageIcon Searchicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/search_icon.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            Searchicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnSearch.setIcon(Searchicon);
+
+        jPanel1.add(pnMenuSwitch);
+
+        pnMenuSkip.setBackground(new java.awt.Color(204, 204, 255));
+        pnMenuSkip.setPreferredSize(new java.awt.Dimension(0, 30));
+        pnMenuSkip.setLayout(new java.awt.GridLayout());
+        pnMenuSkip.add(btnA);
+        this.btnA.setBorderPainted(false);
+        this.btnA.setFocusPainted(false);
+        this.btnA.setContentAreaFilled(false);
+
+        ImageIcon Aicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/a_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Aicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnA.setIcon(Aicon);
+        pnMenuSkip.add(btnB);
+        this.btnB.setBorderPainted(false);
+        this.btnB.setFocusPainted(false);
+        this.btnB.setContentAreaFilled(false);
+
+        ImageIcon Bicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/b_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Bicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnB.setIcon(Bicon);
+        pnMenuSkip.add(btnC);
+        this.btnC.setBorderPainted(false);
+        this.btnC.setFocusPainted(false);
+        this.btnC.setContentAreaFilled(false);
+
+        ImageIcon Cicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/c_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Cicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnC.setIcon(Cicon);
+        pnMenuSkip.add(btnD);
+        ImageIcon Dicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/d_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Dicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnD.setIcon(Dicon);
+
+        this.btnD.setBorderPainted(false);
+        this.btnD.setFocusPainted(false);
+        this.btnD.setContentAreaFilled(false);
+        pnMenuSkip.add(btnE);
+        ImageIcon Eicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/e_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Eicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnE.setIcon(Eicon);
+        this.btnE.setBorderPainted(false);
+        this.btnE.setFocusPainted(false);
+        this.btnE.setContentAreaFilled(false);
+        pnMenuSkip.add(btnF);
+        ImageIcon Ficon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/f_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Ficon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnF.setIcon(Ficon);
+        this.btnF.setBorderPainted(false);
+        this.btnF.setFocusPainted(false);
+        this.btnF.setContentAreaFilled(false);
+        pnMenuSkip.add(btnG);
+        ImageIcon Gicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/g_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Gicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnG.setIcon(Gicon);
+        this.btnG.setBorderPainted(false);
+        this.btnG.setFocusPainted(false);
+        this.btnG.setContentAreaFilled(false);
+        pnMenuSkip.add(btnH);
+        ImageIcon Hicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/h_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Hicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnH.setIcon(Hicon);
+        this.btnH.setBorderPainted(false);
+        this.btnH.setFocusPainted(false);
+        this.btnH.setContentAreaFilled(false);
+        pnMenuSkip.add(btnI);
+        ImageIcon Iicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/i_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Iicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnI.setIcon(Iicon);
+        this.btnI.setBorderPainted(false);
+        this.btnI.setFocusPainted(false);
+        this.btnI.setContentAreaFilled(false);
+        pnMenuSkip.add(btnJ);
+        ImageIcon Jicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/j_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Jicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnJ.setIcon(Jicon);
+        this.btnJ.setBorderPainted(false);
+        this.btnJ.setFocusPainted(false);
+        this.btnJ.setContentAreaFilled(false);
+        pnMenuSkip.add(btnK);
+        ImageIcon Kicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/k_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Kicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnK.setIcon(Kicon);
+        this.btnK.setBorderPainted(false);
+        this.btnK.setFocusPainted(false);
+        this.btnK.setContentAreaFilled(false);
+        pnMenuSkip.add(btnL);
+        ImageIcon Licon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/l_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Licon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnL.setIcon(Licon);
+        this.btnL.setBorderPainted(false);
+        this.btnL.setFocusPainted(false);
+        this.btnL.setContentAreaFilled(false);
+        pnMenuSkip.add(btnM);
+        ImageIcon Micon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/m_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Micon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnM.setIcon(Micon);
+        this.btnM.setBorderPainted(false);
+        this.btnM.setFocusPainted(false);
+        this.btnM.setContentAreaFilled(false);
+        pnMenuSkip.add(btnN);
+        ImageIcon Nicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/n_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Nicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnN.setIcon(Nicon);
+        this.btnN.setBorderPainted(false);
+        this.btnN.setFocusPainted(false);
+        this.btnN.setContentAreaFilled(false);
+        pnMenuSkip.add(btnO);
+        ImageIcon Oicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/o_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Oicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnO.setIcon(Oicon);
+        this.btnO.setBorderPainted(false);
+        this.btnO.setFocusPainted(false);
+        this.btnO.setContentAreaFilled(false);
+        pnMenuSkip.add(btnP);
+        ImageIcon Picon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/p_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Picon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnP.setIcon(Picon);
+        this.btnP.setBorderPainted(false);
+        this.btnP.setFocusPainted(false);
+        this.btnP.setContentAreaFilled(false);
+        pnMenuSkip.add(btnQ);
+        ImageIcon Qicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/q_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Qicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnQ.setIcon(Qicon);
+        this.btnQ.setBorderPainted(false);
+        this.btnQ.setFocusPainted(false);
+        this.btnQ.setContentAreaFilled(false);
+        pnMenuSkip.add(btnR);
+        ImageIcon Ricon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/r_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Ricon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnR.setIcon(Ricon);
+        this.btnR.setBorderPainted(false);
+        this.btnR.setFocusPainted(false);
+        this.btnR.setContentAreaFilled(false);
+        pnMenuSkip.add(btnS);
+        ImageIcon Sicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/s_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Sicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnS.setIcon(Sicon);
+        this.btnS.setBorderPainted(false);
+        this.btnS.setFocusPainted(false);
+        this.btnS.setContentAreaFilled(false);
+        pnMenuSkip.add(btnT);
+        ImageIcon Ticon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/t_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Ticon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnT.setIcon(Ticon);
+        this.btnT.setBorderPainted(false);
+        this.btnT.setFocusPainted(false);
+        this.btnT.setContentAreaFilled(false);
+        pnMenuSkip.add(btnU);
+        ImageIcon Uicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/u_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Uicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnU.setIcon(Uicon);
+        this.btnU.setBorderPainted(false);
+        this.btnU.setFocusPainted(false);
+        this.btnU.setContentAreaFilled(false);
+        pnMenuSkip.add(btnV);
+        ImageIcon Vicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/v_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Vicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnV.setIcon(Vicon);
+        this.btnV.setBorderPainted(false);
+        this.btnV.setFocusPainted(false);
+        this.btnV.setContentAreaFilled(false);
+        pnMenuSkip.add(btnW);
+        ImageIcon Wicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/w_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Wicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnW.setIcon(Wicon);
+        this.btnW.setBorderPainted(false);
+        this.btnW.setFocusPainted(false);
+        this.btnW.setContentAreaFilled(false);
+        pnMenuSkip.add(btnX);
+        ImageIcon Xicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/x_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Xicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnX.setIcon(Xicon);
+        this.btnX.setBorderPainted(false);
+        this.btnX.setFocusPainted(false);
+        this.btnX.setContentAreaFilled(false);
+        pnMenuSkip.add(btnY);
+        ImageIcon Yicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/y_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Yicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnY.setIcon(Yicon);
+        this.btnY.setBorderPainted(false);
+        this.btnY.setFocusPainted(false);
+        this.btnY.setContentAreaFilled(false);
+        pnMenuSkip.add(btnZ);
+        ImageIcon Zicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/z_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Zicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnZ.setIcon(Zicon);
+        this.btnZ.setBorderPainted(false);
+        this.btnZ.setFocusPainted(false);
+        this.btnZ.setContentAreaFilled(false);
+
+        jPanel1.add(pnMenuSkip);
+
+        pnMenuDisplayDetails.setBackground(new java.awt.Color(204, 204, 204));
+        pnMenuDisplayDetails.setPreferredSize(new java.awt.Dimension(472, 700));
+        pnMenuDisplayDetails.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout pnDrinkLayout = new javax.swing.GroupLayout(pnDrink);
+        pnDrink.setLayout(pnDrinkLayout);
+        pnDrinkLayout.setHorizontalGroup(
+            pnDrinkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+        );
+        pnDrinkLayout.setVerticalGroup(
+            pnDrinkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+
+        pnMenuDisplayDetails.add(pnDrink, "card3");
+
+        javax.swing.GroupLayout pnEatLayout = new javax.swing.GroupLayout(pnEat);
+        pnEat.setLayout(pnEatLayout);
+        pnEatLayout.setHorizontalGroup(
+            pnEatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+        );
+        pnEatLayout.setVerticalGroup(
+            pnEatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+
+        pnMenuDisplayDetails.add(pnEat, "card2");
+
+        javax.swing.GroupLayout pnOtherLayout = new javax.swing.GroupLayout(pnOther);
+        pnOther.setLayout(pnOtherLayout);
+        pnOtherLayout.setHorizontalGroup(
+            pnOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+        );
+        pnOtherLayout.setVerticalGroup(
+            pnOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+
+        pnMenuDisplayDetails.add(pnOther, "card4");
+
+        javax.swing.GroupLayout pnStockLayout = new javax.swing.GroupLayout(pnStock);
+        pnStock.setLayout(pnStockLayout);
+        pnStockLayout.setHorizontalGroup(
+            pnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+        );
+        pnStockLayout.setVerticalGroup(
+            pnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+
+        pnMenuDisplayDetails.add(pnStock, "card5");
+
+        jPanel1.add(pnMenuDisplayDetails);
+
+        jScrollPane1.setViewportView(jPanel1);
+
+        javax.swing.GroupLayout pnDisplayMenuLayout = new javax.swing.GroupLayout(pnDisplayMenu);
+        pnDisplayMenu.setLayout(pnDisplayMenuLayout);
+        pnDisplayMenuLayout.setHorizontalGroup(
+            pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+        );
+        pnDisplayMenuLayout.setVerticalGroup(
+            pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+        );
+
+        pnDisplay.add(pnDisplayMenu, "card2");
+
+        pnDisplayEmployee.setBackground(new java.awt.Color(11, 34, 66));
+
+        javax.swing.GroupLayout pnDisplayEmployeeLayout = new javax.swing.GroupLayout(pnDisplayEmployee);
+        pnDisplayEmployee.setLayout(pnDisplayEmployeeLayout);
+        pnDisplayEmployeeLayout.setHorizontalGroup(
+            pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        pnDisplayEmployeeLayout.setVerticalGroup(
+            pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 487, Short.MAX_VALUE)
+        );
+
+        pnDisplay.add(pnDisplayEmployee, "card3");
+
+        pnDisplaySetting.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout pnDisplaySettingLayout = new javax.swing.GroupLayout(pnDisplaySetting);
+        pnDisplaySetting.setLayout(pnDisplaySettingLayout);
+        pnDisplaySettingLayout.setHorizontalGroup(
+            pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        pnDisplaySettingLayout.setVerticalGroup(
+            pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 487, Short.MAX_VALUE)
+        );
+
+        pnDisplay.add(pnDisplaySetting, "card4");
+
+        pnShow.add(pnDisplay);
+
+        getContentPane().add(pnShow);
+
+        pnUsing.setBackground(new java.awt.Color(0, 204, 153));
+        pnUsing.setPreferredSize(new java.awt.Dimension(350, 400));
+        pnUsing.setLayout(new javax.swing.BoxLayout(pnUsing, javax.swing.BoxLayout.PAGE_AXIS));
+
+        pnOrderTable.setBackground(new java.awt.Color(76, 116, 181));
+        pnOrderTable.setPreferredSize(new java.awt.Dimension(300, 100));
+
+        javax.swing.GroupLayout pnOrderTableLayout = new javax.swing.GroupLayout(pnOrderTable);
+        pnOrderTable.setLayout(pnOrderTableLayout);
+        pnOrderTableLayout.setHorizontalGroup(
+            pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 182, Short.MAX_VALUE)
+        );
+        pnOrderTableLayout.setVerticalGroup(
+            pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 143, Short.MAX_VALUE)
+        );
+
+        pnUsing.add(pnOrderTable);
+
+        pnOrderBill.setBackground(new java.awt.Color(45, 66, 99));
+        pnOrderBill.setPreferredSize(new java.awt.Dimension(100, 300));
+
+        javax.swing.GroupLayout pnOrderBillLayout = new javax.swing.GroupLayout(pnOrderBill);
+        pnOrderBill.setLayout(pnOrderBillLayout);
+        pnOrderBillLayout.setHorizontalGroup(
+            pnOrderBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 182, Short.MAX_VALUE)
+        );
+        pnOrderBillLayout.setVerticalGroup(
+            pnOrderBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 343, Short.MAX_VALUE)
+        );
+
+        pnUsing.add(pnOrderBill);
+
+        getContentPane().add(pnUsing);
+
+        mnEdit.setText("Edit");
+        mnbMain.add(mnEdit);
+
+        mnSystem.setText("System");
+
+        miAddemp.setText("Add Employee");
+        miAddemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddempActionPerformed(evt);
+            }
+        });
+        mnSystem.add(miAddemp);
 
         miLogout.setText("Logout");
         miLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -62,43 +782,90 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 miLogoutActionPerformed(evt);
             }
         });
-        jMenu2.add(miLogout);
+        mnSystem.add(miLogout);
 
-        jMenuItem1.setText("Exit");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
+        mnbMain.add(mnSystem);
 
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
-        );
+        setJMenuBar(mnbMain);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void miAddempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddempActionPerformed
+        // TODO add your handling code here:
+        //new FrEmpLogin(this).setVisible(true);
+        new DiaEmpLogin(this, true).setVisible(true);
+        this.titleSetting();
+    }//GEN-LAST:event_miAddempActionPerformed
+
     private void miLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogoutActionPerformed
-        new FrLogin().setVisible(true);
-        this.dispose();
+        // TODO add your handling code here:
+        new DiaEmpLogout(this, true).setVisible(true);
+        if(this.working_emp.isEmpty()){
+            new FrLogin().setVisible(true);
+            setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+            this.dispose();
+            return;
+        }
+        this.titleSetting();
     }//GEN-LAST:event_miLogoutActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        // TODO add your handling code here:
+        if(this.btnMenu.isSelected()){
+            this.btnMenu.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnEmployee.setSelected(false);
+            this.btnEmployee.setBackground(new java.awt.Color(255,255,255));
+            this.btnSetting.setSelected(false);
+            this.btnSetting.setBackground(new java.awt.Color(255,255,255));
+            
+            CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
+            cl.show(this.pnDisplay, "card2");
+        }else{
+            this.btnMenu.setBackground(new java.awt.Color(255,255,255));
+            CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
+            cl.show(this.pnDisplay, "card5");
+        }
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
+        // TODO add your handling code here:
+        if(this.btnEmployee.isSelected()){
+            this.btnEmployee.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnMenu.setSelected(false);
+            this.btnMenu.setBackground(new java.awt.Color(255,255,255));
+            this.btnSetting.setSelected(false);
+            this.btnSetting.setBackground(new java.awt.Color(255,255,255));
+            
+            CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
+            cl.show(this.pnDisplay, "card3");
+        }else{
+            this.btnEmployee.setBackground(new java.awt.Color(255,255,255));
+            CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
+            cl.show(this.pnDisplay, "card5");
+        }
+    }//GEN-LAST:event_btnEmployeeActionPerformed
+
+    private void btnSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingActionPerformed
+        // TODO add your handling code here:
+        if(this.btnSetting.isSelected()){
+            this.btnSetting.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnEmployee.setSelected(false);
+            this.btnEmployee.setBackground(new java.awt.Color(255,255,255));
+            this.btnMenu.setSelected(false);
+            this.btnMenu.setBackground(new java.awt.Color(255,255,255));
+            
+            CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
+            cl.show(this.pnDisplay, "card4");
+        }else{
+            this.btnSetting.setBackground(new java.awt.Color(255,255,255));
+            CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
+            cl.show(this.pnDisplay, "card5");
+        }
+    }//GEN-LAST:event_btnSettingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,19 +897,82 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrEmployeeWorkspace().setVisible(true);
+                new FrEmployeeWorkspace(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JButton btnA;
+    private javax.swing.JButton btnB;
+    private javax.swing.JButton btnC;
+    private javax.swing.JButton btnD;
+    private javax.swing.JButton btnDrink;
+    private javax.swing.JButton btnE;
+    private javax.swing.JButton btnEat;
+    private javax.swing.JToggleButton btnEmployee;
+    private javax.swing.JButton btnF;
+    private javax.swing.JButton btnG;
+    private javax.swing.JButton btnH;
+    private javax.swing.JButton btnI;
+    private javax.swing.JButton btnJ;
+    private javax.swing.JButton btnK;
+    private javax.swing.JButton btnL;
+    private javax.swing.JButton btnM;
+    private javax.swing.JToggleButton btnMenu;
+    private javax.swing.JButton btnN;
+    private javax.swing.JButton btnO;
+    private javax.swing.JButton btnOtherthing;
+    private javax.swing.JButton btnP;
+    private javax.swing.JButton btnQ;
+    private javax.swing.JButton btnR;
+    private javax.swing.JButton btnS;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JToggleButton btnSetting;
+    private javax.swing.JButton btnStock;
+    private javax.swing.JButton btnT;
+    private javax.swing.JButton btnU;
+    private javax.swing.JButton btnV;
+    private javax.swing.JButton btnW;
+    private javax.swing.JButton btnX;
+    private javax.swing.JButton btnY;
+    private javax.swing.JButton btnZ;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem miAddemp;
     private javax.swing.JMenuItem miLogout;
+    private javax.swing.JMenu mnEdit;
+    private javax.swing.JMenu mnSystem;
+    private javax.swing.JMenuBar mnbMain;
+    private javax.swing.JPanel pnBlank;
+    private javax.swing.JPanel pnDisplay;
+    private javax.swing.JPanel pnDisplayEmployee;
+    private javax.swing.JPanel pnDisplayMenu;
+    private javax.swing.JPanel pnDisplaySetting;
+    private javax.swing.JPanel pnDrink;
+    private javax.swing.JPanel pnEat;
+    private javax.swing.JPanel pnMenuDisplayDetails;
+    private javax.swing.JPanel pnMenuSkip;
+    private javax.swing.JPanel pnMenuSwitch;
+    private javax.swing.JPanel pnOrderBill;
+    private javax.swing.JPanel pnOrderTable;
+    private javax.swing.JPanel pnOther;
+    private javax.swing.JPanel pnShow;
+    private javax.swing.JPanel pnShowControl;
+    private javax.swing.JPanel pnStock;
+    private javax.swing.JPanel pnUsing;
     // End of variables declaration//GEN-END:variables
 
+    
+    
+//  CUSTOM DECLARATION
+    ArrayList<Employee> working_emp = new ArrayList<>();
+    ArrayList<EmpSchedule> working_schedule = new ArrayList<>();
+    ArrayList<Food> menufood_list = new ArrayList<>();
+//  END CUSTOM DECLARATION
+    
+    
+// CUSTOM CODE
     private void setFrameIcon() {
         Image scaled = null;
         try{
@@ -152,4 +982,50 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         this.setIconImage(scaled);
     }
+
+    private void titleSetting() {
+        String title = "Employee: ";
+        for(Employee iter : this.working_emp){
+            title += iter.getName();
+            title += ", ";
+        }
+        this.setTitle(title);
+    }
+    
+    public void setScheduleTime(EmpSchedule schedule, boolean isstart){
+        if(isstart){
+            Calendar calendar = Calendar.getInstance();
+            int hours = calendar.get(Calendar.HOUR_OF_DAY);
+            int minutes = calendar.get(Calendar.MINUTE);
+            
+            schedule.setStarthour(hours);
+            schedule.setStartminute(minutes);
+        }else{
+            Calendar calendar = Calendar.getInstance();
+            int hours = calendar.get(Calendar.HOUR_OF_DAY);
+            int minutes = calendar.get(Calendar.MINUTE);
+            
+            schedule.setEndhour(hours);
+            schedule.setEndminute(minutes);
+        }
+    }
+    
+    public void setScheduleDate(EmpSchedule schedule){
+        LocalDate todayLocalDate = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+        java.sql.Date workDate = java.sql.Date.valueOf( todayLocalDate );
+        
+        schedule.setWorkday(workDate);
+    }
+
+    /*private void initFoodMenu() {
+        this.menufood_list = (ArrayList<Food>) FoodDAO.getList();
+        
+        for(Food itemfood : this.menufood_list){
+            JButton b = new JButton();
+            b.setText(itemfood.getName());
+            b.setSize(50, 50);
+            this.pnDisplayDetailsMenu.add(b);
+        }
+    }*/
+// END CUSTOM CODE
 }

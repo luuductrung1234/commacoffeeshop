@@ -111,18 +111,28 @@ public class AdminDAO {
         return ds;
     }
     
-    public static int insert(Admin new_ad, int your_role)
+    public static int insert(Admin new_ad)
     {
-        String sql = "INSERT INTO tbAdmin VALUES (?, ?, ?, ?)";
+        String sql = "SELECT COUNT(ad_id) FROM tbAdmin";                        // tạo id mới cho admin cần thêm vào database
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement pst = cn.prepareStatement(sql);)
-        {
-            pst.setString(1, new_ad.getAd_id());
-            pst.setString(2, new_ad.getUsername());
-            pst.setString(3, new_ad.getPass());
-            pst.setString(4, new_ad.getName());
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();){
             
-            return pst.executeUpdate();
+            if(rs.next()){
+                int current_number_oftbAdmin = rs.getInt(1);
+                String newid = createid("AD", String.valueOf(current_number_oftbAdmin + 1), 10);
+                new_ad.setAd_id(newid);
+        
+                sql = "INSERT INTO tbAdmin VALUES (?, ?, ?, ?)";
+                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+                    st2.setString(1, new_ad.getAd_id());
+                    st2.setString(2, new_ad.getUsername());
+                    st2.setString(3, new_ad.getPass());
+                    st2.setString(4, new_ad.getName());
+
+                    return st2.executeUpdate();
+                }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,7 +142,7 @@ public class AdminDAO {
     }
     
     
-    public static int delete(String ad_id, int your_role)
+    public static int delete(String ad_id)
     {
         String sql = "SELECT * FROM tbAdmin WHERE ad_id = ?";
 
@@ -150,4 +160,20 @@ public class AdminDAO {
         return 0;
     }
 // END HIGHT LEVEL PROCESS
+
+    
+
+// WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
+    private static String createid(String startid, String number_want_toset, int idsize) {
+        String str_result = "";
+        
+        int blank = idsize - (startid.length() + number_want_toset.length());
+        str_result += startid;
+        for(int i = 0; i < blank; i++){
+            str_result += "0";
+        }
+        str_result += number_want_toset;
+        
+        return str_result;
+    }
 }

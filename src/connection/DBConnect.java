@@ -16,7 +16,7 @@ public class DBConnect {
     private final String port;
 
     public DBConnect() {
-        this.dbname = "COMMACOFFEESHOP_ver2";
+        this.dbname = "COMMACOFFEESHOP";
         this.userid = "sa";
         this.userpwd = "maiyeuminhem";
         
