@@ -40,20 +40,30 @@ public class CustomerDAO {
     }
     
     
-    public static int insert(Customer c)
+    public static int insert(Customer new_cus)
     {
-        String sql = "INSERT INTO tbCustomer VALUES (?, ?, ?, ?, ?)";
-        
+        String sql = "SELECT COUNT(cus_id) FROM tbCustomer";                        // tạo id mới cho customer cần thêm vào database
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement st = cn.prepareStatement(sql);){
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();){
             
-            st.setString(1, c.getCus_id());
-            st.setString(2, c.getName());
-            st.setString(3, c.getPhone());
-            st.setString(4, c.getEmail());
-            st.setInt(5, c.getDiscount());
-            
-            return st.executeUpdate();
+            if(rs.next()){
+                int current_number_oftbCustomer = rs.getInt(1);
+                String newid = createid("CUS", String.valueOf(current_number_oftbCustomer + 1), 10);
+                new_cus.setCus_id(newid);
+        
+        
+                sql = "INSERT INTO tbCustomer VALUES (?, ?, ?, ?, ?)";
+                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+                    st2.setString(1, new_cus.getCus_id());
+                    st2.setString(2, new_cus.getName());
+                    st2.setString(3, new_cus.getPhone());
+                    st2.setString(4, new_cus.getEmail());
+                    st2.setInt(5, new_cus.getDiscount());
+
+                    return st2.executeUpdate();
+                }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,4 +114,18 @@ public class CustomerDAO {
         return 0;
     }
     
+    
+// WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
+    private static String createid(String startid, String number_want_toset, int idsize) {
+        String str_result = "";
+        
+        int blank = idsize - (startid.length() + number_want_toset.length());
+        str_result += startid;
+        for(int i = 0; i < blank; i++){
+            str_result += "0";
+        }
+        str_result += number_want_toset;
+        
+        return str_result;
+    }
 }

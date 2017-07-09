@@ -43,22 +43,33 @@ public class FoodMaterialDAO {
         return ds;
     }
     
-    public static int insert(FoodMaterial fm)
+    public static int insert(FoodMaterial new_fm)
     {
-        String sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+        String sql = "SELECT COUNT(fm_id) FROM tbFoodMaterial";                        // tạo id mới cho foodmaterial cần thêm vào database
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement pst = cn.prepareStatement(sql);){
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();){
             
-            pst.setString(1, fm.getFm_id());
-            pst.setString(2, fm.getName());
-            pst.setString(3, fm.getInfo());
-            pst.setByte(4, fm.getUsefor());
-            pst.setString(5, fm.getFmtype());
-            pst.setString(6, fm.getUnit_buy());
-            pst.setString(7, fm.getSupplier());
-            
-            return pst.executeUpdate();
+            if(rs.next()){
+                int current_number_oftbFoodMaterial = rs.getInt(1);
+                String newid = createid("F", String.valueOf(current_number_oftbFoodMaterial + 1), 10);
+                new_fm.setFm_id(newid);
+        
+        
+                sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?)";
+                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+
+                    st2.setString(1, new_fm.getFm_id());
+                    st2.setString(2, new_fm.getName());
+                    st2.setString(3, new_fm.getInfo());
+                    st2.setByte(4, new_fm.getUsefor());
+                    st2.setString(5, new_fm.getFmtype());
+                    st2.setString(6, new_fm.getUnit_buy());
+                    st2.setString(7, new_fm.getSupplier());
+
+                    return st2.executeUpdate();
+                }
+            }
         } catch (SQLException ex) { 
             ex.printStackTrace();
             Logger.getLogger(FoodMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,4 +122,19 @@ public class FoodMaterialDAO {
         return 0;
     }
     
+    
+    
+// WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
+    private static String createid(String startid, String number_want_toset, int idsize) {
+        String str_result = "";
+        
+        int blank = idsize - (startid.length() + number_want_toset.length());
+        str_result += startid;
+        for(int i = 0; i < blank; i++){
+            str_result += "0";
+        }
+        str_result += number_want_toset;
+        
+        return str_result;
+    }
 }

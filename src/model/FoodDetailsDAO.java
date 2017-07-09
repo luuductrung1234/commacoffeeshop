@@ -41,21 +41,31 @@ public class FoodDetailsDAO {
         return ds;
     }
     
-    public static int insert(FoodDetails fd)
+    public static int insert(FoodDetails new_fd)
     {
-        String sql = "insert tbFoodDetails values(?, ?, ?, ?, ?)";
-        
+        String sql = "SELECT COUNT(fd_id) FROM tbFoodDetails";                        // tạo id mới cho fooddetails cần thêm vào database
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement pst = cn.prepareStatement(sql);){
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();){
             
-            pst.setString(1, fd.getFd_id());
-            pst.setString(2, fd.getFood_id());
-            pst.setString(3, fd.getFm_id());
-            pst.setFloat(4, fd.getQuan());
-            pst.setString(5, fd.getUnit_use());
-            
-            return pst.executeUpdate();
-            
+            if(rs.next()){
+                int current_number_oftbFoodDetails = rs.getInt(1);
+                String newid = createid("F", String.valueOf(current_number_oftbFoodDetails + 1), 10);
+                new_fd.setFd_id(newid);
+        
+        
+                sql = "insert tbFoodDetails values(?, ?, ?, ?, ?)";
+                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+
+                    st2.setString(1, new_fd.getFd_id());
+                    st2.setString(2, new_fd.getFood_id());
+                    st2.setString(3, new_fd.getFm_id());
+                    st2.setFloat(4, new_fd.getQuan());
+                    st2.setString(5, new_fd.getUnit_use());
+
+                    return st2.executeUpdate();
+                }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,4 +116,19 @@ public class FoodDetailsDAO {
         return 0;
     }
     
+    
+    
+// WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
+    private static String createid(String startid, String number_want_toset, int idsize) {
+        String str_result = "";
+        
+        int blank = idsize - (startid.length() + number_want_toset.length());
+        str_result += startid;
+        for(int i = 0; i < blank; i++){
+            str_result += "0";
+        }
+        str_result += number_want_toset;
+        
+        return str_result;
+    }
 }
