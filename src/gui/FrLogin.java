@@ -38,9 +38,9 @@ public class FrLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblogin = new javax.swing.JLabel();
+        lbUsername = new javax.swing.JLabel();
+        lbPass = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
@@ -52,14 +52,14 @@ public class FrLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("C-System");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Login Form");
+        lblogin.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblogin.setText("Login Form");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Username:");
+        lbUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbUsername.setText("Username:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Password:");
+        lbPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbPass.setText("Password:");
 
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -69,6 +69,7 @@ public class FrLogin extends javax.swing.JFrame {
 
         btnSubmit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSubmit.setText("Login");
+        btnSubmit.setSelected(true);
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
@@ -98,12 +99,12 @@ public class FrLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(139, 139, 139)
-                        .addComponent(jLabel1))
+                        .addComponent(lblogin))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(lbPass)
+                            .addComponent(lbUsername))
                         .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbUsername_warn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -116,16 +117,16 @@ public class FrLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel1)
+                .addComponent(lblogin)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lbUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbUsername_warn, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lbPass)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbPass_warn, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,7 +159,9 @@ public class FrLogin extends javax.swing.JFrame {
         Admin ad = AdminDAO.check(username, pass);              // tiến hành đăng nhập cho admin trước nếu có
         if(ad != null)
         {
-            new FrAdminWorkspace(ad).setVisible(true);
+            JFrame jf = new FrAdminWorkspace(ad);
+            jf.setVisible(true);
+            jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
             this.dispose();
             return;
         }
@@ -166,18 +169,21 @@ public class FrLogin extends javax.swing.JFrame {
         Employee emp = EmployeeDAO.check(username, pass);       // sau đó tiến hành đăng nhập cho nhân viên
         if(emp != null)
         {
-            new FrEmployeeWorkspace(emp).setVisible(true);
+            JFrame jf = new FrEmployeeWorkspace(emp);
+            jf.setVisible(true);
+            jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
             this.dispose();
             return;
         }
         
-        JOptionPane.showConfirmDialog(null, "Login fail! Please check your Username and Password!", "INPUT WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showConfirmDialog(null, "Login fail! Please check your Username and Password!", "LOGIN WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         this.txtUsername.requestFocus();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
@@ -218,12 +224,12 @@ public class FrLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbPass;
     private javax.swing.JLabel lbPass_warn;
+    private javax.swing.JLabel lbUsername;
     private javax.swing.JLabel lbUsername_warn;
+    private javax.swing.JLabel lblogin;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
