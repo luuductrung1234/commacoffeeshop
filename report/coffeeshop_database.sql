@@ -1,10 +1,10 @@
 Use master
 go
 
-CREATE DATABASE COMMACOFFEESHOP_Ver2
+CREATE DATABASE COMMACOFFEESHOP
 GO
 
-USE COMMACOFFEESHOP_ver2
+USE COMMACOFFEESHOP
 GO
 
 -- EMPLOYEE
@@ -23,6 +23,7 @@ create table tbEmployee (
 	name nvarchar(50) not null,
 	birth date not null,				constraint chk_birthday check(year(birth) <= (year(getdate()) - 18)),
 	startday date not null,
+	hour_wage int not null				constraint chk_hourwage check(hour_wage >= 0),
 	addr nvarchar(200) null,
 	email varchar(50) null,
 	phone varchar(20) null,
@@ -36,9 +37,9 @@ create table tbEmpSchedule(
 	sche_id varchar(10)			constraint pk_scheid primary key,
 	em_id varchar(10)			constraint fk_employee foreign key references tbEmployee(em_id),
 	workday date				constraint def_workday default getdate(),
-	starthour int not null		constraint chk_starthour check(starthour >= 8 and starthour <= 22),
+	starthour int not null		constraint chk_starthour check(starthour >= 8 and starthour <= 23),
 	startminute int not null	constraint chk_startminute check(startminute >= 0 and startminute <= 59),
-	endhour int not null		constraint chk_endhour check(endhour >= 8 and endhour <= 22),
+	endhour int not null		constraint chk_endhour check(endhour >= 8 and endhour <= 23),
 	endminute int not null		constraint chk_endminute check(endminute >= 0 and endminute <= 59)
 )
 go
@@ -138,7 +139,7 @@ create table tbSalaryNote(
 	em_id varchar(10)			constraint fk_employeeid foreign key references tbEmployee(em_id),
 	date_pay date null,									                    -- ngày trả lương
 	salary_value money not null,							                 -- số tiền lương
-	work_hour int not null		constraint chk_workhour check(work_hour >= 0),
+	work_hour float not null	constraint chk_workhour check(work_hour >= 0),
 	for_month int not null		constraint chk_month check(for_month >= 1 and for_month <= 12),
 	for_year int not null,													-- lương của tháng/năm nào
 	is_paid tinyint not null	constraint chk_is_salary_was_paid check(is_paid = 0 or is_paid = 1),		-- 1: đã trả lương, 0: chưa trả lương
@@ -152,6 +153,38 @@ alter table tbEmpSchedule
 add result_salary varchar(10)	constraint fk_result_salarypay foreign key references tbSalaryNote(sn_id)		-- tham chiếu đến bảng lương để trả kết quả lương của lịch làm trong 1 ngày
 go
 
+
+create trigger salaryvalue_update
+on tbEmpSchedule
+for insert
+as
+begin
+	declare @starthour int
+	declare @startminute int
+	declare @endhour int
+	declare @endminute int
+	declare @foremp varchar(10)
+	declare @formonth int
+	declare @foryear int
+	declare @workhour float
+	select @starthour = starthour from inserted
+	select @startminute = startminute from inserted
+	select @endhour = endhour from inserted
+	select @endminute = endminute from inserted
+	select @foremp = em_id from inserted
+	select @formonth = month(workday) from inserted
+	select @foryear = year(workday) from inserted
+	select @workhour = cast((cast(@endhour as float) - cast(@starthour as float)) + ((cast(@endminute as float) - cast(@startminute as float))/cast(60.0 as float)) as float)
+
+	update tbSalaryNote
+	set work_hour += @workhour
+	where em_id = @foremp and for_month = @formonth and for_year = @foryear
+
+	update tbSalaryNote
+	set salary_value = work_hour * (select hour_wage from tbEmployee E where E.em_id = @foremp)
+	where em_id = @foremp and for_month = @formonth and for_year = @foryear
+end
+go
 -- kết thúc chỉnh sửa
 
 
@@ -163,21 +196,21 @@ go
 
 
 insert into tbEmployee values
-('EM00000001', 'emp_username1', 	'password1',	N'Phạm Thanh Bình', 	'1996-01-01',	'2017-07-01',	N'KTX trường Tôn Đức Thắng',						'example_email1@gmail.com',		'0969876940',	1,	'AD00000001'),
-('EM00000002', 'emp_username2', 	'password2',	N'Nguyễn Khánh Duy', 	'1996-01-01',	'2017-07-01',	N'KTX trường Tôn Đức Thắng',						'example_email2@gmail.com',		'0964753827',	1,	'AD00000001'),
-('EM00000003', 'emp_username3', 	'password3',	N'Lý Đông Nghi', 		'1996-01-01',	'2017-07-01',	N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email3@gmail.com',		'01677048100',	1,	'AD00000001'),
-('EM00000004', 'emp_username4', 	'password4',	N'Bảo Nguyên', 			'1996-01-01',	'2017-07-01',	N'1017/34 Lê Văn Lương, Phước Kiển, Nhà Bè',		'example_email4@gmail.com',		'0965164474',	1,	'AD00000001'),
-('EM00000005', 'emp_username5', 	'password5',	N'Lương Nhật Duy', 		'1996-01-01',	'2017-07-01',	N'10/7 Lý Phục Mang, Quận 7',						'desmonmiles8996@gmail.com',	'01215925627',	1,	'AD00000001'),
-('EM00000006', 'emp_username6', 	'password6',	N'Đinh Thanh Hưng', 	'1996-01-01',	'2017-07-01',	N'1558A phường 7, Quận 8',							'example_email5@gmail.com',		'01207305775',	1,	'AD00000001'),
-('EM00000007', 'emp_username7', 	'password7',	N'Ngọc Phấn', 			'1996-01-01',	'2017-07-01',	N'585 Nguyễn Hữu Thọ, phường Tân Phong, Quận 7',	'example_email6@gmail.com',		'01242095099',	1,	'AD00000001'),
-('EM00000008', 'emp_username8', 	'password8',	N'Hữu Phát', 			'1996-01-01',	'2017-07-01',	N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email7@gmail.com',		'01663598586',	1,	'AD00000001'),
-('EM00000009', 'emp_username9', 	'password9',	N'Phan Việt Nhân', 		'1996-01-01',	'2017-07-01',	N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email8@gmail.com',		'0916466886',	1,	'AD00000001'),
-('EM00000010', 'emp_username10', 	'password10',	N'Nguyễn Thị Diễm My', 	'1996-01-01',	'2017-07-01',	N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email9@gmail.com',		'0973035001',	1,	'AD00000001'),
-('EM00000011', 'emp_username11', 	'password11',	N'Phan Thanh Hằng', 	'1996-01-01',	'2017-07-01',	N'599 Lê Văn Lương, Quận 7',						'example_email10@gmail.com',	'0948846462',	1,	'AD00000001'),
-('EM00000012', 'emp_username12', 	'password12',	N'Đặng Anh Thư', 		'1996-01-01',	'2017-07-01',	N'41  Bùi Huy Bích, phường 12, Quận 8',				'example_email11@gmail.com',	'01216956119',	1,	'AD00000001'),
-('EM00000013', 'emp_username13', 	'password13',	N'Hà Nguyễn Nhật Minh', '1996-01-01',	'2017-07-01',	N'122/27/30/1/2 Tôn Đản, phường 10, Quận 4',		'nhatminh157@yahoo.com.vn',		'01208459569',	1,	'AD00000001'),
-('EM00000014', 'emp_username14', 	'password14',	N'Phan Hữu Tiến', 		'1996-01-01',	'2017-07-01',	N'458/10/2 Huỳnh Tấn Phát, Quận 7',					'example_email12.@gmail.com',	'0902448327',	1,	'AD00000001'),
-('EM00000015', 'emp_username15', 	'password15',	N'Ngô Thanh Hiếu', 		'1996-01-01',	'2017-07-01',	N'KTX trường Tôn Đức Thắng',						'ngohieu2698@gmail.com',		'0969945661',	2,	'AD00000002')
+('EM00000001', 'emp_username1', 	'password1',	N'Phạm Thanh Bình', 	'1996-01-01',	'2017-07-01',	10,		N'KTX trường Tôn Đức Thắng',						'example_email1@gmail.com',		'0969876940',	1,	'AD00000001'),
+('EM00000002', 'emp_username2', 	'password2',	N'Nguyễn Khánh Duy', 	'1996-01-01',	'2017-07-01',	12,		N'KTX trường Tôn Đức Thắng',						'example_email2@gmail.com',		'0964753827',	1,	'AD00000001'),
+('EM00000003', 'emp_username3', 	'password3',	N'Lý Đông Nghi', 		'1996-01-01',	'2017-07-01',	11,		N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email3@gmail.com',		'01677048100',	1,	'AD00000001'),
+('EM00000004', 'emp_username4', 	'password4',	N'Bảo Nguyên', 			'1996-01-01',	'2017-07-01',	12,		N'1017/34 Lê Văn Lương, Phước Kiển, Nhà Bè',		'example_email4@gmail.com',		'0965164474',	1,	'AD00000001'),
+('EM00000005', 'emp_username5', 	'password5',	N'Lương Nhật Duy', 		'1996-01-01',	'2017-07-01',	11,		N'10/7 Lý Phục Mang, Quận 7',						'desmonmiles8996@gmail.com',	'01215925627',	1,	'AD00000001'),
+('EM00000006', 'emp_username6', 	'password6',	N'Đinh Thanh Hưng', 	'1996-01-01',	'2017-07-01',	10,		N'1558A phường 7, Quận 8',							'example_email5@gmail.com',		'01207305775',	1,	'AD00000001'),
+('EM00000007', 'emp_username7', 	'password7',	N'Ngọc Phấn', 			'1996-01-01',	'2017-07-01',	10,		N'585 Nguyễn Hữu Thọ, phường Tân Phong, Quận 7',	'example_email6@gmail.com',		'01242095099',	1,	'AD00000001'),
+('EM00000008', 'emp_username8', 	'password8',	N'Hữu Phát', 			'1996-01-01',	'2017-07-01',	10,		N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email7@gmail.com',		'01663598586',	1,	'AD00000001'),
+('EM00000009', 'emp_username9', 	'password9',	N'Phan Việt Nhân', 		'1996-01-01',	'2017-07-01',	10,		N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email8@gmail.com',		'0916466886',	1,	'AD00000001'),
+('EM00000010', 'emp_username10', 	'password10',	N'Nguyễn Thị Diễm My', 	'1996-01-01',	'2017-07-01',	10,		N'19 Nguyễn Hữu Thọ, Tân Phong, Quận 7',			'example_email9@gmail.com',		'0973035001',	1,	'AD00000001'),
+('EM00000011', 'emp_username11', 	'password11',	N'Phan Thanh Hằng', 	'1996-01-01',	'2017-07-01',	10,		N'599 Lê Văn Lương, Quận 7',						'example_email10@gmail.com',	'0948846462',	1,	'AD00000001'),
+('EM00000012', 'emp_username12', 	'password12',	N'Đặng Anh Thư', 		'1996-01-01',	'2017-07-01',	10,		N'41  Bùi Huy Bích, phường 12, Quận 8',				'example_email11@gmail.com',	'01216956119',	1,	'AD00000001'),
+('EM00000013', 'emp_username13', 	'password13',	N'Hà Nguyễn Nhật Minh', '1996-01-01',	'2017-07-01',	11,		N'122/27/30/1/2 Tôn Đản, phường 10, Quận 4',		'nhatminh157@yahoo.com.vn',		'01208459569',	1,	'AD00000001'),
+('EM00000014', 'emp_username14', 	'password14',	N'Phan Hữu Tiến', 		'1996-01-01',	'2017-07-01',	13,		N'458/10/2 Huỳnh Tấn Phát, Quận 7',					'example_email12.@gmail.com',	'0902448327',	1,	'AD00000001'),
+('EM00000015', 'emp_username15', 	'password15',	N'Ngô Thanh Hiếu', 		'1996-01-01',	'2017-07-01',	10,		N'KTX trường Tôn Đức Thắng',						'ngohieu2698@gmail.com',		'0969945661',	2,	'AD00000002')
 go
 
 
@@ -197,7 +230,8 @@ insert into tbCustomer values
 ('CUS0000013', N'Đặng Anh Thư',			'',		'',		20),
 ('CUS0000014', N'Hà Nguyễn Nhật Minh',	'',		'',		20),
 ('CUS0000015', N'Phan Hữu Tiến',		'',		'',		20),
-('CUS0000016', N'Ngô Thanh Hiếu',		'',		'',		20)
+('CUS0000016', N'Ngô Thanh Hiếu',		'',		'',		20),
+('CUS0000017', N'Normal customer',		'',		'',		0)
 go
 
 
@@ -251,7 +285,7 @@ insert into tbFoodMaterial values
 go
 
 
-insert into tbFood values
+insert into tbFood values		-- đồ uống
 ('F000000030',	N'pepsi',					N'',		25,		0),
 ('F000000031',	N'7up',						N'',		25,		0),
 ('F000000032',	N'water',					N'',		25,		0),
@@ -282,6 +316,37 @@ insert into tbFood values
 ('F000000057',	N'orange juice (trái vừa)',	N'',		40,		0)
 go
 
+insert into tbFood values		-- thức ăn
+('F000000001',	N'plain yogurt',			N'',		25,		1),
+('F000000002',	N'choco fondue',			N'',		70,		1),
+('F000000003',	N'choco cloud',				N'',		55,		1),
+('F000000004',	N'custard bread tower',		N'',		70,		1),
+('F000000005',	N'choco muffin',			N'',		25,		1),
+('F000000006',	N'apple muffin',			N'',		25,		1),
+('F000000007',	N'greentea muffin',			N'',		25,		1),
+('F000000008',	N'banana cake',				N'',		25,		1),
+('F000000009',	N'carrot cake',				N'',		25,		1),
+('F000000010',	N'french fries',			N'',		35,		1),
+('F000000011',	N'french toast',			N'',		45,		1),
+('F000000012',	N'tiramisu cake',			N'',		45,		1),
+('F000000013',	N'cheese hotdog',			N'',		35,		1),
+('F000000014',	N'cereal & milk',			N'',		50,		1),
+('F000000015',	N'honey butter bread',		N'',		70,		1),
+('F000000016',	N'pumpkin soup',			N'',		35,		1),
+('F000000017',	N'chilli fries',			N'',		50,		1),
+('F000000018',	N'tortillas nachos',		N'',		50,		1),
+('F000000019',	N'chicken melt',			N'',		50,		1),
+('F000000020',	N'comma club',				N'',		55,		1),
+('F000000021',	N'gourmet berger',			N'',		60,		1),
+('F000000022',	N'spaghetti bolognese',		N'',		55,		1),
+('F000000023',	N'spaghetti carbonara',		N'',		55,		1),
+('F000000024',	N'noodle eggs omelette',	N'',		45,		1),
+('F000000025',	N'chicken burrito',			N'',		60,		1),
+('F000000026',	N'hawaiian pizza',			N'',		60,		1),
+('F000000027',	N'comma pizza',			N'',		60,		1),
+('F000000028',	N'chicken cajun salad',		N'',		55,		1),
+('F000000029',	N'bibimbob',				N'',		60,		1)	
+go
 
 insert into tbFoodDetails values
 ('FD00000001', 'F000000030',	'FM00000001',	1,		N'chai'			),
@@ -378,5 +443,3 @@ select * from tbFood
 go
 select *  from tbFoodDetails
 go
-
-
