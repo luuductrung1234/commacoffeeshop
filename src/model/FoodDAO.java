@@ -27,7 +27,7 @@ public class FoodDAO {
                 newrecord.setFood_id(rs.getString(1));
                 newrecord.setName(rs.getString(2));
                 newrecord.setInfo(rs.getString(3));
-                newrecord.setPrice(rs.getInt(4));
+                newrecord.setPrice(rs.getFloat(4));
                 newrecord.setIsdrink(rs.getByte(5));
                 
                 ds.add(newrecord);
@@ -58,7 +58,7 @@ public class FoodDAO {
                     st2.setString(1, new_food.getFood_id());
                     st2.setString(2, new_food.getName());
                     st2.setString(3, new_food.getInfo());
-                    st2.setInt(4, new_food.getPrice());
+                    st2.setFloat(4, new_food.getPrice());
                     st2.setByte(5, new_food.getIsdrink());
 
                     return st2.executeUpdate();
@@ -81,7 +81,7 @@ public class FoodDAO {
             
             pst.setString(1, newname);
             pst.setString(2, newinfo);
-            pst.setInt(3, newprice);
+            pst.setFloat(3, newprice);
             pst.setByte(4, newisdrink);
             pst.setString(5, old_food.getFood_id());
             
