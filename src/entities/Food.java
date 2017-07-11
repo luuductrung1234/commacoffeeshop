@@ -7,13 +7,13 @@ import java.util.*;
 
 public class Food {
     private String food_id, name, info;
-    private int price;
+    private float price;
     private Byte isdrink;
 
     public Food() {
     }
 
-    public Food(String food_id, String name, String info, int price, Byte isdrink) {
+    public Food(String food_id, String name, String info, float price, Byte isdrink) {
         this.food_id = food_id;
         this.name = name;
         this.info = info;
@@ -45,7 +45,7 @@ public class Food {
         return info;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
@@ -65,7 +65,7 @@ public class Food {
         this.info = info;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
