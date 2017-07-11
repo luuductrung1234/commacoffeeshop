@@ -19,15 +19,21 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import model.CustomerDAO;
 import model.FoodDAO;
+import model.FoodMaterialDAO;
 import model.SalaryNoteDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Map.Entry;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -57,8 +63,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             }
         }
         
-        
+        this.setMenuPanelSize();        // thiết lập kích thước khung menu cho vừa với số menu item
+        this.setTablePanelSize();       // thiết lập khích thước khung table cho vừa với số bàn
+        this.initCustomer();
         this.initComponents();
+        this.setLabelTextRoll_performed();
        
         this.setFrameIcon();
         
@@ -66,7 +75,12 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         
         this.titleSetting();
         
-        //this.initFoodMenu();
+        this.initMenu();
+        this.showDrinkmenu("[\\w ]*");
+        this.isDrinkshow = true;
+        
+        this.initOrderTable();
+        
     }
 
     /** This method is called from within the constructor to
@@ -106,7 +120,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         btnOtherthing = new javax.swing.JButton();
         btnStock = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
+        btnAddnote = new javax.swing.JButton();
         pnMenuSkip = new javax.swing.JPanel();
+        btnAll = new javax.swing.JButton();
         btnA = new javax.swing.JButton();
         btnB = new javax.swing.JButton();
         btnC = new javax.swing.JButton();
@@ -138,11 +154,30 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnEat = new javax.swing.JPanel();
         pnOther = new javax.swing.JPanel();
         pnStock = new javax.swing.JPanel();
+        pnWait = new javax.swing.JPanel();
         pnDisplayEmployee = new javax.swing.JPanel();
         pnDisplaySetting = new javax.swing.JPanel();
         pnUsing = new javax.swing.JPanel();
         pnOrderTable = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pnShowTable = new javax.swing.JPanel();
+        pnBill = new javax.swing.JPanel();
+        pnBillBlank = new javax.swing.JPanel();
         pnOrderBill = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        lbShowOrderText = new javax.swing.JLabel();
+        cboChooseCustomer = new javax.swing.JComboBox<>();
+        lbCustomer = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbOrderFood = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtOrderNote = new javax.swing.JTextArea();
+        pnOrderControl = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        pnReceiptBill = new javax.swing.JPanel();
         mnbMain = new javax.swing.JMenuBar();
         mnEdit = new javax.swing.JMenu();
         mnSystem = new javax.swing.JMenu();
@@ -161,7 +196,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnShowControl.setPreferredSize(new java.awt.Dimension(80, 487));
         pnShowControl.setLayout(new java.awt.GridLayout(3, 0));
 
-        btnMenu.setBackground(new java.awt.Color(255, 255, 255));
+        btnMenu.setBackground(new java.awt.Color(204, 204, 204));
         btnMenu.setToolTipText("menu display");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +213,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         this.btnMenu.setIcon(Menuicon);
 
-        btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+        btnEmployee.setBackground(new java.awt.Color(204, 204, 204));
         btnEmployee.setToolTipText("employee display");
         btnEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +230,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         this.btnEmployee.setIcon(Employeeicon);
 
-        btnSetting.setBackground(new java.awt.Color(255, 255, 255));
+        btnSetting.setBackground(new java.awt.Color(204, 204, 204));
         btnSetting.setToolTipText("setting display");
         btnSetting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +257,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnBlank.setLayout(pnBlankLayout);
         pnBlankLayout.setHorizontalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
         pnBlankLayout.setVerticalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,9 +272,14 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
         pnMenuSwitch.setBackground(new java.awt.Color(51, 51, 51));
         pnMenuSwitch.setPreferredSize(new java.awt.Dimension(100, 32));
-        pnMenuSwitch.setLayout(new java.awt.GridLayout());
+        pnMenuSwitch.setLayout(new java.awt.GridLayout(1, 0));
 
         btnDrink.setToolTipText("food");
+        btnDrink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDrinkActionPerformed(evt);
+            }
+        });
         pnMenuSwitch.add(btnDrink);
         ImageIcon Drinkicon = null;
         try{
@@ -251,6 +291,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnDrink.setIcon(Drinkicon);
 
         btnEat.setToolTipText("drink");
+        btnEat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEatActionPerformed(evt);
+            }
+        });
         pnMenuSwitch.add(btnEat);
         ImageIcon Eaticon = null;
         try{
@@ -262,6 +307,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnEat.setIcon(Eaticon);
 
         btnOtherthing.setToolTipText("other");
+        btnOtherthing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOtherthingActionPerformed(evt);
+            }
+        });
         pnMenuSwitch.add(btnOtherthing);
         ImageIcon Othericon = null;
         try{
@@ -273,6 +323,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnOtherthing.setIcon(Othericon);
 
         btnStock.setToolTipText("stock materials");
+        btnStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStockActionPerformed(evt);
+            }
+        });
         pnMenuSwitch.add(btnStock);
         ImageIcon Stockicon = null;
         try{
@@ -284,6 +339,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnStock.setIcon(Stockicon);
 
         btnSearch.setToolTipText("search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
         pnMenuSwitch.add(btnSearch);
         ImageIcon Searchicon = null;
         try{
@@ -294,11 +354,75 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         this.btnSearch.setIcon(Searchicon);
 
+        btnAddnote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddnoteActionPerformed(evt);
+            }
+        });
+        pnMenuSwitch.add(btnAddnote);
+        ImageIcon Addnoteicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/addnote_icon.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            Addnoteicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnAddnote.setIcon(Addnoteicon);
+
         jPanel1.add(pnMenuSwitch);
 
         pnMenuSkip.setBackground(new java.awt.Color(204, 204, 255));
         pnMenuSkip.setPreferredSize(new java.awt.Dimension(0, 30));
-        pnMenuSkip.setLayout(new java.awt.GridLayout());
+        pnMenuSkip.setLayout(new java.awt.GridLayout(1, 0));
+        pnMenuSkip.add(btnAll);
+        this.btnAll.setBorderPainted(false);
+        this.btnAll.setFocusPainted(false);
+        this.btnAll.setContentAreaFilled(false);
+
+        ImageIcon Allicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/all_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            Allicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnAll.setIcon(Allicon);
+
+        this.btnAll.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "[\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnA);
         this.btnA.setBorderPainted(false);
         this.btnA.setFocusPainted(false);
@@ -312,6 +436,42 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             io_ex.printStackTrace();
         }
         this.btnA.setIcon(Aicon);
+
+        this.btnA.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[aA][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnB);
         this.btnB.setBorderPainted(false);
         this.btnB.setFocusPainted(false);
@@ -325,6 +485,42 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             io_ex.printStackTrace();
         }
         this.btnB.setIcon(Bicon);
+
+        this.btnB.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[bB][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnC);
         this.btnC.setBorderPainted(false);
         this.btnC.setFocusPainted(false);
@@ -338,6 +534,42 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             io_ex.printStackTrace();
         }
         this.btnC.setIcon(Cicon);
+
+        this.btnC.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[cC][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnD);
         ImageIcon Dicon = null;
         try{
@@ -351,6 +583,42 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnD.setBorderPainted(false);
         this.btnD.setFocusPainted(false);
         this.btnD.setContentAreaFilled(false);
+
+        this.btnD.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[dD][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnE);
         ImageIcon Eicon = null;
         try{
@@ -363,6 +631,42 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnE.setBorderPainted(false);
         this.btnE.setFocusPainted(false);
         this.btnE.setContentAreaFilled(false);
+
+        this.btnE.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[eE][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnF);
         ImageIcon Ficon = null;
         try{
@@ -375,6 +679,42 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnF.setBorderPainted(false);
         this.btnF.setFocusPainted(false);
         this.btnF.setContentAreaFilled(false);
+
+        this.btnF.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[fF][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnG);
         ImageIcon Gicon = null;
         try{
@@ -387,6 +727,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnG.setBorderPainted(false);
         this.btnG.setFocusPainted(false);
         this.btnG.setContentAreaFilled(false);
+        this.btnG.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[gG][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnH);
         ImageIcon Hicon = null;
         try{
@@ -399,6 +774,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnH.setBorderPainted(false);
         this.btnH.setFocusPainted(false);
         this.btnH.setContentAreaFilled(false);
+        this.btnH.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[hH][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnI);
         ImageIcon Iicon = null;
         try{
@@ -411,6 +821,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnI.setBorderPainted(false);
         this.btnI.setFocusPainted(false);
         this.btnI.setContentAreaFilled(false);
+        this.btnI.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[iI][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnJ);
         ImageIcon Jicon = null;
         try{
@@ -423,6 +868,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnJ.setBorderPainted(false);
         this.btnJ.setFocusPainted(false);
         this.btnJ.setContentAreaFilled(false);
+        this.btnJ.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[jJ][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnK);
         ImageIcon Kicon = null;
         try{
@@ -435,6 +915,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnK.setBorderPainted(false);
         this.btnK.setFocusPainted(false);
         this.btnK.setContentAreaFilled(false);
+        this.btnK.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[kK][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnL);
         ImageIcon Licon = null;
         try{
@@ -447,6 +962,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnL.setBorderPainted(false);
         this.btnL.setFocusPainted(false);
         this.btnL.setContentAreaFilled(false);
+        this.btnL.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[lL][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnM);
         ImageIcon Micon = null;
         try{
@@ -459,6 +1009,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnM.setBorderPainted(false);
         this.btnM.setFocusPainted(false);
         this.btnM.setContentAreaFilled(false);
+        this.btnM.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[mM][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnN);
         ImageIcon Nicon = null;
         try{
@@ -471,6 +1056,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnN.setBorderPainted(false);
         this.btnN.setFocusPainted(false);
         this.btnN.setContentAreaFilled(false);
+        this.btnN.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[nN][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnO);
         ImageIcon Oicon = null;
         try{
@@ -483,6 +1103,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnO.setBorderPainted(false);
         this.btnO.setFocusPainted(false);
         this.btnO.setContentAreaFilled(false);
+        this.btnO.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[oO][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnP);
         ImageIcon Picon = null;
         try{
@@ -495,6 +1150,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnP.setBorderPainted(false);
         this.btnP.setFocusPainted(false);
         this.btnP.setContentAreaFilled(false);
+        this.btnP.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[pP][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnQ);
         ImageIcon Qicon = null;
         try{
@@ -507,6 +1197,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnQ.setBorderPainted(false);
         this.btnQ.setFocusPainted(false);
         this.btnQ.setContentAreaFilled(false);
+        this.btnQ.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[qQ][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnR);
         ImageIcon Ricon = null;
         try{
@@ -519,6 +1244,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnR.setBorderPainted(false);
         this.btnR.setFocusPainted(false);
         this.btnR.setContentAreaFilled(false);
+        this.btnR.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[rR][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnS);
         ImageIcon Sicon = null;
         try{
@@ -531,6 +1291,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnS.setBorderPainted(false);
         this.btnS.setFocusPainted(false);
         this.btnS.setContentAreaFilled(false);
+        this.btnS.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[sS][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnT);
         ImageIcon Ticon = null;
         try{
@@ -543,6 +1338,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnT.setBorderPainted(false);
         this.btnT.setFocusPainted(false);
         this.btnT.setContentAreaFilled(false);
+        this.btnT.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[tT][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnU);
         ImageIcon Uicon = null;
         try{
@@ -555,6 +1385,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnU.setBorderPainted(false);
         this.btnU.setFocusPainted(false);
         this.btnU.setContentAreaFilled(false);
+        this.btnU.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[uU][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnV);
         ImageIcon Vicon = null;
         try{
@@ -567,6 +1432,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnV.setBorderPainted(false);
         this.btnV.setFocusPainted(false);
         this.btnV.setContentAreaFilled(false);
+        this.btnV.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[vV][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnW);
         ImageIcon Wicon = null;
         try{
@@ -579,6 +1479,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnW.setBorderPainted(false);
         this.btnW.setFocusPainted(false);
         this.btnW.setContentAreaFilled(false);
+        this.btnW.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[wW][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnX);
         ImageIcon Xicon = null;
         try{
@@ -591,6 +1526,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnX.setBorderPainted(false);
         this.btnX.setFocusPainted(false);
         this.btnX.setContentAreaFilled(false);
+        this.btnX.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[xX][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnY);
         ImageIcon Yicon = null;
         try{
@@ -603,6 +1573,41 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnY.setBorderPainted(false);
         this.btnY.setFocusPainted(false);
         this.btnY.setContentAreaFilled(false);
+        this.btnY.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[yY][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
         pnMenuSkip.add(btnZ);
         ImageIcon Zicon = null;
         try{
@@ -615,64 +1620,78 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.btnZ.setBorderPainted(false);
         this.btnZ.setFocusPainted(false);
         this.btnZ.setContentAreaFilled(false);
+        this.btnZ.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String regex = "^[zZ][\\w ]*";
+
+                if(isDrinkshow){
+                    pnDrink.removeAll();
+                    showDrinkmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card3");
+                }
+                if(isEatshow){
+                    pnEat.removeAll();
+                    showEatmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card2");
+                }
+                if(isOthershow){
+                    pnOther.removeAll();
+                    showOthermenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card4");
+                }
+                if(isStockshow){
+                    pnStock.removeAll();
+                    showStockmenu(regex);
+                    CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+                    cl.show(pnMenuDisplayDetails, "card7");
+                    cl.show(pnMenuDisplayDetails, "card5");
+                }
+            }
+        });
 
         jPanel1.add(pnMenuSkip);
 
         pnMenuDisplayDetails.setBackground(new java.awt.Color(204, 204, 204));
-        pnMenuDisplayDetails.setPreferredSize(new java.awt.Dimension(472, 700));
+        pnMenuDisplayDetails.setPreferredSize(new java.awt.Dimension(this.Menupn_width, this.Menupn_height));
         pnMenuDisplayDetails.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout pnDrinkLayout = new javax.swing.GroupLayout(pnDrink);
-        pnDrink.setLayout(pnDrinkLayout);
-        pnDrinkLayout.setHorizontalGroup(
-            pnDrinkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-        pnDrinkLayout.setVerticalGroup(
-            pnDrinkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-
+        pnDrink.setBackground(new java.awt.Color(31, 11, 43));
+        pnDrink.setPreferredSize(new java.awt.Dimension(this.Menupn_width, this.Menupn_height));
+        pnDrink.setMaximumSize(new java.awt.Dimension(this.Menupn_width, this.Menupn_height));
+        pnDrink.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
         pnMenuDisplayDetails.add(pnDrink, "card3");
 
-        javax.swing.GroupLayout pnEatLayout = new javax.swing.GroupLayout(pnEat);
-        pnEat.setLayout(pnEatLayout);
-        pnEatLayout.setHorizontalGroup(
-            pnEatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-        pnEatLayout.setVerticalGroup(
-            pnEatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-
+        pnEat.setBackground(new java.awt.Color(31, 11, 43));
+        pnEat.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
         pnMenuDisplayDetails.add(pnEat, "card2");
 
-        javax.swing.GroupLayout pnOtherLayout = new javax.swing.GroupLayout(pnOther);
-        pnOther.setLayout(pnOtherLayout);
-        pnOtherLayout.setHorizontalGroup(
-            pnOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
-        pnOtherLayout.setVerticalGroup(
-            pnOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-
+        pnOther.setBackground(new java.awt.Color(31, 11, 43));
+        pnOther.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
         pnMenuDisplayDetails.add(pnOther, "card4");
 
-        javax.swing.GroupLayout pnStockLayout = new javax.swing.GroupLayout(pnStock);
-        pnStock.setLayout(pnStockLayout);
-        pnStockLayout.setHorizontalGroup(
-            pnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+        pnStock.setBackground(new java.awt.Color(0, 153, 102));
+        pnStock.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
+        pnMenuDisplayDetails.add(pnStock, "card5");
+
+        javax.swing.GroupLayout pnWaitLayout = new javax.swing.GroupLayout(pnWait);
+        pnWait.setLayout(pnWaitLayout);
+        pnWaitLayout.setHorizontalGroup(
+            pnWaitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 297, Short.MAX_VALUE)
         );
-        pnStockLayout.setVerticalGroup(
-            pnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+        pnWaitLayout.setVerticalGroup(
+            pnWaitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 421, Short.MAX_VALUE)
         );
 
-        pnMenuDisplayDetails.add(pnStock, "card5");
+        pnMenuDisplayDetails.add(pnWait, "card7");
 
         jPanel1.add(pnMenuDisplayDetails);
 
@@ -682,12 +1701,14 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnDisplayMenu.setLayout(pnDisplayMenuLayout);
         pnDisplayMenuLayout.setHorizontalGroup(
             pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
         pnDisplayMenuLayout.setVerticalGroup(
             pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
         );
+
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
 
         pnDisplay.add(pnDisplayMenu, "card2");
 
@@ -697,7 +1718,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnDisplayEmployee.setLayout(pnDisplayEmployeeLayout);
         pnDisplayEmployeeLayout.setHorizontalGroup(
             pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
         pnDisplayEmployeeLayout.setVerticalGroup(
             pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,7 +1733,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnDisplaySetting.setLayout(pnDisplaySettingLayout);
         pnDisplaySettingLayout.setHorizontalGroup(
             pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
         pnDisplaySettingLayout.setVerticalGroup(
             pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -730,36 +1751,183 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnUsing.setLayout(new javax.swing.BoxLayout(pnUsing, javax.swing.BoxLayout.PAGE_AXIS));
 
         pnOrderTable.setBackground(new java.awt.Color(76, 116, 181));
-        pnOrderTable.setPreferredSize(new java.awt.Dimension(300, 100));
+        pnOrderTable.setPreferredSize(new java.awt.Dimension(300, 250));
+
+        pnShowTable.setBackground(new java.awt.Color(76, 116, 181));
+        pnShowTable.setPreferredSize(new java.awt.Dimension(this.Tablepn_width, this.Tablepn_height));
+        pnShowTable.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
+        jScrollPane2.setViewportView(pnShowTable);
 
         javax.swing.GroupLayout pnOrderTableLayout = new javax.swing.GroupLayout(pnOrderTable);
         pnOrderTable.setLayout(pnOrderTableLayout);
         pnOrderTableLayout.setHorizontalGroup(
             pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
         );
         pnOrderTableLayout.setVerticalGroup(
             pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 143, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
+
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
 
         pnUsing.add(pnOrderTable);
 
-        pnOrderBill.setBackground(new java.awt.Color(45, 66, 99));
-        pnOrderBill.setPreferredSize(new java.awt.Dimension(100, 300));
+        pnBill.setBackground(new java.awt.Color(45, 66, 99));
+        pnBill.setPreferredSize(new java.awt.Dimension(100, 300));
+        pnBill.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout pnOrderBillLayout = new javax.swing.GroupLayout(pnOrderBill);
-        pnOrderBill.setLayout(pnOrderBillLayout);
-        pnOrderBillLayout.setHorizontalGroup(
-            pnOrderBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnBillBlankLayout = new javax.swing.GroupLayout(pnBillBlank);
+        pnBillBlank.setLayout(pnBillBlankLayout);
+        pnBillBlankLayout.setHorizontalGroup(
+            pnBillBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 428, Short.MAX_VALUE)
         );
-        pnOrderBillLayout.setVerticalGroup(
-            pnOrderBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
+        pnBillBlankLayout.setVerticalGroup(
+            pnBillBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 476, Short.MAX_VALUE)
         );
 
-        pnUsing.add(pnOrderBill);
+        pnBill.add(pnBillBlank, "card4");
+
+        pnOrderBill.setLayout(new javax.swing.BoxLayout(pnOrderBill, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel2.setBackground(new java.awt.Color(3, 22, 38));
+        jPanel2.setPreferredSize(new java.awt.Dimension(201, 100));
+
+        lbShowOrderText.setBackground(new java.awt.Color(0, 0, 0));
+        lbShowOrderText.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbShowOrderText.setForeground(new java.awt.Color(0, 255, 51));
+        lbShowOrderText.setText("Current Table: "+ this.cur_table +" ----- Day: " + this.today);
+        this.str_labeltext = this.lbShowOrderText.getText();
+
+        String[] cus_name = new String[this.cus_list.size()];
+        for(int i = 0; i < this.cus_list.size(); i++){
+            cus_name[i] = this.cus_list.get(i).getName();
+        }
+        cboChooseCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(cus_name));
+        cboChooseCustomer.setToolTipText("customer for discount");
+        this.cboChooseCustomer.setSelectedIndex(16);
+        cboChooseCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboChooseCustomerActionPerformed(evt);
+            }
+        });
+
+        lbCustomer.setForeground(new java.awt.Color(204, 204, 204));
+        lbCustomer.setText("Customer:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbShowOrderText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbCustomer)
+                .addGap(18, 18, 18)
+                .addComponent(cboChooseCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 175, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(lbShowOrderText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboChooseCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbCustomer))
+                .addGap(0, 29, Short.MAX_VALUE))
+        );
+
+        pnOrderBill.add(jPanel2);
+
+        jScrollPane4.setPreferredSize(new java.awt.Dimension(453, 303));
+
+        tbOrderFood.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Quantity", "Discount", "Price", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tbOrderFood);
+
+        pnOrderBill.add(jScrollPane4);
+
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(236, 150));
+
+        txtOrderNote.setColumns(20);
+        txtOrderNote.setRows(5);
+        txtOrderNote.setPreferredSize(new java.awt.Dimension(220, 100));
+        jScrollPane3.setViewportView(txtOrderNote);
+
+        pnOrderBill.add(jScrollPane3);
+
+        pnOrderControl.setPreferredSize(new java.awt.Dimension(201, 70));
+        pnOrderControl.setLayout(new java.awt.GridLayout(1, 0));
+
+        jButton1.setBackground(new java.awt.Color(0, 153, 0));
+        jButton1.setText("PAY");
+        jButton1.setToolTipText("pay");
+        pnOrderControl.add(jButton1);
+
+        jButton3.setBackground(new java.awt.Color(204, 204, 0));
+        jButton3.setText("KITCHEN PRINT");
+        jButton3.setToolTipText("kitchen print");
+        pnOrderControl.add(jButton3);
+
+        jButton4.setBackground(new java.awt.Color(204, 204, 0));
+        jButton4.setText("PRINT");
+        jButton4.setToolTipText("bar print");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        pnOrderControl.add(jButton4);
+
+        jButton5.setBackground(new java.awt.Color(153, 0, 0));
+        jButton5.setText("DELETE");
+        pnOrderControl.add(jButton5);
+
+        pnOrderBill.add(pnOrderControl);
+
+        pnBill.add(pnOrderBill, "card2");
+
+        javax.swing.GroupLayout pnReceiptBillLayout = new javax.swing.GroupLayout(pnReceiptBill);
+        pnReceiptBill.setLayout(pnReceiptBillLayout);
+        pnReceiptBillLayout.setHorizontalGroup(
+            pnReceiptBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 428, Short.MAX_VALUE)
+        );
+        pnReceiptBillLayout.setVerticalGroup(
+            pnReceiptBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 476, Short.MAX_VALUE)
+        );
+
+        pnBill.add(pnReceiptBill, "card3");
+
+        pnUsing.add(pnBill);
 
         getContentPane().add(pnUsing);
 
@@ -841,6 +2009,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card3");
+            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());
+            c2.show(this.pnBill, "card4");
+            this.refreshTable();
+            this.cur_table = 0;
         }else{
             this.btnEmployee.setBackground(new java.awt.Color(255,255,255));
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
@@ -860,12 +2032,131 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card4");
+            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());
+            c2.show(this.pnBill, "card4");
+            this.refreshTable();
+            this.cur_table = 0;
         }else{
             this.btnSetting.setBackground(new java.awt.Color(255,255,255));
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card5");
         }
     }//GEN-LAST:event_btnSettingActionPerformed
+
+    private void btnDrinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrinkActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) this.pnMenuDisplayDetails.getLayout();
+        cl.show(this.pnMenuDisplayDetails, "card3");
+        this.isDrinkshow = true;
+        this.isEatshow = false;
+        this.isOthershow = false;
+        this.isStockshow = false;
+        
+        this.pnDrink.removeAll();
+        this.showDrinkmenu("[\\w ]*");
+    }//GEN-LAST:event_btnDrinkActionPerformed
+
+    private void btnEatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEatActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) this.pnMenuDisplayDetails.getLayout();
+        cl.show(this.pnMenuDisplayDetails, "card2");
+        this.isDrinkshow = false;
+        this.isEatshow = true;
+        this.isOthershow = false;
+        this.isStockshow = false;
+        
+        this.pnEat.removeAll();
+        this.showEatmenu("[\\w ]*");
+    }//GEN-LAST:event_btnEatActionPerformed
+
+    private void btnOtherthingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtherthingActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) this.pnMenuDisplayDetails.getLayout();
+        cl.show(this.pnMenuDisplayDetails, "card4");
+        this.isDrinkshow = false;
+        this.isEatshow = false;
+        this.isOthershow = true;
+        this.isStockshow = false;
+        
+        this.pnOther.removeAll();
+        this.showOthermenu("[\\w ]*");
+    }//GEN-LAST:event_btnOtherthingActionPerformed
+
+    private void btnStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStockActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) this.pnMenuDisplayDetails.getLayout();
+        cl.show(this.pnMenuDisplayDetails, "card5");
+        this.isDrinkshow = false;
+        this.isEatshow = false;
+        this.isOthershow = false;
+        this.isStockshow = true;
+        
+        this.pnStock.removeAll();
+        this.showStockmenu("[\\w ]*");
+    }//GEN-LAST:event_btnStockActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        String regex = "[\\w ]*"; 
+        String str = JOptionPane.showInputDialog("Input the name you want to search");
+        if(str != null){
+            regex += str;
+            regex += "[\\w ]*";
+        }
+        
+        if(isDrinkshow){
+            pnDrink.removeAll();
+            showDrinkmenu(regex);
+            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+            cl.show(pnMenuDisplayDetails, "card7");
+            cl.show(pnMenuDisplayDetails, "card3");
+        }
+        if(isEatshow){
+            pnEat.removeAll();
+            showEatmenu(regex);
+            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+            cl.show(pnMenuDisplayDetails, "card7");
+            cl.show(pnMenuDisplayDetails, "card2");
+        }
+        if(isOthershow){
+            pnOther.removeAll();
+            showOthermenu(regex);
+            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+            cl.show(pnMenuDisplayDetails, "card7");
+            cl.show(pnMenuDisplayDetails, "card4");
+        }
+        if(isStockshow){
+            pnStock.removeAll();
+            showStockmenu(regex);
+            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();
+            cl.show(pnMenuDisplayDetails, "card7");
+            cl.show(pnMenuDisplayDetails, "card5");
+        }
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void cboChooseCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChooseCustomerActionPerformed
+        if(this.cur_table != 0 && this.getTableState(this.cur_table) != 0){
+            this.cur_order = this.getOrderofTable(this.cur_table);
+            this.cur_order.getKey().setCus_id(this.cus_list.get(this.cboChooseCustomer.getSelectedIndex()).getCus_id());
+            
+            this.ShowCurrentOrderBill();
+        }
+    }//GEN-LAST:event_cboChooseCustomerActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.setTableState(this.cur_table, 2);
+        this.refreshTable();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnAddnoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddnoteActionPerformed
+        // TODO add your handling code here:
+        if(this.cur_table != 0 && this.getTableState(this.cur_table) != 0){
+            new DiaNote(this, true).setVisible(true);
+            this.ShowCurrentOrderBill();
+        }
+    }//GEN-LAST:event_btnAddnoteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -904,6 +2195,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnA;
+    private javax.swing.JButton btnAddnote;
+    private javax.swing.JButton btnAll;
     private javax.swing.JButton btnB;
     private javax.swing.JButton btnC;
     private javax.swing.JButton btnD;
@@ -937,13 +2230,26 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnX;
     private javax.swing.JButton btnY;
     private javax.swing.JButton btnZ;
+    private javax.swing.JComboBox<String> cboChooseCustomer;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lbCustomer;
+    private javax.swing.JLabel lbShowOrderText;
     private javax.swing.JMenuItem miAddemp;
     private javax.swing.JMenuItem miLogout;
     private javax.swing.JMenu mnEdit;
     private javax.swing.JMenu mnSystem;
     private javax.swing.JMenuBar mnbMain;
+    private javax.swing.JPanel pnBill;
+    private javax.swing.JPanel pnBillBlank;
     private javax.swing.JPanel pnBlank;
     private javax.swing.JPanel pnDisplay;
     private javax.swing.JPanel pnDisplayEmployee;
@@ -955,20 +2261,62 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JPanel pnMenuSkip;
     private javax.swing.JPanel pnMenuSwitch;
     private javax.swing.JPanel pnOrderBill;
+    private javax.swing.JPanel pnOrderControl;
     private javax.swing.JPanel pnOrderTable;
     private javax.swing.JPanel pnOther;
+    private javax.swing.JPanel pnReceiptBill;
     private javax.swing.JPanel pnShow;
     private javax.swing.JPanel pnShowControl;
+    private javax.swing.JPanel pnShowTable;
     private javax.swing.JPanel pnStock;
     private javax.swing.JPanel pnUsing;
+    private javax.swing.JPanel pnWait;
+    private javax.swing.JTable tbOrderFood;
+    private javax.swing.JTextArea txtOrderNote;
     // End of variables declaration//GEN-END:variables
 
     
     
 //  CUSTOM DECLARATION
+    int discountevent = 0;
+    
     ArrayList<Employee> working_emp = new ArrayList<>();
     ArrayList<EmpSchedule> working_schedule = new ArrayList<>();
     ArrayList<Food> menufood_list = new ArrayList<>();
+    ArrayList<FoodMaterial> menumaterial_list = new ArrayList<>();
+    ArrayList<Customer> cus_list = new ArrayList<>();
+    boolean isDrinkshow = false;
+    boolean isEatshow = false;
+    boolean isOthershow = false;
+    boolean isStockshow = false;
+    
+    // Điều chỉnh xuất các nút table
+    int tableitem_number = 40;      // số bàn mặc định của quán
+    int tablerow_number;       // số dòng
+    int tablecol_number = 3;            // số cột
+    int Tablepn_width;              // kích thước khung table được điều chỉnh cho phù hợp với số dòng số cột
+    int Tablepn_height;
+    
+    // Điều chỉnh xuất các nút menu
+    int menuitem_number = 50;      // số sản phẩm mặc định cho một menu
+    int row_number;                // số dòng
+    int col_number = 6;            // số cột
+    int Menupn_width;              // kích thước khung menu được điều chỉnh cho phù hợp với số dòng số cột
+    int Menupn_height;
+    
+    
+    
+    ArrayList<JButton> tablebtn_list = new ArrayList<>();                       // danh sách bàn
+    ArrayList<Integer> tablestate_list = new ArrayList<>();                     // 0: chưa order, 1: đã order, 2: đã lưu
+    ArrayList<String> tablesnote_list = new ArrayList<>();
+    HashMap<Order, ArrayList<OrderDetails>> order_list = new HashMap<>();
+    boolean isOrdershow = false;
+    boolean isReceiptshow = false;
+    DefaultTableModel tbmodel;
+    
+    LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+    int cur_table = 0;
+    Entry<Order, ArrayList<OrderDetails>> cur_order;
 //  END CUSTOM DECLARATION
     
     
@@ -1016,16 +2364,477 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         
         schedule.setWorkday(workDate);
     }
+    
+    private void initCustomer(){
+        this.cus_list = (ArrayList<Customer>) CustomerDAO.getList();
+    }
 
-    /*private void initFoodMenu() {
+    private void initMenu() {
         this.menufood_list = (ArrayList<Food>) FoodDAO.getList();
-        
-        for(Food itemfood : this.menufood_list){
-            JButton b = new JButton();
-            b.setText(itemfood.getName());
-            b.setSize(50, 50);
-            this.pnDisplayDetailsMenu.add(b);
+        this.menumaterial_list = (ArrayList<FoodMaterial>) FoodMaterialDAO.getList();
+    }
+    
+    
+    private void setMenuPanelSize(){
+        if(this.menuitem_number % 6 != 0){
+            this.row_number = (this.menuitem_number/6) + 1;
+        }else{
+            this.row_number = this.menuitem_number/6;
         }
-    }*/
+        
+        Menupn_width = (this.col_number * 100) + ((this.col_number-1) * 20);
+        Menupn_height = (this.row_number * 100) + ((this.row_number-1) * 20);
+    }
+    
+    private void showDrinkmenu(String regex){
+        int numberadd = 0;
+        
+        Pattern p = Pattern.compile(regex);
+        for(Food itemfood : this.menufood_list){
+            Matcher m = p.matcher(itemfood.getName());
+            if(itemfood.getIsdrink() == 0 && m.matches()){
+                JButton b = new JButton();
+                b.addActionListener((ActionEvent e) -> {
+                    if(this.cur_table != 0){
+                        String foodname = b.getText();
+                        String foodid = "";
+                        for(Food iter : this.menufood_list){                        // lấy id của food vừa bấm
+                            if(iter.getName().equals(foodname)){
+                                foodid = iter.getFood_id();
+                                break;
+                            }
+                        }
+                        
+                        this.cur_order = this.getOrderofTable(this.cur_table);
+                        // cập food vừa bấm vào current orderdetails
+                        boolean isexisted = false;
+                        for(OrderDetails iter : this.cur_order.getValue()){
+                            if(iter.getFood_id().equals(foodid)){                   // nếu nó đã được order rồi
+                                iter.setQuan(iter.getQuan() + 1);
+                                isexisted = true;
+                                break;
+                            }
+                        }
+                        if(!isexisted){
+                            OrderDetails newod = new OrderDetails("", foodid, 1);
+                            this.cur_order.getValue().add(newod);
+                        }
+                        
+                        // cập nhật food vừa bấm vào cửa sổ order
+                        this.ShowCurrentOrderBill();
+                        if(this.getTableState(this.cur_table) == 0 || this.getTableState(this.cur_table) == 2){
+                            this.setTableState(this.cur_table, 1);
+                            this.refreshTable();
+                        }
+                    }
+                    
+                });
+                b.setText(itemfood.getName());
+                b.setSize(40, 40);
+                
+                this.pnDrink.add(b);
+                ++numberadd;
+            }
+        }
+        
+        for(int i = 0; i < (this.menuitem_number-numberadd); i++){          // xuất những khoảng trống
+            JLabel l = new JLabel();
+            l.setSize(40, 40);
+            this.pnDrink.add(l);
+        }
+    }
+    
+    private void showEatmenu(String regex){
+        int numberadd = 0;
+        
+        Pattern p = Pattern.compile(regex);
+        for(Food itemfood : this.menufood_list){
+            Matcher m = p.matcher(itemfood.getName());
+            if(itemfood.getIsdrink() == 1 && m.matches()){
+                JButton b = new JButton();
+                b.addActionListener((ActionEvent e) -> {
+                    if(this.cur_table != 0){
+                        String foodname = b.getText();
+                        String foodid = "";
+                        for(Food iter : this.menufood_list){                        // lấy id của food vừa bấm
+                            if(iter.getName().equals(foodname)){
+                                foodid = iter.getFood_id();
+                                break;
+                            }
+                        }
+                        
+                        this.cur_order = this.getOrderofTable(this.cur_table);
+                        // cập food vừa bấm vào current orderdetails
+                        boolean isexisted = false;
+                        for(OrderDetails iter : this.cur_order.getValue()){
+                            if(iter.getFood_id().equals(foodid)){                   // nếu nó đã được order rồi
+                                iter.setQuan(iter.getQuan() + 1);
+                                isexisted = true;
+                                break;
+                            }
+                        }
+                        if(!isexisted){
+                            OrderDetails newod = new OrderDetails("", foodid, 1);
+                            this.cur_order.getValue().add(newod);
+                        }
+                        
+                        // cập nhật food vừa bấm vào cửa sổ order
+                        this.ShowCurrentOrderBill();
+                        if(this.getTableState(this.cur_table) == 0 || this.getTableState(this.cur_table) == 2){
+                            this.setTableState(this.cur_table, 1);
+                            this.refreshTable();
+                        }
+                    }
+                });
+                b.setText(itemfood.getName());
+                b.setSize(40, 40);
+                this.pnEat.add(b);
+                ++numberadd;
+            }
+        }
+        
+        for(int i = 0; i < (this.menuitem_number-numberadd); i++){          // xuất những khoảng trống
+            JLabel l = new JLabel();
+            l.setSize(40, 40);
+            this.pnEat.add(l);
+        }
+    }
+    
+    private void showOthermenu(String regex){
+        int numberadd = 0;
+        
+        Pattern p = Pattern.compile(regex);
+        for(Food itemfood : this.menufood_list){
+            Matcher m = p.matcher(itemfood.getName());
+            if(itemfood.getIsdrink() == 2 && m.matches()){
+                JButton b = new JButton();
+                b.addActionListener((ActionEvent e) -> {
+                    if(this.cur_table != 0){
+                        String foodname = b.getText();
+                        String foodid = "";
+                        for(Food iter : this.menufood_list){                        // lấy id của food vừa bấm
+                            if(iter.getName().equals(foodname)){
+                                foodid = iter.getFood_id();
+                                break;
+                            }
+                        }
+                        
+                        this.cur_order = this.getOrderofTable(this.cur_table);
+                        // cập food vừa bấm vào current orderdetails
+                        boolean isexisted = false;
+                        for(OrderDetails iter : this.cur_order.getValue()){
+                            if(iter.getFood_id().equals(foodid)){                   // nếu nó đã được order rồi
+                                iter.setQuan(iter.getQuan() + 1);
+                                isexisted = true;
+                                break;
+                            }
+                        }
+                        if(!isexisted){
+                            OrderDetails newod = new OrderDetails("", foodid, 1);
+                            this.cur_order.getValue().add(newod);
+                        }
+                        
+                        // cập nhật food vừa bấm vào cửa sổ order
+                        this.ShowCurrentOrderBill();
+                        if(this.getTableState(this.cur_table) == 0 || this.getTableState(this.cur_table) == 2){
+                            this.setTableState(this.cur_table, 1);
+                            this.refreshTable();
+                        }
+                    }
+                });
+                b.setText(itemfood.getName());
+                b.setSize(40, 40);
+                this.pnOther.add(b);
+                ++numberadd;
+            }
+        }
+        
+        for(int i = 0; i < (this.menuitem_number-numberadd); i++){          // xuất những khoảng trống
+            JLabel l = new JLabel();
+            l.setSize(40, 40);
+            this.pnOther.add(l);
+        }
+    }
+    
+    private void showStockmenu(String regex){
+        int numberadd = 0;
+        
+        Pattern p = Pattern.compile(regex);
+        for(FoodMaterial itemmaterial : this.menumaterial_list){
+            Matcher m = p.matcher(itemmaterial.getName());
+            if(m.matches()){
+                JButton b = new JButton();
+                b.addActionListener((ActionEvent e) -> {
+                    
+                });
+                b.setText(itemmaterial.getName());
+                b.setSize(40, 40);
+                this.pnStock.add(b);
+                ++numberadd;
+            }
+        }
+        
+        for(int i = 0; i < (this.menuitem_number-numberadd); i++){          // xuất những khoảng trống
+            JLabel l = new JLabel();
+            l.setSize(40, 40);
+            this.pnStock.add(l);
+        }
+    }
+    
+    
+    private void setTablePanelSize(){
+        if(this.tableitem_number % 3 != 0){
+            this.tablerow_number = (this.tableitem_number/3) + 1;
+        }else{
+            this.tablerow_number = this.tableitem_number/3;
+        }
+
+        this.Tablepn_width = (this.tablecol_number * 100) + ((this.tablecol_number-1) * 10);
+        this.Tablepn_height = (this.tablerow_number * 50) + ((this.tablerow_number-1) * 10);
+    }
+    
+    private void initOrderTable() {
+        for(int i = 1; i <= this.menuitem_number; i++){
+            JButton b = new JButton();
+            b.addActionListener((ActionEvent e) -> {
+                this.refreshTable();                                                    // làm mới mỗi lần bấm bàn mới
+                this.cur_table = Integer.parseInt(b.getText());                         // lấy bàn hiện tại vừa bấm
+                int state = this.getTableState(this.cur_table);                         // lấy trạng thái của bàn đó
+                if(state == 0){
+                    b.setBackground(new Color(5, 22, 8));
+                    int rs = JOptionPane.showConfirmDialog(null, "Are you sure to create a new Order?");
+                    if(rs == JOptionPane.YES_OPTION){
+                        CardLayout c1 = (CardLayout) this.pnDisplay.getLayout();
+                        CardLayout c2 = (CardLayout) this.pnMenuDisplayDetails.getLayout();
+                        CardLayout c3 = (CardLayout) this.pnBill.getLayout();
+
+                        c1.show(this.pnDisplay, "card2");
+
+                        c2.show(this.pnMenuDisplayDetails, "card3");                    // hiện màn hình menu drink
+                        this.isDrinkshow = true;
+                        this.isEatshow = false;
+                        this.isStockshow = false;
+                        this.isOthershow = false;
+
+                        c3.show(this.pnBill, "card2");                                  // hiện màn hình nhập Orderbill
+                        this.isOrdershow =true;
+                        this.isReceiptshow = false;
+                    }else{
+                        this.setBackground(new Color(18, 2, 28));
+                    }
+                }else{
+                    if(state == 1 || state == 2){
+                        CardLayout c1 = (CardLayout) this.pnDisplay.getLayout();
+                        CardLayout c2 = (CardLayout) this.pnMenuDisplayDetails.getLayout();
+                        CardLayout c3 = (CardLayout) this.pnBill.getLayout();
+
+                        c1.show(this.pnDisplay, "card2");
+
+                        c2.show(this.pnMenuDisplayDetails, "card3");                    // hiện màn hình menu drink
+                        this.isDrinkshow = true;
+                        this.isEatshow = false;
+                        this.isStockshow = false;
+                        this.isOthershow = false;
+
+                        c3.show(this.pnBill, "card2");                                  // hiện màn hình nhập Orderbill
+                        this.isOrdershow =true;
+                        this.isReceiptshow = false;
+                    }
+                }
+                
+   
+                this.ShowCurrentOrderBill();
+            });
+            b.setText(String.valueOf(i));
+            b.setSize(100, 50);
+            b.setBackground(new Color(18, 2, 28));
+            b.setForeground(new Color(106, 158, 237));
+            this.pnShowTable.add(b);
+            
+            this.tablebtn_list.add(b);
+            this.tablestate_list.add(0);
+            this.tablesnote_list.add("");
+            this.order_list.put(new Order("", this.cus_list.get(16).getCus_id(), Integer.parseInt(b.getText()), java.sql.Date.valueOf(this.today), 0, 0, 0), new ArrayList<>());
+        }
+    }
 // END CUSTOM CODE
+
+
+
+// ORDER PROCESSION
+    private int getTableState(int tablenumber){
+        return this.tablestate_list.get(tablenumber-1);
+    }
+    
+    private void setTableState(int tablenumber, int newstate){
+        this.tablestate_list.set(tablenumber-1, newstate);
+    }
+    
+    public String getTableNote(int tablenumber){
+        return this.tablesnote_list.get(tablenumber-1);
+    }
+    
+    public void setTableNote(int tablenumber, String newnote){
+        this.tablesnote_list.set(tablenumber-1, newnote);
+    }
+    
+    private Entry<Order, ArrayList<OrderDetails>> getOrderofTable(int tablenumber){
+        for(Entry<Order, ArrayList<OrderDetails>> iter : this.order_list.entrySet()){
+            if(iter.getKey().getOrdertable() == tablenumber)
+                return iter;
+        }
+        
+        return null;
+    }
+    
+    private void refreshTable(){
+        for(int i = 0; i < this.tablestate_list.size(); i++){
+            switch(this.tablestate_list.get(i)){
+                case 0:
+                    this.tablebtn_list.get(i).setBackground(new Color(18, 2, 28));
+                    break;
+                case 1:
+                    this.tablebtn_list.get(i).setBackground(new Color(5, 22, 8));
+                    break;
+                case 2:
+                    this.tablebtn_list.get(i).setBackground(new Color(175, 17, 17));
+            }
+        }
+    }
+    
+    private void ShowCurrentOrderBill(){
+        if(this.cur_table != 0){
+            this.cur_order = this.getOrderofTable(this.cur_table);
+            
+            // xuất trạng thái của order
+            switch(this.getTableState(this.cur_table)){
+                case 0:
+                    this.lbShowOrderText.setText("Current Table: "+ this.cur_table + ", State: EMPTY" + " ----- Day: " + this.today);
+                    this.str_labeltext = this.lbShowOrderText.getText();
+                    break;
+                case 1:
+                    this.lbShowOrderText.setText("Current Table: "+ this.cur_table + ", State: ORDERRING" + " ----- Day: " + this.today);
+                    this.str_labeltext = this.lbShowOrderText.getText();
+                    break;
+                case 2:
+                    this.lbShowOrderText.setText("Current Table: "+ this.cur_table + ", State: PRINTED" + " ----- Day: " + this.today);
+                    this.str_labeltext = this.lbShowOrderText.getText();
+            }
+            
+            
+            // xuất khách hàng của order
+            for(int i = 0; i < this.cus_list.size(); i++){
+                if(this.cus_list.get(i).getCus_id().equals(this.cur_order.getKey().getCus_id())){
+                    this.cboChooseCustomer.setSelectedIndex(i);
+                }
+            }
+            
+            // xuất danh sách món của order
+            this.tbmodel = (DefaultTableModel) this.tbOrderFood.getModel();
+            this.tbmodel.setRowCount(0);
+            for(OrderDetails iter : this.cur_order.getValue()){
+                for(Food fiter : this.menufood_list){
+                    if(fiter.getFood_id().equals(iter.getFood_id())){
+                        Object[] newrow = {fiter.getName(), iter.getQuan(), this.discountevent, fiter.getPrice()};
+                        this.tbmodel.addRow(newrow);
+                    }
+                }
+            }
+            
+            // xuất tổng giá của order
+            this.updateOrderPrice();
+            String noteshow = "Total Price: " + this.cur_order.getKey().getPrice() + "\n";
+            noteshow += "--------------------------------------\n";
+            noteshow += "NOTE: \n";
+            noteshow += this.getTableNote(this.cur_table);
+            this.txtOrderNote.setText(noteshow);
+        }
+    }
+    
+    private void updateOrderPrice(){
+        float totalprice = 0;
+        for(int i = 0; i < this.tbmodel.getRowCount(); i++){
+            int item_discount = (int)this.tbmodel.getValueAt(i, 2);
+            float item_price = (float)this.tbmodel.getValueAt(i, 3);
+            totalprice += new Float(((100 - item_discount)/100) * item_price);
+        }
+        
+        float cus_discount = new Float((100 - this.cus_list.get(this.cboChooseCustomer.getSelectedIndex()).getDiscount())/100.0);
+        totalprice *= cus_discount;
+        this.cur_order.getKey().setPrice(totalprice);
+    }
+// END ORDER PROCESSION
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+/*
+    *AUTHOR: Luu Duc Trung
+    *WARNING:
+        - Add setLabelTextRoll() method in JFrame constructor after create the GUI components
+        - the JLabel size always smaller than the text size
+        - You can modify the str_space's length, Timer delay if you need
+        - JLabel lbShow is the components you want to roll the text
+        - You must add code: get the text and assign to str_labeltext after lbShow.setText()
+*/
+    private Timer tm;
+
+    // Method set timer and add actionlistener
+    private void setLabelTextRoll_performed() {
+        this.tm = new Timer(80, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TimerActionPerformed(e);
+            }
+        });
+        this.tm.start();
+    }
+
+
+    private String str_labeltext; // str_labeltext == this.lbShow.getText().trim()
+    private int ibegintext = 0;
+
+    private String str_space = "                                                                      ";
+    private int ibeginspace = 0;
+
+    boolean istextroll = true;
+    boolean isspaceroll = false;
+    // The Jlabel text roll action
+    private void TimerActionPerformed(ActionEvent e){
+        if(((int)this.ibegintext) == this.str_labeltext.length()){
+            this.ibegintext = 0;
+            this.isspaceroll = true;
+            this.istextroll = false;
+        }
+        if(((int)this.ibeginspace) == this.str_space.length()){
+            this.ibeginspace = 0;
+            istextroll = true;
+            isspaceroll = false;
+        }
+
+        if(this.istextroll){
+            String subtext = this.str_labeltext.substring((int) this.ibegintext);
+            this.lbShowOrderText.setText(subtext);
+            this.ibegintext+=1;
+        }else{
+            if(this.isspaceroll){
+                String subtext = this.str_space.substring((int) this.ibeginspace);
+                this.lbShowOrderText.setText(subtext+this.str_labeltext);
+                this.ibeginspace+=1;
+            }
+        }
+    }
 }
