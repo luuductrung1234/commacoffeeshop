@@ -10,16 +10,25 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
 
 
 Note:
- - file "nn" là file rỗng, bù nhìn, giúp giữ cho folder tồn tài khi mà folder không chưa file nào khác
+ - file "nn" là file rỗng, bù nhìn, giúp giữ cho folder tồn tại khi mà folder không chưa file nào khác
 
 
 # Project's procession:
   - FrLogin đã xong
+    + vừa cập nhật thêm chức năng thay đổi cấu hình đăng nhập database
+    
   - FrEmployeeWorkspace:
-    + đã xong : đăng nhập/xuất của nhân viên. Tự động chấm công và phát sinh làm việc trong ngày cũng như bẳng lương trong tháng hiện tại
+    + đã xong : đăng nhập/xuất của nhân viên. Tự động chấm công và phát sinh lịch làm việc trong ngày cũng như bẳng lương trong tháng hiện tại vào trong database
     + đã xong : Phân chia cửa sổ đã hoàn thành
-    + Đang trong tiến trình : xây dựng phần cửa sổ xuất danh sách các sản phẩm trong menu
-  - FrAdminWorkspace chưa có tiến triển
+    + đã xong : các cửa sổ xuất menu (thêm ảnh cho món ăn nếu cần)
+    + đã xong : cửa sổ nhập bill order, sau khi khách hàng tính tiền sẽ tự động sinh dữ liệu Order và OrderDetails trong database
+    + chưa hoàn thành : In bill thông qua printer
+    + chưa hoàn thành : xây dựng cửa sổ nhập ReceitpNote
+    + chưa hoàn thành : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace
+    + chưa hoàn thành : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
+    + dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), thêm chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing)
+    
+  - FrAdminWorkspace chưa submit source code
   
   
 # Login Form
@@ -27,3 +36,6 @@ Note:
 
 # Employee Workspace Form
   ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/ScreenShot_20170713140604.png)
+
+# Admin Workspace Form
+  ![alt text]()
