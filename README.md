@@ -32,10 +32,11 @@ Note:
   
   
 # Login Form
-  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/ScreenShot_20170713140527.png)
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/login_image.png)
 
 # Employee Workspace Form
   ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/ScreenShot_20170713140604.png)
 
 # Admin Workspace Form
+  ---blank---
   ![alt text]()
