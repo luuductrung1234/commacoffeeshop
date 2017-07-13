@@ -19,5 +19,5 @@ go
 
 select * from tbOrder
 go
-select * from tbCustomer
+select * from tbOrderDetails
 go
