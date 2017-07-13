@@ -22,4 +22,8 @@ Note:
   - FrAdminWorkspace chưa có tiến triển
   
   
-  ![alt text]()
+# Login Form
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/ScreenShot_20170713140527.png)
+
+# Employee Workspace Form
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/ScreenShot_20170713140604.png)
