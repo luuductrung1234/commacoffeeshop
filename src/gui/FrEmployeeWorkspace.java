@@ -7,8 +7,10 @@
 package gui;
 
 import entities.*;
+import supportclass.*;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -32,8 +34,9 @@ import model.SalaryNoteDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map.Entry;
-import javax.swing.Timer;
+import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
+import model.OrderDAO;
 
 /**
  *
@@ -67,7 +70,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.setTablePanelSize();       // thiết lập khích thước khung table cho vừa với số bàn
         this.initCustomer();
         this.initComponents();
-        this.setLabelTextRoll_performed();
        
         this.setFrameIcon();
         
@@ -120,7 +122,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         btnOtherthing = new javax.swing.JButton();
         btnStock = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
-        btnAddnote = new javax.swing.JButton();
+        btnAddReceiptNote = new javax.swing.JButton();
         pnMenuSkip = new javax.swing.JPanel();
         btnAll = new javax.swing.JButton();
         btnA = new javax.swing.JButton();
@@ -165,18 +167,21 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnBillBlank = new javax.swing.JPanel();
         pnOrderBill = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        lbShowOrderText = new javax.swing.JLabel();
         cboChooseCustomer = new javax.swing.JComboBox<>();
         lbCustomer = new javax.swing.JLabel();
+        lbShowOrderTable = new supportclass.RollLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbOrderFood = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        pnOrderNote = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        btnAddnote = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
         txtOrderNote = new javax.swing.JTextArea();
         pnOrderControl = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
+        btnKitchenPrint = new javax.swing.JButton();
+        btnPrint = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         pnReceiptBill = new javax.swing.JPanel();
         mnbMain = new javax.swing.JMenuBar();
         mnEdit = new javax.swing.JMenu();
@@ -338,7 +343,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         this.btnStock.setIcon(Stockicon);
 
-        btnSearch.setToolTipText("search");
+        btnSearch.setToolTipText("search food");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -354,20 +359,22 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         this.btnSearch.setIcon(Searchicon);
 
-        btnAddnote.addActionListener(new java.awt.event.ActionListener() {
+        btnAddReceiptNote.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddReceiptNote.setToolTipText("input receipt note");
+        btnAddReceiptNote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddnoteActionPerformed(evt);
+                btnAddReceiptNoteActionPerformed(evt);
             }
         });
-        pnMenuSwitch.add(btnAddnote);
-        ImageIcon Addnoteicon = null;
+        pnMenuSwitch.add(btnAddReceiptNote);
+        ImageIcon AddBillicon = null;
         try{
-            Image scaled = ImageIO.read(new File("src/image/addnote_icon.png")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-            Addnoteicon = new ImageIcon(scaled);
+            Image scaled = ImageIO.read(new File("src/image/addbill_icon.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            AddBillicon = new ImageIcon(scaled);
         }catch(IOException io_ex){
             io_ex.printStackTrace();
         }
-        this.btnAddnote.setIcon(Addnoteicon);
+        this.btnAddReceiptNote.setIcon(AddBillicon);
 
         jPanel1.add(pnMenuSwitch);
 
@@ -1662,23 +1669,25 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnMenuDisplayDetails.setPreferredSize(new java.awt.Dimension(this.Menupn_width, this.Menupn_height));
         pnMenuDisplayDetails.setLayout(new java.awt.CardLayout());
 
-        pnDrink.setBackground(new java.awt.Color(31, 11, 43));
+        pnDrink.setBackground(new java.awt.Color(33, 30, 30));
         pnDrink.setPreferredSize(new java.awt.Dimension(this.Menupn_width, this.Menupn_height));
         pnDrink.setMaximumSize(new java.awt.Dimension(this.Menupn_width, this.Menupn_height));
         pnDrink.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
         pnMenuDisplayDetails.add(pnDrink, "card3");
 
-        pnEat.setBackground(new java.awt.Color(31, 11, 43));
+        pnEat.setBackground(new java.awt.Color(33, 30, 30));
         pnEat.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
         pnMenuDisplayDetails.add(pnEat, "card2");
 
-        pnOther.setBackground(new java.awt.Color(31, 11, 43));
+        pnOther.setBackground(new java.awt.Color(33, 30, 30));
         pnOther.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
         pnMenuDisplayDetails.add(pnOther, "card4");
 
         pnStock.setBackground(new java.awt.Color(0, 153, 102));
         pnStock.setLayout(new java.awt.GridLayout(0, 6, 20, 20));
         pnMenuDisplayDetails.add(pnStock, "card5");
+
+        pnWait.setBackground(new java.awt.Color(33, 30, 30));
 
         javax.swing.GroupLayout pnWaitLayout = new javax.swing.GroupLayout(pnWait);
         pnWait.setLayout(pnWaitLayout);
@@ -1750,10 +1759,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnUsing.setPreferredSize(new java.awt.Dimension(350, 400));
         pnUsing.setLayout(new javax.swing.BoxLayout(pnUsing, javax.swing.BoxLayout.PAGE_AXIS));
 
-        pnOrderTable.setBackground(new java.awt.Color(76, 116, 181));
+        pnOrderTable.setBackground(new java.awt.Color(204, 204, 204));
         pnOrderTable.setPreferredSize(new java.awt.Dimension(300, 250));
 
-        pnShowTable.setBackground(new java.awt.Color(76, 116, 181));
+        pnShowTable.setBackground(new java.awt.Color(33, 30, 30));
         pnShowTable.setPreferredSize(new java.awt.Dimension(this.Tablepn_width, this.Tablepn_height));
         pnShowTable.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
         jScrollPane2.setViewportView(pnShowTable);
@@ -1793,13 +1802,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnOrderBill.setLayout(new javax.swing.BoxLayout(pnOrderBill, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel2.setBackground(new java.awt.Color(3, 22, 38));
-        jPanel2.setPreferredSize(new java.awt.Dimension(201, 100));
-
-        lbShowOrderText.setBackground(new java.awt.Color(0, 0, 0));
-        lbShowOrderText.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbShowOrderText.setForeground(new java.awt.Color(0, 255, 51));
-        lbShowOrderText.setText("Current Table: "+ this.cur_table +" ----- Day: " + this.today);
-        this.str_labeltext = this.lbShowOrderText.getText();
+        jPanel2.setPreferredSize(new java.awt.Dimension(201, 80));
 
         String[] cus_name = new String[this.cus_list.size()];
         for(int i = 0; i < this.cus_list.size(); i++){
@@ -1817,27 +1820,35 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         lbCustomer.setForeground(new java.awt.Color(204, 204, 204));
         lbCustomer.setText("Customer:");
 
+        lbShowOrderTable.setBackground(new java.awt.Color(0, 0, 0));
+        lbShowOrderTable.setForeground(new java.awt.Color(0, 204, 0));
+        lbShowOrderTable.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbShowOrderTable.setOpaque(true);
+        this.lbShowOrderTable.setText("Current Table: "+ this.cur_table + " ----- Day: " + this.today);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbShowOrderText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbCustomer)
                 .addGap(18, 18, 18)
                 .addComponent(cboChooseCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 175, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(lbShowOrderTable, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lbShowOrderText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbShowOrderTable, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboChooseCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbCustomer))
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         pnOrderBill.add(jPanel2);
@@ -1852,7 +1863,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Quantity", "Discount", "Price", ""
+                "Name", "Quantity", "Discount", "Price", "Close"
             }
         ) {
             Class[] types = new Class [] {
@@ -1871,44 +1882,93 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(tbOrderFood);
+        if (tbOrderFood.getColumnModel().getColumnCount() > 0) {
+            tbOrderFood.getColumnModel().getColumn(0).setMinWidth(100);
+            tbOrderFood.getColumnModel().getColumn(0).setPreferredWidth(100);
+        }
+        this.tbOrderFood.setRowHeight(20);
 
         pnOrderBill.add(jScrollPane4);
 
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(236, 150));
+        pnOrderNote.setPreferredSize(new java.awt.Dimension(428, 100));
+        pnOrderNote.setLayout(new javax.swing.BoxLayout(pnOrderNote, javax.swing.BoxLayout.LINE_AXIS));
 
+        jPanel3.setPreferredSize(new java.awt.Dimension(80, 110));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        btnAddnote.setToolTipText("Add note for selected food");
+        btnAddnote.setPreferredSize(new java.awt.Dimension(80, 150));
+        btnAddnote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddnoteActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAddnote, java.awt.BorderLayout.CENTER);
+        ImageIcon Addnoteicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/addnote_icon.png")).getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            Addnoteicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnAddnote.setIcon(Addnoteicon);
+
+        pnOrderNote.add(jPanel3);
+
+        jScrollPane5.setPreferredSize(new java.awt.Dimension(250, 96));
+
+        txtOrderNote.setEditable(false);
         txtOrderNote.setColumns(20);
+        txtOrderNote.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtOrderNote.setRows(5);
-        txtOrderNote.setPreferredSize(new java.awt.Dimension(220, 100));
-        jScrollPane3.setViewportView(txtOrderNote);
+        jScrollPane5.setViewportView(txtOrderNote);
 
-        pnOrderBill.add(jScrollPane3);
+        pnOrderNote.add(jScrollPane5);
+
+        pnOrderBill.add(pnOrderNote);
 
         pnOrderControl.setPreferredSize(new java.awt.Dimension(201, 70));
         pnOrderControl.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setText("PAY");
-        jButton1.setToolTipText("pay");
-        pnOrderControl.add(jButton1);
-
-        jButton3.setBackground(new java.awt.Color(204, 204, 0));
-        jButton3.setText("KITCHEN PRINT");
-        jButton3.setToolTipText("kitchen print");
-        pnOrderControl.add(jButton3);
-
-        jButton4.setBackground(new java.awt.Color(204, 204, 0));
-        jButton4.setText("PRINT");
-        jButton4.setToolTipText("bar print");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnPay.setBackground(new java.awt.Color(0, 153, 0));
+        btnPay.setText("PAY");
+        btnPay.setToolTipText("pay");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnPayActionPerformed(evt);
             }
         });
-        pnOrderControl.add(jButton4);
+        pnOrderControl.add(btnPay);
 
-        jButton5.setBackground(new java.awt.Color(153, 0, 0));
-        jButton5.setText("DELETE");
-        pnOrderControl.add(jButton5);
+        btnKitchenPrint.setBackground(new java.awt.Color(204, 204, 0));
+        btnKitchenPrint.setText("KITCHEN PRINT");
+        btnKitchenPrint.setToolTipText("kitchen print");
+        btnKitchenPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKitchenPrintActionPerformed(evt);
+            }
+        });
+        pnOrderControl.add(btnKitchenPrint);
+
+        btnPrint.setBackground(new java.awt.Color(204, 204, 0));
+        btnPrint.setText("PRINT");
+        btnPrint.setToolTipText("bar print");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+        pnOrderControl.add(btnPrint);
+
+        btnDelete.setBackground(new java.awt.Color(153, 0, 0));
+        btnDelete.setText("DELETE");
+        btnDelete.setToolTipText("delete order");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        pnOrderControl.add(btnDelete);
 
         pnOrderBill.add(pnOrderControl);
 
@@ -1990,6 +2050,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card2");
+
+            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());          // buông bàn hiện tại
+            c2.show(this.pnBill, "card4");
+            this.refreshTable();
+            this.cur_table = 0;
         }else{
             this.btnMenu.setBackground(new java.awt.Color(255,255,255));
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
@@ -2009,7 +2074,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card3");
-            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());
+
+
+            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());          // buông bàn hiện tại
             c2.show(this.pnBill, "card4");
             this.refreshTable();
             this.cur_table = 0;
@@ -2017,6 +2084,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             this.btnEmployee.setBackground(new java.awt.Color(255,255,255));
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card5");
+
+            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());          // buông bàn hiện tại
+            c2.show(this.pnBill, "card4");
+            this.refreshTable();
+            this.cur_table = 0;
         }
     }//GEN-LAST:event_btnEmployeeActionPerformed
 
@@ -2032,7 +2104,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card4");
-            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());
+
+            CardLayout c2 = (CardLayout)(this.pnBill.getLayout());       // buông bàn hiện tại
             c2.show(this.pnBill, "card4");
             this.refreshTable();
             this.cur_table = 0;
@@ -2144,19 +2217,103 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cboChooseCustomerActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         // TODO add your handling code here:
-        this.setTableState(this.cur_table, 2);
-        this.refreshTable();
-    }//GEN-LAST:event_jButton4ActionPerformed
+        if(this.cur_table != 0 && this.getTableState(this.cur_table) != 0){
+            
+            // printing code
+            
+            this.setTableState(this.cur_table, 2);
+            this.refreshTable();
+        }
+    }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnAddnoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddnoteActionPerformed
         // TODO add your handling code here:
-        if(this.cur_table != 0 && this.getTableState(this.cur_table) != 0){
+        if(this.cur_table != 0 && this.getTableState(this.cur_table) != 0 && this.tbOrderFood.getSelectedRow()%2 != 0){
+            // chỉ mở cửa sổ note khi bàn hiện tại khác 0, tình trạng bàn đang orderring, và dòng được chọn trên bảng là dòng lẻ
+            
             new DiaNote(this, true).setVisible(true);
             this.ShowCurrentOrderBill();
         }
     }//GEN-LAST:event_btnAddnoteActionPerformed
+
+    private void btnKitchenPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKitchenPrintActionPerformed
+        // TODO add your handling code here:
+        if(this.cur_table != 0 && this.getTableState(this.cur_table) == 2){
+            
+            // printing code
+            
+        }
+    }//GEN-LAST:event_btnKitchenPrintActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if(this.cur_table != 0 && this.getTableState(this.cur_table) != 0){
+            // làm mới trạng thái bàn hiện tại
+            this.setTableState(this.cur_table, 0);
+
+            // làm mới order và orderdetails bàn hiện tại
+            this.cur_order = this.getOrderofTable(this.cur_table);
+            this.cur_order.getKey().setOrder_id("");
+            this.cur_order.getKey().setCus_id(this.cus_list.get(16).getCus_id());
+            this.cur_order.getKey().setPrice(0);
+            this.cur_order.getKey().setCustomerpay(0);
+            this.cur_order.getKey().setPayback(0);
+            this.cur_order.setValue(new ArrayList<OrderDetails>());
+            
+            // làm mới note bàn hiện tại
+           this.cur_ordernote = this.getNoteofTable(this.cur_table);
+           this.cur_ordernote.setValue(new ArrayList<String>());
+
+
+            this.cur_table = 0;
+            this.refreshTable();
+            this.ShowCurrentOrderBill();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        //
+        if(this.cur_table != 0 && this.getTableState(this.cur_table) == 2){
+            // thu tiền và thối tiền
+            this.ispay = false;
+            new DiaPay(this, true).setVisible(true);
+            if(this.ispay){
+
+                // printing code
+
+                // thêm dữ liệu vào database
+                OrderDAO.insert(this.getOrderofTable(this.cur_table));
+
+
+                // làm mới trạng thái bàn hiện tại
+                this.setTableState(this.cur_table, 0);
+
+                // làm mới order và orderdetails bàn hiện tại
+                this.cur_order = this.getOrderofTable(this.cur_table);
+                this.cur_order.getKey().setOrder_id("");
+                this.cur_order.getKey().setCus_id(this.cus_list.get(16).getCus_id());
+                this.cur_order.getKey().setPrice(0);
+                this.cur_order.getKey().setCustomerpay(0);
+                this.cur_order.getKey().setPayback(0);
+                this.cur_order.setValue(new ArrayList<OrderDetails>());
+
+                // làm mới note bàn hiện tại
+               this.cur_ordernote = this.getNoteofTable(this.cur_table);
+               this.cur_ordernote.setValue(new ArrayList<String>());
+
+
+                this.cur_table = 0;
+                this.refreshTable();
+                this.ShowCurrentOrderBill();
+            }
+        }
+    }//GEN-LAST:event_btnPayActionPerformed
+
+    private void btnAddReceiptNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReceiptNoteActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnAddReceiptNoteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2195,11 +2352,13 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnA;
+    private javax.swing.JButton btnAddReceiptNote;
     private javax.swing.JButton btnAddnote;
     private javax.swing.JButton btnAll;
     private javax.swing.JButton btnB;
     private javax.swing.JButton btnC;
     private javax.swing.JButton btnD;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDrink;
     private javax.swing.JButton btnE;
     private javax.swing.JButton btnEat;
@@ -2210,6 +2369,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnI;
     private javax.swing.JButton btnJ;
     private javax.swing.JButton btnK;
+    private javax.swing.JButton btnKitchenPrint;
     private javax.swing.JButton btnL;
     private javax.swing.JButton btnM;
     private javax.swing.JToggleButton btnMenu;
@@ -2217,6 +2377,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnO;
     private javax.swing.JButton btnOtherthing;
     private javax.swing.JButton btnP;
+    private javax.swing.JButton btnPay;
+    private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnQ;
     private javax.swing.JButton btnR;
     private javax.swing.JButton btnS;
@@ -2231,18 +2393,15 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnY;
     private javax.swing.JButton btnZ;
     private javax.swing.JComboBox<String> cboChooseCustomer;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lbCustomer;
-    private javax.swing.JLabel lbShowOrderText;
+    private supportclass.RollLabel lbShowOrderTable;
     private javax.swing.JMenuItem miAddemp;
     private javax.swing.JMenuItem miLogout;
     private javax.swing.JMenu mnEdit;
@@ -2262,6 +2421,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JPanel pnMenuSwitch;
     private javax.swing.JPanel pnOrderBill;
     private javax.swing.JPanel pnOrderControl;
+    private javax.swing.JPanel pnOrderNote;
     private javax.swing.JPanel pnOrderTable;
     private javax.swing.JPanel pnOther;
     private javax.swing.JPanel pnReceiptBill;
@@ -2307,20 +2467,30 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     
     
     ArrayList<JButton> tablebtn_list = new ArrayList<>();                       // danh sách bàn
-    ArrayList<Integer> tablestate_list = new ArrayList<>();                     // 0: chưa order, 1: đã order, 2: đã lưu
-    ArrayList<String> tablesnote_list = new ArrayList<>();
-    HashMap<Order, ArrayList<OrderDetails>> order_list = new HashMap<>();
+    ArrayList<Integer> tablestate_list = new ArrayList<>();                     // danh sách trạng thái của bàn          0: chưa order, 1: đã order, 2: đã lưu
+    HashMap<Integer, ArrayList<String>> ordernote_list = new HashMap<>();       // danh sách note của order hiện tại              mỗi bàn tương ứng với một danh sách note
+    HashMap<Order, ArrayList<OrderDetails>> order_list = new HashMap<>();       // danh sách order hiện tại
     boolean isOrdershow = false;
     boolean isReceiptshow = false;
     DefaultTableModel tbmodel;
     
     LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
-    int cur_table = 0;
+    public int cur_table = 0;
     Entry<Order, ArrayList<OrderDetails>> cur_order;
+    Entry<Integer, ArrayList<String>> cur_ordernote;
+    
+    boolean ispay = false;
 //  END CUSTOM DECLARATION
+
+
+
     
     
 // CUSTOM CODE
+    public int getSelectRowxofTable(){
+        return this.tbOrderFood.getSelectedRow();
+    }
+    
     private void setFrameIcon() {
         Image scaled = null;
         try{
@@ -2374,6 +2544,18 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.menumaterial_list = (ArrayList<FoodMaterial>) FoodMaterialDAO.getList();
     }
     
+    private ImageIcon getMenuButtonIcon(String foodid){
+        ImageIcon icon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/"+ foodid +".jpg")).getScaledInstance(120, 70, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            //io_ex.printStackTrace();
+        }
+        
+        return icon;
+    }
+    
     
     private void setMenuPanelSize(){
         if(this.menuitem_number % 6 != 0){
@@ -2406,6 +2588,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         }
                         
                         this.cur_order = this.getOrderofTable(this.cur_table);
+                        this.cur_ordernote = this.getNoteofTable(this.cur_table);
                         // cập food vừa bấm vào current orderdetails
                         boolean isexisted = false;
                         for(OrderDetails iter : this.cur_order.getValue()){
@@ -2418,6 +2601,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         if(!isexisted){
                             OrderDetails newod = new OrderDetails("", foodid, 1);
                             this.cur_order.getValue().add(newod);
+                            this.cur_ordernote.getValue().add(new String());
                         }
                         
                         // cập nhật food vừa bấm vào cửa sổ order
@@ -2430,6 +2614,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     
                 });
                 b.setText(itemfood.getName());
+                b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
                 b.setSize(40, 40);
                 
                 this.pnDrink.add(b);
@@ -2452,6 +2637,12 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             Matcher m = p.matcher(itemfood.getName());
             if(itemfood.getIsdrink() == 1 && m.matches()){
                 JButton b = new JButton();
+                b.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+                b.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                ImageIcon icon = this.getMenuButtonIcon(itemfood.getFood_id());
+                if(icon != null)
+                    b.setIcon(icon);
+                
                 b.addActionListener((ActionEvent e) -> {
                     if(this.cur_table != 0){
                         String foodname = b.getText();
@@ -2464,6 +2655,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         }
                         
                         this.cur_order = this.getOrderofTable(this.cur_table);
+                        this.cur_ordernote = this.getNoteofTable(this.cur_table);
                         // cập food vừa bấm vào current orderdetails
                         boolean isexisted = false;
                         for(OrderDetails iter : this.cur_order.getValue()){
@@ -2476,6 +2668,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         if(!isexisted){
                             OrderDetails newod = new OrderDetails("", foodid, 1);
                             this.cur_order.getValue().add(newod);
+                            this.cur_ordernote.getValue().add(new String());
                         }
                         
                         // cập nhật food vừa bấm vào cửa sổ order
@@ -2487,7 +2680,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     }
                 });
                 b.setText(itemfood.getName());
+                b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
                 b.setSize(40, 40);
+                
                 this.pnEat.add(b);
                 ++numberadd;
             }
@@ -2520,6 +2715,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         }
                         
                         this.cur_order = this.getOrderofTable(this.cur_table);
+                        this.cur_ordernote = this.getNoteofTable(this.cur_table);
                         // cập food vừa bấm vào current orderdetails
                         boolean isexisted = false;
                         for(OrderDetails iter : this.cur_order.getValue()){
@@ -2532,6 +2728,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         if(!isexisted){
                             OrderDetails newod = new OrderDetails("", foodid, 1);
                             this.cur_order.getValue().add(newod);
+                            this.cur_ordernote.getValue().add(new String());
                         }
                         
                         // cập nhật food vừa bấm vào cửa sổ order
@@ -2543,7 +2740,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     }
                 });
                 b.setText(itemfood.getName());
+                b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
                 b.setSize(40, 40);
+                
                 this.pnOther.add(b);
                 ++numberadd;
             }
@@ -2568,7 +2767,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     
                 });
                 b.setText(itemmaterial.getName());
+                b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
                 b.setSize(40, 40);
+                
                 this.pnStock.add(b);
                 ++numberadd;
             }
@@ -2596,12 +2797,23 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private void initOrderTable() {
         for(int i = 1; i <= this.menuitem_number; i++){
             JButton b = new JButton();
+            b.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+            b.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            ImageIcon icon = null;
+            try{
+                Image scaled = ImageIO.read(new File("src/image/table_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
+                icon = new ImageIcon(scaled);
+            }catch(IOException io_ex){
+                io_ex.printStackTrace();
+            }
+            b.setIcon(icon);
+            
             b.addActionListener((ActionEvent e) -> {
                 this.refreshTable();                                                    // làm mới mỗi lần bấm bàn mới
                 this.cur_table = Integer.parseInt(b.getText());                         // lấy bàn hiện tại vừa bấm
                 int state = this.getTableState(this.cur_table);                         // lấy trạng thái của bàn đó
                 if(state == 0){
-                    b.setBackground(new Color(5, 22, 8));
+                    b.setBackground(new Color(56, 216, 28));
                     int rs = JOptionPane.showConfirmDialog(null, "Are you sure to create a new Order?");
                     if(rs == JOptionPane.YES_OPTION){
                         CardLayout c1 = (CardLayout) this.pnDisplay.getLayout();
@@ -2620,7 +2832,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         this.isOrdershow =true;
                         this.isReceiptshow = false;
                     }else{
-                        this.setBackground(new Color(18, 2, 28));
+                        this.cur_table = 0;
+                        b.setBackground(new Color(104, 104, 104));
                     }
                 }else{
                     if(state == 1 || state == 2){
@@ -2646,15 +2859,17 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 this.ShowCurrentOrderBill();
             });
             b.setText(String.valueOf(i));
+            b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
             b.setSize(100, 50);
-            b.setBackground(new Color(18, 2, 28));
+            b.setBackground(new Color(104, 104, 104));
             b.setForeground(new Color(106, 158, 237));
             this.pnShowTable.add(b);
             
             this.tablebtn_list.add(b);
             this.tablestate_list.add(0);
-            this.tablesnote_list.add("");
+            
             this.order_list.put(new Order("", this.cus_list.get(16).getCus_id(), Integer.parseInt(b.getText()), java.sql.Date.valueOf(this.today), 0, 0, 0), new ArrayList<>());
+            this.ordernote_list.put(Integer.parseInt(b.getText()), new ArrayList<>());
         }
     }
 // END CUSTOM CODE
@@ -2662,23 +2877,17 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
 
 // ORDER PROCESSION
-    private int getTableState(int tablenumber){
+    public int getTableState(int tablenumber){
         return this.tablestate_list.get(tablenumber-1);
     }
     
-    private void setTableState(int tablenumber, int newstate){
+    public void setTableState(int tablenumber, int newstate){
         this.tablestate_list.set(tablenumber-1, newstate);
     }
     
-    public String getTableNote(int tablenumber){
-        return this.tablesnote_list.get(tablenumber-1);
-    }
     
-    public void setTableNote(int tablenumber, String newnote){
-        this.tablesnote_list.set(tablenumber-1, newnote);
-    }
     
-    private Entry<Order, ArrayList<OrderDetails>> getOrderofTable(int tablenumber){
+    public Entry<Order, ArrayList<OrderDetails>> getOrderofTable(int tablenumber){
         for(Entry<Order, ArrayList<OrderDetails>> iter : this.order_list.entrySet()){
             if(iter.getKey().getOrdertable() == tablenumber)
                 return iter;
@@ -2687,14 +2896,22 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         return null;
     }
     
-    private void refreshTable(){
+    public Entry<Integer, ArrayList<String>> getNoteofTable(int tablenumber){
+        for(Entry<Integer, ArrayList<String>> iter : this.ordernote_list.entrySet()){
+            if(iter.getKey() == tablenumber)
+                return iter;
+        }
+        return null;
+    }
+    
+    public void refreshTable(){
         for(int i = 0; i < this.tablestate_list.size(); i++){
             switch(this.tablestate_list.get(i)){
                 case 0:
-                    this.tablebtn_list.get(i).setBackground(new Color(18, 2, 28));
+                    this.tablebtn_list.get(i).setBackground(new Color(104, 104, 104));
                     break;
                 case 1:
-                    this.tablebtn_list.get(i).setBackground(new Color(5, 22, 8));
+                    this.tablebtn_list.get(i).setBackground(new Color(56, 216, 28));
                     break;
                 case 2:
                     this.tablebtn_list.get(i).setBackground(new Color(175, 17, 17));
@@ -2702,23 +2919,28 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
     }
     
-    private void ShowCurrentOrderBill(){
+    public void ShowCurrentOrderBill(){
         if(this.cur_table != 0){
             this.cur_order = this.getOrderofTable(this.cur_table);
+            this.cur_ordernote = this.getNoteofTable(this.cur_table);
+            
             
             // xuất trạng thái của order
             switch(this.getTableState(this.cur_table)){
                 case 0:
-                    this.lbShowOrderText.setText("Current Table: "+ this.cur_table + ", State: EMPTY" + " ----- Day: " + this.today);
-                    this.str_labeltext = this.lbShowOrderText.getText();
+                    
+                    this.lbShowOrderTable.setText("Current Table: "+ this.cur_table + ", State: EMPTY" + " ----- Day: " + this.today);
+                    
                     break;
                 case 1:
-                    this.lbShowOrderText.setText("Current Table: "+ this.cur_table + ", State: ORDERRING" + " ----- Day: " + this.today);
-                    this.str_labeltext = this.lbShowOrderText.getText();
+                    
+                    this.lbShowOrderTable.setText("Current Table: "+ this.cur_table + ", State: ORDERRING" + " ----- Day: " + this.today);
+                    
                     break;
                 case 2:
-                    this.lbShowOrderText.setText("Current Table: "+ this.cur_table + ", State: PRINTED" + " ----- Day: " + this.today);
-                    this.str_labeltext = this.lbShowOrderText.getText();
+                    
+                    this.lbShowOrderTable.setText("Current Table: "+ this.cur_table + ", State: PRINTED" + " ----- Day: " + this.today);
+                    
             }
             
             
@@ -2732,11 +2954,23 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             // xuất danh sách món của order
             this.tbmodel = (DefaultTableModel) this.tbOrderFood.getModel();
             this.tbmodel.setRowCount(0);
+            int numberfood_appear = 0;
             for(OrderDetails iter : this.cur_order.getValue()){
                 for(Food fiter : this.menufood_list){
                     if(fiter.getFood_id().equals(iter.getFood_id())){
-                        Object[] newrow = {fiter.getName(), iter.getQuan(), this.discountevent, fiter.getPrice()};
+                        
+                        // xuất thông tin món trên order bill
+                        Object[] newrow = {fiter.getName(), iter.getQuan(), this.discountevent, fiter.getPrice(), "X"};
                         this.tbmodel.addRow(newrow);
+                        ++numberfood_appear;
+                        
+                        // xuất note của order bill
+                        Object[] newrownote = {this.cur_ordernote.getValue().get(numberfood_appear-1)};
+                        this.tbmodel.addRow(newrownote);
+                        
+                        
+                        this.tbOrderFood.getColumn("Close").setCellRenderer(new CloseButtonRenderer());                  // tạo render cho các cell button trong cột "Button"
+                        this.tbOrderFood.getColumn("Close").setCellEditor(new CloseButtonEditor(this, new JCheckBox()));       // tạo editor cho các cell button trong cột "Button"
                     }
                 }
             }
@@ -2745,18 +2979,24 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             this.updateOrderPrice();
             String noteshow = "Total Price: " + this.cur_order.getKey().getPrice() + "\n";
             noteshow += "--------------------------------------\n";
-            noteshow += "NOTE: \n";
-            noteshow += this.getTableNote(this.cur_table);
+            
             this.txtOrderNote.setText(noteshow);
+        }else{
+            CardLayout c = (CardLayout) this.pnBill.getLayout();
+            c.show(this.pnBill, "card4");                                  // hiện màn hình nhập Orderbill
+            this.isOrdershow =false;
+            this.isReceiptshow = false;
         }
     }
     
     private void updateOrderPrice(){
         float totalprice = 0;
         for(int i = 0; i < this.tbmodel.getRowCount(); i++){
-            int item_discount = (int)this.tbmodel.getValueAt(i, 2);
-            float item_price = (float)this.tbmodel.getValueAt(i, 3);
-            totalprice += new Float(((100 - item_discount)/100) * item_price);
+            if(i % 2 == 0){
+                int item_discount = (int)this.tbmodel.getValueAt(i, 2);
+                float item_price = (float)this.tbmodel.getValueAt(i, 3);
+                totalprice += new Float(((100 - item_discount)/100) * item_price);
+            }
         }
         
         float cus_discount = new Float((100 - this.cus_list.get(this.cboChooseCustomer.getSelectedIndex()).getDiscount())/100.0);
@@ -2765,76 +3005,4 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     }
 // END ORDER PROCESSION
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-/*
-    *AUTHOR: Luu Duc Trung
-    *WARNING:
-        - Add setLabelTextRoll() method in JFrame constructor after create the GUI components
-        - the JLabel size always smaller than the text size
-        - You can modify the str_space's length, Timer delay if you need
-        - JLabel lbShow is the components you want to roll the text
-        - You must add code: get the text and assign to str_labeltext after lbShow.setText()
-*/
-    private Timer tm;
-
-    // Method set timer and add actionlistener
-    private void setLabelTextRoll_performed() {
-        this.tm = new Timer(80, new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TimerActionPerformed(e);
-            }
-        });
-        this.tm.start();
-    }
-
-
-    private String str_labeltext; // str_labeltext == this.lbShow.getText().trim()
-    private int ibegintext = 0;
-
-    private String str_space = "                                                                      ";
-    private int ibeginspace = 0;
-
-    boolean istextroll = true;
-    boolean isspaceroll = false;
-    // The Jlabel text roll action
-    private void TimerActionPerformed(ActionEvent e){
-        if(((int)this.ibegintext) == this.str_labeltext.length()){
-            this.ibegintext = 0;
-            this.isspaceroll = true;
-            this.istextroll = false;
-        }
-        if(((int)this.ibeginspace) == this.str_space.length()){
-            this.ibeginspace = 0;
-            istextroll = true;
-            isspaceroll = false;
-        }
-
-        if(this.istextroll){
-            String subtext = this.str_labeltext.substring((int) this.ibegintext);
-            this.lbShowOrderText.setText(subtext);
-            this.ibegintext+=1;
-        }else{
-            if(this.isspaceroll){
-                String subtext = this.str_space.substring((int) this.ibeginspace);
-                this.lbShowOrderText.setText(subtext+this.str_labeltext);
-                this.ibeginspace+=1;
-            }
-        }
-    }
 }

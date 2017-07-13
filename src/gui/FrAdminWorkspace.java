@@ -26,7 +26,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }
     
     private Admin a;
-    FrAdminWorkspace(Admin a) {
+    public FrAdminWorkspace(Admin a) {
         this.a = a;
         initComponents();
         this.setFrameIcon();

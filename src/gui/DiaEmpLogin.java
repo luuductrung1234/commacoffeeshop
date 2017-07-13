@@ -7,6 +7,7 @@ package gui;
 
 import entities.EmpSchedule;
 import entities.Employee;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import model.EmployeeDAO;
@@ -40,7 +41,7 @@ public class DiaEmpLogin extends javax.swing.JDialog {
     private void initComponents() {
 
         pnControl = new javax.swing.JPanel();
-        Login = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         pnInput = new javax.swing.JPanel();
         lbPass_warn = new javax.swing.JLabel();
@@ -54,15 +55,21 @@ public class DiaEmpLogin extends javax.swing.JDialog {
         setTitle("Employee Login");
         setBackground(new java.awt.Color(22, 23, 66));
 
-        pnControl.setLayout(new java.awt.GridLayout());
+        pnControl.setBackground(new java.awt.Color(0, 0, 0));
+        pnControl.setLayout(new java.awt.GridLayout(1, 0));
 
-        Login.setText("Login");
-        Login.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-        pnControl.add(Login);
+        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLoginKeyPressed(evt);
+            }
+        });
+        pnControl.add(btnLogin);
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -74,15 +81,27 @@ public class DiaEmpLogin extends javax.swing.JDialog {
 
         getContentPane().add(pnControl, java.awt.BorderLayout.CENTER);
 
-        pnInput.setBackground(new java.awt.Color(0, 153, 255));
+        pnInput.setBackground(new java.awt.Color(204, 204, 204));
 
         lbPass_warn.setForeground(new java.awt.Color(255, 0, 0));
 
         lbPass.setForeground(new java.awt.Color(0, 51, 102));
         lbPass.setText("Password");
 
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
+
         lbUsername.setForeground(new java.awt.Color(0, 51, 102));
         lbUsername.setText("Username:");
+
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
 
         lbUsername_warn.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -130,7 +149,7 @@ public class DiaEmpLogin extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         this.lbUsername_warn.setText("");
         this.lbPass_warn.setText("");
         
@@ -184,13 +203,82 @@ public class DiaEmpLogin extends javax.swing.JDialog {
         
         JOptionPane.showConfirmDialog(null, "Login fail! Please check your Username and Password!", "LOGIN WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         this.txtUsername.requestFocus();
-    }//GEN-LAST:event_LoginActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+        this.txtPass.requestFocus();
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+        this.btnLogin.requestFocus();
+    }//GEN-LAST:event_txtPassActionPerformed
+
+    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.lbUsername_warn.setText("");
+            this.lbPass_warn.setText("");
+
+            String username = this.txtUsername.getText().trim();
+            String pass = new String(this.txtPass.getPassword());
+            if(username.isEmpty() || username.length() > 50){
+                this.lbUsername_warn.setText("Username is not match the pattern!");
+                this.txtUsername.requestFocus();
+                return;
+            }
+
+            if(pass.isEmpty() || pass.length() > 50){
+                this.lbPass_warn.setText("Password is not match the pattern!");
+                this.txtPass.requestFocus();
+                return;
+            }
+
+            Employee emp = EmployeeDAO.check(username, pass);
+            if(emp != null)
+            {
+                for(Employee iter : this.parent.working_emp){
+                    if(iter.getEm_id().equals(emp.getEm_id())){
+                        JOptionPane.showConfirmDialog(null, "This employee is already login!", "LOGIN WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                        this.txtUsername.requestFocus();
+                        return;
+                    }
+                }
+
+                this.parent.working_emp.add(emp);                       // add new login employee with his/her schedule
+                String salaryid = SalaryNoteDAO.insert(emp);
+                if(salaryid == null){                        // tạo và lưu bảng lương trong tháng/năm cho nhân viên vào database
+                    // thất bại
+                    JOptionPane.showConfirmDialog(null, "Some problem cause! Can not create the new SalaryNote for Employee", "DATABASE WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    this.dispose();
+                    return;
+                }else{
+                    // tạo mới thành công hoặc đã có sẵn
+                    EmpSchedule emschedule = new EmpSchedule();             // tạo lịch cho nv trong ngày hiện tại
+                    emschedule.setEm_id(emp.getEm_id());
+                    this.parent.setScheduleDate(emschedule);
+                    this.parent.setScheduleTime(emschedule, true);
+                    emschedule.setResult_salary(salaryid);
+                    this.parent.working_schedule.add(emschedule);
+                }
+
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                this.dispose();
+                return;
+            }
+
+            JOptionPane.showConfirmDialog(null, "Login fail! Please check your Username and Password!", "LOGIN WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+            this.txtUsername.requestFocus();
+        }
+    }//GEN-LAST:event_btnLoginKeyPressed
 
     /**
      * @param args the command line arguments
@@ -235,8 +323,8 @@ public class DiaEmpLogin extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Login;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lbPass;
     private javax.swing.JLabel lbPass_warn;
     private javax.swing.JLabel lbUsername;

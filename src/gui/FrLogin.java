@@ -7,8 +7,16 @@ package gui;
 
 import entities.*;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.LineNumberReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.*;
@@ -22,7 +30,10 @@ public class FrLogin extends javax.swing.JFrame {
      * Creates new form FrLogin
      */
     public FrLogin() {
+        
         initComponents();
+        
+        this.loadingExistedDB();
         
         this.setLocationRelativeTo(this);
         
@@ -44,6 +55,7 @@ public class FrLogin extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
+        btnDBSelect = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lbUsername_warn = new javax.swing.JLabel();
@@ -62,17 +74,59 @@ public class FrLogin extends javax.swing.JFrame {
         lbPass.setText("Password:");
 
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUsername.setEnabled(false);
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPass.setEnabled(false);
+        txtPass.setRequestFocusEnabled(false);
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
 
         jPanel1.setOpaque(false);
+        jPanel1.setLayout(new java.awt.GridLayout());
 
-        btnSubmit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ImageIcon dbicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/database_icon.png")).getScaledInstance(40, 25, Image.SCALE_SMOOTH);
+            dbicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnDBSelect.setIcon(dbicon);
+        btnDBSelect.setToolTipText("Select Database");
+        btnDBSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDBSelectActionPerformed(evt);
+            }
+        });
+        btnDBSelect.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDBSelectKeyPressed(evt);
+            }
+        });
+        jPanel1.add(btnDBSelect);
+        this.btnDBSelect.requestFocus();
+
+        btnSubmit.setFont(new java.awt.Font("Tahoma", 0, 14));
         btnSubmit.setText("Login");
+        btnSubmit.setEnabled(false);
         btnSubmit.setSelected(true);
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
+            }
+        });
+        btnSubmit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnSubmitKeyPressed(evt);
             }
         });
         jPanel1.add(btnSubmit);
@@ -94,31 +148,32 @@ public class FrLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(lblogin))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbPass)
                             .addComponent(lbUsername))
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbUsername_warn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtUsername)
-                            .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(lbPass_warn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbUsername_warn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbPass_warn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(lblogin)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
                 .addComponent(lblogin)
-                .addGap(33, 33, 33)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -128,11 +183,11 @@ public class FrLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPass)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(lbPass_warn, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,6 +241,75 @@ public class FrLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+        this.txtPass.requestFocus();
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+        this.btnSubmit.requestFocus();
+    }//GEN-LAST:event_txtPassActionPerformed
+
+    private void btnSubmitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSubmitKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.lbUsername_warn.setText("");
+            this.lbPass_warn.setText("");
+
+            String username = this.txtUsername.getText().trim();
+            String pass = new String(this.txtPass.getPassword());
+            if(username.isEmpty() || username.length() > 50){
+                this.lbUsername_warn.setText("Username is not match the pattern!");
+                this.txtUsername.requestFocus();
+                return;
+            }
+
+            if(pass.isEmpty() || pass.length() > 50){
+                this.lbPass_warn.setText("Password is not match the pattern!");
+                this.txtPass.requestFocus();
+                return;
+            }
+
+            Admin ad = AdminDAO.check(username, pass);              // tiến hành đăng nhập cho admin trước nếu có
+            if(ad != null)
+            {
+                JFrame jf = new FrAdminWorkspace(ad);
+                jf.setVisible(true);
+                jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                this.dispose();
+                return;
+            }
+
+            Employee emp = EmployeeDAO.check(username, pass);       // sau đó tiến hành đăng nhập cho nhân viên
+            if(emp != null)
+            {
+                JFrame jf = new FrEmployeeWorkspace(emp);
+                jf.setVisible(true);
+                jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                this.dispose();
+                return;
+            }
+
+            JOptionPane.showConfirmDialog(null, "Login fail! Please check your Username and Password!", "LOGIN WARNING", JOptionPane.CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+            this.txtUsername.requestFocus();
+        }
+    }//GEN-LAST:event_btnSubmitKeyPressed
+
+    private void btnDBSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDBSelectActionPerformed
+        // TODO add your handling code here:
+        new DiaDatabaseInfo(this, true).setVisible(true);
+        this.loadingExistedDB();
+    }//GEN-LAST:event_btnDBSelectActionPerformed
+
+    private void btnDBSelectKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDBSelectKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            new DiaDatabaseInfo(this, true).setVisible(true);
+            this.loadingExistedDB();
+        }
+    }//GEN-LAST:event_btnDBSelectKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -223,6 +347,7 @@ public class FrLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDBSelect;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbPass;
@@ -242,5 +367,28 @@ public class FrLogin extends javax.swing.JFrame {
             io_ex.printStackTrace();
         }
         this.setIconImage(scaled);
+    }
+
+    private void loadingExistedDB() {
+        try {
+            BufferedReader instream = Files.newBufferedReader(Paths.get("src/textfile/databaseinfo.txt"));
+            LineNumberReader in = new LineNumberReader(instream);
+            String line;
+            line = in.readLine();
+            if(line.equals("0")){       // đọc dòng đầu tiên kiểm tra đã có dữ liệu về database sẵn chưa
+                this.txtUsername.setEnabled(false);
+                this.txtPass.setEnabled(false);
+                this.btnSubmit.setEnabled(false);
+            }else{                      // nếu chưa có sẵn
+                this.txtUsername.setEnabled(true);
+                this.txtPass.setEnabled(true);
+                this.btnSubmit.setEnabled(true);
+            }
+            
+            instream.close();
+            in.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FrLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

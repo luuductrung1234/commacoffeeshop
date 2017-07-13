@@ -89,11 +89,12 @@ public class DiaEmpLogout extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(tbEmployee);
+        this.tbEmployee.setRowHeight(30);
 
         pnMain.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pnControl.setBackground(new java.awt.Color(0, 153, 153));
-        pnControl.setLayout(new java.awt.GridLayout());
+        pnControl.setLayout(new java.awt.GridLayout(1, 0));
 
         btnLogout.setBackground(new java.awt.Color(22, 23, 66));
         btnLogout.setForeground(new java.awt.Color(102, 102, 255));
