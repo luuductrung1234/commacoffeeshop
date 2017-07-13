@@ -52,11 +52,13 @@ public class FoodMaterialDAO {
             
             if(rs.next()){
                 int current_number_oftbFoodMaterial = rs.getInt(1);
-                String newid = createid("F", String.valueOf(current_number_oftbFoodMaterial + 1), 10);
+                
+                sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?)";
+                int result = 0;
+                do{
+                String newid = createid("F", String.valueOf(++current_number_oftbFoodMaterial), 10);
                 new_fm.setFm_id(newid);
         
-        
-                sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?)";
                 try(PreparedStatement st2 = cn.prepareStatement(sql);){
 
                     st2.setString(1, new_fm.getFm_id());
@@ -67,8 +69,10 @@ public class FoodMaterialDAO {
                     st2.setString(6, new_fm.getUnit_buy());
                     st2.setString(7, new_fm.getSupplier());
 
-                    return st2.executeUpdate();
+                    result = st2.executeUpdate();
                 }
+                }while(result == 0);
+                return result;
             }
         } catch (SQLException ex) { 
             ex.printStackTrace();

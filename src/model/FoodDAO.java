@@ -49,20 +49,26 @@ public class FoodDAO {
             
             if(rs.next()){
                 int current_number_oftbFood = rs.getInt(1);
-                String newid = createid("F", String.valueOf(current_number_oftbFood + 1), 10);
-                new_food.setFood_id(newid);
-        
+                
                 sql = "INSERT tbFood VALUES (?, ?, ?, ?, ?)";                    // thêm food mới vào database
-                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+                int result = 0;
+                do{
+                    String newid = createid("F", String.valueOf(++current_number_oftbFood), 10);
+                    new_food.setFood_id(newid);
 
-                    st2.setString(1, new_food.getFood_id());
-                    st2.setString(2, new_food.getName());
-                    st2.setString(3, new_food.getInfo());
-                    st2.setFloat(4, new_food.getPrice());
-                    st2.setByte(5, new_food.getIsdrink());
 
-                    return st2.executeUpdate();
-                }
+                    try(PreparedStatement st2 = cn.prepareStatement(sql);){
+
+                        st2.setString(1, new_food.getFood_id());
+                        st2.setString(2, new_food.getName());
+                        st2.setString(3, new_food.getInfo());
+                        st2.setFloat(4, new_food.getPrice());
+                        st2.setByte(5, new_food.getIsdrink());
+
+                        result = st2.executeUpdate();
+                    }
+                }while(result == 0);
+                return result;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -168,28 +168,34 @@ public class EmployeeDAO {
             
             if(rs.next()){
                 int current_number_oftbEmployee = rs.getInt(1);
-                String newid = createid("EM", String.valueOf(current_number_oftbEmployee + 1), 10);
-                new_emp.setEm_id(newid);
-        
-        
+                
                 sql = "INSERT tbEmployee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+                int result = 0;
+                do{
+                    String newid = createid("EM", String.valueOf(++current_number_oftbEmployee), 10);
+                    new_emp.setEm_id(newid);
 
-                    st2.setString(1, new_emp.getEm_id());
-                    st2.setString(2, new_emp.getUsername());
-                    st2.setString(3, new_emp.getPass());
-                    st2.setString(4, new_emp.getName());
-                    st2.setDate(5, new_emp.getBirth());
-                    st2.setDate(6, new_emp.getStartday());
-                    st2.setInt(7, new_emp.getHour_wage());
-                    st2.setString(8, new_emp.getAddr());
-                    st2.setString(9, new_emp.getEmail());
-                    st2.setString(10, new_emp.getPhone());
-                    st2.setInt(11, new_emp.getEm_role());
-                    st2.setString(12, new_emp.getManager());
 
-                    return st2.executeUpdate();
-                }
+
+                    try(PreparedStatement st2 = cn.prepareStatement(sql);){
+
+                        st2.setString(1, new_emp.getEm_id());
+                        st2.setString(2, new_emp.getUsername());
+                        st2.setString(3, new_emp.getPass());
+                        st2.setString(4, new_emp.getName());
+                        st2.setDate(5, new_emp.getBirth());
+                        st2.setDate(6, new_emp.getStartday());
+                        st2.setInt(7, new_emp.getHour_wage());
+                        st2.setString(8, new_emp.getAddr());
+                        st2.setString(9, new_emp.getEmail());
+                        st2.setString(10, new_emp.getPhone());
+                        st2.setInt(11, new_emp.getEm_role());
+                        st2.setString(12, new_emp.getManager());
+
+                        result = st2.executeUpdate();
+                    }
+                } while(result == 0);
+                return result;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

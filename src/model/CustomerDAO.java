@@ -49,20 +49,24 @@ public class CustomerDAO {
             
             if(rs.next()){
                 int current_number_oftbCustomer = rs.getInt(1);
-                String newid = createid("CUS", String.valueOf(current_number_oftbCustomer + 1), 10);
-                new_cus.setCus_id(newid);
-        
-        
+                
                 sql = "INSERT INTO tbCustomer VALUES (?, ?, ?, ?, ?)";
-                try(PreparedStatement st2 = cn.prepareStatement(sql);){
-                    st2.setString(1, new_cus.getCus_id());
-                    st2.setString(2, new_cus.getName());
-                    st2.setString(3, new_cus.getPhone());
-                    st2.setString(4, new_cus.getEmail());
-                    st2.setInt(5, new_cus.getDiscount());
+                int result = 0;
+                do{
+                    String newid = createid("CUS", String.valueOf(++current_number_oftbCustomer), 10);
+                    new_cus.setCus_id(newid);
 
-                    return st2.executeUpdate();
-                }
+                    try(PreparedStatement st2 = cn.prepareStatement(sql);){
+                        st2.setString(1, new_cus.getCus_id());
+                        st2.setString(2, new_cus.getName());
+                        st2.setString(3, new_cus.getPhone());
+                        st2.setString(4, new_cus.getEmail());
+                        st2.setInt(5, new_cus.getDiscount());
+
+                        result = st2.executeUpdate();
+                    }
+                }while(result == 0);
+                return result;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

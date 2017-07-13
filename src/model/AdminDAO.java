@@ -120,18 +120,25 @@ public class AdminDAO {
             
             if(rs.next()){
                 int current_number_oftbAdmin = rs.getInt(1);
-                String newid = createid("AD", String.valueOf(current_number_oftbAdmin + 1), 10);
-                new_ad.setAd_id(newid);
-        
+                
                 sql = "INSERT INTO tbAdmin VALUES (?, ?, ?, ?)";
-                try(PreparedStatement st2 = cn.prepareStatement(sql);){
-                    st2.setString(1, new_ad.getAd_id());
-                    st2.setString(2, new_ad.getUsername());
-                    st2.setString(3, new_ad.getPass());
-                    st2.setString(4, new_ad.getName());
+                int result = 0;
+                do{
+                    String newid = createid("AD", String.valueOf(++current_number_oftbAdmin), 10);
+                    new_ad.setAd_id(newid);
 
-                    return st2.executeUpdate();
-                }
+
+                    try(PreparedStatement st2 = cn.prepareStatement(sql);){
+                        st2.setString(1, new_ad.getAd_id());
+                        st2.setString(2, new_ad.getUsername());
+                        st2.setString(3, new_ad.getPass());
+                        st2.setString(4, new_ad.getName());
+
+                        result = st2.executeUpdate();
+                    }
+                }while(result == 0);
+                
+                return result;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
