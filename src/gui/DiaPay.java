@@ -5,6 +5,7 @@
  */
 package gui;
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -90,6 +91,11 @@ public class DiaPay extends javax.swing.JDialog {
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
+            }
+        });
+        btnOK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnOKKeyPressed(evt);
             }
         });
         jPanel1.add(btnOK);
@@ -308,6 +314,7 @@ public class DiaPay extends javax.swing.JDialog {
                 float payback = cuspay - price;
                 this.txtPayback.setText(String.valueOf(payback));
                 this.btnOK.setEnabled(true);
+                this.btnOK.requestFocus();
             }catch(NumberFormatException ex){
                 JOptionPane.showConfirmDialog(null, "Input error! Please do it again!");
                 this.txtCustomerpay.requestFocus();
@@ -474,6 +481,17 @@ public class DiaPay extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_txtCustomerpayFocusLost
+
+    private void btnOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnOKKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.parent.getOrderofTable(this.parent.cur_table).getKey().setCustomerpay(Float.parseFloat(this.txtCustomerpay.getText().trim()));
+            this.parent.getOrderofTable(this.parent.cur_table).getKey().setPayback(Float.parseFloat(this.txtPayback.getText().trim()));
+            this.parent.ispay = true;
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnOKKeyPressed
 
     /**
      * @param args the command line arguments
