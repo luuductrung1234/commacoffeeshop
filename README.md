@@ -23,12 +23,14 @@ Note:
     + đã xong : các cửa sổ xuất menu (thêm ảnh cho món ăn nếu cần)
     + đã xong : cửa sổ nhập bill order, sau khi khách hàng tính tiền sẽ tự động sinh dữ liệu Order và OrderDetails trong database
     + chưa hoàn thành : In bill thông qua printer
-    + chưa hoàn thành : xây dựng cửa sổ nhập ReceitpNote
+    + đã xong : xây dựng cửa sổ nhập ReceitpNote
     + chưa hoàn thành : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace
     + chưa hoàn thành : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
-    + dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), thêm chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing)
+    (*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
     
-  - FrAdminWorkspace chưa submit source code
+  - FrAdminWorkspace chưa submit source code (thành viên đảm nhiệm nhớ ghi rõ mô tả và tiến trình phát triển mã nguồn sau khi update code)
+  
+(*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library)
   
   
 # Login Form
