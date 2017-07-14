@@ -21,3 +21,9 @@ select * from tbOrder
 go
 select * from tbOrderDetails
 go
+
+
+select * from tbReceiptNote
+go
+select * from tbReceiptNoteDetails
+go
