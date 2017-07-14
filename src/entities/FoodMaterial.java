@@ -8,19 +8,22 @@ import java.util.Vector;
 public class FoodMaterial {
     private String fm_id, name, info, fmtype, unit_buy, supplier;
     private Byte usefor;
+    private float standard_price;
 
     public FoodMaterial() {
     }
 
-    public FoodMaterial(String fm_id, String name, String info, String fmtype, String unit_buy, String supply_contact, Byte usefor) {
+    public FoodMaterial(String fm_id, String name, String info, String fmtype, String unit_buy, String supplier, Byte usefor, float standard_price) {
         this.fm_id = fm_id;
         this.name = name;
         this.info = info;
         this.fmtype = fmtype;
         this.unit_buy = unit_buy;
-        this.supplier = supply_contact;
+        this.supplier = supplier;
         this.usefor = usefor;
+        this.standard_price = standard_price;
     }
+
     
     public Vector toVector()
     {
@@ -31,6 +34,7 @@ public class FoodMaterial {
         v.add(this.usefor);
         v.add(this.fmtype);
         v.add(this.unit_buy);
+        v.add(this.standard_price);
         v.add(this.supplier);
                 
         return v;
@@ -90,6 +94,14 @@ public class FoodMaterial {
 
     public void setUsefor(Byte usefor) {
         this.usefor = usefor;
+    }
+
+    public float getStandard_price() {
+        return standard_price;
+    }
+
+    public void setStandard_price(float standard_price) {
+        this.standard_price = standard_price;
     }
 
     
