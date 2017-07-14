@@ -34,12 +34,21 @@ Note:
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library)
   
   
-# Login Form
+# Login Frame
   ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/login_image.png)
 
-# Employee Workspace Form
+
+# Employee Workspace Frame
   ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/ScreenShot_20170713140604.png)
 
-# Admin Workspace Form
-  ---blank---
+
+# Admin Workspace Frame
+  ---update soon---
+  
+  ![alt text]()
+  
+  
+# Audit Frame
+  ---update soon---
+  
   ![alt text]()
