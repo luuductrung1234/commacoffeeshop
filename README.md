@@ -26,7 +26,7 @@ Note:
     + đã xong : xây dựng cửa sổ nhập ReceitpNote
     + chưa hoàn thành : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace
     + chưa hoàn thành : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
-    (*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
+(*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
     
   - FrAdminWorkspace chưa submit source code (thành viên đảm nhiệm nhớ ghi rõ mô tả và tiến trình phát triển mã nguồn sau khi update code)
   
