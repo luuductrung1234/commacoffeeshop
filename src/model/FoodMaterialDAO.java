@@ -30,7 +30,8 @@ public class FoodMaterialDAO {
                 newitem.setUsefor(rs.getByte(4));
                 newitem.setFmtype(rs.getString(5));
                 newitem.setUnit_buy(rs.getString(6));
-                newitem.setSupplier(rs.getString(7));
+                newitem.setStandard_price(rs.getFloat(7));
+                newitem.setSupplier(rs.getString(8));
                 
                 ds.add(newitem);
             }
@@ -53,24 +54,25 @@ public class FoodMaterialDAO {
             if(rs.next()){
                 int current_number_oftbFoodMaterial = rs.getInt(1);
                 
-                sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?)";
+                sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 int result = 0;
                 do{
-                String newid = createid("F", String.valueOf(++current_number_oftbFoodMaterial), 10);
-                new_fm.setFm_id(newid);
-        
-                try(PreparedStatement st2 = cn.prepareStatement(sql);){
+                    String newid = createid("F", String.valueOf(++current_number_oftbFoodMaterial), 10);
+                    new_fm.setFm_id(newid);
 
-                    st2.setString(1, new_fm.getFm_id());
-                    st2.setString(2, new_fm.getName());
-                    st2.setString(3, new_fm.getInfo());
-                    st2.setByte(4, new_fm.getUsefor());
-                    st2.setString(5, new_fm.getFmtype());
-                    st2.setString(6, new_fm.getUnit_buy());
-                    st2.setString(7, new_fm.getSupplier());
+                    try(PreparedStatement st2 = cn.prepareStatement(sql);){
 
-                    result = st2.executeUpdate();
-                }
+                        st2.setString(1, new_fm.getFm_id());
+                        st2.setString(2, new_fm.getName());
+                        st2.setString(3, new_fm.getInfo());
+                        st2.setByte(4, new_fm.getUsefor());
+                        st2.setString(5, new_fm.getFmtype());
+                        st2.setString(6, new_fm.getUnit_buy());
+                        st2.setFloat(7, new_fm.getStandard_price());
+                        st2.setString(8, new_fm.getSupplier());
+
+                        result = st2.executeUpdate();
+                    }
                 }while(result == 0);
                 return result;
             }
@@ -84,7 +86,7 @@ public class FoodMaterialDAO {
     
     public static int update(FoodMaterial fm, String newname, String newinfo, byte newusefor, String newfmtype, String newunitbuy, String newsupplier)
     {
-        String sql = "UPDATE tbFoodMaterial SET name = ?, info = ?, usefor = ?, fmtype = ?, unit_buy = ?, supplier = ? WHERE fm_id = ?";
+        String sql = "UPDATE tbFoodMaterial SET name = ?, info = ?, usefor = ?, fmtype = ?, unit_buy = ?, standard_price = ?, supplier = ? WHERE fm_id = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement pst = cn.prepareStatement(sql);){
@@ -94,8 +96,9 @@ public class FoodMaterialDAO {
             pst.setByte(3, fm.getUsefor());
             pst.setString(4, fm.getFmtype());
             pst.setString(5, fm.getUnit_buy());
-            pst.setString(6, fm.getSupplier());
-            pst.setString(7, fm.getFm_id());
+            pst.setFloat(6, fm.getStandard_price());
+            pst.setString(7, fm.getSupplier());
+            pst.setString(8, fm.getFm_id());
             
             return pst.executeUpdate();
             
