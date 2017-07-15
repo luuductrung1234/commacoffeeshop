@@ -24,8 +24,8 @@ Note:
     + đã xong : cửa sổ nhập bill order, sau khi khách hàng tính tiền sẽ tự động sinh dữ liệu Order và OrderDetails trong database
     + chưa hoàn thành : In bill thông qua printer
     + đã xong : xây dựng cửa sổ nhập ReceitpNote
-    + chưa hoàn thành : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace
-    + chưa hoàn thành : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
+    + đã xong : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace
+    + đã xong : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
 
 (*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
     
