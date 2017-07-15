@@ -35,13 +35,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.LineNumberReader;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.DateTimeException;
+import java.time.Month;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextPane;
 import javax.swing.table.DefaultTableModel;
+import model.AdminDAO;
+import model.EmployeeDAO;
 import model.OrderDAO;
 import model.ReceiptNoteDAO;
 
@@ -73,6 +84,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             }
         }
         
+        this.getsetting();              // lấy thông tin tuỳ chỉnh của chương trình từ file txt
+        
         this.setMenuPanelSize();        // thiết lập kích thước khung menu cho vừa với số menu item
         this.setTablePanelSize();       // thiết lập khích thước khung table cho vừa với số bàn
         this.initCustomer();
@@ -91,6 +104,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.initOrderTable();
         
         this.initInvoice();
+        
+        this.initSettingForm();
     }
 
     /** This method is called from within the constructor to
@@ -166,7 +181,67 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnStock = new javax.swing.JPanel();
         pnWait = new javax.swing.JPanel();
         pnDisplayEmployee = new javax.swing.JPanel();
+        pnEmpdefaultinfo = new javax.swing.JPanel();
+        cboEmpName = new javax.swing.JComboBox<>();
+        lbAvatar = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lbManager = new javax.swing.JLabel();
+        lbEmpRole = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lbEmphourwage = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lbEmpStartday = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtEmpUsername = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtEmpPass = new javax.swing.JPasswordField();
+        jLabel9 = new javax.swing.JLabel();
+        txtEmpBirth = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtEmpPhone = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtEmpEmail = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtEmpAddress = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        btnEmpSaveInfo = new javax.swing.JButton();
+        btnEmpResetInfo = new javax.swing.JButton();
+        lbPassconfirmstate = new javax.swing.JLabel();
+        lbBirthstate = new javax.swing.JLabel();
+        lbUsernamestate = new javax.swing.JLabel();
+        lbEmailstate = new javax.swing.JLabel();
+        lbPhonestate = new javax.swing.JLabel();
+        lbAddressstate = new javax.swing.JLabel();
+        txtEmpPassconfirm = new javax.swing.JPasswordField();
+        lbPassstate1 = new javax.swing.JLabel();
         pnDisplaySetting = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txtMenutablenumber = new javax.swing.JTextField();
+        txtMenuitemnumber = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtTodaydiscount = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        listFood = new javax.swing.JList<>();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        listFoodDiscount = new javax.swing.JList<>();
+        btnAddtodiscount = new javax.swing.JButton();
+        btnAddAlltodiscount = new javax.swing.JButton();
+        btnRemovefromdiscount = new javax.swing.JButton();
+        btnRemoveAllfromdiscount = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        btnSavesetting = new javax.swing.JButton();
+        btnResetsetting = new javax.swing.JButton();
+        lbtablenumberstate = new javax.swing.JLabel();
+        lbMenuitemnumberstate = new javax.swing.JLabel();
+        lbDiscountstate = new javax.swing.JLabel();
+        lbSettingstate = new javax.swing.JLabel();
         pnUsing = new javax.swing.JPanel();
         pnOrderTable = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -282,11 +357,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnBlank.setLayout(pnBlankLayout);
         pnBlankLayout.setHorizontalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 954, Short.MAX_VALUE)
         );
         pnBlankLayout.setVerticalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
 
         pnDisplay.add(pnBlank, "card5");
@@ -1713,11 +1788,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnWait.setLayout(pnWaitLayout);
         pnWaitLayout.setHorizontalGroup(
             pnWaitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
+            .addGap(0, 951, Short.MAX_VALUE)
         );
         pnWaitLayout.setVerticalGroup(
             pnWaitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addGap(0, 567, Short.MAX_VALUE)
         );
 
         pnMenuDisplayDetails.add(pnWait, "card7");
@@ -1730,7 +1805,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnDisplayMenu.setLayout(pnDisplayMenuLayout);
         pnDisplayMenuLayout.setHorizontalGroup(
             pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 954, Short.MAX_VALUE)
         );
         pnDisplayMenuLayout.setVerticalGroup(
             pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1741,32 +1816,481 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
         pnDisplay.add(pnDisplayMenu, "card2");
 
-        pnDisplayEmployee.setBackground(new java.awt.Color(11, 34, 66));
+        pnDisplayEmployee.setBackground(new java.awt.Color(204, 204, 204));
+
+        pnEmpdefaultinfo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(153, 153, 255), null, new java.awt.Color(204, 255, 255)));
+
+        String[] currentemployee_name2 = new String[this.working_emp.size()];
+        for(int i = 0; i < this.working_emp.size(); i++){
+            currentemployee_name2[i] = this.working_emp.get(i).getName();
+        }
+        cboEmpName.setModel(new javax.swing.DefaultComboBoxModel<>(currentemployee_name2));
+        cboEmpName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEmpNameActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Name:");
+
+        jLabel6.setText("Manager:");
+
+        jLabel7.setText("Role:");
+
+        lbManager.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbManager.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbEmpRole.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbEmpRole.setForeground(new java.awt.Color(204, 0, 0));
+
+        jLabel10.setText("Wage per hour (kVND):");
+
+        lbEmphourwage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbEmphourwage.setForeground(new java.awt.Color(204, 0, 0));
+
+        jLabel14.setText("Start day:");
+
+        lbEmpStartday.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbEmpStartday.setForeground(new java.awt.Color(204, 0, 0));
+
+        javax.swing.GroupLayout pnEmpdefaultinfoLayout = new javax.swing.GroupLayout(pnEmpdefaultinfo);
+        pnEmpdefaultinfo.setLayout(pnEmpdefaultinfoLayout);
+        pnEmpdefaultinfoLayout.setHorizontalGroup(
+            pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEmpdefaultinfoLayout.createSequentialGroup()
+                .addComponent(lbAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel14))
+                .addGap(39, 39, 39)
+                .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboEmpName, 0, 150, Short.MAX_VALUE)
+                    .addComponent(lbManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbEmpRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbEmphourwage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbEmpStartday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnEmpdefaultinfoLayout.setVerticalGroup(
+            pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEmpdefaultinfoLayout.createSequentialGroup()
+                .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnEmpdefaultinfoLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboEmpName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(lbManager, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(lbEmpRole, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(lbEmphourwage, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmpdefaultinfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbEmpStartday, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("EMPLOYEE INFOMATION");
+
+        jLabel4.setText("Username:");
+
+        txtEmpUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpUsernameActionPerformed(evt);
+            }
+        });
+        txtEmpUsername.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtEmpUsernamePropertyChange(evt);
+            }
+        });
+
+        jLabel8.setText("Password");
+
+        txtEmpPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpPassActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Birth (yyyy/mm/dd):");
+
+        txtEmpBirth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpBirthActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Phone:");
+
+        txtEmpPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpPhoneActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Email:");
+
+        txtEmpEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Address:");
+
+        txtEmpAddress.setColumns(20);
+        txtEmpAddress.setRows(5);
+        jScrollPane6.setViewportView(txtEmpAddress);
+
+        jPanel4.setLayout(new java.awt.GridLayout());
+
+        btnEmpSaveInfo.setBackground(new java.awt.Color(0, 153, 0));
+        btnEmpSaveInfo.setText("SAVE");
+        btnEmpSaveInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpSaveInfoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEmpSaveInfo);
+
+        btnEmpResetInfo.setBackground(new java.awt.Color(153, 153, 0));
+        btnEmpResetInfo.setText("RESET");
+        btnEmpResetInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpResetInfoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEmpResetInfo);
+
+        lbPassconfirmstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbPassconfirmstate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbBirthstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbBirthstate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbUsernamestate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbUsernamestate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbEmailstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbEmailstate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbPhonestate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbPhonestate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbAddressstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbAddressstate.setForeground(new java.awt.Color(204, 0, 0));
+
+        txtEmpPassconfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpPassconfirmActionPerformed(evt);
+            }
+        });
+
+        lbPassstate1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbPassstate1.setForeground(new java.awt.Color(204, 0, 0));
 
         javax.swing.GroupLayout pnDisplayEmployeeLayout = new javax.swing.GroupLayout(pnDisplayEmployee);
         pnDisplayEmployee.setLayout(pnDisplayEmployeeLayout);
         pnDisplayEmployeeLayout.setHorizontalGroup(
             pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                .addComponent(pnEmpdefaultinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(71, 71, 71)
+                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtEmpUsername)
+                                .addComponent(txtEmpPass)
+                                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtEmpPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                    .addComponent(txtEmpBirth, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(txtEmpEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))
+                        .addGap(42, 42, 42)
+                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                                .addComponent(lbPassstate1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEmpPassconfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbBirthstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbEmailstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbPhonestate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbAddressstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbUsernamestate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(202, 202, 202)))
+                .addGap(37, 37, 37)
+                .addComponent(lbPassconfirmstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222))
         );
         pnDisplayEmployeeLayout.setVerticalGroup(
             pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnEmpdefaultinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtEmpUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbUsernamestate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
+                                .addComponent(txtEmpPassconfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))
+                            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel8)
+                                        .addComponent(txtEmpPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbPassstate1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                    .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                        .addComponent(lbPassconfirmstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)))
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtEmpBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbBirthstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtEmpPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbPhonestate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtEmpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbEmailstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(lbAddressstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pnDisplay.add(pnDisplayEmployee, "card3");
 
-        pnDisplaySetting.setBackground(new java.awt.Color(204, 204, 204));
+        pnDisplaySetting.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel15.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel15.setText("Max table number (> 50):");
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(204, 204, 0));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("SETTING");
+
+        jLabel17.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel17.setText("Max menu item number (>40):");
+
+        jLabel18.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel18.setText("Today discount (%):");
+
+        jScrollPane7.setViewportView(listFood);
+        this.listFood.setDragEnabled(true);
+
+        jLabel19.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel19.setText("Choose Food you want to discount today:");
+
+        jScrollPane8.setViewportView(listFoodDiscount);
+        this.listFoodDiscount.setDropMode(javax.swing.DropMode.INSERT);
+
+        btnAddtodiscount.setForeground(new java.awt.Color(0, 153, 204));
+        btnAddtodiscount.setText("ADD");
+        btnAddtodiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddtodiscountActionPerformed(evt);
+            }
+        });
+
+        btnAddAlltodiscount.setForeground(new java.awt.Color(0, 153, 204));
+        btnAddAlltodiscount.setText("ADD ALL");
+        btnAddAlltodiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddAlltodiscountActionPerformed(evt);
+            }
+        });
+
+        btnRemovefromdiscount.setForeground(new java.awt.Color(0, 153, 204));
+        btnRemovefromdiscount.setText("REMOVE");
+        btnRemovefromdiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemovefromdiscountActionPerformed(evt);
+            }
+        });
+
+        btnRemoveAllfromdiscount.setForeground(new java.awt.Color(0, 153, 204));
+        btnRemoveAllfromdiscount.setText("REMOVE ALL");
+        btnRemoveAllfromdiscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveAllfromdiscountActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setLayout(new java.awt.GridLayout());
+
+        btnSavesetting.setBackground(new java.awt.Color(0, 153, 0));
+        btnSavesetting.setText("SAVE");
+        btnSavesetting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSavesettingActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnSavesetting);
+
+        btnResetsetting.setBackground(new java.awt.Color(153, 153, 0));
+        btnResetsetting.setText("RESET");
+        btnResetsetting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetsettingActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnResetsetting);
+
+        lbtablenumberstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbtablenumberstate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbMenuitemnumberstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbMenuitemnumberstate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbDiscountstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbDiscountstate.setForeground(new java.awt.Color(204, 0, 0));
+
+        lbSettingstate.setForeground(new java.awt.Color(204, 0, 0));
+        lbSettingstate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnDisplaySettingLayout = new javax.swing.GroupLayout(pnDisplaySetting);
         pnDisplaySetting.setLayout(pnDisplaySettingLayout);
         pnDisplaySettingLayout.setHorizontalGroup(
             pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(323, 323, 323)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19))
+                        .addGap(33, 33, 33)
+                        .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMenutablenumber, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addComponent(txtMenuitemnumber)
+                            .addComponent(txtTodaydiscount))
+                        .addGap(34, 34, 34)
+                        .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbtablenumberstate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lbDiscountstate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                .addComponent(lbMenuitemnumberstate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                                .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAddAlltodiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnRemovefromdiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnRemoveAllfromdiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAddtodiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(27, 27, 27)
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbSettingstate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
         pnDisplaySettingLayout.setVerticalGroup(
             pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+            .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtMenutablenumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbtablenumberstate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtMenuitemnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMenuitemnumberstate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtTodaydiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDiscountstate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel19)
+                .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAddtodiscount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAddAlltodiscount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemovefromdiscount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemoveAllfromdiscount))
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(lbSettingstate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pnDisplay.add(pnDisplaySetting, "card4");
@@ -1791,7 +2315,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnOrderTable.setLayout(pnOrderTableLayout);
         pnOrderTableLayout.setHorizontalGroup(
             pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
         );
         pnOrderTableLayout.setVerticalGroup(
             pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1810,11 +2334,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnBillBlank.setLayout(pnBillBlankLayout);
         pnBillBlankLayout.setHorizontalGroup(
             pnBillBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
+            .addGap(0, 386, Short.MAX_VALUE)
         );
         pnBillBlankLayout.setVerticalGroup(
             pnBillBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGap(0, 622, Short.MAX_VALUE)
         );
 
         pnBill.add(pnBillBlank, "card4");
@@ -1857,7 +2381,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 .addComponent(cboChooseCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lbShowOrderTable, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addComponent(lbShowOrderTable, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -1868,7 +2392,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboChooseCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbCustomer))
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         pnOrderBill.add(jPanel2);
@@ -2030,7 +2554,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnReceitpInput.setLayout(pnReceitpInputLayout);
         pnReceitpInputLayout.setHorizontalGroup(
             pnReceitpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rlbShowReceiptBill, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+            .addComponent(rlbShowReceiptBill, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
             .addGroup(pnReceitpInputLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(pnReceitpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2057,7 +2581,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     .addGroup(pnReceitpInputLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         this.rlbShowReceiptBill.setText("Invoice Note" + " --------- Day:" + this.today);
@@ -2175,6 +2699,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             currentemployee_name[i] = this.working_emp.get(i).getName();
         }
         this.cbEmployeeInput.setModel(new javax.swing.DefaultComboBoxModel<>(currentemployee_name));
+        this.cboEmpName.setModel(new javax.swing.DefaultComboBoxModel<>(currentemployee_name));
     }//GEN-LAST:event_miAddempActionPerformed
 
     private void miLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogoutActionPerformed
@@ -2193,6 +2718,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             currentemployee_name[i] = this.working_emp.get(i).getName();
         }
         this.cbEmployeeInput.setModel(new javax.swing.DefaultComboBoxModel<>(currentemployee_name));
+        this.cboEmpName.setModel(new javax.swing.DefaultComboBoxModel<>(currentemployee_name));
     }//GEN-LAST:event_miLogoutActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -2231,7 +2757,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card3");
-
+            this.initEmployeeEditForm();
 
             CardLayout c2 = (CardLayout)(this.pnBill.getLayout());          // buông bàn hiện tại
             c2.show(this.pnBill, "card4");
@@ -2565,6 +3091,253 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.ShowCurrentInvoice();
     }//GEN-LAST:event_btnDeleteReceiptItemActionPerformed
 
+    private void cboEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmpNameActionPerformed
+        // TODO add your handling code here:
+        this.initEmployeeEditForm();
+    }//GEN-LAST:event_cboEmpNameActionPerformed
+
+    private void btnEmpSaveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpSaveInfoActionPerformed
+        this.lbUsernamestate.setText("");
+        this.lbPassstate1.setText("");
+        this.lbPassconfirmstate.setText("");
+        this.lbBirthstate.setText("");
+        this.lbPhonestate.setText("");
+        this.lbEmailstate.setText("");
+        this.lbAddressstate.setText("");
+        
+        String username, pass, phone, email, address;
+        LocalDate birth;
+        
+        username = this.txtEmpUsername.getText();
+        pass = new String(this.txtEmpPass.getPassword());
+        phone = this.txtEmpPhone.getText();
+        email = this.txtEmpEmail.getText();
+        address = this.txtEmpAddress.getText();
+        
+        if(username.isEmpty() || username.length() > 50){
+            this.lbUsernamestate.setText("!");
+            this.txtEmpUsername.requestFocus();
+            return;
+        }
+        
+        if(pass.isEmpty() || pass.length() > 50){
+            this.lbPassstate1.setText("!");
+            this.txtEmpPass.requestFocus();
+            return;
+        }
+        if(!pass.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getPass())){
+            String passconfirm = new String(this.txtEmpPassconfirm.getPassword());
+            if(!pass.equals(passconfirm)){
+                this.lbPassconfirmstate.setText("!");
+                this.txtEmpPassconfirm.requestFocus();
+                return;
+            }
+        }
+        
+        if(phone.length() > 20){
+            this.lbPhonestate.setText("!");
+            this.txtEmpPhone.requestFocus();
+            return;
+        }
+        
+        if(email.length() > 50){
+            this.lbEmailstate.setText("!");
+            this.txtEmpEmail.requestFocus();
+            return;
+        }
+        
+        if(address.length() > 200){
+            this.lbAddressstate.setText("!");
+            this.txtEmpAddress.requestFocus();
+            return;
+        }
+        
+        try{
+            String sbirth = this.txtEmpBirth.getText();
+            String[] s = sbirth.split("-");
+            int year = Integer.parseInt(s[0]);
+            int month = Integer.parseInt(s[1]);
+            int day = Integer.parseInt(s[2]);
+            birth = LocalDate.of(year, month, day);
+            if(this.today.getYear() - birth.getYear() < 18){
+                this.lbBirthstate.setText("!");
+                this.txtEmpBirth.requestFocus();
+                return;
+            }
+        }catch(DateTimeException ex){
+            ex.getStackTrace();
+            this.lbBirthstate.setText("!");
+            this.txtEmpBirth.requestFocus();
+            return;
+        }
+        
+        
+        Employee cur_emp = this.working_emp.get(this.cboEmpName.getSelectedIndex());
+        
+        // save new data to database
+        int result = EmployeeDAO.selfupdate(cur_emp, username, pass, java.sql.Date.valueOf(birth), phone, email, address);
+        
+        // update current employee
+        if(result != 0){
+            cur_emp.setUsername(username);
+            cur_emp.setPass(pass);
+            cur_emp.setBirth(java.sql.Date.valueOf(birth));
+            cur_emp.setPhone(phone);
+            cur_emp.setEmail(email);
+            cur_emp.setAddr(address);
+            
+            this.initEmployeeEditForm();
+        }else{
+            JOptionPane.showMessageDialog(null, "Can not update new employee data to database", "DATABASE WARNING", JOptionPane.WARNING_MESSAGE);
+            this.initEmployeeEditForm();
+        }
+    }//GEN-LAST:event_btnEmpSaveInfoActionPerformed
+
+    private void btnEmpResetInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpResetInfoActionPerformed
+        // TODO add your handling code here:
+        this.initEmployeeEditForm();
+    }//GEN-LAST:event_btnEmpResetInfoActionPerformed
+
+    
+    private void txtEmpUsernamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtEmpUsernamePropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmpUsernamePropertyChange
+
+    
+    private void txtEmpUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpUsernameActionPerformed
+        // TODO add your handling code here:
+        String username = this.txtEmpUsername.getText();
+        if(!username.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getUsername())){
+            this.btnEmpSaveInfo.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtEmpUsernameActionPerformed
+
+    private void txtEmpPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpPassActionPerformed
+        // TODO add your handling code here:
+        String pass = new String(this.txtEmpPass.getPassword());
+        if(!pass.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getPass())){
+            this.txtEmpPassconfirm.setEditable(true);
+        }
+    }//GEN-LAST:event_txtEmpPassActionPerformed
+
+    private void txtEmpBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpBirthActionPerformed
+        // TODO add your handling code here:
+        this.lbBirthstate.setText("");
+        Pattern p = Pattern.compile("[\\d]{4}-[\\d]{2}-[\\d]{2}");
+        Matcher m = p.matcher(this.txtEmpBirth.getText());
+        if(m.matches()){
+            String birth = this.txtEmpBirth.getText();
+            if(!this.working_emp.get(this.cboEmpName.getSelectedIndex()).getBirth().toString().equals(birth))
+                this.btnEmpSaveInfo.setEnabled(true);
+        }else{
+            this.lbBirthstate.setText("!");
+            this.txtEmpBirth.requestFocus();
+        }
+    }//GEN-LAST:event_txtEmpBirthActionPerformed
+
+    private void txtEmpPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpPhoneActionPerformed
+        // TODO add your handling code here:
+        String phone = this.txtEmpPhone.getText();
+        if(!phone.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getPhone())){
+            this.btnEmpSaveInfo.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtEmpPhoneActionPerformed
+
+    private void txtEmpEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpEmailActionPerformed
+        // TODO add your handling code here:
+        String email = this.txtEmpEmail.getText();
+        if(!email.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getEmail())){
+            this.btnEmpSaveInfo.setEnabled(true);
+        }
+    }//GEN-LAST:event_txtEmpEmailActionPerformed
+
+    private void txtEmpPassconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpPassconfirmActionPerformed
+        // TODO add your handling code here:
+        this.btnEmpSaveInfo.setEnabled(true);
+    }//GEN-LAST:event_txtEmpPassconfirmActionPerformed
+
+    private void btnAddtodiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtodiscountActionPerformed
+        // TODO add your handling code here:
+        int[] slitem = this.listFood.getSelectedIndices();
+        
+        for(int i = 0; i < slitem.length; i++)
+            this.listdisfoodmodel.addElement(this.listfoodmodel.get(slitem[i]));
+        
+        int removenumber = 0;
+        for(int i = 0; i < slitem.length; i++){
+            this.listfoodmodel.remove(slitem[i] - removenumber);
+            ++removenumber;
+        }
+    }//GEN-LAST:event_btnAddtodiscountActionPerformed
+
+    private void btnAddAlltodiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAlltodiscountActionPerformed
+        // TODO add your handling code here:
+        for(int i = 0; i < this.listfoodmodel.getSize(); i++){
+            this.listdisfoodmodel.addElement(this.listfoodmodel.get(i));
+        }
+        
+        this.listfoodmodel.removeAllElements();
+    }//GEN-LAST:event_btnAddAlltodiscountActionPerformed
+
+    private void btnRemovefromdiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovefromdiscountActionPerformed
+        // TODO add your handling code here:
+        int[] slitem = this.listFoodDiscount.getSelectedIndices();
+        
+        for(int i = 0; i < slitem.length; i++)
+            this.listfoodmodel.addElement(this.listdisfoodmodel.get(slitem[i]));
+        
+        int removenumber = 0;
+        for(int i = 0; i < slitem.length; i++){
+            this.listdisfoodmodel.remove(slitem[i] - removenumber);
+            ++removenumber;
+        }
+    }//GEN-LAST:event_btnRemovefromdiscountActionPerformed
+
+    private void btnRemoveAllfromdiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveAllfromdiscountActionPerformed
+        // TODO add your handling code here:
+        for(int i = 0; i < this.listdisfoodmodel.getSize(); i++){
+            this.listfoodmodel.addElement(this.listdisfoodmodel.get(i));
+        }
+        
+        this.listdisfoodmodel.removeAllElements();
+    }//GEN-LAST:event_btnRemoveAllfromdiscountActionPerformed
+
+    private void btnSavesettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavesettingActionPerformed
+        // TODO add your handling code here:
+        this.lbtablenumberstate.setText("");
+        this.lbMenuitemnumberstate.setText("");
+        this.lbDiscountstate.setText("");
+        
+        int tbnumber = Integer.parseInt(this.txtMenutablenumber.getText());
+        int itemnumber = Integer.parseInt(this.txtMenuitemnumber.getText());
+        int dis = Integer.parseInt(this.txtTodaydiscount.getText());
+        if(tbnumber < 50){
+            this.lbtablenumberstate.setText("!");
+            this.txtMenutablenumber.requestFocus();
+            return;
+        }
+        if(itemnumber < 40){
+            this.lbMenuitemnumberstate.setText("!");
+            this.txtMenuitemnumber.requestFocus();
+            return;
+        }
+        if(dis < 0){
+            this.lbDiscountstate.setText("!");
+            this.txtTodaydiscount.requestFocus();
+            return;
+        }
+        
+        this.savesetting();
+        this.lbSettingstate.setText("You need to reset the application for active the setting");
+    }//GEN-LAST:event_btnSavesettingActionPerformed
+
+    private void btnResetsettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetsettingActionPerformed
+        // TODO add your handling code here:
+        this.listfoodmodel.removeAllElements();
+        this.listdisfoodmodel.removeAllElements();
+        this.initSettingForm();
+    }//GEN-LAST:event_btnResetsettingActionPerformed
+    
 
 
     /**
@@ -2604,8 +3377,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnA;
+    private javax.swing.JButton btnAddAlltodiscount;
     private javax.swing.JButton btnAddReceiptNote;
     private javax.swing.JButton btnAddnote;
+    private javax.swing.JButton btnAddtodiscount;
     private javax.swing.JButton btnAll;
     private javax.swing.JButton btnB;
     private javax.swing.JButton btnC;
@@ -2615,6 +3390,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnDrink;
     private javax.swing.JButton btnE;
     private javax.swing.JButton btnEat;
+    private javax.swing.JButton btnEmpResetInfo;
+    private javax.swing.JButton btnEmpSaveInfo;
     private javax.swing.JToggleButton btnEmployee;
     private javax.swing.JButton btnF;
     private javax.swing.JButton btnG;
@@ -2636,7 +3413,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnR;
     private javax.swing.JButton btnReceiptReset;
     private javax.swing.JButton btnReceiptSave;
+    private javax.swing.JButton btnRemoveAllfromdiscount;
+    private javax.swing.JButton btnRemovefromdiscount;
+    private javax.swing.JButton btnResetsetting;
     private javax.swing.JButton btnS;
+    private javax.swing.JButton btnSavesetting;
     private javax.swing.JButton btnSearch;
     private javax.swing.JToggleButton btnSetting;
     private javax.swing.JButton btnStock;
@@ -2649,19 +3430,60 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnZ;
     private javax.swing.JComboBox<String> cbEmployeeInput;
     private javax.swing.JComboBox<String> cboChooseCustomer;
+    private javax.swing.JComboBox<String> cboEmpName;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JLabel lbAddressstate;
+    private javax.swing.JLabel lbAvatar;
+    private javax.swing.JLabel lbBirthstate;
     private javax.swing.JLabel lbCustomer;
+    private javax.swing.JLabel lbDiscountstate;
+    private javax.swing.JLabel lbEmailstate;
+    private javax.swing.JLabel lbEmpRole;
+    private javax.swing.JLabel lbEmpStartday;
+    private javax.swing.JLabel lbEmphourwage;
+    private javax.swing.JLabel lbManager;
+    private javax.swing.JLabel lbMenuitemnumberstate;
+    private javax.swing.JLabel lbPassconfirmstate;
+    private javax.swing.JLabel lbPassstate1;
+    private javax.swing.JLabel lbPhonestate;
+    private javax.swing.JLabel lbSettingstate;
     private supportclass.RollLabel lbShowOrderTable;
     private javax.swing.JLabel lbTotalAmount;
+    private javax.swing.JLabel lbUsernamestate;
+    private javax.swing.JLabel lbtablenumberstate;
+    private javax.swing.JList<String> listFood;
+    private javax.swing.JList<String> listFoodDiscount;
     private javax.swing.JMenuItem miAddemp;
     private javax.swing.JMenuItem miLogout;
     private javax.swing.JMenu mnEdit;
@@ -2676,6 +3498,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JPanel pnDisplaySetting;
     private javax.swing.JPanel pnDrink;
     private javax.swing.JPanel pnEat;
+    private javax.swing.JPanel pnEmpdefaultinfo;
     private javax.swing.JPanel pnMenuDisplayDetails;
     private javax.swing.JPanel pnMenuSkip;
     private javax.swing.JPanel pnMenuSwitch;
@@ -2696,7 +3519,17 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private supportclass.RollLabel rlbShowReceiptBill;
     private javax.swing.JTable tbInvoice;
     private javax.swing.JTable tbOrderFood;
+    private javax.swing.JTextArea txtEmpAddress;
+    private javax.swing.JTextField txtEmpBirth;
+    private javax.swing.JTextField txtEmpEmail;
+    private javax.swing.JPasswordField txtEmpPass;
+    private javax.swing.JPasswordField txtEmpPassconfirm;
+    private javax.swing.JTextField txtEmpPhone;
+    private javax.swing.JTextField txtEmpUsername;
+    private javax.swing.JTextField txtMenuitemnumber;
+    private javax.swing.JTextField txtMenutablenumber;
     private javax.swing.JTextArea txtOrderNote;
+    private javax.swing.JTextField txtTodaydiscount;
     // End of variables declaration//GEN-END:variables
 
     
@@ -2704,6 +3537,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 //  CUSTOM DECLARATION
     int discountevent = 0;
     
+    private ArrayList<Admin>manager_list = (ArrayList<Admin>) AdminDAO.getList();
     ArrayList<Employee> working_emp = new ArrayList<>();
     ArrayList<EmpSchedule> working_schedule = new ArrayList<>();
     ArrayList<Food> menufood_list = new ArrayList<>();
@@ -2715,14 +3549,14 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     boolean isStockshow = false;
     
     // Điều chỉnh xuất các nút table
-    int tableitem_number = 40;      // số bàn mặc định của quán
-    int tablerow_number;       // số dòng
-    int tablecol_number = 3;            // số cột
+    int tableitem_number;           // số bàn mặc định của quán
+    int tablerow_number;            // số dòng
+    int tablecol_number = 3;        // số cột
     int Tablepn_width;              // kích thước khung table được điều chỉnh cho phù hợp với số dòng số cột
     int Tablepn_height;
     
     // Điều chỉnh xuất các nút menu
-    int menuitem_number = 50;      // số sản phẩm mặc định cho một menu
+    int menuitem_number;           // số sản phẩm mặc định cho một menu
     int row_number;                // số dòng
     int col_number = 6;            // số cột
     int Menupn_width;              // kích thước khung menu được điều chỉnh cho phù hợp với số dòng số cột
@@ -3157,7 +3991,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     }
     
     private void initOrderTable() {
-        for(int i = 1; i <= this.menuitem_number; i++){
+        for(int i = 1; i <= this.tableitem_number; i++){
             JButton b = new JButton();
             b.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
             b.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -3214,7 +4048,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         this.isReceiptshow = false;
                     }
                 }
-                
+                this.btnEmployee.setSelected(false);
+                this.btnSetting.setSelected(false);
+                this.btnEmployee.setBackground(new java.awt.Color(255,255,255));
+                this.btnSetting.setBackground(new java.awt.Color(255,255,255));
    
                 this.ShowCurrentOrderBill();
             });
@@ -3331,9 +4168,20 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     if(fiter.getFood_id().equals(iter.getFood_id())){
                         
                         // xuất thông tin món trên order bill
-                        Object[] newrow = {fiter.getName(), iter.getQuan(), this.discountevent, fiter.getPrice(), "X"};
-                        this.tbmodel.addRow(newrow);
-                        ++numberfood_appear;
+                        boolean isdis = false;
+                        for(int i = 0; i < this.listdisfoodmodel.getSize(); i++){
+                            if(fiter.getName().equals(this.listdisfoodmodel.get(i))){
+                                Object[] newrow = {fiter.getName(), iter.getQuan(), this.discountevent, fiter.getPrice(), "X"};
+                                this.tbmodel.addRow(newrow);
+                                ++numberfood_appear;
+                                isdis = true;
+                            }
+                        }
+                        if(!isdis){
+                            Object[] newrow = {fiter.getName(), iter.getQuan(), 0, fiter.getPrice(), "X"};
+                            this.tbmodel.addRow(newrow);
+                            ++numberfood_appear;
+                        }
                         
                         // xuất note của order bill
                         Object[] newrownote = {this.cur_ordernote.getValue().get(numberfood_appear-1)};
@@ -3366,7 +4214,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             if(i % 2 == 0){
                 int item_discount = (int)this.tbmodel.getValueAt(i, 2);
                 float item_price = (float)this.tbmodel.getValueAt(i, 3);
-                totalprice += new Float(((100 - item_discount)/100) * item_price);
+                totalprice += new Float(((100 - item_discount)/100.0) * item_price);
             }
         }
         
@@ -3423,4 +4271,152 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
     }
 // END INPUT INVOICE PROCESSION
+
+    
+    
+    
+    
+    
+// EMPLOYEE EDIT INFORMATION FORM
+    private void initEmployeeEditForm() {
+        this.txtEmpPassconfirm.setEditable(false);
+        this.btnEmpSaveInfo.setEnabled(false);
+        Employee cur_emp = this.working_emp.get(this.cboEmpName.getSelectedIndex());
+        
+        // hiển thị avatar
+        ImageIcon avataricon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/"+ cur_emp.getEm_id() +".png")).getScaledInstance(this.lbAvatar.getWidth(), this.lbAvatar.getHeight(), Image.SCALE_SMOOTH);
+            avataricon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.getStackTrace();
+            try {               // nếu ko có avatar thì lấy avatar mặc định
+                Image scaled = ImageIO.read(new File("src/avatar/default_avatar.png")).getScaledInstance(this.lbAvatar.getWidth(), this.lbAvatar.getHeight(), Image.SCALE_SMOOTH);
+                avataricon = new ImageIcon(scaled);
+            } catch (IOException ex) {
+                Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        }
+        this.lbAvatar.setIcon(avataricon);
+
+        
+        // hiển thị thông tin mặc định không thể sửa
+        for(Admin iter : this.manager_list){
+            if(iter.getAd_id().equals(cur_emp.getManager())){
+                this.lbManager.setText(iter.getName());
+                break;
+            }
+        }
+        this.lbEmpRole.setText((cur_emp.getEm_role() == 1)? "In bar" : "In kitchen");
+        this.lbEmphourwage.setText(String.valueOf(cur_emp.getHour_wage()));
+        this.lbEmpStartday.setText(String.valueOf(cur_emp.getStartday()));
+        
+        // hiển thị thông tin có thể sửa
+        this.txtEmpUsername.setText(cur_emp.getUsername());
+        this.txtEmpPass.setText(cur_emp.getPass());
+        this.txtEmpBirth.setText(String.valueOf(cur_emp.getBirth()));
+        this.txtEmpPhone.setText(cur_emp.getPhone());
+        this.txtEmpEmail.setText(cur_emp.getEmail());
+        this.txtEmpAddress.setText(cur_emp.getAddr());
+        
+        
+    }
+    
+// END EMPLOYEE EDIT INFORMATION FORM
+
+    
+    
+    
+    
+    
+    
+//  SETTING FORM
+    ArrayList<String> strfood = new ArrayList<>();
+    ArrayList<String> strdisfood = new ArrayList<>();
+    DefaultListModel listfoodmodel = new DefaultListModel();
+    DefaultListModel listdisfoodmodel = new DefaultListModel();
+    
+    private void initSettingForm() {
+        this.txtMenutablenumber.setText(String.valueOf(this.tableitem_number));
+        this.txtMenuitemnumber.setText(String.valueOf(this.menuitem_number));
+        this.txtTodaydiscount.setText(String.valueOf(this.discountevent));
+        
+        for(String iter : this.strfood){
+            this.listfoodmodel.addElement(iter);
+        }
+        
+        for(String iter : this.strdisfood){
+            this.listdisfoodmodel.addElement(iter);
+        }
+        
+        this.listFood.setModel(this.listfoodmodel);
+        this.listFoodDiscount.setModel(this.listdisfoodmodel);
+    }
+    
+    private void getsetting(){
+        BufferedReader instream = null;
+        try {
+            instream = Files.newBufferedReader(Paths.get("src/textfile/settinginfo.txt"));
+            LineNumberReader in = new LineNumberReader(instream);
+            
+            this.tableitem_number = Integer.parseInt(in.readLine());
+            this.menuitem_number = Integer.parseInt(in.readLine());
+            this.discountevent = Integer.parseInt(in.readLine());
+            
+            while(true){
+                String food = in.readLine();
+                if(food.equals("-"))
+                    break;
+                this.strfood.add(food);
+            }
+            
+            while(true){
+                String disfood = in.readLine();
+                if(disfood.equals("-"))
+                    break;
+                this.strdisfood.add(disfood);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                instream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    
+    private void savesetting(){
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(new File("src/textfile/settinginfo.txt"));
+            
+            out.println(this.txtMenutablenumber.getText());
+            out.println(this.txtMenuitemnumber.getText());
+            out.println(this.txtTodaydiscount.getText());
+            
+            for(int i = 0; i < this.listfoodmodel.getSize(); i++){
+                out.println(this.listfoodmodel.get(i));
+            }
+            
+            out.println("-");
+            
+            for(int i = 0; i < this.listdisfoodmodel.getSize(); i++){
+                out.println(this.listdisfoodmodel.get(i));
+            }
+            
+            out.println("-");
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            out.flush();
+            out.close();
+        }
+    }
+    
+//  END SETTING FORM
 }
