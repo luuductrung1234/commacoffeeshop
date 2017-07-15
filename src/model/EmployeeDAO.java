@@ -75,7 +75,7 @@ public class EmployeeDAO {
     
     public static int update(Employee old_emp, String newusername, String newpass, String newname, java.sql.Date newbirth, java.sql.Date newstartday, String newaddr, String newemail, String newphone, String newrole, String newmanager)
     {
-        String sql = "UPDATE tbEmployee SET username = ?, pass = ?, name = ?, birth = ?, startday = ?, addr = ?, email = ?, phone = ?, em_role, manager = ? WHERE em_id = ?, username = ?, pass = ?";
+        String sql = "UPDATE tbEmployee SET username = ?, pass = ?, name = ?, birth = ?, startday = ?, addr = ?, email = ?, phone = ?, em_role, manager = ? WHERE em_id = ? and username = ? and pass = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);){
@@ -93,6 +93,33 @@ public class EmployeeDAO {
             st.setString(11, old_emp.getEm_id());
             st.setString(12, old_emp.getUsername());
             st.setString(13, old_emp.getPass());
+            
+            return st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
+    }
+    
+    
+    public static int selfupdate(Employee old_emp, String newusername, String newpass, java.sql.Date newbirth, String newphone, String newemail, String newaddr){
+        String sql = "UPDATE tbEmployee SET username = ?, pass = ?, birth = ?, addr = ?, email = ?, phone = ? WHERE em_id = ? AND username = ? AND pass = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);){
+            
+            st.setString(1, newusername);
+            st.setString(2, newpass);
+            st.setDate(3, newbirth);
+            st.setString(4, newaddr);
+            st.setString(5, newemail);
+            st.setString(6, newphone);
+        
+            st.setString(7, old_emp.getEm_id());
+            st.setString(8, old_emp.getUsername());
+            st.setString(9, old_emp.getPass());
             
             return st.executeUpdate();
         } catch (SQLException ex) {
