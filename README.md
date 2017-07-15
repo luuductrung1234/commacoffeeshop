@@ -15,16 +15,16 @@ Note:
 
 # Project's procession:
   - FrLogin đã xong
-    + vừa cập nhật thêm chức năng thay đổi cấu hình đăng nhập database
+    + vừa cập nhật thêm chức năng thay đổi cấu hình đăng nhập database, sau khi chỉnh sửa và đăng nhập thành công, chương trình tự động lưu dữ liệu của database đó (lần sau không cần điều chỉnh nữa). Thông tin database sẽ được lưu vào databaseinfo.txt
     
   - FrEmployeeWorkspace:
-    + đã xong : đăng nhập/xuất của nhân viên. Tự động chấm công và phát sinh lịch làm việc trong ngày cũng như bẳng lương trong tháng hiện tại vào trong database
+    + đã xong : đăng nhập/xuất của nhân viên. Tự động chấm công và phát sinh lịch làm việc trong ngày, bảng lương của tháng hiện tại vào trong database
     + đã xong : Phân chia cửa sổ đã hoàn thành
     + đã xong : các cửa sổ xuất menu (thêm ảnh cho món ăn nếu cần)
     + đã xong : cửa sổ nhập bill order, sau khi khách hàng tính tiền sẽ tự động sinh dữ liệu Order và OrderDetails trong database
     + chưa hoàn thành : In bill thông qua printer
-    + đã xong : xây dựng cửa sổ nhập ReceitpNote
-    + đã xong : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace
+    + đã xong : xây dựng cửa sổ nhập đơn hàng, sau khi nhân viên nhập đơn hàng sẽ tự động sinh dữ liệu ReceitpNote và ReceiptNoteDetails trong database
+    + đã xong : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace, các tuỳ chỉnh lưu vào settinginfo.txt
     + đã xong : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
 
 (*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
