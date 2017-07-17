@@ -6,10 +6,20 @@
 package gui;
 
 import entities.*;
+import java.awt.CardLayout;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import model.*;
 
 /**
@@ -26,9 +36,29 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }
     
     private Admin a;
-    public FrAdminWorkspace(Admin a) {
+    FrAdminWorkspace(Admin a) {
         this.a = a;
         initComponents();
+        //employee
+        initDatavwEmployee();
+        setEmployeeFormControl(false);
+        //customer
+        initDatavwCustomer();
+        setCustomerControl(false);
+        //food
+        initDatavwFood();
+        setFoodControl(false);
+        initDatavwFD();
+        setFDControl(false);
+        //food material
+        initDatavwFM();
+        setFMControl(false);
+        //profile
+        initDataThisAdmin();
+        setAdControl(false);
+        //order
+        initDatavwOrder();
+        
         this.setFrameIcon();
         setTitle("Admin: " + a.getName());
         
@@ -44,12 +74,196 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane8 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        pnShowControl = new javax.swing.JPanel();
+        btnEmployee = new javax.swing.JToggleButton();
+        btnSalaryNote = new javax.swing.JToggleButton();
+        btnCustomer = new javax.swing.JToggleButton();
+        btnFood = new javax.swing.JToggleButton();
+        btnFoodMaterial = new javax.swing.JToggleButton();
+        btnReceiptNote = new javax.swing.JToggleButton();
+        btnOrder = new javax.swing.JToggleButton();
+        btnProfile = new javax.swing.JToggleButton();
+        pnDisplay = new javax.swing.JPanel();
+        pnBlank = new javax.swing.JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                BufferedImage image = null;
+                try{
+                    image = ImageIO.read(new File("src/image/blank_picture.jpg"));
+                }catch(IOException ex){
+                    ex.printStackTrace();
+                }
+                super.paintComponent(g);
+                g.drawImage(image, 300, 0, this); // see javadoc for more info on the parameters
+            }
+        };
+        pnEmployee = new javax.swing.JPanel();
+        pnShowEmployee = new javax.swing.JPanel();
+        pnEmployeeSearch = new javax.swing.JPanel();
+        btnSearchEmployeeName = new javax.swing.JButton();
+        btnResetEmployeeData = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        vwEmployee = new javax.swing.JTable();
+        pnEmployeeForm = new javax.swing.JPanel();
+        pnEmployeeInformation = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtUsernameEmp = new javax.swing.JTextField();
+        txtNameEmp = new javax.swing.JTextField();
+        txtBirthEmp = new javax.swing.JTextField();
+        txtStartDayEmp = new javax.swing.JTextField();
+        txtHourWageEmp = new javax.swing.JTextField();
+        txtAddrEmp = new javax.swing.JTextField();
+        txtEmailEmp = new javax.swing.JTextField();
+        txtPhoneEmp = new javax.swing.JTextField();
+        cboRoleEmployee = new javax.swing.JComboBox<>();
+        jLabel33 = new javax.swing.JLabel();
+        txtIDEmp = new javax.swing.JTextField();
+        pnEmployeeInformationControl = new javax.swing.JPanel();
+        btnInsertEmp = new javax.swing.JButton();
+        btnUpdateEmp = new javax.swing.JButton();
+        btnDeleteEmp = new javax.swing.JButton();
+        btnResetEmp = new javax.swing.JButton();
+        pnSalaryNote = new javax.swing.JPanel();
+        pnCustomer = new javax.swing.JPanel();
+        pnShowCustomer = new javax.swing.JPanel();
+        pnCustomerSearch = new javax.swing.JPanel();
+        btnSearchCustomerName = new javax.swing.JButton();
+        btnResetCustomerData = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        vwCustomer = new javax.swing.JTable();
+        pnCustomerForm = new javax.swing.JPanel();
+        pnCustomerInformation = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtNameCus = new javax.swing.JTextField();
+        txtPhoneCus = new javax.swing.JTextField();
+        txtEmailCus = new javax.swing.JTextField();
+        txtDiscountCus = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtIDCus = new javax.swing.JTextField();
+        pnCustomerInformationControl = new javax.swing.JPanel();
+        btnInsertCus = new javax.swing.JButton();
+        btnUpdateCus = new javax.swing.JButton();
+        btnDeleteCus = new javax.swing.JButton();
+        btnResetCus = new javax.swing.JButton();
+        pnFood = new javax.swing.JPanel();
+        pnShowFood = new javax.swing.JPanel();
+        pnFoodSearch = new javax.swing.JPanel();
+        btnSearchFoodName = new javax.swing.JButton();
+        btnResetFoodData = new javax.swing.JButton();
+        pnvw = new javax.swing.JPanel();
+        pnvwFood = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        vwFood = new javax.swing.JTable();
+        pnvwFD = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        vwFD = new javax.swing.JTable();
+        pnFoodForm = new javax.swing.JPanel();
+        pnInsertFood = new javax.swing.JPanel();
+        btnInsertFood = new javax.swing.JButton();
+        btnInsertFD = new javax.swing.JButton();
+        pnFoodFormInput = new javax.swing.JPanel();
+        pnFoodFormCL = new javax.swing.JPanel();
+        pnFoodInformation = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtNameFood = new javax.swing.JTextField();
+        txtInfoFood = new javax.swing.JTextField();
+        txtPriceFood = new javax.swing.JTextField();
+        cboTypeFood = new javax.swing.JComboBox<>();
+        jLabel20 = new javax.swing.JLabel();
+        txtIDFood = new javax.swing.JTextField();
+        pnFoodInformationControl = new javax.swing.JPanel();
+        btnUpdateFood = new javax.swing.JButton();
+        btnDeleteFood = new javax.swing.JButton();
+        btnResetFood = new javax.swing.JButton();
+        pnFoodDetailsFormCL = new javax.swing.JPanel();
+        pnFDInformation = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        txtFoodIDFD = new javax.swing.JTextField();
+        txtFMIDFD = new javax.swing.JTextField();
+        txtQuanFD = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        txtIDFD = new javax.swing.JTextField();
+        txtUnitUseFD = new javax.swing.JTextField();
+        txtFoodNameFD = new javax.swing.JTextField();
+        txtFMNameFD = new javax.swing.JTextField();
+        pnFDInformationControl = new javax.swing.JPanel();
+        btnUpdateFD = new javax.swing.JButton();
+        btnDeleteFD = new javax.swing.JButton();
+        btnResetFD = new javax.swing.JButton();
+        pnFoodMaterial = new javax.swing.JPanel();
+        pnShowFM = new javax.swing.JPanel();
+        pnFMSearch = new javax.swing.JPanel();
+        btnSearchFMName = new javax.swing.JButton();
+        btnResetFMData = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        vwFM = new javax.swing.JTable();
+        pnFMForm = new javax.swing.JPanel();
+        pnFMInformation = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        txtNameFM = new javax.swing.JTextField();
+        txtInfoFM = new javax.swing.JTextField();
+        txtUnitBuyOtherFM = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        txtIDFM = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        txtSupplierFM = new javax.swing.JTextField();
+        cboTypeFM = new javax.swing.JComboBox<>();
+        cboUseForFM = new javax.swing.JComboBox<>();
+        txtTypeOtherFM = new javax.swing.JTextField();
+        cboUnitBuyFM = new javax.swing.JComboBox<>();
+        pnFMInformationControl = new javax.swing.JPanel();
+        btnInsertFM = new javax.swing.JButton();
+        btnUpdateFM = new javax.swing.JButton();
+        btnDeleteFM = new javax.swing.JButton();
+        btnResetFM = new javax.swing.JButton();
+        pnReceiptNote = new javax.swing.JPanel();
+        pnOrder = new javax.swing.JPanel();
+        pnOrderSearch = new javax.swing.JPanel();
+        txtSearchOrderTime = new javax.swing.JTextField();
+        btnSearchOrderTime = new javax.swing.JButton();
+        btnResetOrderData = new javax.swing.JButton();
+        pnShowOrder = new javax.swing.JPanel();
+        pnvwOrder = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        vwOrder = new javax.swing.JTable();
+        pnvwOD = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        vwOD = new javax.swing.JTable();
+        pnProfile = new javax.swing.JPanel();
+        pnShowAdmin = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        txtIDAd = new javax.swing.JTextField();
+        txtUsernameAd = new javax.swing.JTextField();
+        txtNameAd = new javax.swing.JTextField();
+        txtPassAd = new javax.swing.JPasswordField();
+        pnAdminControl = new javax.swing.JPanel();
+        btnUpdateAd = new javax.swing.JButton();
+        btnChangepPassAd = new javax.swing.JButton();
+        btnInsertNewAd = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -60,70 +274,1386 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Workplace");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+        pnShowControl.setOpaque(false);
+        pnShowControl.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+        btnEmployee.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEmployee.setText("Employee");
+        btnEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmployeeActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnEmployee);
+
+        btnSalaryNote.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalaryNote.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSalaryNote.setText("Salary Note");
+        pnShowControl.add(btnSalaryNote);
+
+        btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
+        btnCustomer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCustomer.setText("Customer");
+        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnCustomer);
+
+        btnFood.setBackground(new java.awt.Color(255, 255, 255));
+        btnFood.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnFood.setText("Food");
+        btnFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFoodActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnFood);
+
+        btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
+        btnFoodMaterial.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnFoodMaterial.setText("Food Material");
+        btnFoodMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFoodMaterialActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnFoodMaterial);
+
+        btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+        btnReceiptNote.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnReceiptNote.setText("Receipt Note");
+        pnShowControl.add(btnReceiptNote);
+
+        btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+        btnOrder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnOrder.setText("Order");
+        btnOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnOrder);
+
+        btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+        btnProfile.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
+        pnShowControl.add(btnProfile);
+
+        pnDisplay.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout pnBlankLayout = new javax.swing.GroupLayout(pnBlank);
+        pnBlank.setLayout(pnBlankLayout);
+        pnBlankLayout.setHorizontalGroup(
+            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1010, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+        pnBlankLayout.setVerticalGroup(
+            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 525, Short.MAX_VALUE)
         );
 
-        jTabbedPane8.addTab("Employee", jPanel1);
+        pnDisplay.add(pnBlank, "card2");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+        pnEmployee.setLayout(new javax.swing.BoxLayout(pnEmployee, javax.swing.BoxLayout.LINE_AXIS));
+
+        pnShowEmployee.setPreferredSize(new java.awt.Dimension(590, 429));
+
+        pnEmployeeSearch.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnSearchEmployeeName.setBackground(new java.awt.Color(255, 255, 255));
+        btnSearchEmployeeName.setText("Search By Employee Name");
+        btnSearchEmployeeName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchEmployeeNameActionPerformed(evt);
+            }
+        });
+        pnEmployeeSearch.add(btnSearchEmployeeName);
+
+        btnResetEmployeeData.setBackground(new java.awt.Color(255, 255, 255));
+        btnResetEmployeeData.setText("Reset Data");
+        btnResetEmployeeData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetEmployeeDataActionPerformed(evt);
+            }
+        });
+        pnEmployeeSearch.add(btnResetEmployeeData);
+
+        vwEmployee.setAutoCreateRowSorter(true);
+        vwEmployee.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Employee ID", "Username", "Password", "Name", "Birth", "Start Day", "Hour Wage", "Address", "Email", "Phone", "Role", "Manager"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vwEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vwEmployeeMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(vwEmployee);
+        if (vwEmployee.getColumnModel().getColumnCount() > 0) {
+            vwEmployee.getColumnModel().getColumn(2).setMinWidth(0);
+            vwEmployee.getColumnModel().getColumn(2).setPreferredWidth(0);
+            vwEmployee.getColumnModel().getColumn(2).setMaxWidth(0);
+            vwEmployee.getColumnModel().getColumn(6).setPreferredWidth(50);
+            vwEmployee.getColumnModel().getColumn(10).setPreferredWidth(30);
+            vwEmployee.getColumnModel().getColumn(11).setMinWidth(0);
+            vwEmployee.getColumnModel().getColumn(11).setPreferredWidth(0);
+            vwEmployee.getColumnModel().getColumn(11).setMaxWidth(0);
+        }
+        this.vwEmployee.setRowHeight(25);
+
+        javax.swing.GroupLayout pnShowEmployeeLayout = new javax.swing.GroupLayout(pnShowEmployee);
+        pnShowEmployee.setLayout(pnShowEmployeeLayout);
+        pnShowEmployeeLayout.setHorizontalGroup(
+            pnShowEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnEmployeeSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+        pnShowEmployeeLayout.setVerticalGroup(
+            pnShowEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnShowEmployeeLayout.createSequentialGroup()
+                .addComponent(pnEmployeeSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
         );
 
-        jTabbedPane8.addTab("Food", jPanel2);
+        pnEmployee.add(pnShowEmployee);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+        pnEmployeeForm.setPreferredSize(new java.awt.Dimension(325, 452));
+
+        pnEmployeeInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Employee Information"));
+
+        jLabel1.setText("Username");
+
+        jLabel3.setText("Name");
+
+        jLabel4.setText("Birth");
+
+        jLabel5.setText("Startday");
+
+        jLabel6.setText("Address");
+
+        jLabel7.setText("Hour Wage");
+
+        jLabel8.setText("Email");
+
+        jLabel9.setText("Phone");
+
+        jLabel10.setText("Role");
+
+        cboRoleEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drink", "Food" }));
+
+        jLabel33.setText("Employee ID");
+
+        javax.swing.GroupLayout pnEmployeeInformationLayout = new javax.swing.GroupLayout(pnEmployeeInformation);
+        pnEmployeeInformation.setLayout(pnEmployeeInformationLayout);
+        pnEmployeeInformationLayout.setHorizontalGroup(
+            pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel33))
+                .addGap(58, 58, 58)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtBirthEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStartDayEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHourWageEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtAddrEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUsernameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIDEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+        pnEmployeeInformationLayout.setVerticalGroup(
+            pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(txtIDEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtUsernameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtBirthEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtStartDayEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtHourWageEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtAddrEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
-        jTabbedPane8.addTab("Bill", jPanel3);
+        btnInsertEmp.setText("Insert");
+        btnInsertEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertEmpActionPerformed(evt);
+            }
+        });
+        pnEmployeeInformationControl.add(btnInsertEmp);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+        btnUpdateEmp.setText("Update");
+        btnUpdateEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateEmpActionPerformed(evt);
+            }
+        });
+        pnEmployeeInformationControl.add(btnUpdateEmp);
+
+        btnDeleteEmp.setText("Delete");
+        btnDeleteEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteEmpActionPerformed(evt);
+            }
+        });
+        pnEmployeeInformationControl.add(btnDeleteEmp);
+
+        btnResetEmp.setText("Reset");
+        btnResetEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetEmpActionPerformed(evt);
+            }
+        });
+        pnEmployeeInformationControl.add(btnResetEmp);
+
+        javax.swing.GroupLayout pnEmployeeFormLayout = new javax.swing.GroupLayout(pnEmployeeForm);
+        pnEmployeeForm.setLayout(pnEmployeeFormLayout);
+        pnEmployeeFormLayout.setHorizontalGroup(
+            pnEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(pnEmployeeInformation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnEmployeeInformationControl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+        pnEmployeeFormLayout.setVerticalGroup(
+            pnEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnEmployeeFormLayout.createSequentialGroup()
+                .addComponent(pnEmployeeInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnEmployeeInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane8.addTab("Order", jPanel4);
+        pnEmployee.add(pnEmployeeForm);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+        pnDisplay.add(pnEmployee, "card3");
+
+        javax.swing.GroupLayout pnSalaryNoteLayout = new javax.swing.GroupLayout(pnSalaryNote);
+        pnSalaryNote.setLayout(pnSalaryNoteLayout);
+        pnSalaryNoteLayout.setHorizontalGroup(
+            pnSalaryNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1010, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+        pnSalaryNoteLayout.setVerticalGroup(
+            pnSalaryNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 525, Short.MAX_VALUE)
         );
 
-        jTabbedPane8.addTab("Edit Profile", jPanel6);
+        pnDisplay.add(pnSalaryNote, "card10");
+
+        pnCustomer.setLayout(new javax.swing.BoxLayout(pnCustomer, javax.swing.BoxLayout.LINE_AXIS));
+
+        pnCustomerSearch.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnSearchCustomerName.setBackground(new java.awt.Color(255, 255, 255));
+        btnSearchCustomerName.setText("Search By Customer Name");
+        btnSearchCustomerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchCustomerNameActionPerformed(evt);
+            }
+        });
+        pnCustomerSearch.add(btnSearchCustomerName);
+
+        btnResetCustomerData.setBackground(new java.awt.Color(255, 255, 255));
+        btnResetCustomerData.setText("Reset Data");
+        btnResetCustomerData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetCustomerDataActionPerformed(evt);
+            }
+        });
+        pnCustomerSearch.add(btnResetCustomerData);
+
+        vwCustomer.setAutoCreateRowSorter(true);
+        vwCustomer.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Customer ID", "Name", "Phone", "Email", "Discount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vwCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vwCustomerMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(vwCustomer);
+        this.vwCustomer.setRowHeight(25);
+
+        javax.swing.GroupLayout pnShowCustomerLayout = new javax.swing.GroupLayout(pnShowCustomer);
+        pnShowCustomer.setLayout(pnShowCustomerLayout);
+        pnShowCustomerLayout.setHorizontalGroup(
+            pnShowCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnCustomerSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
+        );
+        pnShowCustomerLayout.setVerticalGroup(
+            pnShowCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnShowCustomerLayout.createSequentialGroup()
+                .addComponent(pnCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+        );
+
+        pnCustomer.add(pnShowCustomer);
+
+        pnCustomerForm.setPreferredSize(new java.awt.Dimension(325, 452));
+
+        pnCustomerInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Customer Information"));
+        pnCustomerInformation.setPreferredSize(new java.awt.Dimension(325, 421));
+
+        jLabel11.setText("Name");
+
+        jLabel12.setText("Phone");
+
+        jLabel13.setText("Email");
+
+        jLabel14.setText("Discount");
+
+        jLabel19.setText("Customer ID");
+
+        javax.swing.GroupLayout pnCustomerInformationLayout = new javax.swing.GroupLayout(pnCustomerInformation);
+        pnCustomerInformation.setLayout(pnCustomerInformationLayout);
+        pnCustomerInformationLayout.setHorizontalGroup(
+            pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCustomerInformationLayout.createSequentialGroup()
+                .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnCustomerInformationLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addComponent(txtDiscountCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCustomerInformationLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEmailCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCustomerInformationLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnCustomerInformationLayout.createSequentialGroup()
+                        .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNameCus, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtIDCus))))
+                .addGap(30, 30, 30))
+        );
+        pnCustomerInformationLayout.setVerticalGroup(
+            pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCustomerInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtIDCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtNameCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtPhoneCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtEmailCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtDiscountCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(280, Short.MAX_VALUE))
+        );
+
+        btnInsertCus.setText("Insert");
+        btnInsertCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertCusActionPerformed(evt);
+            }
+        });
+        pnCustomerInformationControl.add(btnInsertCus);
+
+        btnUpdateCus.setText("Update");
+        btnUpdateCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCusActionPerformed(evt);
+            }
+        });
+        pnCustomerInformationControl.add(btnUpdateCus);
+
+        btnDeleteCus.setText("Delete");
+        btnDeleteCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCusActionPerformed(evt);
+            }
+        });
+        pnCustomerInformationControl.add(btnDeleteCus);
+
+        btnResetCus.setText("Reset");
+        btnResetCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetCusActionPerformed(evt);
+            }
+        });
+        pnCustomerInformationControl.add(btnResetCus);
+
+        javax.swing.GroupLayout pnCustomerFormLayout = new javax.swing.GroupLayout(pnCustomerForm);
+        pnCustomerForm.setLayout(pnCustomerFormLayout);
+        pnCustomerFormLayout.setHorizontalGroup(
+            pnCustomerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnCustomerInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnCustomerInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        pnCustomerFormLayout.setVerticalGroup(
+            pnCustomerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnCustomerFormLayout.createSequentialGroup()
+                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnCustomerInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pnCustomer.add(pnCustomerForm);
+
+        pnDisplay.add(pnCustomer, "card4");
+
+        pnFood.setPreferredSize(new java.awt.Dimension(915, 460));
+        pnFood.setLayout(new javax.swing.BoxLayout(pnFood, javax.swing.BoxLayout.LINE_AXIS));
+
+        pnShowFood.setPreferredSize(new java.awt.Dimension(1040, 600));
+        pnShowFood.setLayout(new java.awt.BorderLayout());
+
+        pnFoodSearch.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnSearchFoodName.setBackground(new java.awt.Color(255, 255, 255));
+        btnSearchFoodName.setText("Search By Food Name");
+        btnSearchFoodName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchFoodNameActionPerformed(evt);
+            }
+        });
+        pnFoodSearch.add(btnSearchFoodName);
+
+        btnResetFoodData.setBackground(new java.awt.Color(255, 255, 255));
+        btnResetFoodData.setText("Reset Data");
+        btnResetFoodData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetFoodDataActionPerformed(evt);
+            }
+        });
+        pnFoodSearch.add(btnResetFoodData);
+
+        pnShowFood.add(pnFoodSearch, java.awt.BorderLayout.PAGE_START);
+
+        pnvw.setLayout(new java.awt.BorderLayout());
+
+        vwFood.setAutoCreateRowSorter(true);
+        vwFood.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Food ID", "Name", "Information", "Price", "Type"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vwFood.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vwFoodMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(vwFood);
+        this.vwFood.setRowHeight(25);
+
+        javax.swing.GroupLayout pnvwFoodLayout = new javax.swing.GroupLayout(pnvwFood);
+        pnvwFood.setLayout(pnvwFoodLayout);
+        pnvwFoodLayout.setHorizontalGroup(
+            pnvwFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 694, Short.MAX_VALUE)
+            .addGroup(pnvwFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
+        );
+        pnvwFoodLayout.setVerticalGroup(
+            pnvwFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 339, Short.MAX_VALUE)
+            .addGroup(pnvwFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
+        );
+
+        pnvw.add(pnvwFood, java.awt.BorderLayout.PAGE_START);
+
+        vwFD.setAutoCreateRowSorter(true);
+        vwFD.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Food Details ID", "Food ID", "Food Material ID", "Quan", "Unit Use"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vwFD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vwFDMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(vwFD);
+        this.vwFD.setRowHeight(25);
+
+        javax.swing.GroupLayout pnvwFDLayout = new javax.swing.GroupLayout(pnvwFD);
+        pnvwFD.setLayout(pnvwFDLayout);
+        pnvwFDLayout.setHorizontalGroup(
+            pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 694, Short.MAX_VALUE)
+            .addGroup(pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
+        );
+        pnvwFDLayout.setVerticalGroup(
+            pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 163, Short.MAX_VALUE)
+            .addGroup(pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+        );
+
+        pnvw.add(pnvwFD, java.awt.BorderLayout.CENTER);
+
+        pnShowFood.add(pnvw, java.awt.BorderLayout.CENTER);
+
+        pnFood.add(pnShowFood);
+
+        pnFoodForm.setPreferredSize(new java.awt.Dimension(325, 460));
+        pnFoodForm.setLayout(new java.awt.BorderLayout());
+
+        pnInsertFood.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnInsertFood.setText("Insert Food");
+        btnInsertFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertFoodActionPerformed(evt);
+            }
+        });
+        pnInsertFood.add(btnInsertFood);
+
+        btnInsertFD.setText("Insert Food Details");
+        btnInsertFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertFDActionPerformed(evt);
+            }
+        });
+        pnInsertFood.add(btnInsertFD);
+
+        pnFoodForm.add(pnInsertFood, java.awt.BorderLayout.PAGE_START);
+
+        pnFoodFormInput.setLayout(new java.awt.CardLayout());
+
+        pnFoodFormCL.setPreferredSize(new java.awt.Dimension(320, 460));
+
+        pnFoodInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Food Information"));
+
+        jLabel15.setText("Name");
+
+        jLabel16.setText("Information");
+
+        jLabel17.setText("Price");
+
+        jLabel18.setText("Type");
+
+        cboTypeFood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drink", "Food" }));
+
+        jLabel20.setText("Food ID");
+
+        javax.swing.GroupLayout pnFoodInformationLayout = new javax.swing.GroupLayout(pnFoodInformation);
+        pnFoodInformation.setLayout(pnFoodInformationLayout);
+        pnFoodInformationLayout.setHorizontalGroup(
+            pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFoodInformationLayout.createSequentialGroup()
+                .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel20))
+                .addGap(71, 71, 71)
+                .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNameFood, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtInfoFood, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPriceFood, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIDFood, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTypeFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnFoodInformationLayout.setVerticalGroup(
+            pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFoodInformationLayout.createSequentialGroup()
+                .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtIDFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtNameFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(txtInfoFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtPriceFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(cboTypeFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(268, Short.MAX_VALUE))
+        );
+
+        btnUpdateFood.setText("Update");
+        btnUpdateFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateFoodActionPerformed(evt);
+            }
+        });
+        pnFoodInformationControl.add(btnUpdateFood);
+
+        btnDeleteFood.setText("Delete");
+        btnDeleteFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteFoodActionPerformed(evt);
+            }
+        });
+        pnFoodInformationControl.add(btnDeleteFood);
+
+        btnResetFood.setText("Reset");
+        btnResetFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetFoodActionPerformed(evt);
+            }
+        });
+        pnFoodInformationControl.add(btnResetFood);
+
+        javax.swing.GroupLayout pnFoodFormCLLayout = new javax.swing.GroupLayout(pnFoodFormCL);
+        pnFoodFormCL.setLayout(pnFoodFormCLLayout);
+        pnFoodFormCLLayout.setHorizontalGroup(
+            pnFoodFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFoodFormCLLayout.createSequentialGroup()
+                .addGroup(pnFoodFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnFoodInformationControl, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                    .addComponent(pnFoodInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
+        );
+        pnFoodFormCLLayout.setVerticalGroup(
+            pnFoodFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFoodFormCLLayout.createSequentialGroup()
+                .addComponent(pnFoodInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnFoodInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pnFoodFormInput.add(pnFoodFormCL, "card2");
+
+        pnFoodDetailsFormCL.setPreferredSize(new java.awt.Dimension(320, 460));
+
+        pnFDInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Food Details Information"));
+
+        jLabel21.setText("Details for Food");
+
+        jLabel22.setText("With Food Material(s)");
+
+        jLabel23.setText("Quan");
+
+        jLabel24.setText("Unit Use");
+
+        txtQuanFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuanFDActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setText("Food Details ID");
+
+        javax.swing.GroupLayout pnFDInformationLayout = new javax.swing.GroupLayout(pnFDInformation);
+        pnFDInformation.setLayout(pnFDInformationLayout);
+        pnFDInformationLayout.setHorizontalGroup(
+            pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnFDInformationLayout.createSequentialGroup()
+                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnFDInformationLayout.createSequentialGroup()
+                        .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFoodIDFD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIDFD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnFDInformationLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFoodNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnFDInformationLayout.createSequentialGroup()
+                        .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtQuanFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtFMNameFD)
+                                .addComponent(txtFMIDFD, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addComponent(txtUnitUseFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(21, 21, 21))
+        );
+        pnFDInformationLayout.setVerticalGroup(
+            pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFDInformationLayout.createSequentialGroup()
+                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(txtIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(txtFoodIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFoodNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFMIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFMNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuanFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addGap(18, 18, 18)
+                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUnitUseFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24))
+                .addContainerGap(216, Short.MAX_VALUE))
+        );
+
+        btnUpdateFD.setText("Update");
+        btnUpdateFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateFDActionPerformed(evt);
+            }
+        });
+        pnFDInformationControl.add(btnUpdateFD);
+
+        btnDeleteFD.setText("Delete");
+        btnDeleteFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteFDActionPerformed(evt);
+            }
+        });
+        pnFDInformationControl.add(btnDeleteFD);
+
+        btnResetFD.setText("Reset");
+        btnResetFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetFDActionPerformed(evt);
+            }
+        });
+        pnFDInformationControl.add(btnResetFD);
+
+        javax.swing.GroupLayout pnFoodDetailsFormCLLayout = new javax.swing.GroupLayout(pnFoodDetailsFormCL);
+        pnFoodDetailsFormCL.setLayout(pnFoodDetailsFormCLLayout);
+        pnFoodDetailsFormCLLayout.setHorizontalGroup(
+            pnFoodDetailsFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFoodDetailsFormCLLayout.createSequentialGroup()
+                .addComponent(pnFDInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
+            .addGroup(pnFoodDetailsFormCLLayout.createSequentialGroup()
+                .addComponent(pnFDInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnFoodDetailsFormCLLayout.setVerticalGroup(
+            pnFoodDetailsFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFoodDetailsFormCLLayout.createSequentialGroup()
+                .addComponent(pnFDInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnFDInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pnFoodFormInput.add(pnFoodDetailsFormCL, "card3");
+
+        pnFoodForm.add(pnFoodFormInput, java.awt.BorderLayout.CENTER);
+
+        pnFood.add(pnFoodForm);
+
+        pnDisplay.add(pnFood, "card5");
+
+        pnFoodMaterial.setLayout(new javax.swing.BoxLayout(pnFoodMaterial, javax.swing.BoxLayout.LINE_AXIS));
+
+        pnFMSearch.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnSearchFMName.setBackground(new java.awt.Color(255, 255, 255));
+        btnSearchFMName.setText("Search By Food Material Name");
+        btnSearchFMName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchFMNameActionPerformed(evt);
+            }
+        });
+        pnFMSearch.add(btnSearchFMName);
+
+        btnResetFMData.setBackground(new java.awt.Color(255, 255, 255));
+        btnResetFMData.setText("Reset Data");
+        btnResetFMData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetFMDataActionPerformed(evt);
+            }
+        });
+        pnFMSearch.add(btnResetFMData);
+
+        vwFM.setAutoCreateRowSorter(true);
+        vwFM.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Food Material ID", "Name", "Information", "Use for", "Type", "Unit Buy", "Standard Price", "Supplier"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vwFM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vwFMMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(vwFM);
+        this.vwFM.setRowHeight(25);
+
+        javax.swing.GroupLayout pnShowFMLayout = new javax.swing.GroupLayout(pnShowFM);
+        pnShowFM.setLayout(pnShowFMLayout);
+        pnShowFMLayout.setHorizontalGroup(
+            pnShowFMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnFMSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
+            .addComponent(jScrollPane5)
+        );
+        pnShowFMLayout.setVerticalGroup(
+            pnShowFMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnShowFMLayout.createSequentialGroup()
+                .addComponent(pnFMSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+        );
+
+        pnFoodMaterial.add(pnShowFM);
+
+        pnFMForm.setPreferredSize(new java.awt.Dimension(325, 487));
+
+        pnFMInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Food Material Information"));
+        pnFMInformation.setPreferredSize(new java.awt.Dimension(325, 421));
+
+        jLabel26.setText("Name");
+
+        jLabel27.setText("Information");
+
+        jLabel28.setText("Use For");
+
+        jLabel29.setText("Food Material Type");
+
+        jLabel30.setText("Food Material ID");
+
+        jLabel31.setText("Unit Buy");
+
+        jLabel32.setText("Supplier");
+
+        cboTypeFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "khô", "sữa", "rau củ", "vật dụng", "Khác" }));
+        cboTypeFM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTypeFMActionPerformed(evt);
+            }
+        });
+
+        cboUseForFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thức Uống", "Thức Ăn", "Không rõ lượng dùng", "Khác" }));
+
+        cboUnitBuyFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "thùng", "kí", "bịch", "hộp", "lon", "chai", "bình", "trái", "lóc", "cuộn", "Khác" }));
+        cboUnitBuyFM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboUnitBuyFMActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnFMInformationLayout = new javax.swing.GroupLayout(pnFMInformation);
+        pnFMInformation.setLayout(pnFMInformationLayout);
+        pnFMInformationLayout.setHorizontalGroup(
+            pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFMInformationLayout.createSequentialGroup()
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnFMInformationLayout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtInfoFM, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnFMInformationLayout.createSequentialGroup()
+                        .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel30))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNameFM, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtIDFM)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnFMInformationLayout.createSequentialGroup()
+                        .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel31)
+                            .addComponent(jLabel32))
+                        .addGap(41, 41, 41)
+                        .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSupplierFM, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUnitBuyOtherFM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(txtTypeOtherFM, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cboUseForFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(30, 30, 30))
+        );
+        pnFMInformationLayout.setVerticalGroup(
+            pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFMInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(txtIDFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(txtNameFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(txtInfoFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(cboUseForFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTypeOtherFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUnitBuyOtherFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSupplierFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32))
+                .addContainerGap(152, Short.MAX_VALUE))
+        );
+
+        btnInsertFM.setText("Insert");
+        btnInsertFM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertFMActionPerformed(evt);
+            }
+        });
+        pnFMInformationControl.add(btnInsertFM);
+
+        btnUpdateFM.setText("Update");
+        btnUpdateFM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateFMActionPerformed(evt);
+            }
+        });
+        pnFMInformationControl.add(btnUpdateFM);
+
+        btnDeleteFM.setText("Delete");
+        btnDeleteFM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteFMActionPerformed(evt);
+            }
+        });
+        pnFMInformationControl.add(btnDeleteFM);
+
+        btnResetFM.setText("Reset");
+        btnResetFM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetFMActionPerformed(evt);
+            }
+        });
+        pnFMInformationControl.add(btnResetFM);
+
+        javax.swing.GroupLayout pnFMFormLayout = new javax.swing.GroupLayout(pnFMForm);
+        pnFMForm.setLayout(pnFMFormLayout);
+        pnFMFormLayout.setHorizontalGroup(
+            pnFMFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnFMInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnFMInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        pnFMFormLayout.setVerticalGroup(
+            pnFMFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnFMFormLayout.createSequentialGroup()
+                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnFMInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pnFoodMaterial.add(pnFMForm);
+
+        pnDisplay.add(pnFoodMaterial, "card6");
+
+        javax.swing.GroupLayout pnReceiptNoteLayout = new javax.swing.GroupLayout(pnReceiptNote);
+        pnReceiptNote.setLayout(pnReceiptNoteLayout);
+        pnReceiptNoteLayout.setHorizontalGroup(
+            pnReceiptNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1010, Short.MAX_VALUE)
+        );
+        pnReceiptNoteLayout.setVerticalGroup(
+            pnReceiptNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 525, Short.MAX_VALUE)
+        );
+
+        pnDisplay.add(pnReceiptNote, "card7");
+
+        pnOrder.setLayout(new java.awt.BorderLayout());
+
+        pnOrderSearch.setLayout(new java.awt.GridLayout(1, 0));
+        pnOrderSearch.add(txtSearchOrderTime);
+
+        btnSearchOrderTime.setText("Search by Order Time");
+        btnSearchOrderTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchOrderTimeActionPerformed(evt);
+            }
+        });
+        pnOrderSearch.add(btnSearchOrderTime);
+
+        btnResetOrderData.setText("Reset Data");
+        btnResetOrderData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetOrderDataActionPerformed(evt);
+            }
+        });
+        pnOrderSearch.add(btnResetOrderData);
+
+        pnOrder.add(pnOrderSearch, java.awt.BorderLayout.PAGE_START);
+
+        pnShowOrder.setLayout(new javax.swing.BoxLayout(pnShowOrder, javax.swing.BoxLayout.LINE_AXIS));
+
+        vwOrder.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Order ID", "Customer ID", "Order Table", "Order Time", "Price", "Customer Pay", "Pay Back"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vwOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vwOrderMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(vwOrder);
+        this.vwOrder.setRowHeight(25);
+
+        javax.swing.GroupLayout pnvwOrderLayout = new javax.swing.GroupLayout(pnvwOrder);
+        pnvwOrder.setLayout(pnvwOrderLayout);
+        pnvwOrderLayout.setHorizontalGroup(
+            pnvwOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+        );
+        pnvwOrderLayout.setVerticalGroup(
+            pnvwOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+        );
+
+        pnShowOrder.add(pnvwOrder);
+
+        pnvwOD.setPreferredSize(new java.awt.Dimension(300, 457));
+
+        vwOD.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Order ID", "Food ID", "Quantity"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(vwOD);
+        this.vwOD.setRowHeight(25);
+
+        javax.swing.GroupLayout pnvwODLayout = new javax.swing.GroupLayout(pnvwOD);
+        pnvwOD.setLayout(pnvwODLayout);
+        pnvwODLayout.setHorizontalGroup(
+            pnvwODLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
+        pnvwODLayout.setVerticalGroup(
+            pnvwODLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+        );
+
+        pnShowOrder.add(pnvwOD);
+
+        pnOrder.add(pnShowOrder, java.awt.BorderLayout.CENTER);
+
+        pnDisplay.add(pnOrder, "card8");
+
+        pnShowAdmin.setBorder(javax.swing.BorderFactory.createTitledBorder("Admin Profile"));
+
+        jLabel2.setText("Admin ID");
+
+        jLabel34.setText("Username");
+
+        jLabel35.setText("Password");
+
+        jLabel36.setText("Name");
+
+        btnUpdateAd.setText("Update");
+        pnAdminControl.add(btnUpdateAd);
+
+        btnChangepPassAd.setText("Change Pass");
+        pnAdminControl.add(btnChangepPassAd);
+
+        btnInsertNewAd.setText("Insert New Admin");
+        pnAdminControl.add(btnInsertNewAd);
+
+        javax.swing.GroupLayout pnShowAdminLayout = new javax.swing.GroupLayout(pnShowAdmin);
+        pnShowAdmin.setLayout(pnShowAdminLayout);
+        pnShowAdminLayout.setHorizontalGroup(
+            pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnShowAdminLayout.createSequentialGroup()
+                .addGroup(pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnAdminControl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addGroup(pnShowAdminLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtIDAd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnShowAdminLayout.createSequentialGroup()
+                        .addGroup(pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel36))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNameAd, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtPassAd)))
+                    .addGroup(pnShowAdminLayout.createSequentialGroup()
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtUsernameAd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(680, Short.MAX_VALUE))
+        );
+        pnShowAdminLayout.setVerticalGroup(
+            pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnShowAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtIDAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(txtUsernameAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(txtPassAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnShowAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(txtNameAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnAdminControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(318, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnProfileLayout = new javax.swing.GroupLayout(pnProfile);
+        pnProfile.setLayout(pnProfileLayout);
+        pnProfileLayout.setHorizontalGroup(
+            pnProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnShowAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnProfileLayout.setVerticalGroup(
+            pnProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnShowAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnDisplay.add(pnProfile, "card9");
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -157,11 +1687,15 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane8)
+            .addComponent(pnShowControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane8)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnShowControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,6 +1710,598 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_miExitActionPerformed
+
+    private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
+        if(this.btnEmployee.isSelected())
+        {
+            this.btnEmployee.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnCustomer.setSelected(false);
+            this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFood.setSelected(false);
+            this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFoodMaterial.setSelected(false);
+            this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnReceiptNote.setSelected(false);
+            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnOrder.setSelected(false);
+            this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnProfile.setSelected(false);
+            this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+            
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card3");
+            
+            initDatavwEmployee();
+            setEmployeeFormControl(false);
+        }
+        else
+        {
+            this.btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card2");
+        }
+    }//GEN-LAST:event_btnEmployeeActionPerformed
+
+    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
+        if(this.btnCustomer.isSelected())
+        {
+            this.btnCustomer.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnEmployee.setSelected(false);
+            this.btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFood.setSelected(false);
+            this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFoodMaterial.setSelected(false);
+            this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnReceiptNote.setSelected(false);
+            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnOrder.setSelected(false);
+            this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnProfile.setSelected(false);
+            this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+            
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card4");
+            
+            initDatavwCustomer();
+            setCustomerControl(false);
+        }
+        else
+        {
+            this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card2");
+        }
+    }//GEN-LAST:event_btnCustomerActionPerformed
+
+    private void btnSearchEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmployeeNameActionPerformed
+        String dkEmployeeName = JOptionPane.showInputDialog("Input an employee name want to search");
+//        sorterEmployee.setRowFilter(RowFilter.regexFilter(dkEmployeeName.trim(), 3));
+        modelEmployee.getDataVector().removeAllElements();
+        modelEmployee.fireTableDataChanged();
+        for (Employee d:dsEmployee)
+        {
+            if (d.getName().toUpperCase().contains(dkEmployeeName.trim().toUpperCase()) || d.getName().toLowerCase().contains(dkEmployeeName.trim().toLowerCase()))
+            {
+                modelEmployee.addRow(d.toVector());
+            }
+        }
+    }//GEN-LAST:event_btnSearchEmployeeNameActionPerformed
+
+    private void btnResetEmployeeDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetEmployeeDataActionPerformed
+//        String dkEmployeeName = "(?i)" + "";
+//        sorterEmployee.setRowFilter(RowFilter.regexFilter(dkEmployeeName.trim(), 3));
+        modelEmployee.getDataVector().removeAllElements();
+        modelEmployee.fireTableDataChanged();
+        for (Employee d:dsEmployee)
+        {
+            modelEmployee.addRow(d.toVector());
+        }
+    }//GEN-LAST:event_btnResetEmployeeDataActionPerformed
+
+    private void btnSearchCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerNameActionPerformed
+        String dkCustomerName = JOptionPane.showInputDialog("Input an customer name want to search");
+//        sorterCustomer.setRowFilter(RowFilter.regexFilter(dkCustomerName.trim(), 1));
+        modelCustomer.getDataVector().removeAllElements();
+        modelCustomer.fireTableDataChanged();
+        for (Customer d:dsCustomer)
+        {
+            if (d.getName().toUpperCase().contains(dkCustomerName.trim().toUpperCase()) || d.getName().toLowerCase().contains(dkCustomerName.trim().toLowerCase()))
+            {
+                modelCustomer.addRow(d.toVector());
+            }
+        }
+    }//GEN-LAST:event_btnSearchCustomerNameActionPerformed
+
+    private void btnResetCustomerDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetCustomerDataActionPerformed
+//        String dkCustomerName = "(?i)" + "";
+//        sorterCustomer.setRowFilter(RowFilter.regexFilter(dkCustomerName.trim(), 1));
+        modelCustomer.getDataVector().removeAllElements();
+        modelCustomer.fireTableDataChanged();
+        for (Customer d:dsCustomer)
+        {
+            modelCustomer.addRow(d.toVector());
+        }
+    }//GEN-LAST:event_btnResetCustomerDataActionPerformed
+
+    private void vwCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwCustomerMouseClicked
+        int row = vwCustomer.getSelectedRow();
+        
+        setCustomerControl(false);
+        if(row >= 0)
+        {
+            txtIDCus.setText(modelCustomer.getValueAt(row, 0).toString());
+            txtNameCus.setText(modelCustomer.getValueAt(row, 1).toString());
+            txtPhoneCus.setText(modelCustomer.getValueAt(row, 2).toString());
+            txtEmailCus.setText(modelCustomer.getValueAt(row, 3).toString());
+            txtDiscountCus.setText(modelCustomer.getValueAt(row, 4).toString());
+        }
+    }//GEN-LAST:event_vwCustomerMouseClicked
+
+    private void btnInsertEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertEmpActionPerformed
+        
+    }//GEN-LAST:event_btnInsertEmpActionPerformed
+
+    private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateEmpActionPerformed
+
+    private void btnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEmpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteEmpActionPerformed
+
+    private void btnResetEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetEmpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetEmpActionPerformed
+
+    private void btnInsertCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertCusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInsertCusActionPerformed
+
+    private void btnUpdateCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateCusActionPerformed
+
+    private void btnDeleteCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteCusActionPerformed
+
+    private void btnResetCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetCusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetCusActionPerformed
+
+    private void btnFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFoodActionPerformed
+        if(this.btnFood.isSelected())
+        {
+            this.btnFood.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnCustomer.setSelected(false);
+            this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnEmployee.setSelected(false);
+            this.btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFoodMaterial.setSelected(false);
+            this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnReceiptNote.setSelected(false);
+            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnOrder.setSelected(false);
+            this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnProfile.setSelected(false);
+            this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+            
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card5");
+            
+            initDatavwFood();
+            initDatavwFD();
+            setFoodControl(false);
+            setFDControl(false);
+        }
+        else
+        {
+            this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card2");
+        }
+        CardLayout cl = (CardLayout) this.pnFoodFormInput.getLayout();
+        cl.show(pnFoodFormInput, "card2");
+    }//GEN-LAST:event_btnFoodActionPerformed
+
+    private void btnFoodMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFoodMaterialActionPerformed
+        if(this.btnFoodMaterial.isSelected())
+        {
+            this.btnFoodMaterial.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnCustomer.setSelected(false);
+            this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnEmployee.setSelected(false);
+            this.btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFood.setSelected(false);
+            this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnReceiptNote.setSelected(false);
+            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnOrder.setSelected(false);
+            this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnProfile.setSelected(false);
+            this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+            
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card6");
+            
+            initDatavwFM();
+            setFMControl(false);
+        }
+        else
+        {
+            this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card2");
+        }
+    }//GEN-LAST:event_btnFoodMaterialActionPerformed
+
+    private void vwFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwFoodMouseClicked
+        int row = vwFood.getSelectedRow();
+        
+        CardLayout cl = (CardLayout) this.pnFoodFormInput.getLayout();
+        cl.show(pnFoodFormInput, "card2");
+        
+        setFoodControl(false);
+        if(row >= 0)
+        {
+            txtIDFood.setText(modelFood.getValueAt(row, 0).toString());
+            txtNameFood.setText(modelFood.getValueAt(row, 1).toString());
+            txtInfoFood.setText(modelFood.getValueAt(row, 2).toString());
+            txtPriceFood.setText(modelFood.getValueAt(row, 3).toString());
+            cboTypeFood.setSelectedIndex(Byte.parseByte(modelFood.getValueAt(row, 4).toString()));
+            initDatavwFood(txtIDFood.getText().trim());
+        }
+    }//GEN-LAST:event_vwFoodMouseClicked
+
+    private void vwFDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwFDMouseClicked
+        int row = vwFD.getSelectedRow();
+        
+        CardLayout cl = (CardLayout) this.pnFoodFormInput.getLayout();
+        cl.show(pnFoodFormInput, "card3");
+        
+        setFDControl(false);
+        if(row >= 0)
+        {
+            txtIDFD.setText(modelFD.getValueAt(row, 0).toString());
+            txtFoodIDFD.setText(modelFD.getValueAt(row, 1).toString());
+            for(Food d:dsFood)
+            {
+                if(d.getFood_id().equals(modelFD.getValueAt(row, 1).toString()))
+                {
+                    txtFoodNameFD.setText(d.getName());
+                    break;
+                }
+            }
+            txtFMIDFD.setText(modelFD.getValueAt(row, 2).toString());
+            for(FoodMaterial d:dsFM)
+            {
+                if(d.getFm_id().equals(modelFD.getValueAt(row, 2).toString()))
+                {
+                    txtFMNameFD.setText(d.getName());
+                    break;
+                }
+            }
+            txtQuanFD.setText(modelFD.getValueAt(row, 3).toString());
+            txtUnitUseFD.setText(modelFD.getValueAt(row, 4).toString());
+        }
+        
+    }//GEN-LAST:event_vwFDMouseClicked
+
+    private void btnResetFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetFoodActionPerformed
+
+    private void btnDeleteFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteFoodActionPerformed
+
+    private void btnUpdateFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateFoodActionPerformed
+
+    private void btnResetFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetFDActionPerformed
+
+    private void btnDeleteFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteFDActionPerformed
+
+    private void btnUpdateFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateFDActionPerformed
+
+    private void btnSearchFMNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFMNameActionPerformed
+        String dkFMName = JOptionPane.showInputDialog("Input an food material name want to search");
+//        sorterFM.setRowFilter(RowFilter.regexFilter(dkFMName.trim(), 1));
+        modelFM.getDataVector().removeAllElements();
+        modelFM.fireTableDataChanged();
+        for (FoodMaterial d:dsFM)
+        {
+            if (d.getName().toUpperCase().contains(dkFMName.trim().toUpperCase()) || d.getName().toLowerCase().contains(dkFMName.trim().toLowerCase()))
+            {
+                modelFM.addRow(d.toVector());
+            }
+        }
+    }//GEN-LAST:event_btnSearchFMNameActionPerformed
+
+    private void btnResetFMDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFMDataActionPerformed
+//        String dkFMName = "(?i)" + "";
+//        sorterFM.setRowFilter(RowFilter.regexFilter(dkFMName.trim(), 1));
+        modelFM.getDataVector().removeAllElements();
+        modelFM.fireTableDataChanged();
+        for (FoodMaterial d:dsFM)
+        {
+            modelFM.addRow(d.toVector());
+        }
+    }//GEN-LAST:event_btnResetFMDataActionPerformed
+
+    private void vwFMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwFMMouseClicked
+        int row = vwFM.getSelectedRow();
+
+        setFMControl(false);
+        if(row >= 0)
+        {
+            txtIDFM.setEnabled(false);
+            txtIDFM.setText(modelFM.getValueAt(row, 0).toString());
+            txtNameFM.setText(modelFM.getValueAt(row, 1).toString());
+            txtInfoFM.setText(modelFM.getValueAt(row, 2).toString());
+            switch(Integer.parseInt(modelFM.getValueAt(row, 3).toString()))
+            {
+                case 0:
+                    cboUseForFM.setSelectedIndex(0);
+                    break;
+                case 1:
+                    cboUseForFM.setSelectedIndex(1);
+                    break;
+                case 2:
+                    cboUseForFM.setSelectedIndex(2);
+                    break;
+                case 3:
+                    cboUseForFM.setSelectedIndex(3);
+            }
+            cboTypeFM.setSelectedItem(modelFM.getValueAt(row, 4).toString());
+            cboUnitBuyFM.setSelectedItem(modelFM.getValueAt(row, 5).toString());
+            txtSupplierFM.setText(modelFM.getValueAt(row, 6).toString());
+        }
+    }//GEN-LAST:event_vwFMMouseClicked
+
+    private void txtQuanFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuanFDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuanFDActionPerformed
+
+    private void btnInsertFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertFMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInsertFMActionPerformed
+
+    private void btnUpdateFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateFMActionPerformed
+
+    private void btnDeleteFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteFMActionPerformed
+
+    private void btnResetFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetFMActionPerformed
+
+    private void cboTypeFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTypeFMActionPerformed
+        if(cboTypeFM.getSelectedItem().equals("Khác"))
+        {
+            txtTypeOtherFM.setVisible(true);
+        }
+        else
+        {
+            txtTypeOtherFM.setVisible(false);
+        }
+    }//GEN-LAST:event_cboTypeFMActionPerformed
+
+    private void cboUnitBuyFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboUnitBuyFMActionPerformed
+        if(cboUnitBuyFM.getSelectedItem().equals("Khác"))
+        {
+            txtUnitBuyOtherFM.setVisible(true);
+        }
+        else
+        {
+            txtUnitBuyOtherFM.setVisible(false);
+        }
+    }//GEN-LAST:event_cboUnitBuyFMActionPerformed
+
+    private void vwEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwEmployeeMouseClicked
+        int row = vwEmployee.getSelectedRow();
+
+        setEmployeeFormControl(false);
+        if(row >= 0)
+        {
+            txtIDEmp.setEnabled(false);
+            txtIDEmp.setText(modelEmployee.getValueAt(row, 0).toString());
+            txtUsernameEmp.setEnabled(false);
+            txtUsernameEmp.setText(modelEmployee.getValueAt(row, 1).toString());
+            txtNameEmp.setText(modelEmployee.getValueAt(row, 3).toString());
+            txtBirthEmp.setText(modelEmployee.getValueAt(row, 4).toString());
+            txtStartDayEmp.setText(modelEmployee.getValueAt(row, 5).toString());
+            txtHourWageEmp.setText(modelEmployee.getValueAt(row, 6).toString());
+            txtAddrEmp.setText(modelEmployee.getValueAt(row, 7).toString());
+            txtEmailEmp.setText(modelEmployee.getValueAt(row, 8).toString());
+            txtPhoneEmp.setText(modelEmployee.getValueAt(row, 9).toString());
+            cboRoleEmployee.setSelectedIndex(Integer.parseInt(modelEmployee.getValueAt(row, 10).toString()) - 1);
+        }
+    }//GEN-LAST:event_vwEmployeeMouseClicked
+
+    private void btnSearchFoodNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFoodNameActionPerformed
+        String dkFoodName = JOptionPane.showInputDialog("Input a food name want to search");
+//        sorterFood.setRowFilter(RowFilter.regexFilter(dkCustomerName.trim(), 1));
+        modelFood.getDataVector().removeAllElements();
+        modelFood.fireTableDataChanged();
+        for (Food d:dsFood)
+        {
+            if (d.getName().toUpperCase().contains(dkFoodName.trim().toUpperCase()) || d.getName().toLowerCase().contains(dkFoodName.trim().toLowerCase()))
+            {
+                modelFood.addRow(d.toVector());
+            }
+        }
+    }//GEN-LAST:event_btnSearchFoodNameActionPerformed
+
+    private void btnResetFoodDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFoodDataActionPerformed
+//        String dkCustomerName = "(?i)" + "";
+//        sorterFood.setRowFilter(RowFilter.regexFilter(dkCustomerName.trim(), 1));
+        modelFood.getDataVector().removeAllElements();
+        modelFood.fireTableDataChanged();
+        for (Food d:dsFood)
+        {
+            modelFood.addRow(d.toVector());
+        }
+        modelFD.getDataVector().removeAllElements();
+        modelFD.fireTableDataChanged();
+        for (FoodDetails d:dsFD)
+        {
+            modelFD.addRow(d.toVector());
+        }
+    }//GEN-LAST:event_btnResetFoodDataActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        if(this.btnProfile.isSelected())
+        {
+            this.btnProfile.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnCustomer.setSelected(false);
+            this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnEmployee.setSelected(false);
+            this.btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFood.setSelected(false);
+            this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFoodMaterial.setSelected(false);
+            this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnReceiptNote.setSelected(false);
+            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnOrder.setSelected(false);
+            this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+            
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card9");
+            
+            initDataThisAdmin();
+            setAdControl(false);
+        }
+        else
+        {
+            this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card2");
+        }
+    }//GEN-LAST:event_btnProfileActionPerformed
+
+    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
+        if(btnOrder.isSelected())
+        {
+            this.btnOrder.setBackground(new java.awt.Color(84, 96, 153));
+            
+            this.btnCustomer.setSelected(false);
+            this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnEmployee.setSelected(false);
+            this.btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFood.setSelected(false);
+            this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnFoodMaterial.setSelected(false);
+            this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnReceiptNote.setSelected(false);
+            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+            this.btnProfile.setSelected(false);
+            this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+            
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card8");
+            
+            initDatavwOrder();
+//            txtSearchOrderTime.setSize(0, 0);
+//            btnSearchOrderTime.setText("Search by Order Time");
+        }
+        else
+        {
+            this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
+            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
+            cl.show(pnDisplay, "card2");
+        }
+    }//GEN-LAST:event_btnOrderActionPerformed
+
+    private void vwOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwOrderMouseClicked
+        int row = vwOrder.getSelectedRow();
+        
+        if(row >= 0)
+        {
+            initDatavwOD(modelOrder.getValueAt(row, 0).toString());
+        }
+    }//GEN-LAST:event_vwOrderMouseClicked
+
+    private void btnInsertFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertFoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInsertFoodActionPerformed
+
+    private void btnInsertFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertFDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInsertFDActionPerformed
+
+    private void btnSearchOrderTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchOrderTimeActionPerformed
+        String dkOrderTime, dky, dkm, dkd;
+        dkOrderTime = txtSearchOrderTime.getText().trim();
+        try
+        {
+            if(dkOrderTime.length() == 0 || dkOrderTime.length() > 10)
+            {
+                JOptionPane.showMessageDialog(null, "Time is not valid!\nHint: yyyy-MM-dd");
+                requestFocus();
+                return;
+            }
+            dkm = dkOrderTime.substring(5, 7);
+            dkd = dkOrderTime.substring(8, 10);
+            dky = dkOrderTime.substring(0, 4);
+            if(Integer.parseInt(dky) < 0 || Integer.parseInt(dkm) < 0 || Integer.parseInt(dkd) < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Time is not valid!\nHint: yyyy-MM-dd");
+                requestFocus();
+                return;
+            }
+            if(dkOrderTime.charAt(4) != '-' || dkOrderTime.charAt(7) != '-')
+            {
+                JOptionPane.showMessageDialog(null, "Time is not valid!\nHint: yyyy-MM-dd");
+                requestFocus();
+                return;
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Time is not valid!\nHint: yyyy-MM-dd");
+            requestFocus();
+            return;
+        }
+        
+        modelOrder.getDataVector().removeAllElements();
+        modelOrder.fireTableDataChanged();
+        for (Order d:dsOrder)
+        {
+            LocalDate timeori = d.getOrdertime().toLocalDate();
+            if(timeori.getYear() == Integer.parseInt(dky) && timeori.getMonthValue() == (Integer.parseInt(dkm) - 1) && timeori.getDayOfMonth() == Integer.parseInt(dkd))
+            {
+                modelFood.addRow(d.toVector());
+            }
+        }
+    }//GEN-LAST:event_btnSearchOrderTimeActionPerformed
+
+    private void btnResetOrderDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetOrderDataActionPerformed
+        modelOrder.getDataVector().removeAllElements();
+        modelOrder.fireTableDataChanged();
+        for(Order d:dsOrder)
+        {
+            modelOrder.addRow(d.toVector());
+        }
+        modelOD.getDataVector().removeAllElements();
+        modelOD.fireTableDataChanged();
+    }//GEN-LAST:event_btnResetOrderDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,18 +2339,190 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChangepPassAd;
+    private javax.swing.JToggleButton btnCustomer;
+    private javax.swing.JButton btnDeleteCus;
+    private javax.swing.JButton btnDeleteEmp;
+    private javax.swing.JButton btnDeleteFD;
+    private javax.swing.JButton btnDeleteFM;
+    private javax.swing.JButton btnDeleteFood;
+    private javax.swing.JToggleButton btnEmployee;
+    private javax.swing.JToggleButton btnFood;
+    private javax.swing.JToggleButton btnFoodMaterial;
+    private javax.swing.JButton btnInsertCus;
+    private javax.swing.JButton btnInsertEmp;
+    private javax.swing.JButton btnInsertFD;
+    private javax.swing.JButton btnInsertFM;
+    private javax.swing.JButton btnInsertFood;
+    private javax.swing.JButton btnInsertNewAd;
+    private javax.swing.JToggleButton btnOrder;
+    private javax.swing.JToggleButton btnProfile;
+    private javax.swing.JToggleButton btnReceiptNote;
+    private javax.swing.JButton btnResetCus;
+    private javax.swing.JButton btnResetCustomerData;
+    private javax.swing.JButton btnResetEmp;
+    private javax.swing.JButton btnResetEmployeeData;
+    private javax.swing.JButton btnResetFD;
+    private javax.swing.JButton btnResetFM;
+    private javax.swing.JButton btnResetFMData;
+    private javax.swing.JButton btnResetFood;
+    private javax.swing.JButton btnResetFoodData;
+    private javax.swing.JButton btnResetOrderData;
+    private javax.swing.JToggleButton btnSalaryNote;
+    private javax.swing.JButton btnSearchCustomerName;
+    private javax.swing.JButton btnSearchEmployeeName;
+    private javax.swing.JButton btnSearchFMName;
+    private javax.swing.JButton btnSearchFoodName;
+    private javax.swing.JButton btnSearchOrderTime;
+    private javax.swing.JButton btnUpdateAd;
+    private javax.swing.JButton btnUpdateCus;
+    private javax.swing.JButton btnUpdateEmp;
+    private javax.swing.JButton btnUpdateFD;
+    private javax.swing.JButton btnUpdateFM;
+    private javax.swing.JButton btnUpdateFood;
+    private javax.swing.JComboBox<String> cboRoleEmployee;
+    private javax.swing.JComboBox<String> cboTypeFM;
+    private javax.swing.JComboBox<String> cboTypeFood;
+    private javax.swing.JComboBox<String> cboUnitBuyFM;
+    private javax.swing.JComboBox<String> cboUseForFM;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JTabbedPane jTabbedPane8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JMenuItem miExit;
     private javax.swing.JMenuItem miLogout;
+    private javax.swing.JPanel pnAdminControl;
+    private javax.swing.JPanel pnBlank;
+    private javax.swing.JPanel pnCustomer;
+    private javax.swing.JPanel pnCustomerForm;
+    private javax.swing.JPanel pnCustomerInformation;
+    private javax.swing.JPanel pnCustomerInformationControl;
+    private javax.swing.JPanel pnCustomerSearch;
+    private javax.swing.JPanel pnDisplay;
+    private javax.swing.JPanel pnEmployee;
+    private javax.swing.JPanel pnEmployeeForm;
+    private javax.swing.JPanel pnEmployeeInformation;
+    private javax.swing.JPanel pnEmployeeInformationControl;
+    private javax.swing.JPanel pnEmployeeSearch;
+    private javax.swing.JPanel pnFDInformation;
+    private javax.swing.JPanel pnFDInformationControl;
+    private javax.swing.JPanel pnFMForm;
+    private javax.swing.JPanel pnFMInformation;
+    private javax.swing.JPanel pnFMInformationControl;
+    private javax.swing.JPanel pnFMSearch;
+    private javax.swing.JPanel pnFood;
+    private javax.swing.JPanel pnFoodDetailsFormCL;
+    private javax.swing.JPanel pnFoodForm;
+    private javax.swing.JPanel pnFoodFormCL;
+    private javax.swing.JPanel pnFoodFormInput;
+    private javax.swing.JPanel pnFoodInformation;
+    private javax.swing.JPanel pnFoodInformationControl;
+    private javax.swing.JPanel pnFoodMaterial;
+    private javax.swing.JPanel pnFoodSearch;
+    private javax.swing.JPanel pnInsertFood;
+    private javax.swing.JPanel pnOrder;
+    private javax.swing.JPanel pnOrderSearch;
+    private javax.swing.JPanel pnProfile;
+    private javax.swing.JPanel pnReceiptNote;
+    private javax.swing.JPanel pnSalaryNote;
+    private javax.swing.JPanel pnShowAdmin;
+    private javax.swing.JPanel pnShowControl;
+    private javax.swing.JPanel pnShowCustomer;
+    private javax.swing.JPanel pnShowEmployee;
+    private javax.swing.JPanel pnShowFM;
+    private javax.swing.JPanel pnShowFood;
+    private javax.swing.JPanel pnShowOrder;
+    private javax.swing.JPanel pnvw;
+    private javax.swing.JPanel pnvwFD;
+    private javax.swing.JPanel pnvwFood;
+    private javax.swing.JPanel pnvwOD;
+    private javax.swing.JPanel pnvwOrder;
+    private javax.swing.JTextField txtAddrEmp;
+    private javax.swing.JTextField txtBirthEmp;
+    private javax.swing.JTextField txtDiscountCus;
+    private javax.swing.JTextField txtEmailCus;
+    private javax.swing.JTextField txtEmailEmp;
+    private javax.swing.JTextField txtFMIDFD;
+    private javax.swing.JTextField txtFMNameFD;
+    private javax.swing.JTextField txtFoodIDFD;
+    private javax.swing.JTextField txtFoodNameFD;
+    private javax.swing.JTextField txtHourWageEmp;
+    private javax.swing.JTextField txtIDAd;
+    private javax.swing.JTextField txtIDCus;
+    private javax.swing.JTextField txtIDEmp;
+    private javax.swing.JTextField txtIDFD;
+    private javax.swing.JTextField txtIDFM;
+    private javax.swing.JTextField txtIDFood;
+    private javax.swing.JTextField txtInfoFM;
+    private javax.swing.JTextField txtInfoFood;
+    private javax.swing.JTextField txtNameAd;
+    private javax.swing.JTextField txtNameCus;
+    private javax.swing.JTextField txtNameEmp;
+    private javax.swing.JTextField txtNameFM;
+    private javax.swing.JTextField txtNameFood;
+    private javax.swing.JPasswordField txtPassAd;
+    private javax.swing.JTextField txtPhoneCus;
+    private javax.swing.JTextField txtPhoneEmp;
+    private javax.swing.JTextField txtPriceFood;
+    private javax.swing.JTextField txtQuanFD;
+    private javax.swing.JTextField txtSearchOrderTime;
+    private javax.swing.JTextField txtStartDayEmp;
+    private javax.swing.JTextField txtSupplierFM;
+    private javax.swing.JTextField txtTypeOtherFM;
+    private javax.swing.JTextField txtUnitBuyOtherFM;
+    private javax.swing.JTextField txtUnitUseFD;
+    private javax.swing.JTextField txtUsernameAd;
+    private javax.swing.JTextField txtUsernameEmp;
+    private javax.swing.JTable vwCustomer;
+    private javax.swing.JTable vwEmployee;
+    private javax.swing.JTable vwFD;
+    private javax.swing.JTable vwFM;
+    private javax.swing.JTable vwFood;
+    private javax.swing.JTable vwOD;
+    private javax.swing.JTable vwOrder;
     // End of variables declaration//GEN-END:variables
 
     private void setFrameIcon() {
@@ -236,4 +2534,206 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
         this.setIconImage(scaled);
     }
+
+    //employee
+    DefaultTableModel modelEmployee;
+    List<Employee> dsEmployee;
+    TableRowSorter<TableModel> sorterEmployee;
+    private void initDatavwEmployee() {
+        modelEmployee = (DefaultTableModel) vwEmployee.getModel();
+        dsEmployee = EmployeeDAO.getList();
+        modelEmployee.setRowCount(0);
+        for(Employee d:dsEmployee)
+        {
+            if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+            {
+                modelEmployee.addRow(d.toVector());
+            }
+        }
+        
+        sorterEmployee = (TableRowSorter<TableModel>) vwEmployee.getRowSorter();
+    }
+
+    private void setEmployeeFormControl(boolean b) {
+        txtNameEmp.setEnabled(b);
+        txtBirthEmp.setEnabled(b);
+        txtStartDayEmp.setEnabled(b);
+        txtHourWageEmp.setEnabled(b);
+        txtAddrEmp.setEnabled(b);
+        txtEmailEmp.setEnabled(b);
+        txtPhoneEmp.setEnabled(b);
+        
+        txtIDEmp.setEnabled(false);
+        txtUsernameEmp.setEnabled(false);
+    }
+
+    //customer
+    DefaultTableModel modelCustomer;
+    List<Customer> dsCustomer;
+    TableRowSorter<TableModel> sorterCustomer;
+    private void initDatavwCustomer() {
+        modelCustomer = (DefaultTableModel) vwCustomer.getModel();
+        dsCustomer = CustomerDAO.getList();
+        modelCustomer.setRowCount(0);
+        for(Customer d:dsCustomer)
+        {
+            modelCustomer.addRow(d.toVector());
+        }
+        
+        sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
+    }
+
+    private void setCustomerControl(boolean b) {
+        txtNameCus.setEnabled(b);
+        txtPhoneCus.setEnabled(b);
+        txtEmailCus.setEnabled(b);
+        txtDiscountCus.setEnabled(b);
+        
+        txtIDCus.setEnabled(false);
+    }
+
+    //food
+    DefaultTableModel modelFood;
+    List<Food> dsFood;
+    TableRowSorter<TableModel> sorterFood;
+    private void initDatavwFood() {
+        modelFood = (DefaultTableModel) vwFood.getModel();
+        dsFood = FoodDAO.getList();
+        modelFood.setRowCount(0);
+        for(Food d:dsFood)
+        {
+            modelFood.addRow(d.toVector());
+        }
+        
+        sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
+    }
+
+    private void setFoodControl(boolean b) {
+        txtNameFood.setEnabled(b);
+        txtInfoFood.setEnabled(b);
+        txtPriceFood.setEnabled(b);
+        cboTypeFood.setEnabled(b);
+        
+        txtIDFood.setEnabled(false);
+    }
+
+    DefaultTableModel modelFD;
+    List<FoodDetails> dsFD;
+    TableRowSorter<TableModel> sorterFD;
+    private void initDatavwFD() {
+        modelFD = (DefaultTableModel) vwFD.getModel();
+        dsFD = FoodDetailsDAO.getList();
+        modelFD.setRowCount(0);
+        for(FoodDetails d:dsFD)
+        {
+            modelFD.addRow(d.toVector());
+        }
+        
+        sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
+    }
+
+    private void initDatavwFood(String txtIDFood) {
+//        sorterFD.setRowFilter(RowFilter.regexFilter(txtIDFood, 1));
+        modelFD.getDataVector().removeAllElements();
+        modelFD.fireTableDataChanged();
+        for (FoodDetails d:dsFD)
+        {
+            if (d.getFood_id().equals(txtIDFood))
+            {
+                modelFD.addRow(d.toVector());
+            }
+        }
+    }
+
+    private void setFDControl(boolean b) {
+        txtFoodNameFD.setEnabled(b);
+        txtFMNameFD.setEnabled(b);
+        txtQuanFD.setEnabled(b);
+        txtUnitUseFD.setEnabled(b);
+        
+        txtIDFD.setEnabled(false);
+        txtFoodIDFD.setEnabled(false);
+        txtFMIDFD.setEnabled(false);
+    }
+
+    DefaultTableModel modelFM;
+    List<FoodMaterial> dsFM;
+    TableRowSorter<TableModel> sorterFM;
+    private void initDatavwFM() {
+        modelFM = (DefaultTableModel) vwFM.getModel();
+        modelFM.setRowCount(0);
+        dsFM = FoodMaterialDAO.getList();
+        for(FoodMaterial d:dsFM)
+        {
+            modelFM.addRow(d.toVector());
+        }
+        
+        sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
+    }
+
+    private void setFMControl(boolean b) {
+        txtNameFM.setEnabled(b);
+        txtInfoFM.setEnabled(b);
+        cboUseForFM.setEnabled(b);
+        cboTypeFM.setEnabled(b);
+        cboUnitBuyFM.setEnabled(b);
+        txtSupplierFM.setEnabled(b);
+        
+        txtIDFM.setEnabled(false);
+        txtUnitBuyOtherFM.setVisible(false);
+        txtTypeOtherFM.setVisible(false);
+    }
+
+    private void initDataThisAdmin() {
+        txtIDAd.setText(this.a.getAd_id());
+        txtUsernameAd.setText(this.a.getUsername());
+        txtPassAd.setText(this.a.getPass());
+        txtNameAd.setText(this.a.getName());
+    }
+    
+    private void setAdControl(boolean b) {
+        txtUsernameAd.setEnabled(b);
+        
+        txtIDAd.setEnabled(false);
+        txtPassAd.setEnabled(false);
+        txtNameAd.setEnabled(false);
+    }
+
+    DefaultTableModel modelOrder;
+    DefaultTableModel modelOD;
+    List<Order> dsOrder;
+    List<OrderDetails> dsOD;
+    TableRowSorter<TableModel> sorterOrder;
+    TableRowSorter<TableModel> sorterOD;
+    private void initDatavwOrder() {
+        modelOrder = (DefaultTableModel) vwOrder.getModel();
+        modelOrder.setRowCount(0);
+        modelOD = (DefaultTableModel) vwOD.getModel();
+        modelOD.setRowCount(0);
+        dsOrder = OrderDAO.getList();
+        dsOD = OrderDetailsDAO.getList();
+        for(Order d:dsOrder)
+        {
+            modelOrder.addRow(d.toVector());
+        }
+        
+        sorterOrder = (TableRowSorter<TableModel>) vwOrder.getRowSorter();
+    }
+    
+    private void initDatavwOD(String order_id)
+    {
+//        modelOD = (DefaultTableModel) vwOD.getModel();
+//        modelOD.setRowCount(0);
+        modelOD.getDataVector().removeAllElements();
+        modelOD.fireTableDataChanged();
+        //dsOD = OrderDetailsDAO.getList();
+        for(OrderDetails d:dsOD)
+        {
+            if(d.getOrder_id().equals(order_id))
+            {
+                modelOD.addRow(d.toVector());
+            }
+        }
+    }
+    
 }
