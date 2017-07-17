@@ -40,6 +40,7 @@ public class Employee {
         v.add(this.name);
         v.add(this.birth);
         v.add(this.startday);
+        v.add(this.hour_wage);
         v.add(this.addr);
         v.add(this.email);
         v.add(this.phone);
