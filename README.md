@@ -29,7 +29,11 @@ Note:
 
 (*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
     
-  - FrAdminWorkspace chưa submit source code (thành viên đảm nhiệm nhớ ghi rõ mô tả và tiến trình phát triển mã nguồn sau khi update code)
+  - FrAdminWorkspace(đã submit code):
+    + đã xong: đăng nhập đăng xuất Admin
+    + đã xong: Phân chia cửa sổ
+    + đã xong: các cửa sổ quản lý Employee, Customer, Food, Food Material, Receipt Note, Order, Profile Admin(đã bao gồm tìm kiếm đơn giản). Cụ thể có thể nhập xuất, thay đổi dữ liệu
+    
   
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library)
   
