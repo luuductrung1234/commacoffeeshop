@@ -48,7 +48,7 @@ Note:
 # Admin Workspace Frame
   ---update soon---
   
-  ![alt text]()
+  ![alt text](commacoffeeshop/admin_workspace.png)
   
   
 # Audit Frame
