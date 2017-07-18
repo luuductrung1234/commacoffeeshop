@@ -61,6 +61,7 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
         lbPriceperunitState = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtQuan = new javax.swing.JTextField();
+        lbQuantityState = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Edit Invoice's Item");
@@ -86,7 +87,7 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
         jScrollPane1.setViewportView(txtNote);
 
         pnControl.setBackground(new java.awt.Color(102, 102, 102));
-        pnControl.setLayout(new java.awt.GridLayout());
+        pnControl.setLayout(new java.awt.GridLayout(1, 0));
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +110,7 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
         });
         pnControl.add(btnCancel);
 
+        lbPriceperunitState.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lbPriceperunitState.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel1.setText("Quantity:");
@@ -118,6 +120,9 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
                 txtQuanActionPerformed(evt);
             }
         });
+
+        lbQuantityState.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbQuantityState.setForeground(new java.awt.Color(204, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +144,9 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
                             .addComponent(txtQuan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(txtPriceperunit, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbPriceperunitState, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbPriceperunitState, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                            .addComponent(lbQuantityState, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,10 +154,11 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lbFoodMaterialName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtPriceperunit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbPriceperunitState, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbPriceperunitState, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtPriceperunit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
@@ -160,7 +168,8 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txtQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbQuantityState, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -172,25 +181,48 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
+        float priceperunit;
+        int quan;
         try{
-            float priceperunit = Float.parseFloat(this.txtPriceperunit.getText().trim());
-            int quan = Integer.parseInt(this.txtQuan.getText().trim());
-            String note = this.txtNote.getText().trim();
-            
-            this.parent.cur_invoice.getSecond().get(this.selectedrow).setItem_price(priceperunit);
-            this.parent.cur_invoice.getSecond().get(this.selectedrow).setQuan(quan);
-            this.parent.cur_invoice.getSecond().get(this.selectedrow).setNote(note);
-            
-            this.parent.ShowCurrentInvoice();
-            
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            this.dispose();
+            priceperunit = Float.parseFloat(this.txtPriceperunit.getText().trim());
         }catch(NumberFormatException ex){
             ex.getStackTrace();
             this.lbPriceperunitState.setText("!");
             this.txtPriceperunit.requestFocus();
             return;
         }
+        
+        try{
+            quan = Integer.parseInt(this.txtQuan.getText().trim());
+        }catch(NumberFormatException ex){
+            ex.getStackTrace();
+            this.lbQuantityState.setText("!");
+            this.txtQuan.requestFocus();
+            return;
+        }
+        
+        if(priceperunit < 0){
+            this.lbPriceperunitState.setText("!");
+            this.txtPriceperunit.requestFocus();
+            return;
+        }
+        
+        if(quan < 0){
+            this.lbQuantityState.setText("!");
+            this.txtQuan.requestFocus();
+            return;
+        }
+        
+        String note = this.txtNote.getText().trim();
+        
+        this.parent.cur_invoice.getSecond().get(this.selectedrow).setItem_price(priceperunit);
+        this.parent.cur_invoice.getSecond().get(this.selectedrow).setQuan(quan);
+        this.parent.cur_invoice.getSecond().get(this.selectedrow).setNote(note);
+        
+        this.parent.ShowCurrentInvoice();
+        
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -208,26 +240,49 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
     private void btnOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnOKKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            float priceperunit;
+            int quan;
             try{
-                float priceperunit = Float.parseFloat(this.txtPriceperunit.getText().trim());
-                int quan = Integer.parseInt(this.txtQuan.getText().trim());
-                String note = this.txtNote.getText().trim();
-
-                this.parent.cur_invoice.getSecond().get(this.selectedrow).setItem_price(priceperunit);
-                this.parent.cur_invoice.getSecond().get(this.selectedrow).setQuan(quan);
-                this.parent.cur_invoice.getSecond().get(this.selectedrow).setNote(note);
-
-                this.parent.ShowCurrentInvoice();
-
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                this.dispose();
+                priceperunit = Float.parseFloat(this.txtPriceperunit.getText().trim());
             }catch(NumberFormatException ex){
                 ex.getStackTrace();
                 this.lbPriceperunitState.setText("!");
                 this.txtPriceperunit.requestFocus();
                 return;
             }
-        }
+
+            try{
+                quan = Integer.parseInt(this.txtQuan.getText().trim());
+            }catch(NumberFormatException ex){
+                ex.getStackTrace();
+                this.lbQuantityState.setText("!");
+                this.txtQuan.requestFocus();
+                return;
+            }
+            
+            if(priceperunit < 0){
+                this.lbPriceperunitState.setText("!");
+                this.txtPriceperunit.requestFocus();
+                return;
+            }
+
+            if(quan < 0){
+                this.lbQuantityState.setText("!");
+                this.txtQuan.requestFocus();
+                return;
+            }
+
+            String note = this.txtNote.getText().trim();
+
+            this.parent.cur_invoice.getSecond().get(this.selectedrow).setItem_price(priceperunit);
+            this.parent.cur_invoice.getSecond().get(this.selectedrow).setQuan(quan);
+            this.parent.cur_invoice.getSecond().get(this.selectedrow).setNote(note);
+
+            this.parent.ShowCurrentInvoice();
+
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            this.dispose();
+            }
     }//GEN-LAST:event_btnOKKeyPressed
 
     private void txtQuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuanActionPerformed
@@ -286,6 +341,7 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbFoodMaterialName;
     private javax.swing.JLabel lbPriceperunitState;
+    private javax.swing.JLabel lbQuantityState;
     private javax.swing.JPanel pnControl;
     private javax.swing.JTextArea txtNote;
     private javax.swing.JTextField txtPriceperunit;

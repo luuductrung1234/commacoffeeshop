@@ -325,11 +325,16 @@ public class DiaPay extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        this.parent.getOrderofTable(this.parent.cur_table).getKey().setCustomerpay(Float.parseFloat(this.txtCustomerpay.getText().trim()));
-        this.parent.getOrderofTable(this.parent.cur_table).getKey().setPayback(Float.parseFloat(this.txtPayback.getText().trim()));
-        this.parent.ispay = true;
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.dispose();
+        try{
+            this.parent.getOrderofTable(this.parent.cur_table).getKey().setCustomerpay(Float.parseFloat(this.txtCustomerpay.getText().trim()));
+            this.parent.getOrderofTable(this.parent.cur_table).getKey().setPayback(Float.parseFloat(this.txtPayback.getText().trim()));
+            this.parent.ispay = true;
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            this.dispose();
+        }catch(NumberFormatException ex){
+            ex.getStackTrace();
+            JOptionPane.showMessageDialog(null, "Customer's paid money is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
