@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import supportclass.Pair;
@@ -68,7 +69,30 @@ public class ReceiptNoteDAO {
         return 0;
     }
 
-
+// HIGHT LEVEL PROCESS
+    public static List<ReceiptNote> getList()
+    {
+        List<ReceiptNote> ds = new ArrayList<>();
+        String sql = "SELECT * FROM tbReceiptNote";
+                
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery())
+        {
+            while(rs.next()){
+                ReceiptNote newitem = new ReceiptNote();
+                newitem.setRn_id(rs.getString(1));
+                newitem.setEm_id(rs.getString(2));
+                newitem.setRday(rs.getDate(3));
+                newitem.setTotal_amount(rs.getFloat(4));
+                ds.add(newitem);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return ds;
+    }
 
 
     // WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
