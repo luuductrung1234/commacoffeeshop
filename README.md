@@ -15,8 +15,9 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
 
 
 # Project's procession:
-  - FrLogin đã xong
-    + vừa cập nhật thêm chức năng thay đổi cấu hình đăng nhập database, sau khi chỉnh sửa và đăng nhập thành công, chương trình tự động lưu dữ liệu của database đó (lần sau không cần điều chỉnh nữa). Thông tin database sẽ được lưu vào databaseinfo.txt
+  - **FrLogin**:
+    + đã xong : đăng nhập cho nhân viên và quản lý
+    + đã xong : cập nhật thêm chức năng thay đổi cấu hình đăng nhập database, sau khi chỉnh sửa và đăng nhập thành công, chương trình tự động lưu dữ liệu của database đó (lần sau không cần điều chỉnh nữa). Thông tin database sẽ được lưu vào databaseinfo.txt
     
   - **FrEmployeeWorkspace**:
     + đã xong : đăng nhập/xuất của nhân viên. Tự động chấm công và phát sinh lịch làm việc trong ngày, bảng lương của tháng hiện tại vào trong database
