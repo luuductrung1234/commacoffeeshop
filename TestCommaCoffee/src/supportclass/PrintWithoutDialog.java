@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.PrintService;
@@ -21,7 +22,16 @@ import javax.print.attribute.standard.PrinterResolution;
  */
 public class PrintWithoutDialog implements Printable 
 {
-    public String[] printtext = new String[17];
+    public static int TEMPORARY_PRINT = 1;
+    public static int KITCHEN_PRINT = 2;
+    public static int PAY_PRINT = 3;
+    
+    private Integer[] boldline;
+    private String[] pretext;
+    private ArrayList<TableItem> table;
+    private String[] posttext;
+    private int print_style;
+    
     
     public PrintService findPrintService(String printerName)
     {
@@ -48,28 +58,38 @@ public class PrintWithoutDialog implements Printable
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         
         
-        /* Now we perform our rendering */
-        int linesize = 10;
-        for(int i = 0; i < this.printtext.length; i++){
-            if(i == 11){
-                g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
-            }else{
-                if(i == 0 || i == 5){
-                    g.setFont(new Font("Plain", 0, 9).deriveFont(Font.BOLD));
-                }else
-                    g.setFont(new Font("Plain", 0, 8));
-            }
-                
-            g.drawString(printtext[i], 0, linesize);
-            linesize += 11;         // chuyển tọa độ sang dòng khác
+        switch(this.print_style){
+            case 1:
+                this.temporaryPrint(g);
+                break;
+            case 2:
+                this.kitchenPrint(g);
+                break;
+            case 3:
+                this.payPrint(g);
+                break;
         }
+        
 
         return PAGE_EXISTS;
     }
 
-    public PrintWithoutDialog(String printerName,  String[] printtext)
+    
+    /*
+    * @param    printerName : name of printer we need to find in system
+    * @param    boldline : index of lines need to bold style
+    * @param    pretext : the head info of bill
+    * @param    table : the table of bill
+    * @param    posttext : the tail info of bill
+    */
+    public PrintWithoutDialog(String printerName, Integer[] boldline, String[] pretext, ArrayList<TableItem> table, String[] posttext, int print_style)
     {
-        this.printtext = printtext;
+        // get information to printing
+        this.boldline = boldline;
+        this.pretext = pretext;
+        this.table = table;
+        this.posttext = posttext;
+        this.print_style = print_style;
         
         //find the printService of name printerName
         PrintService ps = findPrintService(printerName);                                    
@@ -97,7 +117,73 @@ public class PrintWithoutDialog implements Printable
     
     
     
-    public static void main(String[] args){
+    private void temporaryPrint(Graphics g){
+        /* in thông tin đầu bill */
+        int linesize = 10;
+        for(int i = 0; i < this.pretext.length; i++){
+            g.setFont(new Font("Plain", 0, 8));
+            for(Integer iter : this.boldline){
+                if(i == iter){
+                    g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+                    break;
+                }
+            }
+            
+            g.drawString(pretext[i], 0, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+        
+        /* in bảng bill */
+        boolean firstline = true;
+        int index;
+        for(index = 0; index < this.table.size() - 2; index++){
+            if(firstline){
+                g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+                firstline = false;
+            }else{
+                g.setFont(new Font("Plain", 0, 8));
+            }
+            g.drawString(this.table.get(index).getProduct(), 0, linesize);
+            g.drawString(this.table.get(index).getQuan(), 120, linesize);
+            g.drawString(this.table.get(index).getPrice(), 140, linesize);
+            g.drawString(this.table.get(index).getAmt(), 170, linesize);
+            
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+        
+        /* in phần tổng kết */
+        // phần tổng kết mặc định được tạo chung với table
+        // đối với temporary print thì 2 dòng cuối của table là chứ phần tổng kết
+        for(; index < this.table.size(); index++){
+            g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+            
+            g.drawString(this.table.get(index).getProduct(), 80, linesize);
+            g.drawString(this.table.get(index).getAmt(), 170, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+        
+        
+        /* in thông tin cuối bill */
+        for(int i = 0; i < this.posttext.length; i++){
+            g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+            
+            g.drawString(posttext[i], 0, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+    }
+    
+    private void kitchenPrint(Graphics g){
+        
+        
+        
+    }
+    
+    private void payPrint(Graphics g){
+        
+        
+        /* in phần tổng kết */
+        // phần tổng kết mặc định được tạo chung với table
+        // đối với temporary print thì 4 dòng cuối của table là chứ phần tổng kết
         
     }
 }

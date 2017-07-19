@@ -55,6 +55,7 @@ import model.AdminDAO;
 import model.EmployeeDAO;
 import model.OrderDAO;
 import model.ReceiptNoteDAO;
+import static supportclass.PrintTextForm.localizedFormat;
 
 /**
  *
@@ -2922,13 +2923,22 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
             //printing code
             this.cur_order = this.getOrderofTable(this.cur_table);
-            String[] foodname = this.toFoodName(this.cur_order);
-            int[] foodquan = this.toFoodQuan(this.cur_order);
-            float[] foodprice = this.toFoodPrice(this.cur_order);
+            int discount = 0;
+            for(Customer iter : this.cus_list){
+                if(iter.getCus_id().equals(this.cur_order.getKey().getCus_id())){
+                    discount =iter.getDiscount();
+                }
+            }
             
             String[] dummy = new String[1];
-            String[] printtext = new PrintTextForm(foodname, foodquan, foodprice, this.cur_table, Integer.parseInt(this.txtCustomernumber.getText()), this.working_emp.size(), this.cur_order.getKey().getOrder_id(), this.cur_order.getKey().getPrice()).getTextForPrint().toArray(dummy);
-            PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", printtext);
+            PrintTextForm ptext = new PrintTextForm(this.cur_table, Integer.parseInt(this.txtCustomernumber.getText()), this.working_emp.size(), this.cur_order.getKey().getOrder_id(), discount);
+            ptext.prepareTextForPrint();
+            Integer[] boldline = ptext.getBoldline();
+            String[] pretext = ptext.getPretext().toArray(dummy);
+            String[] posttext = ptext.getPosttext().toArray(dummy);
+            ArrayList<TableItem> table = this.toTemporaryTable(cur_order);
+            
+            PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, table, posttext, PrintWithoutDialog.TEMPORARY_PRINT);
             
             
             this.setTableState(this.cur_table, 2);
@@ -3588,6 +3598,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JTextField txtTodaydiscount;
     // End of variables declaration//GEN-END:variables
 
+    
     
     
 //  CUSTOM DECLARATION
@@ -4530,6 +4541,35 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         
         return result;
+    }
+    
+    private ArrayList<TableItem> toTemporaryTable(Entry<Order, ArrayList<OrderDetails>> curorder){
+        ArrayList<TableItem> r = new ArrayList<>();
+        
+        r.add(new TableItem("Product", "Q", "Price", "Amt"));
+        for(OrderDetails iter : curorder.getValue()){
+            for(Food fitem : this.menufood_list){
+                if(fitem.getFood_id().equals(iter.getFood_id())){
+                    String name = fitem.getName();
+                    int quan = iter.getQuan();
+                    int price = (int) (fitem.getPrice() * 1000);
+                    String sprice = localizedFormat("###,###.###", price, Locale.US);
+
+                    int totalprice = price * quan;
+                    String stotalprice = localizedFormat("###,###.###", totalprice, Locale.US);
+                    
+                    r.add(new TableItem(name, String.valueOf(quan), sprice, stotalprice));
+                }
+            }
+        }
+        
+        // 2 dòng cuối
+        r.add(new TableItem(" ", " ", " ", " "));
+        int totalprice = (int) (curorder.getKey().getPrice() * 1000);
+        String stotalprice = localizedFormat("###,###.###", totalprice, Locale.US);
+        r.add(new TableItem("Total Amount:", "", "" , stotalprice));
+        
+        return r;
     }
     
 // END PRINTING CODE
