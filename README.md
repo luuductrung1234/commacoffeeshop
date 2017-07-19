@@ -38,15 +38,15 @@ Note:
   
   
 # Login Frame
-  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/repo-picture/login_image.png)
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/edit-repo-file/repo%20picture/login_image.png)
 
 
 # Employee Workspace Frame
-  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/repo-picture/emp_workspace.png)
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/edit-repo-file/repo%20picture/emp_workspace.png)
 
 
 # Admin Workspace Frame  
-  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/repo-picture/admin_workspace.png)
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/edit-repo-file/repo%20picture/admin_workspace.png)
   
   
 # Audit Frame
