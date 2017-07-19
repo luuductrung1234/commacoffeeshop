@@ -2976,6 +2976,12 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, kittable, posttext, PrintWithoutDialog.KITCHEN_PRINT);
             
+            
+            ptext = new KitchenPrintTextForm(this.cur_order.getKey().getOrder_id(), this.cur_table, Integer.parseInt(this.txtCustomernumber.getText()), KitchenPrintTextForm.BAR_MODE);
+            ptext.prepareTextForPrint();
+            boldline = ptext.getBoldLine();
+            pretext = ptext.getPretext().toArray(dummy);
+            posttext = ptext.getPosttext().toArray(dummy);
             ArrayList<TableItem> bartable = this.toBarTable(cur_order);
             
             printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, bartable, posttext, PrintWithoutDialog.KITCHEN_PRINT);

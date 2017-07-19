@@ -188,6 +188,8 @@ public class PrintWithoutDialog implements Printable
             linesize += 11;         // chuyển tọa độ sang dòng khác
         }
         
+        g.drawLine(0, linesize, 200, linesize);
+        linesize += 11;
         
         /* in bảng bill */
         int index;
