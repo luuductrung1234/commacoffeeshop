@@ -42,11 +42,11 @@ Note:
 
 
 # Employee Workspace Frame
-  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/ScreenShot_20170713140604.png)
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/documents/emp_workspace.png)
 
 
 # Admin Workspace Frame  
-  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/admin_workspace.png)
+  ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/documents/admin_workspace.png)
   
   
 # Audit Frame
