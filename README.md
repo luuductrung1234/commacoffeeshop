@@ -9,7 +9,7 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
   - Thống kê Thu chi theo tuần/tháng/năm
 
 
-Note:
+**Note:**
  - file "nn" là file rỗng, bù nhìn, giúp giữ cho folder tồn tại khi mà folder không chưa file nào khác
  - folder "Testcommacoffee" là một netbean project, nên khi clone mã nguồn về lập trình viên có thể open ngay folder "Testcommacoffe" vào NetbeanIDE để code (không cần phải copy và ghi đè folder "src" nữa)
 
