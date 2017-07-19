@@ -62,7 +62,7 @@ public class PrintTextForm {
         this.defaultform[2] =  "Phone:    ";
         this.defaultform[3] =  "Date: ";
         this.defaultform[4] =  " ";
-        this.defaultform[5] =  "                          TEMPORARY ORDER";
+        this.defaultform[5] =  "                         TEMPORARY ORDER";
         this.defaultform[6] =  "                            TABLE:  ";
         this.defaultform[7] =  "#Customer: ";
         this.defaultform[8] =  "#Employee: ";

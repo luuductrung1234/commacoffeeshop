@@ -124,7 +124,7 @@ public class PrintWithoutDialog implements Printable
             g.setFont(new Font("Plain", 0, 8));
             for(Integer iter : this.boldline){
                 if(i == iter){
-                    g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+                    g.setFont(new Font("Plain", 0, 9).deriveFont(Font.BOLD));
                     break;
                 }
             }
@@ -173,17 +173,89 @@ public class PrintWithoutDialog implements Printable
     }
     
     private void kitchenPrint(Graphics g){
+        /* in thông tin đầu bill */
+        int linesize = 10;
+        for(int i = 0; i < this.pretext.length; i++){
+            g.setFont(new Font("Plain", 0, 12));
+            for(Integer iter : this.boldline){
+                if(i == iter){
+                    g.setFont(new Font("Plain", 0, 12).deriveFont(Font.BOLD));
+                    break;
+                }
+            }
+            
+            g.drawString(pretext[i], 0, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
         
         
+        /* in bảng bill */
+        int index;
+        for(index = 0; index < this.table.size(); index++){
+            g.setFont(new Font("Plain", 0, 12).deriveFont(Font.BOLD));
+            
+            g.drawString(this.table.get(index).getQuan(), 30, linesize);
+            g.drawString(this.table.get(index).getProduct(), 50, linesize);
+            
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
         
+        
+        /* in thông tin cuối bill */
     }
     
     private void payPrint(Graphics g){
+        /* in thông tin đầu bill */
+        int linesize = 10;
+        for(int i = 0; i < this.pretext.length; i++){
+            g.setFont(new Font("Plain", 0, 8));
+            for(Integer iter : this.boldline){
+                if(i == iter){
+                    g.setFont(new Font("Plain", 0, 9).deriveFont(Font.BOLD));
+                    break;
+                }
+            }
+            
+            g.drawString(pretext[i], 0, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
         
+        /* in bảng bill */
+        boolean firstline = true;
+        int index;
+        for(index = 0; index < this.table.size() - 4; index++){
+            if(firstline){
+                g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+                firstline = false;
+            }else{
+                g.setFont(new Font("Plain", 0, 8));
+            }
+            g.drawString(this.table.get(index).getProduct(), 0, linesize);
+            g.drawString(this.table.get(index).getQuan(), 120, linesize);
+            g.drawString(this.table.get(index).getPrice(), 140, linesize);
+            g.drawString(this.table.get(index).getAmt(), 170, linesize);
+            
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
         
         /* in phần tổng kết */
         // phần tổng kết mặc định được tạo chung với table
         // đối với temporary print thì 4 dòng cuối của table là chứ phần tổng kết
+        for(; index < this.table.size(); index++){
+            g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+            
+            g.drawString(this.table.get(index).getProduct(), 80, linesize);
+            g.drawString(this.table.get(index).getAmt(), 160, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
         
+        
+        /* in thông tin cuối bill */
+        for(int i = 0; i < this.posttext.length; i++){
+            g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+            
+            g.drawString(posttext[i], 0, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
     }
 }
