@@ -6,6 +6,11 @@
 
 package gui;
 
+import supportclass.printing.TableItem;
+import supportclass.printing.PrintTextForm;
+import supportclass.printing.ReceiptPrintTextForm;
+import supportclass.printing.PrintWithoutDialog;
+import supportclass.printing.KitchenPrintTextForm;
 import entities.*;
 import supportclass.*;
 import java.awt.CardLayout;
@@ -55,7 +60,7 @@ import model.AdminDAO;
 import model.EmployeeDAO;
 import model.OrderDAO;
 import model.ReceiptNoteDAO;
-import static supportclass.PrintTextForm.localizedFormat;
+import static supportclass.printing.PrintTextForm.localizedFormat;
 
 /**
  *

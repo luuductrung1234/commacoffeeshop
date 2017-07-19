@@ -1,4 +1,4 @@
-package supportclass;
+package supportclass.printing;
 
 /*
  * @(#)TablePrintable.java  1.41 05/11/17

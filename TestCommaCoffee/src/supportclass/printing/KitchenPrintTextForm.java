@@ -4,7 +4,7 @@
  * Warning: - Các thông tin biểu thị một hoá đơn order sẽ tương thích với kích thước của máy in bill
  *          - Loại hoá đơn: hoá đơn cho nhà bếp
  */
-package supportclass;
+package supportclass.printing;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

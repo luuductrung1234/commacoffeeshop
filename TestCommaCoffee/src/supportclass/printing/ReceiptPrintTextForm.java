@@ -4,7 +4,7 @@
  * Warning: - Các thông tin biểu thị một hoá đơn order sẽ tương thích với kích thước của máy in bill
  *          - Loại hoá đơn: hoá đơn tạm
  */
-package supportclass;
+package supportclass.printing;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -20,7 +20,7 @@ import java.util.Locale;
  * @author DELL
  *
  */
-public class PrintTextForm {
+public class ReceiptPrintTextForm {
     // dữ liệu mặc định
     private String[] defaultform;
     private LocalDate date;
@@ -41,11 +41,11 @@ public class PrintTextForm {
     ArrayList<String> pretext;
     ArrayList<String> posttext;
 
-    public PrintTextForm() {
+    public ReceiptPrintTextForm() {
         this.initDefaultForm();
     }
 
-    public PrintTextForm(int tablenumber, int number_customer, int number_employee, String orderid, int discount) {
+    public ReceiptPrintTextForm(int tablenumber, int number_customer, int number_employee, String orderid, int discount) {
         this.initDefaultForm();
         
         this.tablenumber = tablenumber;
@@ -62,8 +62,8 @@ public class PrintTextForm {
         this.defaultform[2] =  "Phone:    ";
         this.defaultform[3] =  "Date: ";
         this.defaultform[4] =  " ";
-        this.defaultform[5] =  "                         TEMPORARY ORDER";
-        this.defaultform[6] =  "                            TABLE:  ";
+        this.defaultform[5] =  "                                RECEIPT";
+        this.defaultform[6] =  "                                TABLE:  ";
         this.defaultform[7] =  "#Customer: ";
         this.defaultform[8] =  "#Employee: ";
         this.defaultform[9] =  "Discount: ";
