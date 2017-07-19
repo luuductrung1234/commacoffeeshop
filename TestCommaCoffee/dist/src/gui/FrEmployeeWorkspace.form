@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="mnbMain">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="mnEdit">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mnSystem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="System"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miAddemp">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add Employee"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddempActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miLogout">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Logout"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miLogoutActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Employee Workplace"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="mnbMain"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-2,0,0,3,7"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="pnShow">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="99" red="0" type="rgb"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1000, 479]"/>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="pnShowControl">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[80, 487]"/>
+            </Property>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="0"/>
+            <Property name="rows" type="int" value="3"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JToggleButton" name="btnMenu">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="menu display"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Menuicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/menu_icon.png&quot;)).getScaledInstance(70, 70, Image.SCALE_SMOOTH);&#xa;    Menuicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnMenu.setIcon(Menuicon);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="btnEmployee">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="employee display"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmployeeActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Employeeicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/employee_icon.png&quot;)).getScaledInstance(70, 70, Image.SCALE_SMOOTH);&#xa;    Employeeicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnEmployee.setIcon(Employeeicon);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="btnSetting">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="setting display"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSettingActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Settingicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/setting_icon.png&quot;)).getScaledInstance(70, 70, Image.SCALE_SMOOTH);&#xa;    Settingicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnSetting.setIcon(Settingicon);"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pnDisplay">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="d8" green="af" red="95" type="rgb"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[900, 487]"/>
+            </Property>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="pnBlank">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        BufferedImage image = null;&#xa;        try{&#xa;            image = ImageIO.read(new File(&quot;src/image/blank_picture.jpg&quot;));&#xa;        }catch(IOException ex){&#xa;            ex.printStackTrace();&#xa;        }&#xa;        super.paintComponent(g);&#xa;        g.drawImage(image, 100, 0, this); // see javadoc for more info on the parameters&#xa;    }&#xa;}"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card5"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnDisplayMenu">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="42" green="22" red="b" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card2"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" pref="300" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="jPanel1">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                        <Property name="axis" type="int" value="1"/>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="pnMenuSwitch">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="33" green="33" red="33" type="rgb"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[100, 32]"/>
+                            </Property>
+                          </Properties>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                            <Property name="columns" type="int" value="0"/>
+                            <Property name="rows" type="int" value="1"/>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JButton" name="btnDrink">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="food"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDrinkActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Drinkicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/drink_icon.png&quot;)).getScaledInstance(30, 30, Image.SCALE_SMOOTH);&#xa;    Drinkicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnDrink.setIcon(Drinkicon);"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnEat">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="drink"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEatActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Eaticon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/eat_icon.png&quot;)).getScaledInstance(30, 30, Image.SCALE_SMOOTH);&#xa;    Eaticon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnEat.setIcon(Eaticon);"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnOtherthing">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="other"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOtherthingActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Othericon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/other_icon.png&quot;)).getScaledInstance(30, 30, Image.SCALE_SMOOTH);&#xa;    Othericon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnOtherthing.setIcon(Othericon);"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnStock">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="stock materials"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStockActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Stockicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/stock_icon.png&quot;)).getScaledInstance(30, 30, Image.SCALE_SMOOTH);&#xa;    Stockicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnStock.setIcon(Stockicon);"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnSearch">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="search food"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Searchicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/search_icon.png&quot;)).getScaledInstance(30, 30, Image.SCALE_SMOOTH);&#xa;    Searchicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnSearch.setIcon(Searchicon);"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnAddReceiptNote">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="0" green="0" red="0" type="rgb"/>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="input receipt note"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddReceiptNoteActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon AddBillicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/addbill_icon.jpg&quot;)).getScaledInstance(30, 30, Image.SCALE_SMOOTH);&#xa;    AddBillicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnAddReceiptNote.setIcon(AddBillicon);"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="pnMenuSkip">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[0, 30]"/>
+                            </Property>
+                          </Properties>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                            <Property name="columns" type="int" value="0"/>
+                            <Property name="rows" type="int" value="1"/>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JButton" name="btnAll">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="this.btnAll.setBorderPainted(false);&#xa;this.btnAll.setFocusPainted(false);&#xa;this.btnAll.setContentAreaFilled(false);&#xa;&#xa;ImageIcon Allicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/all_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Allicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnAll.setIcon(Allicon);&#xa;&#xa;this.btnAll.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;[\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnA">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="this.btnA.setBorderPainted(false);&#xa;this.btnA.setFocusPainted(false);&#xa;this.btnA.setContentAreaFilled(false);&#xa;&#xa;ImageIcon Aicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/a_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Aicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnA.setIcon(Aicon);&#xa;&#xa;&#xa;this.btnA.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[aA][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnB">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="this.btnB.setBorderPainted(false);&#xa;this.btnB.setFocusPainted(false);&#xa;this.btnB.setContentAreaFilled(false);&#xa;&#xa;ImageIcon Bicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/b_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Bicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnB.setIcon(Bicon);&#xa;&#xa;&#xa;this.btnB.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[bB][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnC">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="this.btnC.setBorderPainted(false);&#xa;this.btnC.setFocusPainted(false);&#xa;this.btnC.setContentAreaFilled(false);&#xa;&#xa;ImageIcon Cicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/c_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Cicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnC.setIcon(Cicon);&#xa;&#xa;&#xa;this.btnC.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[cC][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnD">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Dicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/d_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Dicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnD.setIcon(Dicon);&#xa;&#xa;this.btnD.setBorderPainted(false);&#xa;this.btnD.setFocusPainted(false);&#xa;this.btnD.setContentAreaFilled(false);&#xa;&#xa;this.btnD.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[dD][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnE">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Eicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/e_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Eicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnE.setIcon(Eicon);&#xa;this.btnE.setBorderPainted(false);&#xa;this.btnE.setFocusPainted(false);&#xa;this.btnE.setContentAreaFilled(false);&#xa;&#xa;&#xa;this.btnE.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[eE][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnF">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Ficon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/f_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Ficon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnF.setIcon(Ficon);&#xa;this.btnF.setBorderPainted(false);&#xa;this.btnF.setFocusPainted(false);&#xa;this.btnF.setContentAreaFilled(false);&#xa;&#xa;&#xa;this.btnF.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[fF][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnG">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Gicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/g_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Gicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnG.setIcon(Gicon);&#xa;this.btnG.setBorderPainted(false);&#xa;this.btnG.setFocusPainted(false);&#xa;this.btnG.setContentAreaFilled(false);&#xa;this.btnG.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[gG][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnH">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Hicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/h_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Hicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnH.setIcon(Hicon);&#xa;this.btnH.setBorderPainted(false);&#xa;this.btnH.setFocusPainted(false);&#xa;this.btnH.setContentAreaFilled(false);&#xa;this.btnH.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[hH][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnI">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Iicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/i_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Iicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnI.setIcon(Iicon);&#xa;this.btnI.setBorderPainted(false);&#xa;this.btnI.setFocusPainted(false);&#xa;this.btnI.setContentAreaFilled(false);&#xa;this.btnI.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[iI][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnJ">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Jicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/j_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Jicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnJ.setIcon(Jicon);&#xa;this.btnJ.setBorderPainted(false);&#xa;this.btnJ.setFocusPainted(false);&#xa;this.btnJ.setContentAreaFilled(false);&#xa;this.btnJ.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[jJ][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnK">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Kicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/k_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Kicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnK.setIcon(Kicon);&#xa;this.btnK.setBorderPainted(false);&#xa;this.btnK.setFocusPainted(false);&#xa;this.btnK.setContentAreaFilled(false);&#xa;this.btnK.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[kK][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnL">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Licon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/l_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Licon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnL.setIcon(Licon);&#xa;this.btnL.setBorderPainted(false);&#xa;this.btnL.setFocusPainted(false);&#xa;this.btnL.setContentAreaFilled(false);&#xa;this.btnL.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[lL][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnM">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Micon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/m_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Micon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnM.setIcon(Micon);&#xa;this.btnM.setBorderPainted(false);&#xa;this.btnM.setFocusPainted(false);&#xa;this.btnM.setContentAreaFilled(false);&#xa;this.btnM.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[mM][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnN">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Nicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/n_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Nicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnN.setIcon(Nicon);&#xa;this.btnN.setBorderPainted(false);&#xa;this.btnN.setFocusPainted(false);&#xa;this.btnN.setContentAreaFilled(false);&#xa;this.btnN.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[nN][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnO">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Oicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/o_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Oicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnO.setIcon(Oicon);&#xa;this.btnO.setBorderPainted(false);&#xa;this.btnO.setFocusPainted(false);&#xa;this.btnO.setContentAreaFilled(false);&#xa;this.btnO.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[oO][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnP">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Picon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/p_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Picon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnP.setIcon(Picon);&#xa;this.btnP.setBorderPainted(false);&#xa;this.btnP.setFocusPainted(false);&#xa;this.btnP.setContentAreaFilled(false);&#xa;this.btnP.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[pP][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnQ">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Qicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/q_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Qicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnQ.setIcon(Qicon);&#xa;this.btnQ.setBorderPainted(false);&#xa;this.btnQ.setFocusPainted(false);&#xa;this.btnQ.setContentAreaFilled(false);&#xa;this.btnQ.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[qQ][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnR">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Ricon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/r_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Ricon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnR.setIcon(Ricon);&#xa;this.btnR.setBorderPainted(false);&#xa;this.btnR.setFocusPainted(false);&#xa;this.btnR.setContentAreaFilled(false);&#xa;this.btnR.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[rR][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnS">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Sicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/s_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Sicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnS.setIcon(Sicon);&#xa;this.btnS.setBorderPainted(false);&#xa;this.btnS.setFocusPainted(false);&#xa;this.btnS.setContentAreaFilled(false);&#xa;this.btnS.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[sS][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnT">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Ticon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/t_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Ticon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnT.setIcon(Ticon);&#xa;this.btnT.setBorderPainted(false);&#xa;this.btnT.setFocusPainted(false);&#xa;this.btnT.setContentAreaFilled(false);&#xa;this.btnT.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[tT][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnU">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Uicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/u_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Uicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnU.setIcon(Uicon);&#xa;this.btnU.setBorderPainted(false);&#xa;this.btnU.setFocusPainted(false);&#xa;this.btnU.setContentAreaFilled(false);&#xa;this.btnU.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[uU][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnV">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Vicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/v_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Vicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnV.setIcon(Vicon);&#xa;this.btnV.setBorderPainted(false);&#xa;this.btnV.setFocusPainted(false);&#xa;this.btnV.setContentAreaFilled(false);&#xa;this.btnV.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[vV][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnW">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Wicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/w_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Wicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnW.setIcon(Wicon);&#xa;this.btnW.setBorderPainted(false);&#xa;this.btnW.setFocusPainted(false);&#xa;this.btnW.setContentAreaFilled(false);&#xa;this.btnW.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[wW][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnX">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Xicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/x_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Xicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnX.setIcon(Xicon);&#xa;this.btnX.setBorderPainted(false);&#xa;this.btnX.setFocusPainted(false);&#xa;this.btnX.setContentAreaFilled(false);&#xa;this.btnX.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[xX][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnY">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Yicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/y_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Yicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnY.setIcon(Yicon);&#xa;this.btnY.setBorderPainted(false);&#xa;this.btnY.setFocusPainted(false);&#xa;this.btnY.setContentAreaFilled(false);&#xa;this.btnY.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[yY][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnZ">
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Zicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/z_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    Zicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnZ.setIcon(Zicon);&#xa;this.btnZ.setBorderPainted(false);&#xa;this.btnZ.setFocusPainted(false);&#xa;this.btnZ.setContentAreaFilled(false);&#xa;this.btnZ.addActionListener(new ActionListener(){&#xa;    @Override&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        String regex = &quot;^[zZ][\\w ]*&quot;; &#xa; &#xa;        if(isDrinkshow){&#xa;            pnDrink.removeAll();&#xa;            showDrinkmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card3&quot;);&#xa;        }&#xa;        if(isEatshow){&#xa;            pnEat.removeAll();&#xa;            showEatmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card2&quot;);&#xa;        }&#xa;        if(isOthershow){&#xa;            pnOther.removeAll();&#xa;            showOthermenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card4&quot;);&#xa;        }&#xa;        if(isStockshow){&#xa;            pnStock.removeAll();&#xa;            showStockmenu(regex);&#xa;            CardLayout cl = (CardLayout) pnMenuDisplayDetails.getLayout();&#xa;            cl.show(pnMenuDisplayDetails, &quot;card7&quot;);&#xa;            cl.show(pnMenuDisplayDetails, &quot;card5&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="pnMenuDisplayDetails">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="new java.awt.Dimension(this.Menupn_width, this.Menupn_height)" type="code"/>
+                            </Property>
+                          </Properties>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="pnDrink">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="1e" green="1e" red="21" type="rgb"/>
+                                </Property>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                  <Connection code="new java.awt.Dimension(this.Menupn_width, this.Menupn_height)" type="code"/>
+                                </Property>
+                              </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="pnDrink.setMaximumSize(new java.awt.Dimension(this.Menupn_width, this.Menupn_height));"/>
+                              </AuxValues>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                                  <CardConstraints cardName="card3"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                                <Property name="columns" type="int" value="6"/>
+                                <Property name="horizontalGap" type="int" value="20"/>
+                                <Property name="rows" type="int" value="0"/>
+                                <Property name="verticalGap" type="int" value="20"/>
+                              </Layout>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="pnEat">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="1e" green="1e" red="21" type="rgb"/>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                                  <CardConstraints cardName="card2"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                                <Property name="columns" type="int" value="6"/>
+                                <Property name="horizontalGap" type="int" value="20"/>
+                                <Property name="rows" type="int" value="0"/>
+                                <Property name="verticalGap" type="int" value="20"/>
+                              </Layout>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="pnOther">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="1e" green="1e" red="21" type="rgb"/>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                                  <CardConstraints cardName="card4"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                                <Property name="columns" type="int" value="6"/>
+                                <Property name="horizontalGap" type="int" value="20"/>
+                                <Property name="rows" type="int" value="0"/>
+                                <Property name="verticalGap" type="int" value="20"/>
+                              </Layout>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="pnStock">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="66" green="99" red="0" type="rgb"/>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                                  <CardConstraints cardName="card5"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                                <Property name="columns" type="int" value="6"/>
+                                <Property name="horizontalGap" type="int" value="20"/>
+                                <Property name="rows" type="int" value="0"/>
+                                <Property name="verticalGap" type="int" value="20"/>
+                              </Layout>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="pnWait">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="1e" green="1e" red="21" type="rgb"/>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                                  <CardConstraints cardName="card7"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="297" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="421" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnDisplayEmployee">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="42" green="22" red="b" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card3"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnDisplaySetting">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card4"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnUsing">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="cc" red="0" type="rgb"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[350, 400]"/>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+        <Property name="axis" type="int" value="3"/>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="pnOrderTable">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new java.awt.Dimension(300, 250)" type="code"/>
+            </Property>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane2" alignment="0" pref="428" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane2" alignment="0" pref="20" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="pnShowTable">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="1e" green="1e" red="21" type="rgb"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new java.awt.Dimension(this.Tablepn_width, this.Tablepn_height)" type="code"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                    <Property name="columns" type="int" value="3"/>
+                    <Property name="horizontalGap" type="int" value="10"/>
+                    <Property name="rows" type="int" value="0"/>
+                    <Property name="verticalGap" type="int" value="10"/>
+                  </Layout>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pnBill">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="63" green="42" red="2d" type="rgb"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[100, 300]"/>
+            </Property>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="pnBillBlank">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card4"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="428" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="476" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnOrderBill">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card2"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                <Property name="axis" type="int" value="3"/>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="jPanel2">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="26" green="16" red="3" type="rgb"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[201, 80]"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lbCustomer" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cboChooseCustomer" min="-2" pref="170" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbShowOrderTable" pref="422" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbShowOrderTable" min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cboChooseCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JComboBox" name="cboChooseCustomer">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(cus_name)" type="code"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="customer for discount"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboChooseCustomerActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="this.cboChooseCustomer.setSelectedIndex(16);"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] cus_name = new String[this.cus_list.size()];&#xa;for(int i = 0; i &lt; this.cus_list.size(); i++){&#xa;    cus_name[i] = this.cus_list.get(i).getName();&#xa;}"/>
+                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lbCustomer">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Customer:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="supportclass.RollLabel" name="lbShowOrderTable">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="0" type="rgb"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="cc" red="0" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Dialog" size="18" style="1"/>
+                        </Property>
+                        <Property name="opaque" type="boolean" value="true"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="this.lbShowOrderTable.setText(&quot;Current Table: &quot;+ this.cur_table + &quot; ----- Day: &quot; + this.today);"/>
+                      </AuxValues>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                  <Properties>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[453, 303]"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="tbOrderFood">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="5" rowCount="4">
+                            <Column editable="false" title="Name" type="java.lang.String"/>
+                            <Column editable="false" title="Quantity" type="java.lang.Integer"/>
+                            <Column editable="true" title="Discount" type="java.lang.Integer"/>
+                            <Column editable="false" title="Price" type="java.lang.Float"/>
+                            <Column editable="true" title="Close" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="this.tbOrderFood.setRowHeight(20);">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="100" prefWidth="100" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
+                        </Property>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="pnOrderNote">
+                  <Properties>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[428, 100]"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="jPanel3">
+                      <Properties>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[80, 110]"/>
+                        </Property>
+                      </Properties>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JButton" name="btnAddnote">
+                          <Properties>
+                            <Property name="toolTipText" type="java.lang.String" value="Add note for selected food"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[80, 150]"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddnoteActionPerformed"/>
+                          </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon Addnoteicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/addnote_icon.png&quot;)).getScaledInstance(100, 100, Image.SCALE_SMOOTH);&#xa;    Addnoteicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnAddnote.setIcon(Addnoteicon);"/>
+                          </AuxValues>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                              <BorderConstraints direction="Center"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                      <Properties>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[250, 96]"/>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTextArea" name="txtOrderNote">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="18" style="1"/>
+                            </Property>
+                            <Property name="rows" type="int" value="5"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="pnOrderControl">
+                  <Properties>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[201, 70]"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                    <Property name="columns" type="int" value="0"/>
+                    <Property name="rows" type="int" value="1"/>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JButton" name="btnPay">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="99" red="0" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="PAY"/>
+                        <Property name="toolTipText" type="java.lang.String" value="pay"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPayActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnKitchenPrint">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="cc" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="KITCHEN PRINT"/>
+                        <Property name="toolTipText" type="java.lang.String" value="kitchen print"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKitchenPrintActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnPrint">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="cc" red="cc" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="PRINT"/>
+                        <Property name="toolTipText" type="java.lang.String" value="bar print"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrintActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnDelete">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="99" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="DELETE"/>
+                        <Property name="toolTipText" type="java.lang.String" value="delete order"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnReceiptBill">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card3"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="428" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="476" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
