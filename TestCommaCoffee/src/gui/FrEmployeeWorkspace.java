@@ -41,8 +41,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.LineNumberReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -112,6 +116,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.initInvoice();
         
         this.initSettingForm();
+        
+        this.loadLastWorkingInfo();
     }
 
     /** This method is called from within the constructor to
@@ -2919,6 +2925,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             this.cur_order.getKey().setCus_id(this.cus_list.get(this.cboChooseCustomer.getSelectedIndex()).getCus_id());
             
             this.ShowCurrentOrderBill();
+            this.saveCurrentInfo(false);
         }
     }//GEN-LAST:event_cboChooseCustomerActionPerformed
 
@@ -2958,6 +2965,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             new DiaNote(this, true).setVisible(true);
             this.ShowCurrentOrderBill();
+            this.saveCurrentInfo(isDrinkshow);
         }
     }//GEN-LAST:event_btnAddnoteActionPerformed
 
@@ -3021,6 +3029,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             this.cur_table = 0;
             this.refreshTable();
             this.ShowCurrentOrderBill();
+            this.saveCurrentInfo(false);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -3086,6 +3095,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 this.cur_table = 0;
                 this.refreshTable();
                 this.ShowCurrentOrderBill();
+                this.saveCurrentInfo(false);
             }
         }
     }//GEN-LAST:event_btnPayActionPerformed
@@ -3117,6 +3127,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.initInvoice();
         this.ShowCurrentInvoice();
+        this.saveCurrentInfo(false);
     }//GEN-LAST:event_btnReceiptResetActionPerformed
 
     private void btnReceiptSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceiptSaveActionPerformed
@@ -3128,6 +3139,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             // reset đơn hàng mới
             this.initInvoice();
             this.ShowCurrentInvoice();
+            this.saveCurrentInfo(false);
         }
     }//GEN-LAST:event_btnReceiptSaveActionPerformed
 
@@ -3145,6 +3157,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             ++numitemdeleted;
         }
         this.ShowCurrentInvoice();
+        this.saveCurrentInfo(false);
     }//GEN-LAST:event_btnDeleteReceiptItemActionPerformed
 
     private void cboEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmpNameActionPerformed
@@ -3672,8 +3685,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     int Menupn_height;
     
     
-    ArrayList<Integer> cusnumber_list = new ArrayList<>();                      // danh sách số lượng khách hàng từng bàn
+    
     ArrayList<JButton> tablebtn_list = new ArrayList<>();                       // danh sách bàn
+    ArrayList<Integer> cusnumber_list = new ArrayList<>();                      // danh sách số lượng khách hàng từng bàn
     ArrayList<Integer> tablestate_list = new ArrayList<>();                     // danh sách trạng thái của bàn          0: chưa order, 1: đã order, 2: đã lưu
     HashMap<Integer, ArrayList<String>> ordernote_list = new HashMap<>();       // danh sách note của order hiện tại              mỗi bàn tương ứng với một danh sách note
     HashMap<Order, ArrayList<OrderDetails>> order_list = new HashMap<>();       // danh sách order hiện tại
@@ -3843,6 +3857,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                             this.setTableState(this.cur_table, 1);
                             this.refreshTable();
                         }
+                        this.saveCurrentInfo(false);
                     }
                     
                 });
@@ -3912,6 +3927,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                             this.setTableState(this.cur_table, 1);
                             this.refreshTable();
                         }
+                        this.saveCurrentInfo(false);
                     }
                 });
                 b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
@@ -3975,6 +3991,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                             this.setTableState(this.cur_table, 1);
                             this.refreshTable();
                         }
+                        this.saveCurrentInfo(false);
                     }
                 });
                 b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
@@ -4032,6 +4049,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     }
                     
                     this.ShowCurrentInvoice();
+                    this.saveCurrentInfo(false);
                 });
                 
                 /*b.addMouseListener(new java.awt.event.MouseListener(){
@@ -4688,4 +4706,58 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 // END PRINTING CODE
     
     
+    
+    
+    
+// HISTORY TRACKING
+    private void saveCurrentInfo(boolean finishwork){
+        if(!finishwork){
+            // nếu công việc chưa hoàn thành
+            try {
+                FileOutputStream fos = new FileOutputStream("src/textfile/history.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+                // tiến hành lưu các dữ liệu
+                oos.writeBoolean(finishwork);
+                oos.writeObject(this.cusnumber_list);
+                oos.writeObject(this.tablestate_list);
+                oos.writeObject(this.ordernote_list);
+                oos.writeObject(this.order_list);
+                oos.writeObject(this.cur_invoice);
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            
+        }
+    }
+    
+    
+    private void loadLastWorkingInfo(){
+        try {
+            FileInputStream fis = new FileInputStream("src/textfile/history.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            
+            boolean isfinish = ois.readBoolean();
+            if(!isfinish){
+                this.cusnumber_list = (ArrayList<Integer>) ois.readObject();
+                this.tablestate_list = (ArrayList<Integer>) ois.readObject();
+                this.ordernote_list = (HashMap<Integer, ArrayList<String>>) ois.readObject();
+                this.order_list = (HashMap<Order, ArrayList<OrderDetails>>) ois.readObject();
+                this.cur_invoice = (Pair<ReceiptNote, ArrayList<ReceiptNoteDetails>>) ois.readObject();
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+// END HISTORY TRACKING
 }
