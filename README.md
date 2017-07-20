@@ -28,10 +28,12 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
     + đã xong : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace, các tuỳ chỉnh lưu vào settinginfo.txt
     + đã xong : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
     + đã xong : In bill thông qua printer. Tính năng tuỳ chỉnh hiển thị văn bản in trước khi in
+    + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
+    + chưa hoàn thành : In thêm note của từng món ăn trong bill (kitchen print)
     + chưa hoàn thành : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc
     + chưa hàng thành : thêm giá mặc định cho các nguyên liệu (FoodMaterials) => Sẽ cần phải điều chỉnh database, entities class, model class query, giao diện của FrEmployeeWorkspace và FrAdminWorkspace
     + chưa hoàn thành : tách code
-    + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
+    
 
 (*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
 

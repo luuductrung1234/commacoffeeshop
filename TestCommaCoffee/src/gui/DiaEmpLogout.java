@@ -134,7 +134,7 @@ public class DiaEmpLogout extends javax.swing.JDialog {
         int[] slrows = this.tbEmployee.getSelectedRows();
         
         if(slrows.length >= this.parent.working_emp.size()){
-            int r = JOptionPane.showConfirmDialog(null, "There still have working table! Are you sure the logout?");
+            int r = JOptionPane.showConfirmDialog(null, "There still have working table! Are you sure to logout?");
             if(r == JOptionPane.NO_OPTION){
                 return;
             }else{
