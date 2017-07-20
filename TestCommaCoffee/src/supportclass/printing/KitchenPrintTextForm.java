@@ -63,6 +63,7 @@ public class KitchenPrintTextForm {
         this.pretext.add(this.defaultform[1]);
         this.pretext.add(this.defaultform[2]);
         this.pretext.add(this.defaultform[3]);
+        this.pretext.add(this.defaultform[4]);
         
         this.postext = new ArrayList<>();
         // chưa dùng đến

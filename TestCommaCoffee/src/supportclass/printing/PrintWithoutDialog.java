@@ -194,7 +194,7 @@ public class PrintWithoutDialog implements Printable
         /* in bảng bill */
         int index;
         for(index = 0; index < this.table.size(); index++){
-            g.setFont(new Font("Plain", 0, 12).deriveFont(Font.BOLD));
+            g.setFont(new Font("Plain", 0, 13).deriveFont(Font.BOLD));
             
             g.drawString(this.table.get(index).getQuan(), 30, linesize);
             g.drawString(this.table.get(index).getProduct(), 50, linesize);
