@@ -73,9 +73,9 @@ public class EmployeeDAO {
         return 0;
     }
     
-    public static int update(Employee old_emp, String newusername, String newpass, String newname, java.sql.Date newbirth, java.sql.Date newstartday, String newaddr, String newemail, String newphone, String newrole, String newmanager)
+    public static int update(Employee old_emp, String newusername, String newpass, String newname, java.sql.Date newbirth, java.sql.Date newstartday, String newaddr, String newemail, String newphone, int newrole, int newhourwage, String newmanager)
     {
-        String sql = "UPDATE tbEmployee SET username = ?, pass = ?, name = ?, birth = ?, startday = ?, addr = ?, email = ?, phone = ?, em_role, manager = ? WHERE em_id = ? and username = ? and pass = ?";
+        String sql = "UPDATE tbEmployee SET username = ?, pass = ?, name = ?, birth = ?, startday = ?, addr = ?, email = ?, phone = ?, em_role = ?, manager = ?, hour_wage = ? WHERE em_id = ? and username = ? and pass = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);){
@@ -88,11 +88,12 @@ public class EmployeeDAO {
             st.setString(6, newaddr);
             st.setString(7, newemail);
             st.setString(8, newphone);
-            st.setString(9, newrole);
+            st.setInt(9, newrole);
             st.setString(10, newmanager);
-            st.setString(11, old_emp.getEm_id());
-            st.setString(12, old_emp.getUsername());
-            st.setString(13, old_emp.getPass());
+            st.setInt(11, newhourwage);
+            st.setString(12, old_emp.getEm_id());
+            st.setString(13, old_emp.getUsername());
+            st.setString(14, old_emp.getPass());
             
             return st.executeUpdate();
         } catch (SQLException ex) {

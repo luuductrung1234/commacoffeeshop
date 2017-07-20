@@ -13,7 +13,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -23,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.*;
+import java.util.regex.*;
 
 /**
  *
@@ -567,8 +572,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEmployeeInformationLayout.createSequentialGroup()
                             .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel3)
@@ -582,8 +585,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
                         .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(114, 114, 114)))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(90, 90, 90)))
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
                         .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2469,6 +2474,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             txtIDEmp.setText("auto");
             txtUsernameEmp.setText("");
             txtPassEmp.setText("");
+            jLabel45.setVisible(true);
             txtPassConEmp.setText("");
             txtNameEmp.setText("");
             txtBirthEmp.setText("");
@@ -2478,7 +2484,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             txtEmailEmp.setText("");
             txtPhoneEmp.setText("");
             cboRoleEmployee.setSelectedIndex(0);
-            
+            return;
         }
         if(btnInsertEmp.getText().equals("Save"))
         {
@@ -2502,7 +2508,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
             
             String pass = new String(txtPassEmp.getPassword()).trim();
-            if(username.length() == 0 || username.length() > 50)
+            if(pass.length() == 0 || pass.length() > 50)
             {
                 JOptionPane.showMessageDialog(null, "Password is not valid!");
                 txtPassEmp.requestFocus();
@@ -2517,20 +2523,490 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
             
             String namee = txtNameEmp.getText().trim();
-            if(username.length() == 0 || username.length() > 50)
+            if(namee.length() == 0 || namee.length() > 50)
             {
                 JOptionPane.showMessageDialog(null, "Name is not valid!");
-                txtUsernameEmp.requestFocus();
+                txtNameEmp.requestFocus();
                 return;
             }
             
+            LocalDate birth;
+            String sbirth = txtBirthEmp.getText().trim();
+            int dky, dkm, dkd;
+            LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+            try
+            {
+                if(sbirth.length() == 0 || sbirth.length() > 10)
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                dkm = Integer.parseInt(sbirth.substring(5, 7));
+                dkd = Integer.parseInt(sbirth.substring(8, 10));
+                dky = Integer.parseInt(sbirth.substring(0, 4));
+                if(dky < 0 || dkm < 0 || dkd < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(sbirth.charAt(4) != '-' || sbirth.charAt(7) != '-')
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(!(dky <= (today.getYear() - 18)))
+                {
+                    JOptionPane.showMessageDialog(null, "This employee is too young to become employee in coffee shop!");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                birth = LocalDate.of(dky, dkm, dkd);
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                txtBirthEmp.requestFocus();
+                return;
+            }
             
+            String sstartday = txtStartDayEmp.getText().trim();
+            LocalDate startday;
+            try
+            {
+                if(sstartday.length() == 0 || sstartday.length() > 10)
+                {
+                    JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                dkm = Integer.parseInt(sstartday.substring(5, 7));
+                dkd = Integer.parseInt(sstartday.substring(8, 10));
+                dky = Integer.parseInt(sstartday.substring(0, 4));
+                if(dky < 0 || dkm < 0 || dkd < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(sstartday.charAt(4) != '-' || sstartday.charAt(7) != '-')
+                {
+                    JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+//chỉnh sửa sau                
+                startday = LocalDate.of(dky, dkm, dkd);
+                if((startday.getYear() < today.getYear()))
+                {
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                txtBirthEmp.requestFocus();
+                return;
+            }
             
+            int hourwage = 0;
+            try
+            {
+                hourwage = Integer.parseInt(txtHourWageEmp.getText().trim());
+                if(hourwage <= 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Hour Wage must be greater than 0!");
+                    txtHourWageEmp.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Hour Wage must be integer!");
+                txtHourWageEmp.requestFocus();
+                return;
+            }
+            
+            String addr = txtAddrEmp.getText().trim();
+            if(addr.length() == 0 || addr.length() > 200)
+            {
+                JOptionPane.showMessageDialog(null, "Address is not valid!");
+                txtAddrEmp.requestFocus();
+                return;
+            }
+            
+            String email = txtEmailEmp.getText().trim();
+            Pattern pemail = Pattern.compile("[\\w\\d]+[@][\\w]+[.][\\w]+");
+            Matcher m = null;
+            try
+            {
+                m = pemail.matcher(email);
+                if(!m.matches())
+                {
+                    JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                    txtEmailEmp.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                txtEmailEmp.requestFocus();
+                return;
+            }
+            
+            String phone = txtPhoneEmp.getText().trim();
+            try
+            {
+                if(phone.length() == 0 || phone.length() > 12)
+                {
+                    JOptionPane.showMessageDialog(null, "Phone is not valid!");
+                    txtPhoneEmp.requestFocus();
+                    return;
+                }
+                if(Integer.parseInt(phone) < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                    txtPhoneEmp.requestFocus();
+                    return;
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                txtPhoneEmp.requestFocus();
+                return;
+            }
+            
+            int role;
+            if(cboRoleEmployee.getSelectedIndex() == 0)
+            {
+                role = 1;
+            }
+            else
+            {
+                role = 2;
+            }
+            
+            String manager = a.getAd_id();
+            
+            Employee emp = new Employee(emid, username, pass, namee, addr, email, phone, manager, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), hourwage, role);
+            if(EmployeeDAO.insert(emp) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Insert new employee successful!");
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Insert new employee fail!");
+                btnInsertEmp.setText("Insert");
+                btnUpdateEmp.setEnabled(true);
+                btnDeleteEmp.setEnabled(true);
+                txtIDEmp.setText("");
+                txtUsernameEmp.setText("");
+                txtPassEmp.setText("");
+                txtPassConEmp.setText("");
+                txtNameEmp.setText("");
+                txtBirthEmp.setText("");
+                txtStartDayEmp.setText("");
+                txtHourWageEmp.setText("");
+                txtAddrEmp.setText("");
+                txtEmailEmp.setText("");
+                txtPhoneEmp.setText("");
+                cboRoleEmployee.setSelectedIndex(0);
+            }
+            txtIDEmp.setText(emp.getEm_id());
+            btnInsertEmp.setText("Insert");
+            btnUpdateEmp.setEnabled(true);
+            btnDeleteEmp.setEnabled(true);
+            setEmployeeFormControl(false);
+            modelEmployee.getDataVector().removeAllElements();
+            modelEmployee.fireTableDataChanged();
+            dsEmployee = EmployeeDAO.getList();
+            modelEmployee.setRowCount(0);
+            for(Employee d:dsEmployee)
+            {
+                if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+                {
+                    Vector v = new Vector();
+                    v.add(d.getEm_id());
+                    v.add(d.getUsername());
+                    v.add(d.getPass());
+                    v.add(d.getName());
+                    v.add(d.getBirth());
+                    v.add(d.getStartday());
+                    v.add(d.getHour_wage());
+                    v.add(d.getAddr());
+                    v.add(d.getEmail());
+                    v.add(d.getPhone());
+                    if(d.getEm_role() == 1)
+                    {
+                        v.add("Nước");
+                    }
+                    else
+                    {
+                        v.add("Bếp");
+                    }
+                    //v.add(d.getEm_role());
+                    v.add(d.getManager());
+                    modelEmployee.addRow(v);
+                }
+            }
+
+            sorterEmployee = (TableRowSorter<TableModel>) vwEmployee.getRowSorter();
         }
     }//GEN-LAST:event_btnInsertEmpActionPerformed
 
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
-        // TODO add your handling code here:
+        if(btnUpdateEmp.getText().equals("Update"))
+        {
+            btnUpdateEmp.setText("Save");
+            btnInsertEmp.setEnabled(false);
+            btnDeleteEmp.setEnabled(false);
+            setEmployeeFormControl(true);
+            return;
+        }
+        if(btnUpdateEmp.getText().equals("Save"))
+        {
+            String emid = txtIDEmp.getText().trim();
+            
+            String username = txtUsernameEmp.getText().trim();
+            
+            String pass = new String(txtPassEmp.getPassword()).trim();
+            
+            String namee = txtNameEmp.getText().trim();
+            if(namee.length() == 0 || namee.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Name is not valid!");
+                txtNameEmp.requestFocus();
+                return;
+            }
+            
+            LocalDate birth;
+            String sbirth = txtBirthEmp.getText().trim();
+            int dky, dkm, dkd;
+            LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+            try
+            {
+                if(sbirth.length() == 0 || sbirth.length() > 10)
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                dkm = Integer.parseInt(sbirth.substring(5, 7));
+                dkd = Integer.parseInt(sbirth.substring(8, 10));
+                dky = Integer.parseInt(sbirth.substring(0, 4));
+                if(dky < 0 || dkm < 0 || dkd < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(sbirth.charAt(4) != '-' || sbirth.charAt(7) != '-')
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(!(dky <= (today.getYear() - 18)))
+                {
+                    JOptionPane.showMessageDialog(null, "This employee is too young to become employee in coffee shop!");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                birth = LocalDate.of(dky, dkm, dkd);
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                txtBirthEmp.requestFocus();
+                return;
+            }
+            
+            String sstartday = txtStartDayEmp.getText().trim();
+            LocalDate startday;
+            try
+            {
+                if(sstartday.length() == 0 || sstartday.length() > 10)
+                {
+                    JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                dkm = Integer.parseInt(sstartday.substring(5, 7));
+                dkd = Integer.parseInt(sstartday.substring(8, 10));
+                dky = Integer.parseInt(sstartday.substring(0, 4));
+                if(dky < 0 || dkm < 0 || dkd < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(sstartday.charAt(4) != '-' || sstartday.charAt(7) != '-')
+                {
+                    JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+//chỉnh sửa sau                
+                startday = LocalDate.of(dky, dkm, dkd);
+                if((startday.getYear() < today.getYear()))
+                {
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
+                txtBirthEmp.requestFocus();
+                return;
+            }
+            
+            int hourwage = 0;
+            try
+            {
+                hourwage = Integer.parseInt(txtHourWageEmp.getText().trim());
+                if(hourwage <= 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Hour Wage must be greater than 0!");
+                    txtHourWageEmp.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Hour Wage must be integer!");
+                txtHourWageEmp.requestFocus();
+                return;
+            }
+            
+            String addr = txtAddrEmp.getText().trim();
+            if(addr.length() == 0 || addr.length() > 200)
+            {
+                JOptionPane.showMessageDialog(null, "Address is not valid!");
+                txtAddrEmp.requestFocus();
+                return;
+            }
+            
+            String email = txtEmailEmp.getText().trim();
+            Pattern pemail = Pattern.compile("[\\w\\d]+[@][\\w]+[.][\\w]+");
+            Matcher m = null;
+            try
+            {
+                m = pemail.matcher(email);
+                if(!m.matches())
+                {
+                    JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                    txtEmailEmp.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                txtEmailEmp.requestFocus();
+                return;
+            }
+            
+            String phone = txtPhoneEmp.getText().trim();
+            try
+            {
+                if(phone.length() == 0 || phone.length() > 12)
+                {
+                    JOptionPane.showMessageDialog(null, "Phone is not valid!");
+                    txtPhoneEmp.requestFocus();
+                    return;
+                }
+                if(Integer.parseInt(phone) < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                    txtPhoneEmp.requestFocus();
+                    return;
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                txtPhoneEmp.requestFocus();
+                return;
+            }
+            
+            int role;
+            if(cboRoleEmployee.getSelectedIndex() == 0)
+            {
+                role = 1;
+            }
+            else
+            {
+                role = 2;
+            }
+            
+            String manager = a.getAd_id();
+            Employee oldemp = new Employee(emid, username, pass, namee, addr, email, phone, manager, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), hourwage, role);
+            if(EmployeeDAO.update(oldemp, username, pass, namee, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), addr, email, phone, role, hourwage, manager) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update fail!");
+                setEmployeeFormControl(false);
+                txtIDEmp.setText("");
+                txtUsernameEmp.setText("");
+                txtPassEmp.setText("");
+                txtPassConEmp.setText("");
+                txtNameEmp.setText("");
+                txtBirthEmp.setText("");
+                txtStartDayEmp.setText("");
+                txtHourWageEmp.setText("");
+                txtAddrEmp.setText("");
+                txtEmailEmp.setText("");
+                txtPhoneEmp.setText("");
+                cboRoleEmployee.setSelectedIndex(0);
+            }
+            btnUpdateEmp.setText("Update");
+            btnInsertEmp.setEnabled(true);
+            btnDeleteEmp.setEnabled(true);
+            setEmployeeFormControl(false);
+            modelEmployee.getDataVector().removeAllElements();
+            modelEmployee.fireTableDataChanged();
+            dsEmployee = EmployeeDAO.getList();
+            modelEmployee.setRowCount(0);
+            for(Employee d:dsEmployee)
+            {
+                if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+                {
+                    Vector v = new Vector();
+                    v.add(d.getEm_id());
+                    v.add(d.getUsername());
+                    v.add(d.getPass());
+                    v.add(d.getName());
+                    v.add(d.getBirth());
+                    v.add(d.getStartday());
+                    v.add(d.getHour_wage());
+                    v.add(d.getAddr());
+                    v.add(d.getEmail());
+                    v.add(d.getPhone());
+                    if(d.getEm_role() == 1)
+                    {
+                        v.add("Nước");
+                    }
+                    else
+                    {
+                        v.add("Bếp");
+                    }
+                    //v.add(d.getEm_role());
+                    v.add(d.getManager());
+                    modelEmployee.addRow(v);
+                }
+            }
+            sorterEmployee = (TableRowSorter<TableModel>) vwEmployee.getRowSorter();
+        }
     }//GEN-LAST:event_btnUpdateEmpActionPerformed
 
     private void btnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEmpActionPerformed
@@ -2826,12 +3302,19 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         int row = vwEmployee.getSelectedRow();
 
         setEmployeeFormControl(false);
+        btnInsertEmp.setText("Insert");
+        btnInsertEmp.setEnabled(true);
+        btnUpdateEmp.setText("Update");
+        btnUpdateEmp.setEnabled(true);
+        btnDeleteEmp.setText("Delete");
+        btnDeleteEmp.setEnabled(true);
         if(row >= 0)
         {
             txtIDEmp.setEnabled(false);
             txtIDEmp.setText(modelEmployee.getValueAt(row, 0).toString());
             txtUsernameEmp.setEnabled(false);
             txtUsernameEmp.setText(modelEmployee.getValueAt(row, 1).toString());
+            txtPassEmp.setText(modelEmployee.getValueAt(row, 2).toString());
             txtNameEmp.setText(modelEmployee.getValueAt(row, 3).toString());
             txtBirthEmp.setText(modelEmployee.getValueAt(row, 4).toString());
             txtStartDayEmp.setText(modelEmployee.getValueAt(row, 5).toString());
@@ -3577,6 +4060,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtIDEmp.setEnabled(false);
         txtUsernameEmp.setEnabled(false);
         txtPassEmp.setEnabled(false);
+        jLabel45.setVisible(false);
         txtPassConEmp.setVisible(false);
     }
 
