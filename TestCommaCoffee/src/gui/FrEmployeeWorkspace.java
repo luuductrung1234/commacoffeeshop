@@ -4653,7 +4653,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private ArrayList<TableItem> toKitchenTable(Entry<Order, ArrayList<OrderDetails>> curorder) {
         ArrayList<TableItem> r = new ArrayList<>();
         
-        r.add(new TableItem("Product", "Q", "Price", "Amt"));
+
         for(OrderDetails iter : curorder.getValue()){
             for(Food fitem : this.menufood_list){
                 if(fitem.getFood_id().equals(iter.getFood_id()) && fitem.getIsdrink() == 1){
@@ -4671,7 +4671,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private ArrayList<TableItem> toBarTable(Entry<Order, ArrayList<OrderDetails>> curorder) {
         ArrayList<TableItem> r = new ArrayList<>();
         
-        r.add(new TableItem("Product", "Q", "Price", "Amt"));
+
         for(OrderDetails iter : curorder.getValue()){
             for(Food fitem : this.menufood_list){
                 if(fitem.getFood_id().equals(iter.getFood_id()) && fitem.getIsdrink() == 0){
