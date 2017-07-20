@@ -47,7 +47,8 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
 
 
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày
-  
+
+(*) tạo file patch mỗi khi update mã nguồn phần mềm để người dùng cập nhật trực tiếp mà không cần phải gửi toàn bộ phần mềm mới
   
 # Login Frame
   ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/repo%20picture/login_image.png)
