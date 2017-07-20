@@ -4726,6 +4726,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 oos.writeObject(this.ordernote_list);
                 oos.writeObject(this.order_list);
                 oos.writeObject(this.cur_invoice);
+                oos.writeObject(this.today);
             }
             
             oos.close();
@@ -4750,8 +4751,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 this.ordernote_list = (HashMap<Integer, ArrayList<String>>) ois.readObject();
                 this.order_list = (HashMap<Order, ArrayList<OrderDetails>>) ois.readObject();
                 this.cur_invoice = (Pair<ReceiptNote, ArrayList<ReceiptNoteDetails>>) ois.readObject();
+                LocalDate saveday = (LocalDate) ois.readObject();
                 
                 this.refreshTable();
+                JOptionPane.showMessageDialog(null, "We have a program sudden turning off in day: " + saveday + ". Please check emloyees's schedule in that day!", "HISTORY CHECK WARNNING", JOptionPane.WARNING_MESSAGE);
             }
             
             ois.close();
