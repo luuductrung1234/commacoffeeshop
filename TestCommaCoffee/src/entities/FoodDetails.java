@@ -5,7 +5,7 @@ package entities;
 
 import java.util.*;
 
-public class FoodDetails {
+public class FoodDetails implements java.io.Serializable{
     private String fd_id, food_id, fm_id, unit_use;
     private float quan;
 

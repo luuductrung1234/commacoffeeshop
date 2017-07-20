@@ -9,7 +9,7 @@ package entities;
  *
  * @author DELL
  */
-public class ReceiptNoteDetails {
+public class ReceiptNoteDetails implements java.io.Serializable{
     private String rn_id, fm_id;
     private int quan;
     private float item_price;

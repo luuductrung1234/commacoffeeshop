@@ -10,9 +10,12 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.LineNumberReader;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
@@ -60,6 +63,7 @@ public class FrLogin extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         lbUsername_warn = new javax.swing.JLabel();
         lbPass_warn = new javax.swing.JLabel();
+        btnFirstusing = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("C-System");
@@ -91,7 +95,7 @@ public class FrLogin extends javax.swing.JFrame {
         });
 
         jPanel1.setOpaque(false);
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         ImageIcon dbicon = null;
         try{
@@ -144,6 +148,13 @@ public class FrLogin extends javax.swing.JFrame {
 
         lbPass_warn.setForeground(new java.awt.Color(255, 0, 0));
 
+        btnFirstusing.setText("First Using");
+        btnFirstusing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstusingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,6 +178,10 @@ public class FrLogin extends javax.swing.JFrame {
                         .addGap(117, 117, 117)
                         .addComponent(lblogin)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnFirstusing)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +202,9 @@ public class FrLogin extends javax.swing.JFrame {
                 .addComponent(lbPass_warn, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFirstusing)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -310,6 +327,23 @@ public class FrLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDBSelectKeyPressed
 
+    private void btnFirstusingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstusingActionPerformed
+        // TODO add your handling code here:
+        try {
+            FileOutputStream fos = new FileOutputStream("src/textfile/history.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            
+            oos.writeBoolean(true);
+            
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnFirstusingActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -348,6 +382,7 @@ public class FrLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDBSelect;
+    private javax.swing.JButton btnFirstusing;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbPass;

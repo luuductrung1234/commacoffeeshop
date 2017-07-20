@@ -5,7 +5,7 @@ package entities;
 
 import java.util.*;
 
-public class Admin {
+public class Admin implements java.io.Serializable{
     private String ad_id, username, pass, name;
 
     public Admin() {

@@ -12,7 +12,7 @@ import java.util.Vector;
  *
  * @author DELL
  */
-public class EmpSchedule {
+public class EmpSchedule implements java.io.Serializable{
     private String sche_id, em_id;
     private java.sql.Date workday;
     private int starthour, startminute, endhour, endminute;

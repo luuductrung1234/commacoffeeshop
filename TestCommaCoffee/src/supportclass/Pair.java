@@ -8,8 +8,10 @@ package supportclass;
 /**
  *
  * @author DELL
+ * @param <T1> first item that Pair object contain
+ * @param <T2> second item that Pair object contain
  */
-public class Pair<T1, T2>  {
+public class Pair<T1, T2>  implements java.io.Serializable{
     private T1 first;
     private T2 second;
 

@@ -88,6 +88,7 @@ public class CloseButtonEditor extends DefaultCellEditor {
             this.parent.refreshTable();
         }
         this.parent.ShowCurrentOrderBill();
+        this.parent.saveCurrentInfo(false);
     }else{
         JOptionPane.showMessageDialog(null, this.cur_table.getModel().getValueAt(this.cur_row, 0));
     }

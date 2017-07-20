@@ -220,6 +220,7 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
         this.parent.cur_invoice.getSecond().get(this.selectedrow).setNote(note);
         
         this.parent.ShowCurrentInvoice();
+        this.parent.saveCurrentInfo(false);
         
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.dispose();
@@ -279,6 +280,7 @@ public class DiaEditReceiptNoteDetails extends javax.swing.JDialog {
             this.parent.cur_invoice.getSecond().get(this.selectedrow).setNote(note);
 
             this.parent.ShowCurrentInvoice();
+            this.parent.saveCurrentInfo(false);
 
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.dispose();

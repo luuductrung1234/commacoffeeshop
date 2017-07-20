@@ -5,7 +5,7 @@ package entities;
 
 import java.util.*;
 
-public class Employee {
+public class Employee implements java.io.Serializable{
     private String em_id, username, pass, name, addr, email, phone, manager;
     private java.sql.Date birth, startday;
     private int hour_wage;

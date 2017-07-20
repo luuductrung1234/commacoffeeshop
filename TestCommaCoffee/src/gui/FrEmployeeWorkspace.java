@@ -4710,28 +4710,30 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     
     
 // HISTORY TRACKING
-    private void saveCurrentInfo(boolean finishwork){
-        if(!finishwork){
-            // nếu công việc chưa hoàn thành
-            try {
-                FileOutputStream fos = new FileOutputStream("src/textfile/history.txt");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+    public void saveCurrentInfo(boolean finishwork){
+        FileOutputStream fos;
+        ObjectOutputStream oos;
+        try {
+            fos = new FileOutputStream("src/textfile/history.txt");
+            oos = new ObjectOutputStream(fos);
 
-                // tiến hành lưu các dữ liệu
-                oos.writeBoolean(finishwork);
+            // tiến hành lưu các dữ liệu
+            oos.writeBoolean(finishwork);
+                
+            if(!finishwork){    // nếu công việc chưa hoàn thành
                 oos.writeObject(this.cusnumber_list);
                 oos.writeObject(this.tablestate_list);
                 oos.writeObject(this.ordernote_list);
                 oos.writeObject(this.order_list);
                 oos.writeObject(this.cur_invoice);
-
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
             
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -4748,8 +4750,12 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 this.ordernote_list = (HashMap<Integer, ArrayList<String>>) ois.readObject();
                 this.order_list = (HashMap<Order, ArrayList<OrderDetails>>) ois.readObject();
                 this.cur_invoice = (Pair<ReceiptNote, ArrayList<ReceiptNoteDetails>>) ois.readObject();
+                
+                this.refreshTable();
             }
             
+            ois.close();
+            fis.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FrEmployeeWorkspace.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | ClassNotFoundException ex) {

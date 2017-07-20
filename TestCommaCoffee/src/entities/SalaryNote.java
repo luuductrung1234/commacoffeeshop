@@ -12,7 +12,7 @@ import java.util.Vector;
  *
  * @author DELL
  */
-public class SalaryNote {
+public class SalaryNote implements java.io.Serializable{
     private String sn_id, em_id;
     private java.sql.Date date_pay;
     private float salary_value, work_hour;

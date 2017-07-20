@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author DELL
  */
-public class ReceiptNote {
+public class ReceiptNote implements java.io.Serializable{
     private String rn_id, em_id;
     private java.sql.Date rday;
     private float total_amount;

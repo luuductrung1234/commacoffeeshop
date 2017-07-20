@@ -11,7 +11,7 @@ import java.util.Vector;
  *
  * @author DELL
  */
-public class OrderDetails {
+public class OrderDetails implements java.io.Serializable{
     private String order_id, food_id;
     private int quan;
 

@@ -5,7 +5,7 @@ package entities;
 
 import java.util.Vector;
 
-public class Customer {
+public class Customer implements java.io.Serializable{
     private String cus_id, name, phone, email;
     private int discount;
 

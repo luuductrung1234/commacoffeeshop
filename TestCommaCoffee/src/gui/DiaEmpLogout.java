@@ -133,6 +133,15 @@ public class DiaEmpLogout extends javax.swing.JDialog {
         // TODO add your handling code here:
         int[] slrows = this.tbEmployee.getSelectedRows();
         
+        if(slrows.length >= this.parent.working_emp.size()){
+            int r = JOptionPane.showConfirmDialog(null, "There still have working table! Are you sure the logout?");
+            if(r == JOptionPane.NO_OPTION){
+                return;
+            }else{
+                this.parent.saveCurrentInfo(true);
+            }
+        }
+        
         int decrease_index = 0;
         for(int index : slrows){
             this.parent.setScheduleTime(this.parent.working_schedule.get(index - decrease_index), false);        // lấy giờ kết thúc làm việc

@@ -12,7 +12,7 @@ import java.util.Vector;
  *
  * @author DELL
  */
-public class Order {
+public class Order implements java.io.Serializable{
     private String order_id, cus_id;
     private int ordertable;
     private java.sql.Date ordertime;

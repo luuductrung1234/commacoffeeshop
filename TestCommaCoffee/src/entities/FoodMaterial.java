@@ -5,7 +5,7 @@ package entities;
 
 import java.util.Vector;
 
-public class FoodMaterial {
+public class FoodMaterial implements java.io.Serializable{
     private String fm_id, name, info, fmtype, unit_buy, supplier;
     private Byte usefor;
     private float standard_price;
