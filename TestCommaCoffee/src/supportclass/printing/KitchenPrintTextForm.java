@@ -38,20 +38,21 @@ public class KitchenPrintTextForm {
     }
 
     private void initDefaultForm(int mode) {
-        this.defaultform = new String[4];
+        this.defaultform = new String[5];
         
         this.defaultform[0] = "TABLE - " + this.tablenumber;
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         this.defaultform[1] = "No." + this.orderid + "      " + LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) ) + "    " + sdf.format(c.getTime());
         this.defaultform[2] = "#Customer: " + this.numbercustomer;
+        this.defaultform[3] = " ";
         
         switch(mode){
             case 1:
-                this.defaultform[3] = "                BAR PROCESS";
+                this.defaultform[4] = "                BAR PROCESS";
                 break;
             case 2:
-                this.defaultform[3] = "               KITCHEN PROCESS";
+                this.defaultform[4] = "               KITCHEN PROCESS";
         }
     }
     
@@ -116,6 +117,6 @@ public class KitchenPrintTextForm {
     }
     
     public Integer[] getBoldLine(){
-        return new Integer[] {0, 3};
+        return new Integer[] {0, 4};
     }
 }
