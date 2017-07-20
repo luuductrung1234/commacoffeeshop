@@ -87,7 +87,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnCustomer = new javax.swing.JToggleButton();
         btnFood = new javax.swing.JToggleButton();
         btnFoodMaterial = new javax.swing.JToggleButton();
-        btnReceiptNote = new javax.swing.JToggleButton();
         btnOrder = new javax.swing.JToggleButton();
         btnProfile = new javax.swing.JToggleButton();
         pnDisplay = new javax.swing.JPanel();
@@ -134,6 +133,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         cboRoleEmployee = new javax.swing.JComboBox<>();
         jLabel33 = new javax.swing.JLabel();
         txtIDEmp = new javax.swing.JTextField();
+        txtPassEmp = new javax.swing.JPasswordField();
+        txtPassConEmp = new javax.swing.JPasswordField();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
         pnEmployeeInformationControl = new javax.swing.JPanel();
         btnInsertEmp = new javax.swing.JButton();
         btnUpdateEmp = new javax.swing.JButton();
@@ -314,7 +317,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtPassAd = new javax.swing.JPasswordField();
         pnAdminControl = new javax.swing.JPanel();
         btnUpdateAd = new javax.swing.JButton();
-        btnChangepPassAd = new javax.swing.JButton();
+        btnChangePassAd = new javax.swing.JButton();
         btnInsertNewAd = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -379,16 +382,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         });
         pnShowControl.add(btnFoodMaterial);
 
-        btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
-        btnReceiptNote.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnReceiptNote.setText("Receipt Note");
-        btnReceiptNote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReceiptNoteActionPerformed(evt);
-            }
-        });
-        pnShowControl.add(btnReceiptNote);
-
         btnOrder.setBackground(new java.awt.Color(255, 255, 255));
         btnOrder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnOrder.setText("Order");
@@ -419,7 +412,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnBlankLayout.setVerticalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 524, Short.MAX_VALUE)
+            .addGap(0, 531, Short.MAX_VALUE)
         );
 
         pnDisplay.add(pnBlank, "card2");
@@ -525,9 +518,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwEmployeeLayout.setVerticalGroup(
             pnvwEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 496, Short.MAX_VALUE)
             .addGroup(pnvwEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
         );
 
         pnShowEmployee.add(pnvwEmployee, java.awt.BorderLayout.CENTER);
@@ -560,36 +553,57 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         jLabel33.setText("Employee ID");
 
+        jLabel45.setText("Confirm Password");
+
+        jLabel46.setText("Password");
+
         javax.swing.GroupLayout pnEmployeeInformationLayout = new javax.swing.GroupLayout(pnEmployeeInformation);
         pnEmployeeInformation.setLayout(pnEmployeeInformationLayout);
         pnEmployeeInformationLayout.setHorizontalGroup(
             pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel33))
-                .addGap(58, 58, 58)
+                    .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEmployeeInformationLayout.createSequentialGroup()
+                            .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel33)
+                                .addComponent(jLabel46)
+                                .addComponent(jLabel45))
+                            .addGap(58, 58, 58))
+                        .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addGap(120, 120, 120)))
+                    .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
+                        .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(114, 114, 114)))
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtBirthEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtStartDayEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtHourWageEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtAddrEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtEmailEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPhoneEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtUsernameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtIDEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                    .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
+                        .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
+                        .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAddrEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtStartDayEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNameEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(txtUsernameEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(txtIDEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(txtPassConEmp)
+                                    .addComponent(txtPassEmp)))
+                            .addComponent(txtEmailEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhoneEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHourWageEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBirthEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 19, Short.MAX_VALUE))))
         );
         pnEmployeeInformationLayout.setVerticalGroup(
             pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -603,8 +617,16 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     .addComponent(txtUsernameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel46))
+                .addGap(2, 2, 2)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassConEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel45))
+                .addGap(18, 18, 18)
+                .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNameEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -633,7 +655,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         btnInsertEmp.setText("Insert");
@@ -793,7 +815,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwEmpScheLayout.setVerticalGroup(
             pnvwEmpScheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
         );
 
         pnvwNote.add(pnvwEmpSche);
@@ -895,7 +917,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnvwSalaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(txtIsPaidSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addComponent(pnSalaryControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -911,7 +933,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnSalaryNoteLayout.setVerticalGroup(
             pnSalaryNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnShowSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+            .addComponent(pnShowSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
         );
 
         pnDisplay.add(pnSalaryNote, "card10");
@@ -1006,9 +1028,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwCustomerLayout.setVerticalGroup(
             pnvwCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 496, Short.MAX_VALUE)
             .addGroup(pnvwCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
         );
 
         pnShowCustomer.add(pnvwCustomer, java.awt.BorderLayout.CENTER);
@@ -1081,7 +1103,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(txtDiscountCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         btnInsertCus.setText("Insert");
@@ -1126,7 +1148,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnCustomerFormLayout.setVerticalGroup(
             pnCustomerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCustomerFormLayout.createSequentialGroup()
-                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnCustomerInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1290,9 +1312,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwFDLayout.setVerticalGroup(
             pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 147, Short.MAX_VALUE)
+            .addGap(0, 154, Short.MAX_VALUE)
             .addGroup(pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
         );
 
         pnvw.add(pnvwFD, java.awt.BorderLayout.CENTER);
@@ -1386,7 +1408,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(cboTypeFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         btnUpdateFood.setText("Update");
@@ -1510,7 +1532,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUnitUseFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         btnUpdateFD.setText("Update");
@@ -1652,7 +1674,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwFMLayout.setVerticalGroup(
             pnvwFMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
         );
 
         pnShowFM.add(pnvwFM, java.awt.BorderLayout.CENTER);
@@ -1765,7 +1787,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSupplierFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         btnInsertFM.setText("Insert");
@@ -1810,7 +1832,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnFMFormLayout.setVerticalGroup(
             pnFMFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFMFormLayout.createSequentialGroup()
-                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnFMInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1912,7 +1934,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwReceiptNoteLayout.setVerticalGroup(
             pnvwReceiptNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         pnShowReceipt.add(pnvwReceiptNote);
@@ -1970,7 +1992,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnReceiptNoteDetailsLayout.setVerticalGroup(
             pnReceiptNoteDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         pnShowReceipt.add(pnReceiptNoteDetails);
@@ -2072,7 +2094,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwOrderLayout.setVerticalGroup(
             pnvwOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOrder);
@@ -2125,7 +2147,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwODLayout.setVerticalGroup(
             pnvwODLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOD);
@@ -2145,10 +2167,20 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         jLabel36.setText("Name");
 
         btnUpdateAd.setText("Update");
+        btnUpdateAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateAdActionPerformed(evt);
+            }
+        });
         pnAdminControl.add(btnUpdateAd);
 
-        btnChangepPassAd.setText("Change Pass");
-        pnAdminControl.add(btnChangepPassAd);
+        btnChangePassAd.setText("Change Pass");
+        btnChangePassAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePassAdActionPerformed(evt);
+            }
+        });
+        pnAdminControl.add(btnChangePassAd);
 
         btnInsertNewAd.setText("Insert New Admin");
         pnAdminControl.add(btnInsertNewAd);
@@ -2199,7 +2231,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     .addComponent(txtNameAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnAdminControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(324, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnProfileLayout = new javax.swing.GroupLayout(pnProfile);
@@ -2284,8 +2316,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
             this.btnFoodMaterial.setSelected(false);
             this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnReceiptNote.setSelected(false);
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+//            this.btnReceiptNote.setSelected(false);
+//            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
             this.btnOrder.setSelected(false);
             this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
             this.btnProfile.setSelected(false);
@@ -2318,8 +2350,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
             this.btnFoodMaterial.setSelected(false);
             this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnReceiptNote.setSelected(false);
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+//            this.btnReceiptNote.setSelected(false);
+//            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
             this.btnOrder.setSelected(false);
             this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
             this.btnProfile.setSelected(false);
@@ -2425,7 +2457,76 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_vwCustomerMouseClicked
 
     private void btnInsertEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertEmpActionPerformed
-        
+        if(btnInsertEmp.getText().equals("Insert"))
+        {
+            btnInsertEmp.setText("Save");
+            btnUpdateEmp.setEnabled(false);
+            btnDeleteEmp.setEnabled(false);
+            setEmployeeFormControl(true);
+            txtUsernameEmp.setEnabled(true);
+            txtPassEmp.setEnabled(true);
+            txtPassConEmp.setVisible(true);
+            txtIDEmp.setText("auto");
+            txtUsernameEmp.setText("");
+            txtPassEmp.setText("");
+            txtPassConEmp.setText("");
+            txtNameEmp.setText("");
+            txtBirthEmp.setText("");
+            txtStartDayEmp.setText("");
+            txtHourWageEmp.setText("");
+            txtAddrEmp.setText("");
+            txtEmailEmp.setText("");
+            txtPhoneEmp.setText("");
+            cboRoleEmployee.setSelectedIndex(0);
+            
+        }
+        if(btnInsertEmp.getText().equals("Save"))
+        {
+            String emid = txtIDEmp.getText().trim();
+            
+            String username = txtUsernameEmp.getText().trim();
+            if(username.length() == 0 || username.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Username is not valid!");
+                txtUsernameEmp.requestFocus();
+                return;
+            }
+            for(Employee d:dsEmployee)
+            {
+                if(d.getUsername().equals(username))
+                {
+                    JOptionPane.showMessageDialog(null, "Username is already exist!");
+                    txtUsernameEmp.requestFocus();
+                    return;
+                }
+            }
+            
+            String pass = new String(txtPassEmp.getPassword()).trim();
+            if(username.length() == 0 || username.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Password is not valid!");
+                txtPassEmp.requestFocus();
+                return;
+            }
+            String passcon = new String(txtPassConEmp.getPassword()).trim();
+            if(!passcon.equals(pass))
+            {
+                JOptionPane.showMessageDialog(null, "Confirm password is not match!");
+                txtPassConEmp.requestFocus();
+                return;
+            }
+            
+            String namee = txtNameEmp.getText().trim();
+            if(username.length() == 0 || username.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Name is not valid!");
+                txtUsernameEmp.requestFocus();
+                return;
+            }
+            
+            
+            
+        }
     }//GEN-LAST:event_btnInsertEmpActionPerformed
 
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
@@ -2469,8 +2570,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
             this.btnFoodMaterial.setSelected(false);
             this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnReceiptNote.setSelected(false);
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+//            this.btnReceiptNote.setSelected(false);
+//            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
             this.btnOrder.setSelected(false);
             this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
             this.btnProfile.setSelected(false);
@@ -2507,8 +2608,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
             this.btnFood.setSelected(false);
             this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnReceiptNote.setSelected(false);
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+//            this.btnReceiptNote.setSelected(false);
+//            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
             this.btnOrder.setSelected(false);
             this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
             this.btnProfile.setSelected(false);
@@ -2813,8 +2914,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
             this.btnFoodMaterial.setSelected(false);
             this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnReceiptNote.setSelected(false);
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+//            this.btnReceiptNote.setSelected(false);
+//            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
             this.btnOrder.setSelected(false);
             this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
             
@@ -2847,8 +2948,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
             this.btnFoodMaterial.setSelected(false);
             this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnReceiptNote.setSelected(false);
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+//            this.btnReceiptNote.setSelected(false);
+//            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
             this.btnProfile.setSelected(false);
             this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
             
@@ -2945,39 +3046,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelOD.fireTableDataChanged();
     }//GEN-LAST:event_btnResetOrderDataActionPerformed
 
-    private void btnReceiptNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceiptNoteActionPerformed
-        if(this.btnReceiptNote.isSelected())
-        {
-            this.btnReceiptNote.setBackground(new java.awt.Color(84, 96, 153));
-            
-            this.btnEmployee.setSelected(false);
-            this.btnEmployee.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnSalaryNote.setSelected(false);
-            this.btnSalaryNote.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnCustomer.setSelected(false);
-            this.btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnFood.setSelected(false);
-            this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnFoodMaterial.setSelected(false);
-            this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnOrder.setSelected(false);
-            this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnProfile.setSelected(false);
-            this.btnProfile.setBackground(new java.awt.Color(255, 255, 255));
-            
-            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
-            cl.show(pnDisplay, "card7");
-            
-            initDatavwReceipt();
-        }
-        else
-        {
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
-            CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
-            cl.show(pnDisplay, "card2");
-        }
-    }//GEN-LAST:event_btnReceiptNoteActionPerformed
-
     private void btnResetReceiptDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetReceiptDataActionPerformed
         modelReceipt.getDataVector().removeAllElements();
         modelReceipt.fireTableDataChanged();
@@ -3060,8 +3128,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             this.btnFood.setBackground(new java.awt.Color(255, 255, 255));
             this.btnFoodMaterial.setSelected(false);
             this.btnFoodMaterial.setBackground(new java.awt.Color(255, 255, 255));
-            this.btnReceiptNote.setSelected(false);
-            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
+//            this.btnReceiptNote.setSelected(false);
+//            this.btnReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
             this.btnOrder.setSelected(false);
             this.btnOrder.setBackground(new java.awt.Color(255, 255, 255));
             this.btnProfile.setSelected(false);
@@ -3093,6 +3161,39 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSearchEmpScheActionPerformed
 
+    private void btnChangePassAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassAdActionPerformed
+        new DiaAdminChangePass(this, true, a).setVisible(true);
+    }//GEN-LAST:event_btnChangePassAdActionPerformed
+
+    private void btnUpdateAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateAdActionPerformed
+        if(btnUpdateAd.getText().equals("Update"))
+        {
+            txtNameAd.setEnabled(true);
+            btnUpdateAd.setText("Save");
+            return;
+        }
+        if(btnUpdateAd.getText().equals("Save"))
+        {
+            String namead = txtNameAd.getText().trim();
+            if(namead.length() == 0 || namead.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Admin name is not valid!");
+                txtNameAd.requestFocus();
+                return;
+            }
+            if(AdminDAO.update(a, txtUsernameAd.getText().trim(), new String(txtPassAd.getPassword()).trim(), namead) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update fail!");
+            }
+            txtNameAd.setEnabled(false);
+            btnUpdateAd.setText("Update");
+        }
+    }//GEN-LAST:event_btnUpdateAdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3120,6 +3221,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -3129,7 +3233,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChangepPassAd;
+    private javax.swing.JButton btnChangePassAd;
     private javax.swing.JToggleButton btnCustomer;
     private javax.swing.JButton btnDeleteCus;
     private javax.swing.JButton btnDeleteEmp;
@@ -3147,7 +3251,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnInsertNewAd;
     private javax.swing.JToggleButton btnOrder;
     private javax.swing.JToggleButton btnProfile;
-    private javax.swing.JToggleButton btnReceiptNote;
     private javax.swing.JButton btnResetCus;
     private javax.swing.JButton btnResetCustomerData;
     private javax.swing.JButton btnResetEmp;
@@ -3221,6 +3324,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3332,6 +3437,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JTextField txtNameFM;
     private javax.swing.JTextField txtNameFood;
     private javax.swing.JPasswordField txtPassAd;
+    private javax.swing.JPasswordField txtPassConEmp;
+    private javax.swing.JPasswordField txtPassEmp;
     private javax.swing.JTextField txtPhoneCus;
     private javax.swing.JTextField txtPhoneEmp;
     private javax.swing.JTextField txtPriceFood;
@@ -3469,6 +3576,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         
         txtIDEmp.setEnabled(false);
         txtUsernameEmp.setEnabled(false);
+        txtPassEmp.setEnabled(false);
+        txtPassConEmp.setVisible(false);
     }
 
     //customer

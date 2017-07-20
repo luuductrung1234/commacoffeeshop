@@ -47,7 +47,7 @@ public class AdminDAO {
             pst.setString(1, newpass);
             pst.setString(2, old_admin.getAd_id());
             pst.setString(3, old_admin.getUsername());
-            pst.setString(4, old_admin.getUsername());
+            pst.setString(4, old_admin.getPass());
             
             return pst.executeUpdate();
             
