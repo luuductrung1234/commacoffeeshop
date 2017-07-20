@@ -6,6 +6,7 @@
 package gui;
 
 import entities.*;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -148,7 +149,7 @@ public class FrLogin extends javax.swing.JFrame {
 
         lbPass_warn.setForeground(new java.awt.Color(255, 0, 0));
 
-        btnFirstusing.setText("First Using");
+        btnFirstusing.setText("First Using Check");
         btnFirstusing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirstusingActionPerformed(evt);
@@ -177,11 +178,10 @@ public class FrLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(lblogin)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnFirstusing)
-                .addGap(15, 15, 15))
+                .addComponent(btnFirstusing))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,6 +337,8 @@ public class FrLogin extends javax.swing.JFrame {
             
             oos.close();
             fos.close();
+            
+            this.btnFirstusing.setBackground(Color.GREEN);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
