@@ -11,8 +11,8 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
 
 **Note:**
  - file "nn" là file rỗng, bù nhìn, giúp giữ cho folder tồn tại khi mà folder không chưa file nào khác
- - folder "Testcommacoffee" là một netbean project, nên khi clone mã nguồn về lập trình viên có thể open ngay folder "Testcommacoffe" vào NetbeanIDE để code (không cần phải copy và ghi đè folder "src" nữa)
  - Nếu bạn tham gia phát triển cùng chúng tôi xin hãy xem kĩ phần code style requirement
+ - Khi clone project về máy, lấy code dữ liệu từ folder chứa source code "src" và link các thư viện "java" (jdk) và "lib" vào project
 
 
 # Project's procession:
