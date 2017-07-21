@@ -2451,6 +2451,12 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         int row = vwCustomer.getSelectedRow();
         
         setCustomerControl(false);
+        btnInsertCus.setText("Insert");
+        btnInsertCus.setEnabled(true);
+        btnUpdateCus.setText("Update");
+        btnUpdateCus.setEnabled(true);
+        btnDeleteCus.setText("Delete");
+        btnDeleteCus.setEnabled(true);
         if(row >= 0)
         {
             txtIDCus.setText(modelCustomer.getValueAt(row, 0).toString());
@@ -2763,6 +2769,12 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private void btnUpdateEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpActionPerformed
         if(btnUpdateEmp.getText().equals("Update"))
         {
+            int row = vwEmployee.getSelectedRow();
+            if(row < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Must be choose an employee you want to update");
+                return;
+            }
             btnUpdateEmp.setText("Save");
             btnInsertEmp.setEnabled(false);
             btnDeleteEmp.setEnabled(false);
@@ -3014,15 +3026,283 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteEmpActionPerformed
 
     private void btnResetEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetEmpActionPerformed
-        // TODO add your handling code here:
+        btnInsertEmp.setEnabled(true);
+        btnInsertEmp.setText("Insert");
+        btnUpdateEmp.setEnabled(true);
+        btnUpdateEmp.setText("Update");
+        btnDeleteEmp.setEnabled(true);
+        setEmployeeFormControl(false);
+        
+        txtIDEmp.setText("");
+        txtUsernameEmp.setText("");
+        txtPassEmp.setText("");
+        txtPassConEmp.setText("");
+        txtNameEmp.setText("");
+        txtBirthEmp.setText("");
+        txtStartDayEmp.setText("");
+        txtHourWageEmp.setText("");
+        txtAddrEmp.setText("");
+        txtEmailEmp.setText("");
+        txtPhoneEmp.setText("");
+        cboRoleEmployee.setSelectedIndex(0);
     }//GEN-LAST:event_btnResetEmpActionPerformed
 
     private void btnInsertCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertCusActionPerformed
-        // TODO add your handling code here:
+        if(btnInsertCus.getText().equals("Insert"))
+        {
+            btnInsertCus.setText("Save");
+            btnUpdateCus.setEnabled(false);
+            btnDeleteCus.setEnabled(false);
+            setCustomerControl(true);
+
+            txtIDCus.setText("auto");            
+            txtNameCus.setText("");
+            txtPhoneCus.setText("");
+            txtEmailCus.setText("");
+            txtDiscountCus.setText("");
+            return;
+        }
+        if(btnInsertCus.getText().equals("Save"))
+        {
+            String cusid = txtIDCus.getText().trim();
+            
+            String name = txtNameCus.getText().trim();
+            if(name.length() == 0 || name.length() > 40)
+            {
+                JOptionPane.showMessageDialog(null, "Name is not valid!");
+                txtNameCus.requestFocus();
+                return;
+            }
+            
+            String phone = txtPhoneCus.getText().trim();
+            if(phone.length() != 0)
+            {
+                try
+                {
+                    if(phone.length() > 12)
+                    {
+                        JOptionPane.showMessageDialog(null, "Phone is not valid!");
+                        txtPhoneCus.requestFocus();
+                        return;
+                    }
+                    if(Integer.parseInt(phone) < 0)
+                    {
+                        JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                        txtPhoneCus.requestFocus();
+                        return;
+                    }
+
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                    txtPhoneCus.requestFocus();
+                    return;
+                }
+            }
+            
+            String email = txtEmailCus.getText().trim();
+            if(email.length() != 0)
+            {
+                Pattern pemail = Pattern.compile("[\\w\\d]+[@][\\w]+[.][\\w]+");
+                Matcher m = null;
+                try
+                {
+                    m = pemail.matcher(email);
+                    if(!m.matches())
+                    {
+                        JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                        txtEmailCus.requestFocus();
+                        return;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                    txtEmailCus.requestFocus();
+                    return;
+                }
+            }
+            
+            int discount;
+            try
+            {
+                discount = Integer.parseInt(txtDiscountCus.getText().trim());
+                if(discount <= 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Discount must be greater than 0!");
+                    txtDiscountCus.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Discount must be only contain integer number!");
+                txtDiscountCus.requestFocus();
+                return;
+            }
+            
+            Customer cus = new Customer(cusid, name, phone, email, discount);
+            if(CustomerDAO.insert(cus) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Insert successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Insert fail!");
+                btnInsertCus.setText("Insert");
+                btnUpdateCus.setEnabled(true);
+                btnDeleteCus.setEnabled(true);
+                txtIDCus.setText("");            
+                txtNameCus.setText("");
+                txtPhoneCus.setText("");
+                txtEmailCus.setText("");
+                txtDiscountCus.setText("");
+            }
+            txtIDCus.setText(cus.getCus_id());
+            btnInsertCus.setText("Insert");
+            btnUpdateCus.setEnabled(true);
+            btnDeleteCus.setEnabled(true);
+            setCustomerControl(false);
+            modelCustomer.getDataVector().removeAllElements();
+            modelCustomer.fireTableDataChanged();
+            dsCustomer = CustomerDAO.getList();
+            modelCustomer.setRowCount(0);
+            for(Customer d:dsCustomer)
+            {
+                modelCustomer.addRow(d.toVector());
+            }
+            sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
+            
+        }
     }//GEN-LAST:event_btnInsertCusActionPerformed
 
     private void btnUpdateCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCusActionPerformed
-        // TODO add your handling code here:
+        if(btnUpdateCus.getText().equals("Update"))
+        {
+            int row = vwCustomer.getSelectedRow();
+            if(row < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Must be choose a customer you want to update");
+                return;
+            }
+            btnUpdateCus.setText("Save");
+            btnInsertCus.setEnabled(false);
+            btnDeleteCus.setEnabled(false);
+            setCustomerControl(true);
+            return;
+        }
+        if(btnUpdateCus.getText().equals("Save"))
+        {
+            String cusid = txtIDCus.getText().trim();
+            
+            String name = txtNameCus.getText().trim();
+            if(name.length() == 0 || name.length() > 40)
+            {
+                JOptionPane.showMessageDialog(null, "Name is not valid!");
+                txtNameCus.requestFocus();
+                return;
+            }
+            
+            String phone = txtPhoneCus.getText().trim();
+            if(phone.length() != 0)
+            {
+                try
+                {
+                    if(phone.length() > 12)
+                    {
+                        JOptionPane.showMessageDialog(null, "Phone is not valid!");
+                        txtPhoneCus.requestFocus();
+                        return;
+                    }
+                    if(Integer.parseInt(phone) < 0)
+                    {
+                        JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                        txtPhoneCus.requestFocus();
+                        return;
+                    }
+
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Phone is not valid! Phone must be only contain integer number!");
+                    txtPhoneCus.requestFocus();
+                    return;
+                }
+            }
+            
+            String email = txtEmailCus.getText().trim();
+            if(email.length() != 0)
+            {
+                Pattern pemail = Pattern.compile("[\\w\\d]+[@][\\w]+[.][\\w]+");
+                Matcher m = null;
+                try
+                {
+                    m = pemail.matcher(email);
+                    if(!m.matches())
+                    {
+                        JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                        txtEmailCus.requestFocus();
+                        return;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(null, "Email is not valid!\nHint: xxx@xx.xx(.xx)");
+                    txtEmailCus.requestFocus();
+                    return;
+                }
+            }
+            
+            int discount;
+            try
+            {
+                discount = Integer.parseInt(txtDiscountCus.getText().trim());
+                if(discount <= 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Discount must be greater than 0!");
+                    txtDiscountCus.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Discount must be only contain integer number!");
+                txtDiscountCus.requestFocus();
+                return;
+            }
+            
+            Customer cus = new Customer(cusid, name, phone, email, discount);
+            if(CustomerDAO.update(cus, name, phone, email, discount) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update fail!");
+                btnUpdateCus.setText("Update");
+                btnInsertCus.setEnabled(true);
+                btnDeleteCus.setEnabled(true);
+                txtIDCus.setText("");            
+                txtNameCus.setText("");
+                txtPhoneCus.setText("");
+                txtEmailCus.setText("");
+                txtDiscountCus.setText("");
+            }
+            btnUpdateCus.setText("Update");
+            btnInsertCus.setEnabled(true);
+            btnDeleteCus.setEnabled(true);
+            setCustomerControl(false);
+            modelCustomer.getDataVector().removeAllElements();
+            modelCustomer.fireTableDataChanged();
+            dsCustomer = CustomerDAO.getList();
+            modelCustomer.setRowCount(0);
+            for(Customer d:dsCustomer)
+            {
+                modelCustomer.addRow(d.toVector());
+            }
+            sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
+        }
     }//GEN-LAST:event_btnUpdateCusActionPerformed
 
     private void btnDeleteCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCusActionPerformed
@@ -3030,7 +3310,18 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteCusActionPerformed
 
     private void btnResetCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetCusActionPerformed
-        // TODO add your handling code here:
+        btnInsertCus.setEnabled(true);
+        btnInsertCus.setText("Insert");
+        btnUpdateCus.setEnabled(true);
+        btnUpdateCus.setText("Update");
+        btnDeleteCus.setEnabled(true);
+        setCustomerControl(false);
+        
+        txtIDCus.setText("");            
+        txtNameCus.setText("");
+        txtPhoneCus.setText("");
+        txtEmailCus.setText("");
+        txtDiscountCus.setText("");
     }//GEN-LAST:event_btnResetCusActionPerformed
 
     private void btnFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFoodActionPerformed
