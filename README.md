@@ -12,6 +12,7 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
 **Note:**
  - file "nn" là file rỗng, bù nhìn, giúp giữ cho folder tồn tại khi mà folder không chưa file nào khác
  - folder "Testcommacoffee" là một netbean project, nên khi clone mã nguồn về lập trình viên có thể open ngay folder "Testcommacoffe" vào NetbeanIDE để code (không cần phải copy và ghi đè folder "src" nữa)
+ - Nếu bạn tham gia phát triển cùng chúng tôi xin hãy xem kĩ phần code style requirement
 
 
 # Project's procession:
@@ -29,7 +30,7 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
     + đã xong : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
     + đã xong : In bill thông qua printer. Tính năng tuỳ chỉnh hiển thị văn bản in trước khi in
     + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
-    + chưa hoàn thành : In thêm note của từng món ăn trong bill (kitchen print)
+    + đã xong : In thêm note của từng món ăn trong bill (kitchen print)
     + chưa hoàn thành : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc
     + chưa hàng thành : thêm giá mặc định cho các nguyên liệu (FoodMaterials) => Sẽ cần phải điều chỉnh database, entities class, model class query, giao diện của FrEmployeeWorkspace và FrAdminWorkspace
     + chưa hoàn thành : tách code

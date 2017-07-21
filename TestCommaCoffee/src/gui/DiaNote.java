@@ -244,7 +244,7 @@ public class DiaNote extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        String defaultnote = "<NOTE>   \n<style>: ";
+        String defaultnote = "<style>: ";
         if(this.rdHot.isSelected()){
             defaultnote += "hot";
         }

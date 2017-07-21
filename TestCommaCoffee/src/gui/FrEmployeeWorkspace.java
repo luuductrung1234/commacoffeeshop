@@ -371,11 +371,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnBlank.setLayout(pnBlankLayout);
         pnBlankLayout.setHorizontalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 954, Short.MAX_VALUE)
+            .addGap(0, 919, Short.MAX_VALUE)
         );
         pnBlankLayout.setVerticalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGap(0, 628, Short.MAX_VALUE)
         );
 
         pnDisplay.add(pnBlank, "card5");
@@ -1802,11 +1802,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnWait.setLayout(pnWaitLayout);
         pnWaitLayout.setHorizontalGroup(
             pnWaitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 951, Short.MAX_VALUE)
+            .addGap(0, 916, Short.MAX_VALUE)
         );
         pnWaitLayout.setVerticalGroup(
             pnWaitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGap(0, 562, Short.MAX_VALUE)
         );
 
         pnMenuDisplayDetails.add(pnWait, "card7");
@@ -1819,7 +1819,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnDisplayMenu.setLayout(pnDisplayMenuLayout);
         pnDisplayMenuLayout.setHorizontalGroup(
             pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 954, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
         );
         pnDisplayMenuLayout.setVerticalGroup(
             pnDisplayMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2053,7 +2053,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                             .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
                                 .addComponent(lbPassstate1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtEmpPassconfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                                .addComponent(txtEmpPassconfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                             .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
                                 .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbBirthstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2260,7 +2260,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbSettingstate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
         pnDisplaySettingLayout.setVerticalGroup(
             pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2300,7 +2300,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     .addGroup(pnDisplaySettingLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbSettingstate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2328,7 +2328,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnOrderTable.setLayout(pnOrderTableLayout);
         pnOrderTableLayout.setHorizontalGroup(
             pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         );
         pnOrderTableLayout.setVerticalGroup(
             pnOrderTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2347,11 +2347,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnBillBlank.setLayout(pnBillBlankLayout);
         pnBillBlankLayout.setHorizontalGroup(
             pnBillBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 386, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
         pnBillBlankLayout.setVerticalGroup(
             pnBillBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 622, Short.MAX_VALUE)
+            .addGap(0, 617, Short.MAX_VALUE)
         );
 
         pnBill.add(pnBillBlank, "card4");
@@ -2359,7 +2359,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnOrderBill.setLayout(new javax.swing.BoxLayout(pnOrderBill, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel2.setBackground(new java.awt.Color(3, 22, 38));
-        jPanel2.setPreferredSize(new java.awt.Dimension(201, 80));
+        jPanel2.setPreferredSize(new java.awt.Dimension(201, 90));
 
         String[] cus_name = new String[this.cus_list.size()];
         for(int i = 0; i < this.cus_list.size(); i++){
@@ -2397,9 +2397,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lbShowOrderTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbCustomer)
                 .addGap(18, 18, 18)
@@ -2409,6 +2406,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCustomernumber, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(lbShowOrderTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2420,7 +2420,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     .addComponent(lbCustomer)
                     .addComponent(jLabel20)
                     .addComponent(txtCustomernumber, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pnOrderBill.add(jPanel2);
@@ -2582,7 +2582,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnReceitpInput.setLayout(pnReceitpInputLayout);
         pnReceitpInputLayout.setHorizontalGroup(
             pnReceitpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rlbShowReceiptBill, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+            .addComponent(rlbShowReceiptBill, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
             .addGroup(pnReceitpInputLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(pnReceitpInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2609,7 +2609,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     .addGroup(pnReceitpInputLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         this.rlbShowReceiptBill.setText("Invoice Note" + " --------- Day:" + this.today);
@@ -2955,6 +2955,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             this.setTableState(this.cur_table, 2);
             this.refreshTable();
+            this.saveCurrentInfo(false);
         }
     }//GEN-LAST:event_btnPrintActionPerformed
 
@@ -3449,7 +3450,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(this.getTableState(this.cur_table) == 2 || this.getTableState(this.cur_table) == 1){
             try{
+                int cusnum = Integer.parseInt(this.txtCustomernumber.getText());
+                if(cusnum < 0)
+                    return;
                 this.cusnumber_list.set(this.cur_table-1, Integer.parseInt(this.txtCustomernumber.getText()));
+                this.saveCurrentInfo(false);
             }catch(NumberFormatException ex){
                 ex.getStackTrace();
                 JOptionPane.showMessageDialog(null, "Customer number is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
@@ -4001,6 +4006,25 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 ++numberadd;
             }
         }
+        
+        // TIME BUTTON
+        JButton b = new JButton();
+        b.addActionListener((ActionEvent e) ->{
+            if(this.getTableState(this.cur_table) == 2 || this.getTableState(this.cur_table) == 1){
+                int cusnum = Integer.parseInt(this.txtCustomernumber.getText());
+                cusnum++;
+                this.txtCustomernumber.setText(String.valueOf(cusnum));
+                this.cusnumber_list.set(this.cur_table-1, Integer.parseInt(this.txtCustomernumber.getText()));
+                this.saveCurrentInfo(false);
+            }
+        });
+        b.setText("CHECK IN");
+        b.setFont(b.getFont().deriveFont(14f).deriveFont(Font.BOLD));
+        b.setSize(40, 40);
+        
+        this.pnOther.add(b);
+        ++numberadd;
+        // END TIME BUTTON
         
         for(int i = 0; i < (this.menuitem_number-numberadd); i++){          // xuất những khoảng trống
             JLabel l = new JLabel();
@@ -4671,14 +4695,19 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private ArrayList<TableItem> toKitchenTable(Entry<Order, ArrayList<OrderDetails>> curorder) {
         ArrayList<TableItem> r = new ArrayList<>();
         
-
-        for(OrderDetails iter : curorder.getValue()){
+        this.cur_ordernote = this.getNoteofTable(this.cur_table);
+        for(int i = 0; i < this.cur_order.getValue().size(); i++){
             for(Food fitem : this.menufood_list){
-                if(fitem.getFood_id().equals(iter.getFood_id()) && fitem.getIsdrink() == 1){
+                if(fitem.getFood_id().equals(this.cur_order.getValue().get(i).getFood_id()) && fitem.getIsdrink() == 1){
                     String name = fitem.getName();
-                    int quan = iter.getQuan();
+                    int quan = this.cur_order.getValue().get(i).getQuan();
                     
                     r.add(new TableItem(name, String.valueOf(quan), "", ""));
+                    // thêm note kèm sau món
+                    String[] noteline = this.cur_ordernote.getValue().get(i).split("\n");
+                    for(String line : noteline){
+                        r.add(new TableItem("- " + line, "", "", "")); 
+                    }
                 }
             }
         }
@@ -4689,14 +4718,19 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private ArrayList<TableItem> toBarTable(Entry<Order, ArrayList<OrderDetails>> curorder) {
         ArrayList<TableItem> r = new ArrayList<>();
         
-
-        for(OrderDetails iter : curorder.getValue()){
+        this.cur_ordernote = this.getNoteofTable(this.cur_table);
+        for(int i = 0; i < this.cur_order.getValue().size(); i++){
             for(Food fitem : this.menufood_list){
-                if(fitem.getFood_id().equals(iter.getFood_id()) && fitem.getIsdrink() == 0){
+                if(fitem.getFood_id().equals(this.cur_order.getValue().get(i).getFood_id()) && fitem.getIsdrink() == 0){
                     String name = fitem.getName();
-                    int quan = iter.getQuan();
+                    int quan = this.cur_order.getValue().get(i).getQuan();
                     
                     r.add(new TableItem(name, String.valueOf(quan), "", ""));
+                    // thêm note kèm sau món
+                    String[] noteline = this.cur_ordernote.getValue().get(i).split("\n");
+                    for(String line : noteline){
+                        r.add(new TableItem("- " + line, "", "", "")); 
+                    }
                 }
             }
         }
@@ -4704,6 +4738,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         return r;
     }
 // END PRINTING CODE
+    
     
     
     

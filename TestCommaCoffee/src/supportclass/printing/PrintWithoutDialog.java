@@ -117,6 +117,7 @@ public class PrintWithoutDialog implements Printable
     
     
     
+//PRINTING PROCEDURE
     private void temporaryPrint(Graphics g){
         /* in thông tin đầu bill */
         int linesize = 10;
@@ -194,10 +195,14 @@ public class PrintWithoutDialog implements Printable
         /* in bảng bill */
         int index;
         for(index = 0; index < this.table.size(); index++){
-            g.setFont(new Font("Plain", 0, 13).deriveFont(Font.BOLD));
+            if(this.table.get(index).getQuan().length() == 0){
+                g.setFont(new Font("Plain", 0, 11));
+            }else{
+                g.setFont(new Font("Plain", 0, 13).deriveFont(Font.BOLD));
+            }
             
-            g.drawString(this.table.get(index).getQuan(), 30, linesize);
-            g.drawString(this.table.get(index).getProduct(), 50, linesize);
+            g.drawString(this.table.get(index).getQuan(), 10, linesize);
+            g.drawString(this.table.get(index).getProduct(), 30, linesize);
             
             linesize += 11;         // chuyển tọa độ sang dòng khác
         }

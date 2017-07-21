@@ -133,7 +133,13 @@ public class DiaEmpLogout extends javax.swing.JDialog {
         // TODO add your handling code here:
         int[] slrows = this.tbEmployee.getSelectedRows();
         
-        if(slrows.length >= this.parent.working_emp.size()){
+        boolean ishave_workingtable = false;
+        for(int iter : this.parent.tablestate_list){    // kiểm tra tất cả bàn xem có trạng thái bàn nào khác trống không?
+            if(iter != 0)
+                ishave_workingtable = true;
+        }
+        
+        if(slrows.length >= this.parent.working_emp.size() && ishave_workingtable){
             int r = JOptionPane.showConfirmDialog(null, "There still have working table! Are you sure to logout?");
             if(r == JOptionPane.NO_OPTION){
                 return;
