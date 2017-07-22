@@ -283,6 +283,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         cboUseForFM = new javax.swing.JComboBox<>();
         txtTypeOtherFM = new javax.swing.JTextField();
         cboUnitBuyFM = new javax.swing.JComboBox<>();
+        jLabel47 = new javax.swing.JLabel();
+        txtStandardPriceFM = new javax.swing.JTextField();
         pnFMInformationControl = new javax.swing.JPanel();
         btnInsertFM = new javax.swing.JButton();
         btnUpdateFM = new javax.swing.JButton();
@@ -1736,7 +1738,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         jLabel32.setText("Supplier");
 
-        cboTypeFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "khô", "sữa", "rau củ", "vật dụng", "Khác" }));
+        cboTypeFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "khô", "sữa", "rau củ", "vật dụng", "khác" }));
         cboTypeFM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTypeFMActionPerformed(evt);
@@ -1745,12 +1747,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         cboUseForFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Uống", "Ăn", "Không rõ lượng dùng", "Khác" }));
 
-        cboUnitBuyFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "thùng", "kí", "bịch", "hộp", "lon", "chai", "bình", "trái", "lóc", "cuộn", "Khác" }));
+        cboUnitBuyFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "thùng", "kí", "bịch", "hộp", "lon", "chai", "bình", "trái", "lóc", "cuộn", "khác" }));
         cboUnitBuyFM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboUnitBuyFMActionPerformed(evt);
             }
         });
+
+        jLabel47.setText("Standard Price");
 
         javax.swing.GroupLayout pnFMInformationLayout = new javax.swing.GroupLayout(pnFMInformation);
         pnFMInformation.setLayout(pnFMInformationLayout);
@@ -1775,16 +1779,17 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                             .addComponent(jLabel28)
                             .addComponent(jLabel29)
                             .addComponent(jLabel31)
-                            .addComponent(jLabel32))
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel47))
                         .addGap(41, 41, 41)
-                        .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSupplierFM, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtUnitBuyOtherFM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(txtTypeOtherFM, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cboUseForFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSupplierFM, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtUnitBuyOtherFM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtTypeOtherFM, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cboUseForFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStandardPriceFM))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
@@ -1821,9 +1826,13 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(txtUnitBuyOtherFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSupplierFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32))
-                .addContainerGap(155, Short.MAX_VALUE))
+                    .addComponent(txtStandardPriceFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel47))
+                .addGap(18, 18, 18)
+                .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(txtSupplierFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         btnInsertFM.setText("Insert");
@@ -2794,7 +2803,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     modelEmployee.addRow(v);
                 }
             }
-
             sorterEmployee = (TableRowSorter<TableModel>) vwEmployee.getRowSorter();
         }
     }//GEN-LAST:event_btnInsertEmpActionPerformed
@@ -3078,6 +3086,40 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtEmailEmp.setText("");
         txtPhoneEmp.setText("");
         cboRoleEmployee.setSelectedIndex(0);
+        
+        modelEmployee.getDataVector().removeAllElements();
+        modelEmployee.fireTableDataChanged();
+        dsEmployee = EmployeeDAO.getList();
+        modelEmployee.setRowCount(0);
+        for(Employee d:dsEmployee)
+        {
+            if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+            {
+                Vector v = new Vector();
+                v.add(d.getEm_id());
+                v.add(d.getUsername());
+                v.add(d.getPass());
+                v.add(d.getName());
+                v.add(d.getBirth());
+                v.add(d.getStartday());
+                v.add(d.getHour_wage());
+                v.add(d.getAddr());
+                v.add(d.getEmail());
+                v.add(d.getPhone());
+                if(d.getEm_role() == 1)
+                {
+                    v.add("Nước");
+                }
+                else
+                {
+                    v.add("Bếp");
+                }
+                //v.add(d.getEm_role());
+                v.add(d.getManager());
+                modelEmployee.addRow(v);
+            }
+        }
+        sorterEmployee = (TableRowSorter<TableModel>) vwEmployee.getRowSorter();
     }//GEN-LAST:event_btnResetEmpActionPerformed
 
     private void btnInsertCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertCusActionPerformed
@@ -3206,7 +3248,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 modelCustomer.addRow(d.toVector());
             }
             sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
-            
         }
     }//GEN-LAST:event_btnInsertCusActionPerformed
 
@@ -3355,6 +3396,16 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtPhoneCus.setText("");
         txtEmailCus.setText("");
         txtDiscountCus.setText("");
+        
+        modelCustomer.getDataVector().removeAllElements();
+        modelCustomer.fireTableDataChanged();
+        dsCustomer = CustomerDAO.getList();
+        modelCustomer.setRowCount(0);
+        for(Customer d:dsCustomer)
+        {
+            modelCustomer.addRow(d.toVector());
+        }
+        sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
     }//GEN-LAST:event_btnResetCusActionPerformed
 
     private void btnFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFoodActionPerformed
@@ -3422,6 +3473,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             
             initDatavwFM();
             setFMControl(false);
+            btnResetFMActionPerformed(evt);
         }
         else
         {
@@ -3492,6 +3544,61 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnUpdateFood.setText("Update");
         btnDeleteFood.setEnabled(true);
         btnSaveFood.setVisible(false);
+        
+        modelFD.getDataVector().removeAllElements();
+        modelFD.fireTableDataChanged();
+        dsFD = FoodDetailsDAO.getList();
+        for(FoodDetails d:dsFD)
+        {
+            Vector v = new Vector();
+            v.add(d.getFd_id());
+            v.add(d.getFood_id());
+            for(Food dfood:dsFood)
+            {
+                if(dfood.getFood_id().equals(d.getFood_id()))
+                {
+                    v.add(dfood.getName());
+                }
+            }
+            v.add(d.getFm_id());
+            for(FoodMaterial dfm:dsFM)
+            {
+                if(dfm.getFm_id().equals(d.getFm_id()))
+                {
+                    v.add(dfm.getName());
+                }
+            }
+            v.add(d.getQuan());
+            v.add(d.getUnit_use());
+            modelFD.addRow(v);
+        }
+        sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
+        modelFood.getDataVector().removeAllElements();
+        modelFood.fireTableDataChanged();
+        dsFood = FoodDAO.getList();
+        for(Food d:dsFood)
+        {
+            Vector v = new Vector();
+            v.add(d.getFood_id());
+            v.add(d.getName());
+            v.add(d.getInfo());
+            v.add(d.getPrice());
+            if(d.getIsdrink() == 0)
+            {
+                v.add("Uống");
+            }
+            if(d.getIsdrink() == 1)
+            {
+                v.add("Ăn");
+            }
+            if(d.getIsdrink() == 2)
+            {
+                v.add("Khác");
+            }
+            //v.add(d.getIsdrink());
+            modelFood.addRow(v);
+        }
+        sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
     }//GEN-LAST:event_btnResetFoodActionPerformed
 
     private void btnDeleteFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFoodActionPerformed
@@ -3618,6 +3725,61 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnUpdateFD.setEnabled(true);
         btnUpdateFD.setText("Update");
         btnDeleteFD.setEnabled(true);
+        
+        modelFD.getDataVector().removeAllElements();
+        modelFD.fireTableDataChanged();
+        dsFD = FoodDetailsDAO.getList();
+        for(FoodDetails d:dsFD)
+        {
+            Vector v = new Vector();
+            v.add(d.getFd_id());
+            v.add(d.getFood_id());
+            for(Food dfood:dsFood)
+            {
+                if(dfood.getFood_id().equals(d.getFood_id()))
+                {
+                    v.add(dfood.getName());
+                }
+            }
+            v.add(d.getFm_id());
+            for(FoodMaterial dfm:dsFM)
+            {
+                if(dfm.getFm_id().equals(d.getFm_id()))
+                {
+                    v.add(dfm.getName());
+                }
+            }
+            v.add(d.getQuan());
+            v.add(d.getUnit_use());
+            modelFD.addRow(v);
+        }
+        sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
+        modelFood.getDataVector().removeAllElements();
+        modelFood.fireTableDataChanged();
+        dsFood = FoodDAO.getList();
+        for(Food d:dsFood)
+        {
+            Vector v = new Vector();
+            v.add(d.getFood_id());
+            v.add(d.getName());
+            v.add(d.getInfo());
+            v.add(d.getPrice());
+            if(d.getIsdrink() == 0)
+            {
+                v.add("Uống");
+            }
+            if(d.getIsdrink() == 1)
+            {
+                v.add("Ăn");
+            }
+            if(d.getIsdrink() == 2)
+            {
+                v.add("Khác");
+            }
+            //v.add(d.getIsdrink());
+            modelFood.addRow(v);
+        }
+        sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
     }//GEN-LAST:event_btnResetFDActionPerformed
 
     private void btnDeleteFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFDActionPerformed
@@ -3625,7 +3787,135 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteFDActionPerformed
 
     private void btnUpdateFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFDActionPerformed
-        // TODO add your handling code here:
+        if(btnUpdateFD.getText().equals("Update"))
+        {
+            int row = vwFD.getSelectedRow();
+            if(row < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Choose a food details you want to update!");
+                return;
+            }
+            setFDControl(true);
+            btnUpdateFD.setText("Save");
+            btnDeleteFD.setEnabled(false);
+            return;
+        }
+        if(btnUpdateFD.getText().equals("Save"))
+        {
+            String fdid = txtIDFD.getText().trim();
+
+            if(cboFoodNameFD.getSelectedIndex() == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Details for food must be choosed!");
+                cboFoodNameFD.requestFocus();
+                return;
+            }
+            String foodid = txtFoodIDFD.getText().trim();
+
+            if(cboFMNameFD.getSelectedIndex() == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Details for food must be choosed!");
+                cboFMNameFD.requestFocus();
+                return;
+            }
+            String fmid = txtFMIDFD.getText().trim();
+
+            float quan;
+            try
+            {
+                quan = Float.parseFloat(txtQuanFD.getText());
+                if(quan < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Quantity must be greater than 0!");
+                    txtQuanFD.requestFocus();
+                    return;
+                }
+                //bo sung them sau
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Quantity must be only contain number!");
+                txtQuanFD.requestFocus();
+                return;
+            }
+
+            String unituse = txtUnitUseFD.getText().trim();
+
+            FoodDetails fd = new FoodDetails(fdid, foodid, fmid, unituse, quan);
+            if(FoodDetailsDAO.update(fd, foodid, fmid, quan, unituse) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update food details successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update food details fail!");
+                txtIDFD.setText("");
+                txtFoodIDFD.setText("");
+                cboFoodNameFD.setSelectedIndex(0);
+                txtFMIDFD.setText("");
+                cboFMNameFD.setSelectedIndex(0);
+                txtQuanFD.setText("");
+                txtUnitUseFD.setText("");
+            }
+            btnUpdateFD.setEnabled(true);
+            btnUpdateFD.setText("Update");
+            btnDeleteFD.setEnabled(true);
+            setFDControl(false);
+            modelFD.getDataVector().removeAllElements();
+            modelFD.fireTableDataChanged();
+            dsFD = FoodDetailsDAO.getList();
+            for(FoodDetails d:dsFD)
+            {
+                Vector v = new Vector();
+                v.add(d.getFd_id());
+                v.add(d.getFood_id());
+                for(Food dfood:dsFood)
+                {
+                    if(dfood.getFood_id().equals(d.getFood_id()))
+                    {
+                        v.add(dfood.getName());
+                    }
+                }
+                v.add(d.getFm_id());
+                for(FoodMaterial dfm:dsFM)
+                {
+                    if(dfm.getFm_id().equals(d.getFm_id()))
+                    {
+                        v.add(dfm.getName());
+                    }
+                }
+                v.add(d.getQuan());
+                v.add(d.getUnit_use());
+                modelFD.addRow(v);
+            }
+            sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
+            modelFood.getDataVector().removeAllElements();
+            modelFood.fireTableDataChanged();
+            dsFood = FoodDAO.getList();
+            for(Food d:dsFood)
+            {
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
+                //v.add(d.getIsdrink());
+                modelFood.addRow(v);
+            }
+            sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
+        }
     }//GEN-LAST:event_btnUpdateFDActionPerformed
 
     private void btnSearchFMNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFMNameActionPerformed
@@ -3699,7 +3989,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
             cboTypeFM.setSelectedItem(modelFM.getValueAt(row, 4).toString());
             cboUnitBuyFM.setSelectedItem(modelFM.getValueAt(row, 5).toString());
-            txtSupplierFM.setText(modelFM.getValueAt(row, 6).toString());
+            txtStandardPriceFM.setText(modelFM.getValueAt(row, 6).toString());
+            txtSupplierFM.setText(modelFM.getValueAt(row, 7).toString());
         }
     }//GEN-LAST:event_vwFMMouseClicked
 
@@ -3708,11 +3999,244 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuanFDActionPerformed
 
     private void btnInsertFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertFMActionPerformed
-        // TODO add your handling code here:
+        if(btnInsertFM.getText().equals("Insert"))
+        {
+            btnInsertFM.setText("Save");
+            btnUpdateFM.setEnabled(false);
+            btnDeleteFM.setEnabled(false);
+            setFMControl(true);
+            txtIDFM.setText("auto");
+            txtNameFM.setText("");
+            txtInfoFM.setText("");
+            cboUseForFM.setSelectedIndex(0);
+            cboTypeFM.setSelectedIndex(0);
+            cboUnitBuyFM.setSelectedIndex(0);
+            txtStandardPriceFM.setText("");
+            txtSupplierFM.setText("");
+            return;
+        }
+        if(btnInsertFM.getText().equals("Save"))
+        {
+            String fmid = txtIDFM.getText().trim();
+            
+            String name = txtNameFM.getText().trim();
+            if(name.length() == 0 || name.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Food material name is not valid!");
+                txtNameFM.requestFocus();
+                return;
+            }
+            
+            String info = txtInfoFM.getText().trim();
+            if(info.length() > 0)
+            {
+                if(info.length() > 100)
+                {
+                    JOptionPane.showMessageDialog(null, "Food material information is not valid!");
+                    txtInfoFM.requestFocus();
+                    return;
+                }
+            }
+            
+            byte usefor = (byte) cboUseForFM.getSelectedIndex();
+            
+            String fmtype = cboTypeFM.getSelectedItem().toString();
+            
+            String unitbuy = cboUnitBuyFM.getSelectedItem().toString();
+            
+            float standardprice;
+            try
+            {
+                standardprice = Float.parseFloat(txtStandardPriceFM.getText().trim());
+                if(standardprice < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Standard price must be graeter than 0!");
+                    txtStandardPriceFM.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Standard price must be only contain number!");
+                txtStandardPriceFM.requestFocus();
+                return;
+            }
+            
+            String supplier = txtSupplierFM.getText().trim();
+            if(supplier.length() == 0 || supplier.length() > 200)
+            {
+                JOptionPane.showMessageDialog(null, "Supplier is not valid!");
+                txtSupplierFM.requestFocus();
+                return;
+            }
+            
+            FoodMaterial fm = new FoodMaterial(fmid, name, info, fmtype, unitbuy, supplier, usefor, standardprice);
+            if(FoodMaterialDAO.insert(fm) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Insert food material succesful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Insert food material fail!");
+                txtIDFM.setText("");
+                txtNameFM.setText("");
+                txtInfoFM.setText("");
+                cboUseForFM.setSelectedIndex(0);
+                cboTypeFM.setSelectedIndex(0);
+                cboUnitBuyFM.setSelectedIndex(0);
+                txtStandardPriceFM.setText("");
+                txtSupplierFM.setText("");
+            }
+            txtIDFM.setText(fm.getFm_id());
+            btnInsertFM.setText("Insert");
+            btnUpdateFM.setEnabled(true);
+            btnDeleteFM.setEnabled(true);
+            setFMControl(false);
+            modelFM.getDataVector().removeAllElements();
+            modelFM.fireTableDataChanged();
+            dsFM = FoodMaterialDAO.getList();
+            for(FoodMaterial d:dsFM)
+            {
+    //            Vector v = new Vector();
+    //            v.add(d.getFm_id());
+    //            v.add(d.getName());
+    //            v.add(d.getInfo());
+    //            switch(d.getUsefor())
+    //            {
+    //                case 0:
+    //                    v.add("Uống");
+    //                case 1:
+    //                    v.add("Ăn");
+    //                case 2:
+    //                    v.add("Không rõ lượng dùng");
+    //                case 3:
+    //                    v.add("Khác");
+    //            }
+    //            v.add(d.getUsefor());
+    //            v.add(d.getFmtype());
+    //            v.add(d.getUnit_buy());
+    //            v.add(d.getStandard_price());
+    //            v.add(d.getSupplier());
+                modelFM.addRow(d.toVector());
+            }
+            sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
+        }
     }//GEN-LAST:event_btnInsertFMActionPerformed
 
     private void btnUpdateFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFMActionPerformed
-        // TODO add your handling code here:
+        if(btnUpdateFM.getText().equals("Update"))
+        {
+            btnUpdateFM.setText("Save");
+            btnInsertFM.setEnabled(false);
+            btnDeleteFM.setEnabled(false);
+            setFMControl(true);
+            return;
+        }
+        if(btnUpdateFM.getText().equals("Save"))
+        {
+            String fmid = txtIDFM.getText().trim();
+            
+            String name = txtNameFM.getText().trim();
+            if(name.length() == 0 || name.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Food material name is not valid!");
+                txtNameFM.requestFocus();
+                return;
+            }
+            
+            String info = txtInfoFM.getText().trim();
+            if(info.length() > 0)
+            {
+                if(info.length() > 100)
+                {
+                    JOptionPane.showMessageDialog(null, "Food material information is not valid!");
+                    txtInfoFM.requestFocus();
+                    return;
+                }
+            }
+            
+            byte usefor = (byte) cboUseForFM.getSelectedIndex();
+            
+            String fmtype = cboTypeFM.getSelectedItem().toString();
+            
+            String unitbuy = cboUnitBuyFM.getSelectedItem().toString();
+            
+            float standardprice;
+            try
+            {
+                standardprice = Float.parseFloat(txtStandardPriceFM.getText().trim());
+                if(standardprice < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Standard price must be graeter than 0!");
+                    txtStandardPriceFM.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Standard price must be only contain number!");
+                txtStandardPriceFM.requestFocus();
+                return;
+            }
+            
+            String supplier = txtSupplierFM.getText().trim();
+            if(supplier.length() == 0 || supplier.length() > 200)
+            {
+                JOptionPane.showMessageDialog(null, "Supplier is not valid!");
+                txtSupplierFM.requestFocus();
+                return;
+            }
+            
+            FoodMaterial fm = new FoodMaterial(fmid, name, info, fmtype, unitbuy, supplier, usefor, standardprice);
+            if(FoodMaterialDAO.update(fm, name, info, usefor, fmtype, unitbuy, supplier, standardprice) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update food material succesful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update food material fail!");
+                txtIDFM.setText("");
+                txtNameFM.setText("");
+                txtInfoFM.setText("");
+                cboUseForFM.setSelectedIndex(0);
+                cboTypeFM.setSelectedIndex(0);
+                cboUnitBuyFM.setSelectedIndex(0);
+                txtStandardPriceFM.setText("");
+                txtSupplierFM.setText("");
+            }
+            btnUpdateFM.setText("Update");
+            btnInsertFM.setEnabled(true);
+            btnDeleteFM.setEnabled(true);
+            setFMControl(false);
+            modelFM.getDataVector().removeAllElements();
+            modelFM.fireTableDataChanged();
+            dsFM = FoodMaterialDAO.getList();
+            for(FoodMaterial d:dsFM)
+            {
+    //            Vector v = new Vector();
+    //            v.add(d.getFm_id());
+    //            v.add(d.getName());
+    //            v.add(d.getInfo());
+    //            switch(d.getUsefor())
+    //            {
+    //                case 0:
+    //                    v.add("Uống");
+    //                case 1:
+    //                    v.add("Ăn");
+    //                case 2:
+    //                    v.add("Không rõ lượng dùng");
+    //                case 3:
+    //                    v.add("Khác");
+    //            }
+    //            v.add(d.getUsefor());
+    //            v.add(d.getFmtype());
+    //            v.add(d.getUnit_buy());
+    //            v.add(d.getStandard_price());
+    //            v.add(d.getSupplier());
+                modelFM.addRow(d.toVector());
+            }
+            sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
+        }
     }//GEN-LAST:event_btnUpdateFMActionPerformed
 
     private void btnDeleteFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFMActionPerformed
@@ -3720,29 +4244,70 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteFMActionPerformed
 
     private void btnResetFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFMActionPerformed
-        // TODO add your handling code here:
+        txtIDFM.setText("");
+        txtNameFM.setText("");
+        txtInfoFM.setText("");
+        cboUseForFM.setSelectedIndex(0);
+        cboTypeFM.setSelectedIndex(0);
+        cboUnitBuyFM.setSelectedIndex(0);
+        txtStandardPriceFM.setText("");
+        txtSupplierFM.setText("");
+        btnInsertFM.setEnabled(true);
+        btnInsertFM.setText("Insert");
+        btnUpdateFM.setEnabled(true);
+        btnUpdateFM.setText("Update");
+        btnDeleteFM.setEnabled(true);
+        setFMControl(false);
+        modelFM.getDataVector().removeAllElements();
+        modelFM.fireTableDataChanged();
+        dsFM = FoodMaterialDAO.getList();
+        for(FoodMaterial d:dsFM)
+        {
+//            Vector v = new Vector();
+//            v.add(d.getFm_id());
+//            v.add(d.getName());
+//            v.add(d.getInfo());
+//            switch(d.getUsefor())
+//            {
+//                case 0:
+//                    v.add("Uống");
+//                case 1:
+//                    v.add("Ăn");
+//                case 2:
+//                    v.add("Không rõ lượng dùng");
+//                case 3:
+//                    v.add("Khác");
+//            }
+//            v.add(d.getUsefor());
+//            v.add(d.getFmtype());
+//            v.add(d.getUnit_buy());
+//            v.add(d.getStandard_price());
+//            v.add(d.getSupplier());
+            modelFM.addRow(d.toVector());
+        }
+        sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
     }//GEN-LAST:event_btnResetFMActionPerformed
 
     private void cboTypeFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTypeFMActionPerformed
-        if(cboTypeFM.getSelectedItem().equals("Khác"))
-        {
-            txtTypeOtherFM.setVisible(true);
-        }
-        else
-        {
-            txtTypeOtherFM.setVisible(false);
-        }
+//        if(cboTypeFM.getSelectedItem().equals("khác"))
+//        {
+//            txtTypeOtherFM.setVisible(true);
+//        }
+//        else
+//        {
+//            txtTypeOtherFM.setVisible(false);
+//        }
     }//GEN-LAST:event_cboTypeFMActionPerformed
 
     private void cboUnitBuyFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboUnitBuyFMActionPerformed
-        if(cboUnitBuyFM.getSelectedItem().equals("Khác"))
-        {
-            txtUnitBuyOtherFM.setVisible(true);
-        }
-        else
-        {
-            txtUnitBuyOtherFM.setVisible(false);
-        }
+//        if(cboUnitBuyFM.getSelectedItem().equals("lon"))
+//        {
+//            txtUnitBuyOtherFM.setVisible(true);
+//        }
+//        else
+//        {
+//            txtUnitBuyOtherFM.setVisible(false);
+//        }
     }//GEN-LAST:event_cboUnitBuyFMActionPerformed
 
     private void vwEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwEmployeeMouseClicked
@@ -3922,6 +4487,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnInsertFD.setEnabled(true);
         btnSaveFood.setVisible(true);
         btnUpdateFood.setEnabled(false);
+        btnUpdateFood.setText("Update");
         btnDeleteFood.setEnabled(false);
     }//GEN-LAST:event_btnInsertFoodActionPerformed
 
@@ -3942,6 +4508,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnInsertFD.setEnabled(false);
         btnSaveFD.setVisible(true);
         btnUpdateFD.setEnabled(false);
+        btnUpdateFD.setText("Update");
         btnDeleteFD.setEnabled(false);
     }//GEN-LAST:event_btnInsertFDActionPerformed
 
@@ -4519,6 +5086,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4637,6 +5205,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JTextField txtSalarySalary;
     private javax.swing.JTextField txtSearchOrderTime;
     private javax.swing.JTextField txtSearchReceiptTime;
+    private javax.swing.JTextField txtStandardPriceFM;
     private javax.swing.JTextField txtStartDayEmp;
     private javax.swing.JTextField txtSupplierFM;
     private javax.swing.JTextField txtTypeOtherFM;
@@ -4946,17 +5515,17 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 //            v.add(d.getFm_id());
 //            v.add(d.getName());
 //            v.add(d.getInfo());
-////            switch(d.getUsefor())
-////            {
-////                case 0:
-////                    v.add("Uống");
-////                case 1:
-////                    v.add("Ăn");
-////                case 2:
-////                    v.add("Không rõ lượng dùng");
-////                case 3:
-////                    v.add("Khác");
-////            }
+//            switch(d.getUsefor())
+//            {
+//                case 0:
+//                    v.add("Uống");
+//                case 1:
+//                    v.add("Ăn");
+//                case 2:
+//                    v.add("Không rõ lượng dùng");
+//                case 3:
+//                    v.add("Khác");
+//            }
 //            v.add(d.getUsefor());
 //            v.add(d.getFmtype());
 //            v.add(d.getUnit_buy());
@@ -4974,6 +5543,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         cboUseForFM.setEnabled(b);
         cboTypeFM.setEnabled(b);
         cboUnitBuyFM.setEnabled(b);
+        txtStandardPriceFM.setEnabled(b);
         txtSupplierFM.setEnabled(b);
         
         txtIDFM.setEnabled(false);
