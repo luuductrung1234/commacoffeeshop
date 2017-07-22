@@ -2497,17 +2497,17 @@
                                           <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtSupplierFM" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtUnitBuyOtherFM" alignment="1" pref="150" max="32767" attributes="0"/>
-                                              <Component id="txtTypeOtherFM" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="cboUseForFM" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cboTypeFM" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cboUnitBuyFM" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtSupplierFM" pref="150" max="32767" attributes="0"/>
+                                          <Component id="txtUnitBuyOtherFM" alignment="1" pref="150" max="32767" attributes="0"/>
+                                          <Component id="txtTypeOtherFM" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="cboUseForFM" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cboTypeFM" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cboUnitBuyFM" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtStandardPriceFM" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -2555,10 +2555,15 @@
                               <Component id="txtUnitBuyOtherFM" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtSupplierFM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtStandardPriceFM" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="155" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSupplierFM" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="117" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2617,7 +2622,7 @@
                             <StringItem index="1" value="s&#x1eef;a"/>
                             <StringItem index="2" value="rau c&#x1ee7;"/>
                             <StringItem index="3" value="v&#x1ead;t d&#x1ee5;ng"/>
-                            <StringItem index="4" value="Kh&#xe1;c"/>
+                            <StringItem index="4" value="kh&#xe1;c"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -2659,7 +2664,7 @@
                             <StringItem index="7" value="tr&#xe1;i"/>
                             <StringItem index="8" value="l&#xf3;c"/>
                             <StringItem index="9" value="cu&#x1ed9;n"/>
-                            <StringItem index="10" value="Kh&#xe1;c"/>
+                            <StringItem index="10" value="kh&#xe1;c"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -2669,6 +2674,13 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel47">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Standard Price"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtStandardPriceFM">
                     </Component>
                   </SubComponents>
                 </Container>

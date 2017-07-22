@@ -1,4 +1,4 @@
-# commacoffeeshop
+﻿# commacoffeeshop
 Project 2: Commacofffeshop (C-System)
 Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
   - Phục vụ đặt hàng/gọi món, nhập đơn hàng kho, Cho phép nhên viên đăng nhập và tự động chấm công khi đăng xuất
@@ -39,14 +39,16 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
 (*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc
 
   - **FrAdminWorkspace**:		(yêu cầu thành viên cập nhập)
-  	+ ? : Employee information form (giao diện/xem/xoá/sửa thông tin)
-  	+ ? : Salary Note information form (giao diện/xem/xoá/sửa thông tin)
-  	+ ? : Customer information form (giao diện/xem/xoá/sửa thông tin)
-  	+ ? : Food information form (giao diện/xem/xoá/sửa thông tin)
-  	+ ? : Food Materials information form (giao diện/xem/xoá/sửa thông tin)
-  	+ ? : Receipt Note information form (giao diện/xem/xoá/sửa thông tin)
-  	+ ? : Order information form (giao diện/xem/xoá/sửa thông tin)
-  	+ ? : Admin profile information form (giao diện/xem/xoá/sửa thông tin)
+  	+ đã xong : Employee information form (giao diện/xem/xoá*/sửa thông tin/tìm kiếm(theo tên, ?))
+  	+ ? : Salary Note information form (giao diện/xem/xoá*/sửa thông tin)
+  	+ đã xong : Customer information form (giao diện/xem/xoá*/sửa thông tin/tìm kiếm(theo tên, ?))
+  	+ đã xong : Food information form (giao diện/xem/xoá*/sửa thông tin/tìm kiếm(theo tên, ?))
+  	+ đã xong : Food Materials information form (giao diện/xem/xoá*/sửa thông tin/tìm kiếm(theo tên, ?))
+  	+ ?(sẽ phát triển sau khi đã hoàn thành các phần khác) : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
+  	+ đã xong : Order information form (giao diện/xem/tìm kiếm(theo ngày, ?))
+  	+ đã xong : Admin profile information form (giao diện/xem/sửa thông tin) _ không có quyền xóa bất kì admin nào
+	+ các dấu * sẽ nghĩ cách hợp lí để hoàn thành
+	+ ĐẶC BIỆT: phần Salary Note, người được phân công đã không thể hiểu và hoàn thành ở hiện tại. Có lẽ cần phải hướng dẫn lại trong ngày gần nhất có thể. Công việc phần này trước mắt không nhiều nhưng vẫn cần thời gian. Nếu kịp thì có lẽ Đức Anh sẽ làm luôn pần đó để hoàn thành theo đúng tài liệu thiết kế
 
 
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày

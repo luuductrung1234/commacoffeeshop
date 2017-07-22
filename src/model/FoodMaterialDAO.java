@@ -57,7 +57,7 @@ public class FoodMaterialDAO {
                 sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 int result = 0;
                 do{
-                    String newid = createid("F", String.valueOf(++current_number_oftbFoodMaterial), 10);
+                    String newid = createid("FM", String.valueOf(++current_number_oftbFoodMaterial), 10);
                     new_fm.setFm_id(newid);
 
                     try(PreparedStatement st2 = cn.prepareStatement(sql);){
@@ -84,7 +84,7 @@ public class FoodMaterialDAO {
         return 0;
     }
     
-    public static int update(FoodMaterial fm, String newname, String newinfo, byte newusefor, String newfmtype, String newunitbuy, String newsupplier)
+    public static int update(FoodMaterial fm, String newname, String newinfo, byte newusefor, String newfmtype, String newunitbuy, String newsupplier, float newstandardprice)
     {
         String sql = "UPDATE tbFoodMaterial SET name = ?, info = ?, usefor = ?, fmtype = ?, unit_buy = ?, standard_price = ?, supplier = ? WHERE fm_id = ?";
         
