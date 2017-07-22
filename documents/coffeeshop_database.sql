@@ -131,7 +131,7 @@ create table tbReceiptNoteDetails(
 								constraint pk_buymaterialdetails primary key (rn_id, fm_id),
 	quan int not null			constraint chk_buy_quantity check(quan >= 0),
 	item_price money not null,	constraint chk_price_per_item check(item_price >= 0),
-	note varchar(200) null
+	note varchar(300) null
 )
 go
 
@@ -237,12 +237,13 @@ go
 
 
 insert into tbFoodMaterial values
-('FM00000001',	N'pepsi', 					N'',		0,	N'khô',			N'thùng',	0,	N'chị Kiều: 01648360321'),
-('FM00000002',	N'aquafina', 				N'',		0,	N'khô',			N'thùng',	0,	N'chị Kiều: 01648360321'),
-('FM00000003',	N'7up', 					N'',		0,	N'khô',			N'thùng',	0,	N'chị Kiều: 01648360321'),
-('FM00000004',	N'water bottle (big)', 		N'',		0,	N'khô',			N'bình',	0,	N'0836026692'),
+('FM00000000',	N'Non Food purchase',		N'',		3,	N'chi phí',		N'lần',		0,		N''),
+('FM00000001',	N'pepsi', 					N'',		0,	N'khô',			N'thùng',	130,	N'chị Kiều: 01648360321'),
+('FM00000002',	N'aquafina', 				N'',		0,	N'khô',			N'thùng',	90,		N'chị Kiều: 01648360321'),
+('FM00000003',	N'7up', 					N'',		0,	N'khô',			N'thùng',	150,	N'chị Kiều: 01648360321'),
+('FM00000004',	N'water bottle (big)', 		N'',		0,	N'khô',			N'bình',	90,		N'0836026692'),
 ('FM00000005',	N'Coffee Bean', 			N'',		0,	N'khô',			N'kí',		0,	N'mr Vĩnh'),
-('FM00000006',	N'Trung Nguyen coffee S', 	N'',		0,	N'khô',			N'bịch',	0,	N'Coopxtra (2nd floor)'),
+('FM00000006',	N'Trung Nguyen coffee S', 	N'',		0,	N'khô',			N'bịch',	45,	N'Coopxtra (2nd floor)'),
 ('FM00000007',	N'Dalat milk', 				N'',		0,	N'sữa',			N'hộp',		0,	N'ms.Huyen: 0933336118'),
 ('FM00000008',	N'Dutch Lady milk', 		N'',		0,	N'sữa',			N'hộp',		0,	N'Chợ Tân Mỹ, Red Dragon Fly shop'),
 ('FM00000009',	N'Condense milk', 			N'',		0,	N'sữa',			N'hộp',		0,	N'Chợ Tân Mỹ, Red Dragon Fly shop'),

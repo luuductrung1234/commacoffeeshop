@@ -27,3 +27,21 @@ select * from tbReceiptNote
 go
 select * from tbReceiptNoteDetails
 go
+
+
+select * from tbFoodMaterial
+go
+
+
+
+select AVG(total_amount) from tbReceiptNote
+where rday = '2017-07-14'
+go
+
+select AVG(price) from tbOrder
+where ordertime = '2017-07-14'
+go
+
+select COUNT(order_id) from tbOrder
+where ordertime = '2017-07-14'
+go

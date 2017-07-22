@@ -31,8 +31,8 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
     + đã xong : In bill thông qua printer. Tính năng tuỳ chỉnh hiển thị văn bản in trước khi in
     + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
     + đã xong : In thêm note của từng món ăn trong bill (kitchen print)
+    + đã xong : thêm giá mặc định cho các nguyên liệu (FoodMaterials) => Sẽ cần phải điều chỉnh database, entities class, model class query, giao diện của FrEmployeeWorkspace và FrAdminWorkspace
     + chưa hoàn thành : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc
-    + chưa hàng thành : thêm giá mặc định cho các nguyên liệu (FoodMaterials) => Sẽ cần phải điều chỉnh database, entities class, model class query, giao diện của FrEmployeeWorkspace và FrAdminWorkspace
     + chưa hoàn thành : tách code
     
 
