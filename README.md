@@ -44,10 +44,9 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
   	+ đã xong : Customer information form (giao diện/xem/xoá*/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Food information form (giao diện/xem/xoá*/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Food Materials information form (giao diện/xem/xoá*/sửa thông tin/tìm kiếm(theo tên, ?))
-  	+ ?(sẽ phát triển sau khi đã hoàn thành các phần khác) : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
   	+ đã xong : Order information form (giao diện/xem/tìm kiếm(theo ngày, ?))
   	+ đã xong : Admin profile information form (giao diện/xem/sửa thông tin) _ không có quyền xóa bất kì admin nào
-	+ các dấu * sẽ nghĩ cách hợp lí để hoàn thành
+  	+ ?(sẽ phát triển sau khi đã hoàn thành các phần khác) : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
 	+ ĐẶC BIỆT: phần Salary Note, người được phân công đã không thể hiểu và hoàn thành ở hiện tại. Có lẽ cần phải hướng dẫn lại trong ngày gần nhất có thể. Công việc phần này trước mắt không nhiều nhưng vẫn cần thời gian. Nếu kịp thì có lẽ Đức Anh sẽ làm luôn pần đó để hoàn thành theo đúng tài liệu thiết kế
 
 
