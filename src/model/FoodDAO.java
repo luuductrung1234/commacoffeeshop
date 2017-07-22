@@ -78,7 +78,7 @@ public class FoodDAO {
         return 0;
     }
     
-    public static int update(Food old_food, String newname, String newinfo, int newprice, byte newisdrink)
+    public static int update(Food old_food, String newname, String newinfo, float newprice, byte newisdrink)
     {
         String sql = "UPDATE tbFood SET name = ?, info = ?, price = ?, isdrink = ? WHERE food_id = ?";
         
