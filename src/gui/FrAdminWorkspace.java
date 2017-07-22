@@ -55,11 +55,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         //food
         initDatavwFood();
         setFoodControl(false);
-        initDatavwFD();
-        setFDControl(false);
-        //food material
         initDatavwFM();
         setFMControl(false);
+        initDatavwFD();
+        setFDControl(false);
+        initDatacboName();
         //profile
         initDataThisAdmin();
         setAdControl(false);
@@ -234,6 +234,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtIDFood = new javax.swing.JTextField();
         pnFoodInformationControl = new javax.swing.JPanel();
+        btnSaveFood = new javax.swing.JButton();
         btnUpdateFood = new javax.swing.JButton();
         btnDeleteFood = new javax.swing.JButton();
         btnResetFood = new javax.swing.JButton();
@@ -249,9 +250,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         txtIDFD = new javax.swing.JTextField();
         txtUnitUseFD = new javax.swing.JTextField();
-        txtFoodNameFD = new javax.swing.JTextField();
-        txtFMNameFD = new javax.swing.JTextField();
+        cboFoodNameFD = new javax.swing.JComboBox<>();
+        cboFMNameFD = new javax.swing.JComboBox<>();
         pnFDInformationControl = new javax.swing.JPanel();
+        btnSaveFD = new javax.swing.JButton();
         btnUpdateFD = new javax.swing.JButton();
         btnDeleteFD = new javax.swing.JButton();
         btnResetFD = new javax.swing.JButton();
@@ -1219,7 +1221,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -1250,9 +1252,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnvwFood.setLayout(pnvwFoodLayout);
         pnvwFoodLayout.setHorizontalGroup(
             pnvwFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
             .addGroup(pnvwFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
         );
         pnvwFoodLayout.setVerticalGroup(
             pnvwFoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1270,20 +1272,20 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         vwFD.setAutoCreateRowSorter(true);
         vwFD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Food Details ID", "Food ID", "Food Material ID", "Quan", "Unit Use"
+                "Food Details ID", "Food ID", "Food Name", "Food Material ID", "Food Material Name", "Quan", "Unit Use"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1304,6 +1306,12 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             vwFD.getColumnModel().getColumn(0).setMinWidth(0);
             vwFD.getColumnModel().getColumn(0).setPreferredWidth(0);
             vwFD.getColumnModel().getColumn(0).setMaxWidth(0);
+            vwFD.getColumnModel().getColumn(1).setMinWidth(0);
+            vwFD.getColumnModel().getColumn(1).setPreferredWidth(0);
+            vwFD.getColumnModel().getColumn(1).setMaxWidth(0);
+            vwFD.getColumnModel().getColumn(3).setMinWidth(0);
+            vwFD.getColumnModel().getColumn(3).setPreferredWidth(0);
+            vwFD.getColumnModel().getColumn(3).setMaxWidth(0);
         }
         this.vwFD.setRowHeight(25);
 
@@ -1311,9 +1319,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnvwFD.setLayout(pnvwFDLayout);
         pnvwFDLayout.setHorizontalGroup(
             pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
             .addGroup(pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
         );
         pnvwFDLayout.setVerticalGroup(
             pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1416,6 +1424,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addContainerGap(271, Short.MAX_VALUE))
         );
 
+        btnSaveFood.setText("Save");
+        btnSaveFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveFoodActionPerformed(evt);
+            }
+        });
+        pnFoodInformationControl.add(btnSaveFood);
+
         btnUpdateFood.setText("Update");
         btnUpdateFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1448,7 +1464,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFoodFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnFoodInformationControl, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                     .addComponent(pnFoodInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
         pnFoodFormCLLayout.setVerticalGroup(
             pnFoodFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1462,13 +1478,13 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnFoodDetailsFormCL.setPreferredSize(new java.awt.Dimension(320, 460));
 
-        pnFDInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Food Details Information"));
+        pnFDInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Details Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         jLabel21.setText("Details for Food");
 
         jLabel22.setText("With Food Material(s)");
 
-        jLabel23.setText("Quan");
+        jLabel23.setText("Quantity");
 
         jLabel24.setText("Unit Use");
 
@@ -1480,36 +1496,43 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         jLabel25.setText("Food Details ID");
 
+        cboFoodNameFD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cboFoodNameFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboFoodNameFDActionPerformed(evt);
+            }
+        });
+
+        cboFMNameFD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cboFMNameFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboFMNameFDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnFDInformationLayout = new javax.swing.GroupLayout(pnFDInformation);
         pnFDInformation.setLayout(pnFDInformationLayout);
         pnFDInformationLayout.setHorizontalGroup(
             pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnFDInformationLayout.createSequentialGroup()
-                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnFDInformationLayout.createSequentialGroup()
-                        .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel25))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFoodIDFD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIDFD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnFDInformationLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtFoodNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnFDInformationLayout.createSequentialGroup()
+                .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel25)
                     .addGroup(pnFDInformationLayout.createSequentialGroup()
                         .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel23))
+                        .addGap(18, 18, 18)
                         .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtQuanFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtFMNameFD)
-                                .addComponent(txtFMIDFD, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                            .addComponent(txtUnitUseFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(21, 21, 21))
+                            .addComponent(cboFMNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFMIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboFoodNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFoodIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUnitUseFD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel24))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnFDInformationLayout.setVerticalGroup(
             pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1522,13 +1545,13 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(txtFoodIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFoodNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboFoodNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFMIDFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFMNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboFMNameFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuanFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1537,8 +1560,16 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUnitUseFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
+
+        btnSaveFD.setText("Save");
+        btnSaveFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveFDActionPerformed(evt);
+            }
+        });
+        pnFDInformationControl.add(btnSaveFD);
 
         btnUpdateFD.setText("Update");
         btnUpdateFD.addActionListener(new java.awt.event.ActionListener() {
@@ -1570,7 +1601,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             pnFoodDetailsFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFoodDetailsFormCLLayout.createSequentialGroup()
                 .addComponent(pnFDInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
             .addGroup(pnFoodDetailsFormCLLayout.createSequentialGroup()
                 .addComponent(pnFDInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2333,6 +2364,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             
             initDatavwEmployee();
             setEmployeeFormControl(false);
+            btnResetEmpActionPerformed(evt);
         }
         else
         {
@@ -2367,6 +2399,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             
             initDatavwCustomer();
             setCustomerControl(false);
+            btnResetCusActionPerformed(evt);
         }
         else
         {
@@ -3275,11 +3308,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             Customer cus = new Customer(cusid, name, phone, email, discount);
             if(CustomerDAO.update(cus, name, phone, email, discount) != 0)
             {
-                JOptionPane.showMessageDialog(null, "Update successful!");
+                JOptionPane.showMessageDialog(null, "Update customer successful!");
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Update fail!");
+                JOptionPane.showMessageDialog(null, "Update customer fail!");
                 btnUpdateCus.setText("Update");
                 btnInsertCus.setEnabled(true);
                 btnDeleteCus.setEnabled(true);
@@ -3350,7 +3383,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             initDatavwFood();
             initDatavwFD();
             setFoodControl(false);
+            btnResetFoodActionPerformed(evt);
             setFDControl(false);
+            btnResetFDActionPerformed(evt);
         }
         else
         {
@@ -3403,6 +3438,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         cl.show(pnFoodFormInput, "card2");
         
         setFoodControl(false);
+        btnInsertFood.setEnabled(true);
+        btnInsertFD.setEnabled(true);
+        btnSaveFood.setVisible(false);
+        btnUpdateFood.setEnabled(true);
+        btnDeleteFood.setEnabled(true);
         if(row >= 0)
         {
             txtIDFood.setText(modelFood.getValueAt(row, 0).toString());
@@ -3421,35 +3461,37 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         cl.show(pnFoodFormInput, "card3");
         
         setFDControl(false);
+        btnInsertFood.setEnabled(true);
+        btnInsertFD.setEnabled(true);
+        btnSaveFD.setVisible(false);
+        btnUpdateFD.setEnabled(true);
+        btnDeleteFD.setEnabled(true);
         if(row >= 0)
         {
             txtIDFD.setText(modelFD.getValueAt(row, 0).toString());
             txtFoodIDFD.setText(modelFD.getValueAt(row, 1).toString());
-            for(Food d:dsFood)
-            {
-                if(d.getFood_id().equals(modelFD.getValueAt(row, 1).toString()))
-                {
-                    txtFoodNameFD.setText(d.getName());
-                    break;
-                }
-            }
-            txtFMIDFD.setText(modelFD.getValueAt(row, 2).toString());
-            for(FoodMaterial d:dsFM)
-            {
-                if(d.getFm_id().equals(modelFD.getValueAt(row, 2).toString()))
-                {
-                    txtFMNameFD.setText(d.getName());
-                    break;
-                }
-            }
-            txtQuanFD.setText(modelFD.getValueAt(row, 3).toString());
-            txtUnitUseFD.setText(modelFD.getValueAt(row, 4).toString());
+            cboFoodNameFD.setSelectedItem(modelFD.getValueAt(row, 2).toString());
+            txtFMIDFD.setText(modelFD.getValueAt(row, 3).toString());
+            cboFMNameFD.setSelectedItem(modelFD.getValueAt(row, 4).toString());
+            txtQuanFD.setText(modelFD.getValueAt(row, 5).toString());
+            txtUnitUseFD.setText(modelFD.getValueAt(row, 6).toString());
         }
         
     }//GEN-LAST:event_vwFDMouseClicked
 
     private void btnResetFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFoodActionPerformed
-        // TODO add your handling code here:
+        txtIDFood.setText("");
+        txtNameFood.setText("");
+        txtInfoFood.setText("");
+        txtPriceFood.setText("");
+        cboTypeFood.setSelectedIndex(0);
+        
+        setFoodControl(false);
+        btnInsertFood.setEnabled(true);
+        btnUpdateFood.setEnabled(true);
+        btnUpdateFood.setText("Update");
+        btnDeleteFood.setEnabled(true);
+        btnSaveFood.setVisible(false);
     }//GEN-LAST:event_btnResetFoodActionPerformed
 
     private void btnDeleteFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFoodActionPerformed
@@ -3457,11 +3499,125 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteFoodActionPerformed
 
     private void btnUpdateFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFoodActionPerformed
-        // TODO add your handling code here:
+        if(btnUpdateFood.getText().equals("Update"))
+        {
+            int row = vwFood.getSelectedRow();
+            if(row < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Choose a food you want to update!");
+                return;
+            }
+            setFoodControl(true);
+            btnUpdateFood.setText("Save");
+            btnDeleteFood.setEnabled(false);
+            return;
+        }
+        if(btnUpdateFood.getText().equals("Save"))
+        {
+            String foodid = txtIDFood.getText().trim();
+            
+            String name = txtNameFood.getText().trim();
+            if(name.length() == 0 || name.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Food name is not valid!");
+                txtNameFood.requestFocus();
+                return;
+            }
+
+            String info = txtInfoFood.getText().trim();
+            if(info.length() > 0)
+            {
+                if(info.length() > 200)
+                {
+                    JOptionPane.showMessageDialog(null, "Food information is not valid");
+                    txtInfoFood.requestFocus();
+                    return;
+                }
+            }
+
+            float price;
+            try
+            {
+                price = Float.parseFloat(txtPriceFood.getText().trim());
+                if(price < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Price is not valid! Price must be greater than 0!");
+                    txtPriceFood.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Price must be only contain number!");
+                txtPriceFood.requestFocus();
+                return;
+            }
+
+            byte isdrink = (byte) cboTypeFood.getSelectedIndex();
+
+            Food food = new Food(foodid, name, info, price, isdrink);
+            if(FoodDAO.update(food, name, info, price, isdrink) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update food successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update food fail!");
+                txtIDFood.setText("");
+                txtNameFood.setText("");
+                txtInfoFood.setText("");
+                txtPriceFood.setText("");
+                cboTypeFood.setSelectedIndex(0);
+            }
+            txtIDFood.setText(food.getFood_id());
+            btnUpdateFood.setText("Update");
+            btnUpdateFood.setEnabled(true);
+            btnDeleteFood.setEnabled(true);
+            setFoodControl(false);
+            modelFood.getDataVector().removeAllElements();
+            modelFood.fireTableDataChanged();
+            dsFood = FoodDAO.getList();
+            for(Food d:dsFood)
+            {
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
+                //v.add(d.getIsdrink());
+                modelFood.addRow(v);
+            }
+            sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
+        }
     }//GEN-LAST:event_btnUpdateFoodActionPerformed
 
     private void btnResetFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFDActionPerformed
-        // TODO add your handling code here:
+        txtIDFD.setText("auto");
+        txtFoodIDFD.setText("");
+        cboFoodNameFD.setSelectedIndex(0);
+        txtFMIDFD.setText("");
+        cboFMNameFD.setSelectedIndex(0);
+        txtQuanFD.setText("");
+        txtUnitUseFD.setText("");
+        
+        setFDControl(false);
+        btnInsertFD.setEnabled(true);
+        btnSaveFD.setVisible(false);
+        btnUpdateFD.setEnabled(true);
+        btnUpdateFD.setText("Update");
+        btnDeleteFD.setEnabled(true);
     }//GEN-LAST:event_btnResetFDActionPerformed
 
     private void btnDeleteFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFDActionPerformed
@@ -3752,11 +3908,41 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_vwOrderMouseClicked
 
     private void btnInsertFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertFoodActionPerformed
-        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) this.pnFoodFormInput.getLayout();
+        cl.show(pnFoodFormInput, "card2");
+
+        setFoodControl(true);
+        txtIDFood.setText("auto");
+        txtNameFood.setText("");
+        txtInfoFood.setText("");
+        txtPriceFood.setText("");
+        cboTypeFood.setSelectedIndex(0);
+
+        btnInsertFood.setEnabled(false);
+        btnInsertFD.setEnabled(true);
+        btnSaveFood.setVisible(true);
+        btnUpdateFood.setEnabled(false);
+        btnDeleteFood.setEnabled(false);
     }//GEN-LAST:event_btnInsertFoodActionPerformed
 
     private void btnInsertFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertFDActionPerformed
-        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) this.pnFoodFormInput.getLayout();
+        cl.show(pnFoodFormInput, "card3");
+
+        setFDControl(true);
+        txtIDFD.setText("auto");
+        txtFoodIDFD.setText("");
+        cboFoodNameFD.setSelectedIndex(0);
+        txtFMIDFD.setText("");
+        cboFMNameFD.setSelectedIndex(0);
+        txtQuanFD.setText("");
+        txtUnitUseFD.setText("");
+
+        btnInsertFood.setEnabled(true);
+        btnInsertFD.setEnabled(false);
+        btnSaveFD.setVisible(true);
+        btnUpdateFD.setEnabled(false);
+        btnDeleteFD.setEnabled(false);
     }//GEN-LAST:event_btnInsertFDActionPerformed
 
     private void btnSearchOrderTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchOrderTimeActionPerformed
@@ -3968,6 +4154,235 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdateAdActionPerformed
 
+    private void btnSaveFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFoodActionPerformed
+        String foodid = txtIDFD.getText().trim();
+
+        String name = txtNameFood.getText().trim();
+        if(name.length() == 0 || name.length() > 50)
+        {
+            JOptionPane.showMessageDialog(null, "Food name is not valid!");
+            txtNameFood.requestFocus();
+            return;
+        }
+
+        String info = txtInfoFood.getText().trim();
+        if(info.length() > 0)
+        {
+            if(info.length() > 200)
+            {
+                JOptionPane.showMessageDialog(null, "Food information is not valid");
+                txtInfoFood.requestFocus();
+                return;
+            }
+        }
+
+        float price;
+        try
+        {
+            price = Integer.parseInt(txtPriceFood.getText().trim());
+            if(price < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Price is not valid! Price must be greater than 0!");
+                txtPriceFood.requestFocus();
+                return;
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Price must be only contain number!");
+            txtPriceFood.requestFocus();
+            return;
+        }
+
+        byte isdrink = (byte) cboTypeFood.getSelectedIndex();
+
+        Food food = new Food(foodid, name, info, price, isdrink);
+        if(FoodDAO.insert(food) != 0)
+        {
+            JOptionPane.showMessageDialog(null, "Insert food successful!");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Insert food fail!");
+            txtIDFood.setText("");
+            txtNameFood.setText("");
+            txtInfoFood.setText("");
+            txtPriceFood.setText("");
+            cboTypeFood.setSelectedIndex(0);
+        }
+        txtIDFood.setText(food.getFood_id());
+        btnInsertFood.setEnabled(true);
+        btnUpdateFood.setEnabled(true);
+        btnDeleteFood.setEnabled(true);
+        btnSaveFood.setVisible(false);
+        setFoodControl(false);
+        modelFood.getDataVector().removeAllElements();
+        modelFood.fireTableDataChanged();
+        dsFood = FoodDAO.getList();
+        for(Food d:dsFood)
+        {
+            Vector v = new Vector();
+            v.add(d.getFood_id());
+            v.add(d.getName());
+            v.add(d.getInfo());
+            v.add(d.getPrice());
+            if(d.getIsdrink() == 0)
+            {
+                v.add("Uống");
+            }
+            if(d.getIsdrink() == 1)
+            {
+                v.add("Ăn");
+            }
+            if(d.getIsdrink() == 2)
+            {
+                v.add("Khác");
+            }
+            //v.add(d.getIsdrink());
+            modelFood.addRow(v);
+        }
+        sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
+    }//GEN-LAST:event_btnSaveFoodActionPerformed
+
+    private void cboFoodNameFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboFoodNameFDActionPerformed
+        for(Food d:dsFood)
+        {
+            if(cboFoodNameFD.getSelectedItem().equals(d.getName()))
+            {
+                txtFoodIDFD.setText(d.getFood_id());
+            }
+        }
+    }//GEN-LAST:event_cboFoodNameFDActionPerformed
+
+    private void cboFMNameFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboFMNameFDActionPerformed
+        for(FoodMaterial d:dsFM)
+        {
+            if(cboFMNameFD.getSelectedItem().equals(d.getName()))
+            {
+                txtFMIDFD.setText(d.getFm_id());
+                
+                txtUnitUseFD.setText(d.getUnit_buy());
+            }
+        }
+    }//GEN-LAST:event_cboFMNameFDActionPerformed
+
+    private void btnSaveFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFDActionPerformed
+        String fdid = txtIDFD.getText().trim();
+        
+        if(cboFoodNameFD.getSelectedIndex() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Details for food must be choosed!");
+            cboFoodNameFD.requestFocus();
+            return;
+        }
+        String foodid = txtFoodIDFD.getText().trim();
+        
+        if(cboFMNameFD.getSelectedIndex() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Details for food must be choosed!");
+            cboFMNameFD.requestFocus();
+            return;
+        }
+        String fmid = txtFMIDFD.getText().trim();
+        
+        float quan;
+        try
+        {
+            quan = Float.parseFloat(txtQuanFD.getText());
+            if(quan < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Quantity must be greater than 0!");
+                txtQuanFD.requestFocus();
+                return;
+            }
+            //bo sung them sau
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Quantity must be only contain number!");
+            txtQuanFD.requestFocus();
+            return;
+        }
+        
+        String unituse = txtUnitUseFD.getText().trim();
+        
+        FoodDetails fd = new FoodDetails(fdid, foodid, fmid, unituse, quan);
+        if(FoodDetailsDAO.insert(fd) != 0)
+        {
+            JOptionPane.showMessageDialog(null, "Insert food details successful!");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Insert food details fail!");
+            txtIDFD.setText("auto");
+            txtFoodIDFD.setText("");
+            cboFoodNameFD.setSelectedIndex(0);
+            txtFMIDFD.setText("");
+            cboFMNameFD.setSelectedIndex(0);
+            txtQuanFD.setText("");
+            txtUnitUseFD.setText("");
+        }
+        btnInsertFD.setEnabled(true);
+        btnSaveFD.setVisible(false);
+        btnUpdateFD.setEnabled(true);
+        btnDeleteFD.setEnabled(true);
+        setFDControl(false);
+        modelFD.getDataVector().removeAllElements();
+        modelFD.fireTableDataChanged();
+        dsFD = FoodDetailsDAO.getList();
+        for(FoodDetails d:dsFD)
+        {
+            Vector v = new Vector();
+            v.add(d.getFd_id());
+            v.add(d.getFood_id());
+            for(Food dfood:dsFood)
+            {
+                if(dfood.getFood_id().equals(d.getFood_id()))
+                {
+                    v.add(dfood.getName());
+                }
+            }
+            v.add(d.getFm_id());
+            for(FoodMaterial dfm:dsFM)
+            {
+                if(dfm.getFm_id().equals(d.getFm_id()))
+                {
+                    v.add(dfm.getName());
+                }
+            }
+            v.add(d.getQuan());
+            v.add(d.getUnit_use());
+            modelFD.addRow(v);
+        }
+        sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
+        modelFood.getDataVector().removeAllElements();
+        modelFood.fireTableDataChanged();
+        dsFood = FoodDAO.getList();
+        for(Food d:dsFood)
+        {
+            Vector v = new Vector();
+            v.add(d.getFood_id());
+            v.add(d.getName());
+            v.add(d.getInfo());
+            v.add(d.getPrice());
+            if(d.getIsdrink() == 0)
+            {
+                v.add("Uống");
+            }
+            if(d.getIsdrink() == 1)
+            {
+                v.add("Ăn");
+            }
+            if(d.getIsdrink() == 2)
+            {
+                v.add("Khác");
+            }
+            //v.add(d.getIsdrink());
+            modelFood.addRow(v);
+        }
+        sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
+    }//GEN-LAST:event_btnSaveFDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -4037,6 +4452,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnResetOrderData;
     private javax.swing.JButton btnResetReceiptData;
     private javax.swing.JToggleButton btnSalaryNote;
+    private javax.swing.JButton btnSaveFD;
+    private javax.swing.JButton btnSaveFood;
     private javax.swing.JButton btnScheNext;
     private javax.swing.JButton btnSchePre;
     private javax.swing.JButton btnSearchCustomerName;
@@ -4054,6 +4471,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdateFood;
     private javax.swing.JButton btnUpdateSalary;
     private javax.swing.JComboBox<String> cboEmployee;
+    private javax.swing.JComboBox<String> cboFMNameFD;
+    private javax.swing.JComboBox<String> cboFoodNameFD;
     private javax.swing.JComboBox<String> cboRoleEmployee;
     private javax.swing.JComboBox<String> cboTypeFM;
     private javax.swing.JComboBox<String> cboTypeFood;
@@ -4188,9 +4607,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmailEmp;
     private javax.swing.JTextField txtEmpNameSalary;
     private javax.swing.JTextField txtFMIDFD;
-    private javax.swing.JTextField txtFMNameFD;
     private javax.swing.JTextField txtFoodIDFD;
-    private javax.swing.JTextField txtFoodNameFD;
     private javax.swing.JTextField txtForMonthSalary;
     private javax.swing.JTextField txtForYearSalary;
     private javax.swing.JTextField txtHourWageEmp;
@@ -4408,7 +4825,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 v.add("Khác");
             }
             //v.add(d.getIsdrink());
-            modelFood.addRow(d.toVector());
+            modelFood.addRow(v);
         }
         
         sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
@@ -4421,6 +4838,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         cboTypeFood.setEnabled(b);
         
         txtIDFood.setEnabled(false);
+        btnSaveFood.setVisible(false);
     }
 
     DefaultTableModel modelFD;
@@ -4432,27 +4850,27 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         dsFD = FoodDetailsDAO.getList();
         for(FoodDetails d:dsFD)
         {
-//            Vector v = new Vector();
-//            v.add(d.getFd_id());
-//            v.add(d.getFood_id());
-//            for(Food dfood:dsFood)
-//            {
-//                if(dfood.getFood_id().equals(d.getFood_id()))
-//                {
-//                    v.add(dfood.getName());
-//                }
-//            }
-//            v.add(d.getFm_id());
-////            for(FoodMaterial dfm:dsFM)
-////            {
-////                if(dfm.getFm_id().equals(d.getFm_id()))
-////                {
-////                    v.add(dfm.getName());
-////                }
-////            }
-//            v.add(d.getQuan());
-//            v.add(d.getUnit_use());
-            modelFD.addRow(d.toVector());
+            Vector v = new Vector();
+            v.add(d.getFd_id());
+            v.add(d.getFood_id());
+            for(Food dfood:dsFood)
+            {
+                if(dfood.getFood_id().equals(d.getFood_id()))
+                {
+                    v.add(dfood.getName());
+                }
+            }
+            v.add(d.getFm_id());
+            for(FoodMaterial dfm:dsFM)
+            {
+                if(dfm.getFm_id().equals(d.getFm_id()))
+                {
+                    v.add(dfm.getName());
+                }
+            }
+            v.add(d.getQuan());
+            v.add(d.getUnit_use());
+            modelFD.addRow(v);
         }
         
         sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
@@ -4466,40 +4884,52 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             if (d.getFood_id().equals(txtIDFood))
             {
-//                Vector v = new Vector();
-//                v.add(d.getFd_id());
-//                v.add(d.getFood_id());
-//                for(Food dfood:dsFood)
-//                {
-//                    if(dfood.getFood_id().equals(d.getFood_id()))
-//                    {
-//                        v.add(dfood.getName());
-//                    }
-//                }
-//                v.add(d.getFm_id());
-//                for(FoodMaterial dfm:dsFM)
-//                {
-//                    if(dfm.getFm_id().equals(d.getFm_id()))
-//                    {
-//                        v.add(dfm.getName());
-//                    }
-//                }
-//                v.add(d.getQuan());
-//                v.add(d.getUnit_use());
-                modelFD.addRow(d.toVector());
+                Vector v = new Vector();
+                v.add(d.getFd_id());
+                v.add(d.getFood_id());
+                for(Food dfood:dsFood)
+                {
+                    if(dfood.getFood_id().equals(d.getFood_id()))
+                    {
+                        v.add(dfood.getName());
+                    }
+                }
+                v.add(d.getFm_id());
+                for(FoodMaterial dfm:dsFM)
+                {
+                    if(dfm.getFm_id().equals(d.getFm_id()))
+                    {
+                        v.add(dfm.getName());
+                    }
+                }
+                v.add(d.getQuan());
+                v.add(d.getUnit_use());
+                modelFD.addRow(v);
             }
         }
     }
 
     private void setFDControl(boolean b) {
-        txtFoodNameFD.setEnabled(b);
-        txtFMNameFD.setEnabled(b);
+        cboFoodNameFD.setEnabled(b);
+        cboFMNameFD.setEnabled(b);
         txtQuanFD.setEnabled(b);
-        txtUnitUseFD.setEnabled(b);
         
         txtIDFD.setEnabled(false);
         txtFoodIDFD.setEnabled(false);
         txtFMIDFD.setEnabled(false);
+        txtUnitUseFD.setEnabled(false);
+        btnSaveFD.setVisible(false);
+    }
+    
+    private void initDatacboName() {
+        for(Food d:dsFood)
+        {
+            cboFoodNameFD.addItem(d.getName());
+        }
+        for(FoodMaterial d:dsFM)
+        {
+            cboFMNameFD.addItem(d.getName());
+        }
     }
 
     //food material

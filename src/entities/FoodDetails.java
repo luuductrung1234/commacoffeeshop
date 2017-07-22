@@ -12,7 +12,7 @@ public class FoodDetails implements java.io.Serializable{
     public FoodDetails() {
     }
 
-    public FoodDetails(String fd_id, String food_id, String fm_id, String unit_use, float quan, float weight_unit_use) {
+    public FoodDetails(String fd_id, String food_id, String fm_id, String unit_use, float quan) {
         this.fd_id = fd_id;
         this.food_id = food_id;
         this.fm_id = fm_id;
