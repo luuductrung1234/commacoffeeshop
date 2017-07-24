@@ -116,6 +116,25 @@ public class FoodDetailsDAO {
         return 0;
     }
     
+    public static int deletefm(String fm_id)
+    {
+        String sql = "delete tbFoodDetails where fm_id = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement pst = cn.prepareStatement(sql);){
+            
+            pst.setString(1, fm_id);
+            
+            return pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
+    }
+    
     
     
 // WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table

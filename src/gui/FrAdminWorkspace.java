@@ -1738,7 +1738,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         jLabel32.setText("Supplier");
 
-        cboTypeFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "khô", "sữa", "rau củ", "vật dụng", "khác" }));
+        cboTypeFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "khô", "sữa", "rau củ", "vật dụng", "chi phí", "khác" }));
         cboTypeFM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTypeFMActionPerformed(evt);
@@ -1747,7 +1747,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         cboUseForFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Uống", "Ăn", "Không rõ lượng dùng", "Khác" }));
 
-        cboUnitBuyFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "thùng", "kí", "bịch", "hộp", "lon", "chai", "bình", "trái", "lóc", "cuộn", "khác" }));
+        cboUnitBuyFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "thùng", "kí", "bịch", "hộp", "lon", "chai", "bình", "trái", "lóc", "cuộn", "lần", "khác" }));
         cboUnitBuyFM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboUnitBuyFMActionPerformed(evt);
@@ -2048,6 +2048,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnOrder.setLayout(new java.awt.BorderLayout());
 
+        txtSearchOrderTime.setPreferredSize(new java.awt.Dimension(34, 20));
+
         btnSearchOrderTime.setBackground(new java.awt.Color(255, 255, 255));
         btnSearchOrderTime.setToolTipText("Search by Order Time");
         btnSearchOrderTime.addActionListener(new java.awt.event.ActionListener() {
@@ -2094,20 +2096,20 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         vwOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Customer ID", "Order Table", "Order Time", "Price", "Customer Pay", "Pay Back"
+                "Order ID", "Customer ID", "Customer Name", "Order Table", "Order Time", "Price", "Customer Pay", "Pay Back"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2128,6 +2130,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             vwOrder.getColumnModel().getColumn(0).setMinWidth(0);
             vwOrder.getColumnModel().getColumn(0).setPreferredWidth(0);
             vwOrder.getColumnModel().getColumn(0).setMaxWidth(0);
+            vwOrder.getColumnModel().getColumn(1).setMinWidth(0);
+            vwOrder.getColumnModel().getColumn(1).setPreferredWidth(0);
+            vwOrder.getColumnModel().getColumn(1).setMaxWidth(0);
         }
         this.vwOrder.setRowHeight(25);
 
@@ -2462,6 +2467,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             modelEmployee.addRow(d.toVector());
         }
+        
+        btnResetEmpActionPerformed(evt);
     }//GEN-LAST:event_btnResetEmployeeDataActionPerformed
 
     private void btnSearchCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerNameActionPerformed
@@ -2487,6 +2494,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             modelCustomer.addRow(d.toVector());
         }
+        
+        btnResetCusActionPerformed(evt);
     }//GEN-LAST:event_btnResetCustomerDataActionPerformed
 
     private void vwCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwCustomerMouseClicked
@@ -2497,7 +2506,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnInsertCus.setEnabled(true);
         btnUpdateCus.setText("Update");
         btnUpdateCus.setEnabled(true);
-        btnDeleteCus.setText("Delete");
         btnDeleteCus.setEnabled(true);
         if(row >= 0)
         {
@@ -2745,7 +2753,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             if(EmployeeDAO.insert(emp) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Insert new employee successful!");
-                
             }
             else
             {
@@ -2777,7 +2784,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             modelEmployee.setRowCount(0);
             for(Employee d:dsEmployee)
             {
-                if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+                if(d.getManager().equalsIgnoreCase(a.getAd_id()) && d.getEm_role() != 3)
                 {
                     Vector v = new Vector();
                     v.add(d.getEm_id());
@@ -3032,7 +3039,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             modelEmployee.setRowCount(0);
             for(Employee d:dsEmployee)
             {
-                if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+                if(d.getManager().equalsIgnoreCase(a.getAd_id()) && d.getEm_role() != 3)
                 {
                     Vector v = new Vector();
                     v.add(d.getEm_id());
@@ -3063,7 +3070,41 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateEmpActionPerformed
 
     private void btnDeleteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEmpActionPerformed
-        // TODO add your handling code here:
+        int row = vwEmployee.getSelectedRow();
+        if(row < 0)
+        {
+            JOptionPane.showMessageDialog(null, "Choose an employee you want to delete!");
+            return;
+        }
+        
+        String emid = txtIDEmp.getText().trim();
+        String username = txtUsernameEmp.getText().trim();
+        String pass = new String(txtPassEmp.getPassword()).trim();
+        String namee = txtNameEmp.getText().trim();
+        String sbirth = txtBirthEmp.getText().trim();
+        LocalDate birth = LocalDate.of(Integer.parseInt(sbirth.substring(0, 4)), Integer.parseInt(sbirth.substring(5, 7)), Integer.parseInt(sbirth.substring(8, 10)));
+        String sstartday = txtStartDayEmp.getText().trim();
+        LocalDate startday = LocalDate.of(Integer.parseInt(sstartday.substring(0, 4)), Integer.parseInt(sstartday.substring(5, 7)), Integer.parseInt(sstartday.substring(8, 10)));
+        int hourwage = Integer.parseInt(txtHourWageEmp.getText().trim());
+        String addr = txtAddrEmp.getText().trim();
+        String email = txtEmailEmp.getText().trim();
+        String phone = txtPhoneEmp.getText().trim();
+        int role = cboRoleEmployee.getSelectedIndex();
+        String manager = a.getAd_id();
+        
+        int option = JOptionPane.showConfirmDialog(null, "Do you want to delete this employee?\nReally to delete?", "Really?", JOptionPane.YES_OPTION);
+        if(option == JOptionPane.YES_OPTION)
+        {
+            Employee emp = new Employee(emid, username, pass, namee, addr, email, phone, manager, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), hourwage, role);
+            if(EmployeeDAO.update(emp, "(N/A) " + username, pass, namee, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), addr, email, phone, 3, hourwage, manager) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Delete employee succesful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Delete employee fail!");
+            }
+        }
     }//GEN-LAST:event_btnDeleteEmpActionPerformed
 
     private void btnResetEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetEmpActionPerformed
@@ -3093,7 +3134,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelEmployee.setRowCount(0);
         for(Employee d:dsEmployee)
         {
-            if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+            if(d.getManager().equalsIgnoreCase(a.getAd_id()) && d.getEm_role() != 3)
             {
                 Vector v = new Vector();
                 v.add(d.getEm_id());
@@ -3380,7 +3421,63 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateCusActionPerformed
 
     private void btnDeleteCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCusActionPerformed
-        // TODO add your handling code here:
+        int row = vwCustomer.getSelectedRow();
+        if(row < 0)
+        {
+            JOptionPane.showMessageDialog(null, "Choose a customer want to delete!");
+            return;
+        }
+        
+        String cus_id = txtIDCus.getText().trim();
+        String name = txtNameCus.getText().trim();
+        String phone = txtPhoneCus.getText().trim();
+        String email = txtEmailCus.getText().trim();
+        int discount = Integer.parseInt(txtDiscountCus.getText().trim());
+        
+        int option = JOptionPane.showConfirmDialog(null, "Do you want to delete this customer?\nThis action will be already delete ALL order by this customer!\nReally to delete?", "Really?", JOptionPane.YES_OPTION);
+                
+        if(option == JOptionPane.YES_OPTION)
+        {
+//            for(Order d:dsOrder)
+//            {
+//                if(d.getCus_id().equals(cus_id))
+//                {
+//                    if(OrderDetailsDAO.delete(d.getOrder_id()) != 0)
+//                    {
+//                        if(OrderDAO.delete(cus_id) != 0)
+//                        {
+//                            if(CustomerDAO.delete(cus_id) != 0)
+//                            {
+//                                JOptionPane.showMessageDialog(null, "Delete customer successful!");
+//                            }
+//                            else
+//                            {
+//                                JOptionPane.showMessageDialog(null, "Delete customer fail!");
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            
+            Customer cus = new Customer(cus_id, name, phone, email, discount);
+            
+            if(CustomerDAO.update(cus, "N/A " + name, "N/A " + phone, "N/A " + email, 0)!= 0)
+            {
+                JOptionPane.showMessageDialog(null, "Delete customer successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Delete customer fail!");
+            }
+        }
+        modelCustomer.getDataVector().removeAllElements();
+        modelCustomer.fireTableDataChanged();
+        dsCustomer = CustomerDAO.getList();
+        for(Customer d:dsCustomer)
+        {
+            modelCustomer.addRow(d.toVector());
+        }
+        sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
     }//GEN-LAST:event_btnDeleteCusActionPerformed
 
     private void btnResetCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetCusActionPerformed
@@ -3494,6 +3591,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnInsertFD.setEnabled(true);
         btnSaveFood.setVisible(false);
         btnUpdateFood.setEnabled(true);
+        btnUpdateFood.setText("Update");
         btnDeleteFood.setEnabled(true);
         if(row >= 0)
         {
@@ -3517,6 +3615,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnInsertFD.setEnabled(true);
         btnSaveFD.setVisible(false);
         btnUpdateFD.setEnabled(true);
+        btnUpdateFD.setText("Update");
         btnDeleteFD.setEnabled(true);
         if(row >= 0)
         {
@@ -3602,7 +3701,37 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetFoodActionPerformed
 
     private void btnDeleteFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFoodActionPerformed
-        // TODO add your handling code here:
+        int row = vwFood.getSelectedRow();
+        if(row < 0)
+        {
+            JOptionPane.showMessageDialog(null, "Choose a food you want to delete!");
+            return;
+        }
+        
+        String foodid = txtIDFood.getText().trim();
+        
+        int option = JOptionPane.showConfirmDialog(null, "Do you want to delete this food?\nThis action will be delete ALL food details!\nReally to delete?", "Really?", JOptionPane.YES_OPTION);
+        if(option == JOptionPane.YES_OPTION)
+        {
+            for(FoodDetails d:dsFD)
+            {
+                if(d.getFood_id().equals(foodid))
+                {
+                    FoodDetailsDAO.delete(d.getFd_id());
+                }
+            }
+            if(FoodDAO.delete(foodid) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Delete food successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Delete food fail!");
+            }
+        }
+        
+        btnResetFoodActionPerformed(evt);
+        btnResetFDActionPerformed(evt);
     }//GEN-LAST:event_btnDeleteFoodActionPerformed
 
     private void btnUpdateFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFoodActionPerformed
@@ -3783,7 +3912,29 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetFDActionPerformed
 
     private void btnDeleteFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFDActionPerformed
-        // TODO add your handling code here:
+        int row = vwFD.getSelectedRow();
+        if(row < 0)
+        {
+            JOptionPane.showMessageDialog(null, "Choose food details you want to search!");
+            return;
+        }
+        
+        String fdid = txtIDFD.getText().trim();
+        
+        int option = JOptionPane.showConfirmDialog(null, "Doyou want to delete this food details?", "Really?", JOptionPane.YES_OPTION);
+        if(option == JOptionPane.YES_OPTION)
+        {
+            if(FoodDetailsDAO.delete(fdid) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Delete food details successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Delete food details fail!");
+            }
+        }
+        btnResetFDActionPerformed(evt);
+        btnResetFoodActionPerformed(evt);
     }//GEN-LAST:event_btnDeleteFDActionPerformed
 
     private void btnUpdateFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFDActionPerformed
@@ -3961,12 +4112,19 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             modelFM.addRow(d.toVector());
         }
+        
+        btnResetFMActionPerformed(evt);
     }//GEN-LAST:event_btnResetFMDataActionPerformed
 
     private void vwFMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwFMMouseClicked
         int row = vwFM.getSelectedRow();
 
         setFMControl(false);
+        btnInsertFM.setEnabled(true);
+        btnInsertFM.setText("Insert");
+        btnUpdateFM.setEnabled(true);
+        btnUpdateFM.setText("Update");
+        btnDeleteFM.setEnabled(true);
         if(row >= 0)
         {
             txtIDFM.setEnabled(false);
@@ -4240,7 +4398,36 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateFMActionPerformed
 
     private void btnDeleteFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFMActionPerformed
-        // TODO add your handling code here:
+        int row = vwFM.getSelectedRow();
+        if(row < 0)
+        {
+            JOptionPane.showMessageDialog(null, "Choose a food material you want to delete!");
+            return;
+        }
+        
+        String fmid = txtIDFM.getText().trim();
+        
+        int option = JOptionPane.showConfirmDialog(null, "Do you want to delete this customer?\nThis action will be delete ALL food details has contained it!\nReally to delete?", "Really?", JOptionPane.YES_OPTION);
+        
+        if(option == JOptionPane.YES_OPTION)
+        {
+            for(FoodDetails d:dsFD)
+            {
+                if(d.getFm_id().equals(fmid))
+                {
+                    FoodDetailsDAO.deletefm(fmid);
+                }
+            }
+            if(FoodMaterialDAO.delete(fmid) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Delete food material successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Delete food material fail!");
+            }
+        }
+        btnResetFMActionPerformed(evt);
     }//GEN-LAST:event_btnDeleteFMActionPerformed
 
     private void btnResetFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFMActionPerformed
@@ -4289,7 +4476,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetFMActionPerformed
 
     private void cboTypeFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTypeFMActionPerformed
-//        if(cboTypeFM.getSelectedItem().equals("khác"))
+//        if(cboTypeFM.getSelectedIndex() == 5)
 //        {
 //            txtTypeOtherFM.setVisible(true);
 //        }
@@ -4392,6 +4579,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             modelFD.addRow(d.toVector());
         }
+        
+        btnResetFoodActionPerformed(evt);
+        btnResetFDActionPerformed(evt);
     }//GEN-LAST:event_btnResetFoodDataActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
@@ -4495,6 +4685,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) this.pnFoodFormInput.getLayout();
         cl.show(pnFoodFormInput, "card3");
 
+        dsFood = FoodDAO.getList();
+        dsFD = FoodDetailsDAO.getList();
+        initDatacboName();
         setFDControl(true);
         txtIDFD.setText("auto");
         txtFoodIDFD.setText("");
@@ -4550,14 +4743,24 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelOrder.fireTableDataChanged();
         for (Order d:dsOrder)
         {
-            //LocalDate timeori = d.getOrdertime().toLocalDate();
-            //if(timeori.getYear() == Integer.parseInt(dky) && timeori.getMonthValue() == (Integer.parseInt(dkm) - 1) && timeori.getDayOfMonth() == Integer.parseInt(dkd))
-            //{
-            //    modelFood.addRow(d.toVector());
-            //}
             if(d.getOrdertime().toString().equals(dkOrderTime))
             {
-                modelOrder.addRow(d.toVector());
+                Vector v = new Vector();
+                v.add(d.getOrder_id());
+                v.add(d.getCus_id());
+                for(Customer dcus:dsCustomer)
+                {
+                    if(dcus.getCus_id().equals(d.getCus_id()))
+                    {
+                        v.add(dcus.getName());
+                    }
+                }
+                v.add(d.getOrdertable());
+                v.add(d.getOrdertime());
+                v.add(d.getPrice());
+                v.add(d.getCustomerpay());
+                v.add(d.getPayback());
+                modelOrder.addRow(v);
             }
         }
     }//GEN-LAST:event_btnSearchOrderTimeActionPerformed
@@ -4567,7 +4770,22 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelOrder.fireTableDataChanged();
         for(Order d:dsOrder)
         {
-            modelOrder.addRow(d.toVector());
+            Vector v = new Vector();
+            v.add(d.getOrder_id());
+            v.add(d.getCus_id());
+            for(Customer dcus:dsCustomer)
+            {
+                if(dcus.getCus_id().equals(d.getCus_id()))
+                {
+                    v.add(dcus.getName());
+                }
+            }
+            v.add(d.getOrdertable());
+            v.add(d.getOrdertime());
+            v.add(d.getPrice());
+            v.add(d.getCustomerpay());
+            v.add(d.getPayback());
+            modelOrder.addRow(v);
         }
         modelOD.getDataVector().removeAllElements();
         modelOD.fireTableDataChanged();
@@ -5294,7 +5512,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelEmployee.setRowCount(0);
         for(Employee d:dsEmployee)
         {
-            if(d.getManager().equalsIgnoreCase(a.getAd_id()))
+            if(d.getManager().equals(a.getAd_id()) && d.getEm_role() != 3)
             {
                 Vector v = new Vector();
                 v.add(d.getEm_id());
@@ -5583,7 +5801,22 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         dsOD = OrderDetailsDAO.getList();
         for(Order d:dsOrder)
         {
-            modelOrder.addRow(d.toVector());
+            Vector v = new Vector();
+            v.add(d.getOrder_id());
+            v.add(d.getCus_id());
+            for(Customer dcus:dsCustomer)
+            {
+                if(dcus.getCus_id().equals(d.getCus_id()))
+                {
+                    v.add(dcus.getName());
+                }
+            }
+            v.add(d.getOrdertable());
+            v.add(d.getOrdertime());
+            v.add(d.getPrice());
+            v.add(d.getCustomerpay());
+            v.add(d.getPayback());
+            modelOrder.addRow(v);
         }
         
         sorterOrder = (TableRowSorter<TableModel>) vwOrder.getRowSorter();

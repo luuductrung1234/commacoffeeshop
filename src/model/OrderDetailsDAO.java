@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,6 +50,42 @@ public class OrderDetailsDAO {
         }
         
         return ds;
-    }    
+    }
+    
+    public static int delete(String order_id_food_id)
+    {
+        String sql = "DELETE tbOrderDetails WHERE order_id = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);){
+            
+            st.setString(1, order_id_food_id);
+            
+            return st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
+    }
+    
+    public static int deletef(String food_id)
+    {
+        String sql = "DELETE tbOrderDetails WHERE food_id = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);){
+            
+            st.setString(1, food_id);
+            
+            return st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
+    }
     
 }
