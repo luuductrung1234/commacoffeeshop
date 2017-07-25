@@ -5,6 +5,8 @@
  */
 package gui;
 
+import gui.admin.FrAdminWorkspace;
+import gui.employee.FrEmployeeWorkspace;
 import entities.*;
 import java.awt.Color;
 import java.awt.Image;

@@ -5,8 +5,8 @@
  */
 package supportclass;
 
-import gui.DiaEditReceiptNoteDetails;
-import gui.FrEmployeeWorkspace;
+import gui.employee.DiaEditReceiptNoteDetails;
+import gui.employee.FrEmployeeWorkspace;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultCellEditor;

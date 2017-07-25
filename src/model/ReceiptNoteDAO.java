@@ -94,6 +94,33 @@ public class ReceiptNoteDAO {
         return ds;
     }
 
+    
+    public static List<ReceiptNote> getlist_indate(java.sql.Date indate){
+        ArrayList<ReceiptNote> resultlist = new ArrayList<>();
+        String sql  = "SELECT * FROM tbReceiptNote WHERE rday = ?";
+        
+        try(Connection cn  = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);){
+            
+            st.setDate(1, indate);
+            try(ResultSet rs = st.executeQuery()){
+                while(rs.next()){
+                    ReceiptNote newitem = new ReceiptNote();
+                    newitem.setRn_id(rs.getString(1));
+                    newitem.setEm_id(rs.getString(2));
+                    newitem.setRday(rs.getDate(3));
+                    newitem.setTotal_amount(rs.getFloat(4));
+                    
+                    resultlist.add(newitem);
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceiptNoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultlist;
+    }
 
     // WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
     private static String createid(String startid, String number_want_toset, int idsize) {
