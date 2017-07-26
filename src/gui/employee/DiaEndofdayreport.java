@@ -516,15 +516,12 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
             
             // xuất report trong frame
-            /*this.getContentPane().add(new JRViewer(filledReport));
-            this.pack();*/
+            new DiaShowReport(this.parent, new JRViewer(filledReport), true).setVisible(true);
             
             
             // xuất report ra file pdf
-            /*File outDir = new File("C:/jasperoutput");
-            outDir.mkdirs();*/
-            JasperExportManager.exportReportToPdfFile(filledReport,
-            "C:/csystemreport/eodreport" + this.dayreport.toString() +".pdf");
+            /*JasperExportManager.exportReportToPdfFile(filledReport,
+            "C:/csystemreport/eodreport" + this.dayreport.toString() +".pdf");*/
         } catch (JRException ex) {
             Logger.getLogger(DiaEndofdayreport.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Somethings went wrong, can not generate the report file", "REPORT WARNNING", JOptionPane.ERROR_MESSAGE);
@@ -548,15 +545,12 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
             
             // xuất report trong frame
-            /*this.getContentPane().add(new JRViewer(filledReport));
-            this.pack();*/
+            new DiaShowReport(this.parent, new JRViewer(filledReport), true).setVisible(true);
             
             
             // xuất report ra file pdf
-            /*File outDir = new File("C:/jasperoutput");
-            outDir.mkdirs();*/
-            JasperExportManager.exportReportToPdfFile(filledReport,
-            "C:/csystemreport/eodreport" + this.dayreport.toString() +".pdf");
+            /*JasperExportManager.exportReportToPdfFile(filledReport,
+            "C:/csystemreport/eodreport" + this.dayreport.toString() +".pdf");*/
         } catch (JRException ex) {
             Logger.getLogger(DiaEndofdayreport.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Somethings went wrong, can not generate the report file", "REPORT WARNNING", JOptionPane.ERROR_MESSAGE);
