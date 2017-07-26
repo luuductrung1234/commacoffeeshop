@@ -73,9 +73,9 @@ public class EmployeeDAO {
         return 0;
     }
     
-    public static int update(Employee old_emp, String newusername, String newpass, String newname, java.sql.Date newbirth, java.sql.Date newstartday, String newaddr, String newemail, String newphone, int newrole, int newhourwage, String newmanager)
+    public static int update(Employee old_emp, String newusername, String newpass, String newname, java.sql.Date newbirth, java.sql.Date newstartday, String newaddr, String newemail, String newphone, int newrole, int newhourwage, String newmanager, int newdeleted)
     {
-        String sql = "UPDATE tbEmployee SET username = ?, pass = ?, name = ?, birth = ?, startday = ?, addr = ?, email = ?, phone = ?, em_role = ?, manager = ?, hour_wage = ? WHERE em_id = ? and username = ? and pass = ?";
+        String sql = "UPDATE tbEmployee SET username = ?, pass = ?, name = ?, birth = ?, startday = ?, addr = ?, email = ?, phone = ?, em_role = ?, manager = ?, hour_wage = ?, deleted = ? WHERE em_id = ? and username = ? and pass = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);){
@@ -91,9 +91,10 @@ public class EmployeeDAO {
             st.setInt(9, newrole);
             st.setString(10, newmanager);
             st.setInt(11, newhourwage);
-            st.setString(12, old_emp.getEm_id());
-            st.setString(13, old_emp.getUsername());
-            st.setString(14, old_emp.getPass());
+            st.setInt(12, newdeleted);
+            st.setString(13, old_emp.getEm_id());
+            st.setString(14, old_emp.getUsername());
+            st.setString(15, old_emp.getPass());
             
             return st.executeUpdate();
         } catch (SQLException ex) {
@@ -138,7 +139,7 @@ public class EmployeeDAO {
     public static List<Employee> getList()
     {
         List<Employee> ds = new ArrayList<>();
-        String sql = "SELECT * FROM tbEmployee";
+        String sql = "SELECT * FROM tbEmployee where deleted = 0";
                 
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);
@@ -197,7 +198,7 @@ public class EmployeeDAO {
             if(rs.next()){
                 int current_number_oftbEmployee = rs.getInt(1);
                 
-                sql = "INSERT tbEmployee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                sql = "INSERT tbEmployee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 int result = 0;
                 do{
                     String newid = createid("EM", String.valueOf(++current_number_oftbEmployee), 10);
@@ -219,6 +220,7 @@ public class EmployeeDAO {
                         st2.setString(10, new_emp.getPhone());
                         st2.setInt(11, new_emp.getEm_role());
                         st2.setString(12, new_emp.getManager());
+                        st2.setInt(13, 0);
 
                         result = st2.executeUpdate();
                     }

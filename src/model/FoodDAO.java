@@ -15,7 +15,7 @@ public class FoodDAO {
     public static List<Food> getList()
     {
         List<Food> ds = new ArrayList<>();
-        String sql = "SELECT * FROM tbFood";
+        String sql = "SELECT * FROM tbFood where deleted = 0";
                 
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);
@@ -40,6 +40,35 @@ public class FoodDAO {
         return ds;
     }
     
+    public static List<Food> getListAll()
+    {
+        List<Food> ds = new ArrayList<>();
+        String sql = "SELECT * FROM tbFood";
+                
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();)
+        {
+            while(rs.next())
+            {
+                Food newrecord = new Food();
+                newrecord.setFood_id(rs.getString(1));
+                newrecord.setName(rs.getString(2));
+                newrecord.setInfo(rs.getString(3));
+                newrecord.setPrice(rs.getFloat(4));
+                newrecord.setIsdrink(rs.getByte(5));
+                newrecord.setDeleted(rs.getInt(6));
+                
+                ds.add(newrecord);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FoodDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ds;
+    }
+    
     public static int insert(Food new_food)
     {
         String sql = "SELECT COUNT(food_id) FROM tbFood";                        // tạo id mới cho food cần thêm vào database
@@ -50,7 +79,7 @@ public class FoodDAO {
             if(rs.next()){
                 int current_number_oftbFood = rs.getInt(1);
                 
-                sql = "INSERT tbFood VALUES (?, ?, ?, ?, ?)";                    // thêm food mới vào database
+                sql = "INSERT tbFood VALUES (?, ?, ?, ?, ?, ?)";                    // thêm food mới vào database
                 int result = 0;
                 do{
                     String newid = createid("F", String.valueOf(++current_number_oftbFood), 10);
@@ -64,6 +93,7 @@ public class FoodDAO {
                         st2.setString(3, new_food.getInfo());
                         st2.setFloat(4, new_food.getPrice());
                         st2.setByte(5, new_food.getIsdrink());
+                        st2.setInt(6, 0);
 
                         result = st2.executeUpdate();
                     }
@@ -78,9 +108,9 @@ public class FoodDAO {
         return 0;
     }
     
-    public static int update(Food old_food, String newname, String newinfo, float newprice, byte newisdrink)
+    public static int update(Food old_food, String newname, String newinfo, float newprice, byte newisdrink, int newdeleted)
     {
-        String sql = "UPDATE tbFood SET name = ?, info = ?, price = ?, isdrink = ? WHERE food_id = ?";
+        String sql = "UPDATE tbFood SET name = ?, info = ?, price = ?, isdrink = ?, deleted = ? WHERE food_id = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement pst = cn.prepareStatement(sql);){
@@ -89,7 +119,8 @@ public class FoodDAO {
             pst.setString(2, newinfo);
             pst.setFloat(3, newprice);
             pst.setByte(4, newisdrink);
-            pst.setString(5, old_food.getFood_id());
+            pst.setInt(5, newdeleted);
+            pst.setString(6, old_food.getFood_id());
             
             return pst.executeUpdate();
             

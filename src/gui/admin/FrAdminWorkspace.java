@@ -313,6 +313,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtSearchOrderTime = new javax.swing.JTextField();
         btnSearchOrderTime = new javax.swing.JButton();
         btnResetOrderData = new javax.swing.JButton();
+        txtTodaySale = new javax.swing.JTextField();
+        lbTodaySale = new javax.swing.JLabel();
         pnShowOrder = new javax.swing.JPanel();
         pnvwOrder = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -986,20 +988,20 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         vwCustomer.setAutoCreateRowSorter(true);
         vwCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Customer ID", "Name", "Phone", "Email", "Discount(%)"
+                "Customer ID", "Name", "Phone", "Email", "Discount(%)", "Deleted"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1020,6 +1022,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             vwCustomer.getColumnModel().getColumn(0).setMinWidth(0);
             vwCustomer.getColumnModel().getColumn(0).setPreferredWidth(0);
             vwCustomer.getColumnModel().getColumn(0).setMaxWidth(0);
+            vwCustomer.getColumnModel().getColumn(5).setMinWidth(0);
+            vwCustomer.getColumnModel().getColumn(5).setPreferredWidth(0);
+            vwCustomer.getColumnModel().getColumn(5).setMaxWidth(0);
         }
         this.vwCustomer.setRowHeight(25);
 
@@ -1460,7 +1465,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             pnFoodFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFoodFormCLLayout.createSequentialGroup()
                 .addGroup(pnFoodFormCLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnFoodInformationControl, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                    .addComponent(pnFoodInformationControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnFoodInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 26, Short.MAX_VALUE))
         );
@@ -1777,14 +1782,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                             .addComponent(jLabel47))
                         .addGap(41, 41, 41)
                         .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSupplierFM, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(txtUnitBuyOtherFM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtSupplierFM)
+                            .addComponent(txtUnitBuyOtherFM, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtTypeOtherFM, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cboUseForFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtStandardPriceFM))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 25, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         pnFMInformationLayout.setVerticalGroup(
@@ -2060,6 +2065,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
         });
 
+        lbTodaySale.setText("Today sale:");
+
         javax.swing.GroupLayout pnOrderSearchLayout = new javax.swing.GroupLayout(pnOrderSearch);
         pnOrderSearch.setLayout(pnOrderSearchLayout);
         pnOrderSearchLayout.setHorizontalGroup(
@@ -2071,15 +2078,20 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(btnSearchOrderTime, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnResetOrderData, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95)
+                .addComponent(lbTodaySale)
+                .addGap(18, 18, 18)
+                .addComponent(txtTodaySale, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnOrderSearchLayout.setVerticalGroup(
             pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnOrderSearchLayout.createSequentialGroup()
-                .addComponent(txtSearchOrderTime, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(btnResetOrderData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(txtTodaySale, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(lbTodaySale))
+            .addComponent(txtSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnOrder.add(pnOrderSearch, java.awt.BorderLayout.PAGE_START);
@@ -2138,7 +2150,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwOrderLayout.setVerticalGroup(
             pnvwOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOrder);
@@ -2191,7 +2203,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwODLayout.setVerticalGroup(
             pnvwODLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOD);
@@ -2474,7 +2486,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             if (d.getName().toUpperCase().contains(dkCustomerName.trim().toUpperCase()) || d.getName().toLowerCase().contains(dkCustomerName.trim().toLowerCase()))
             {
-                if(!(d.getName().contains("N/A")))
+                if(d.getDeleted() == 0)
                 {
                     modelCustomer.addRow(d.toVector());
                 }
@@ -2595,10 +2607,16 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     txtBirthEmp.requestFocus();
                     return;
                 }
+                dky = Integer.parseInt(sbirth.substring(0, 4));
                 dkm = Integer.parseInt(sbirth.substring(5, 7));
                 dkd = Integer.parseInt(sbirth.substring(8, 10));
-                dky = Integer.parseInt(sbirth.substring(0, 4));
                 if(dky < 0 || dkm < 0 || dkd < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(sbirth.charAt(4) != '-' || sbirth.charAt(7) != '-')
                 {
                     JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
                     txtBirthEmp.requestFocus();
@@ -2607,12 +2625,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 if(!(dky <= (today.getYear() - 18)))
                 {
                     JOptionPane.showMessageDialog(null, "This employee is too young to become employee in coffee shop!");
-                    txtBirthEmp.requestFocus();
-                    return;
-                }
-                if(sbirth.charAt(4) != '-' || sbirth.charAt(7) != '-')
-                {
-                    JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
                     txtBirthEmp.requestFocus();
                     return;
                 }
@@ -2945,9 +2957,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     txtBirthEmp.requestFocus();
                     return;
                 }
+                dky = Integer.parseInt(sbirth.substring(0, 4));
                 dkm = Integer.parseInt(sbirth.substring(5, 7));
                 dkd = Integer.parseInt(sbirth.substring(8, 10));
-                dky = Integer.parseInt(sbirth.substring(0, 4));
                 if(dky < 0 || dkm < 0 || dkd < 0)
                 {
                     JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
@@ -2965,6 +2977,51 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "This employee is too young to become employee in coffee shop!");
                     txtBirthEmp.requestFocus();
                     return;
+                }
+                if(dkm > 12)
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid! Month of year must not be greater than 12!");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+                if(dkm == 2)
+                {
+                    if((dky % 400 == 0) || (dky % 4 == 0 &&  dky % 100 != 0))
+                    {
+                        if(dkd > 29)
+                        {
+                            JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 29!");
+                            txtBirthEmp.requestFocus();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(dkd > 28)
+                        {
+                            JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 28!");
+                            txtBirthEmp.requestFocus();
+                            return;
+                        }
+                    }
+                }
+                if(dkm == 4 || dkm == 6 || dkm == 9 || dkm == 11)
+                {
+                    if(dkd > 30)
+                    {
+                        JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 30!");
+                        txtBirthEmp.requestFocus();
+                        return;
+                    }
+                }
+                if(dkm == 1 || dkm == 3 || dkm == 5 || dkm == 7 || dkm == 8 || dkm == 10 || dkm == 11)
+                {
+                    if(dkd > 31)
+                    {
+                        JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 31!");
+                        txtBirthEmp.requestFocus();
+                        return;
+                    }
                 }
                 birth = LocalDate.of(dky, dkm, dkd);
             }
@@ -3000,7 +3057,51 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     txtBirthEmp.requestFocus();
                     return;
                 }
-//chỉnh sửa sau                
+                if(dkm > 12)
+                {
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid! Month of year must not be greater than 12!");
+                    txtStartDayEmp.requestFocus();
+                    return;
+                }
+                if(dkm == 2)
+                {
+                    if((dky % 400 == 0) || (dky % 4 == 0 &&  dky % 100 != 0))
+                    {
+                        if(dkd > 29)
+                        {
+                            JOptionPane.showMessageDialog(null, "Startday is not valid! Day of that month must not be greater than 29!");
+                            txtStartDayEmp.requestFocus();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(dkd > 28)
+                        {
+                            JOptionPane.showMessageDialog(null, "Startday is not valid! Day of that month must not be greater than 28!");
+                            txtStartDayEmp.requestFocus();
+                            return;
+                        }
+                    }
+                }
+                if(dkm == 4 || dkm == 6 || dkm == 9 || dkm == 11)
+                {
+                    if(dkd > 30)
+                    {
+                        JOptionPane.showMessageDialog(null, "Startday is not valid! Day of that month must not be greater than 30!");
+                        txtStartDayEmp.requestFocus();
+                        return;
+                    }
+                }
+                if(dkm == 1 || dkm == 3 || dkm == 5 || dkm == 7 || dkm == 8 || dkm == 10 || dkm == 11)
+                {
+                    if(dkd > 31)
+                    {
+                        JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 31!");
+                        txtStartDayEmp.requestFocus();
+                        return;
+                    }
+                }
                 startday = LocalDate.of(dky, dkm, dkd);
                 if((startday.getYear() < today.getYear()))
                 {
@@ -3096,7 +3197,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             
             String manager = a.getAd_id();
             Employee oldemp = new Employee(emid, username, pass, namee, addr, email, phone, manager, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), hourwage, role);
-            if(EmployeeDAO.update(oldemp, username, pass, namee, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), addr, email, phone, role, hourwage, manager) != 0)
+            if(EmployeeDAO.update(oldemp, username, pass, namee, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), addr, email, phone, role, hourwage, manager, 0) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Update successful!");
             }
@@ -3177,14 +3278,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         String addr = txtAddrEmp.getText().trim();
         String email = txtEmailEmp.getText().trim();
         String phone = txtPhoneEmp.getText().trim();
-        int role = cboRoleEmployee.getSelectedIndex();
+        int role = cboRoleEmployee.getSelectedIndex() + 1;
         String manager = a.getAd_id();
         
         int option = JOptionPane.showConfirmDialog(null, "Do you want to delete this employee?\nReally to delete?", "Really?", JOptionPane.YES_OPTION);
         if(option == JOptionPane.YES_OPTION)
         {
             Employee emp = new Employee(emid, username, pass, namee, addr, email, phone, manager, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), hourwage, role);
-            if(EmployeeDAO.update(emp, "(N/A) " + username, pass, namee, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), addr, email, phone, 3, hourwage, manager) != 0)
+            if(EmployeeDAO.update(emp, "N/A " + username, pass, namee, java.sql.Date.valueOf(birth), java.sql.Date.valueOf(startday), addr, email, phone, role, hourwage, manager, 1) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Delete employee succesful!");
             }
@@ -3193,6 +3294,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Delete employee fail!");
             }
         }
+        btnResetEmpActionPerformed(evt);
     }//GEN-LAST:event_btnDeleteEmpActionPerformed
 
     private void btnResetEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetEmpActionPerformed
@@ -3346,7 +3448,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return;
             }
             
-            Customer cus = new Customer(cusid, name, phone, email, discount);
+            Customer cus = new Customer(cusid, name, phone, email, discount, 0);
             if(CustomerDAO.insert(cus) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Insert successful!");
@@ -3370,11 +3472,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             setCustomerControl(false);
             modelCustomer.getDataVector().removeAllElements();
             modelCustomer.fireTableDataChanged();
-            dsCustomer = CustomerDAO.getList();
+            dsCustomer = CustomerDAO.getListAll();
             modelCustomer.setRowCount(0);
             for(Customer d:dsCustomer)
             {
-                if(!(d.getName().contains("N/A")))
+                if(d.getDeleted() == 0)
                 {
                     modelCustomer.addRow(d.toVector());
                 }
@@ -3478,8 +3580,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return;
             }
             
-            Customer cus = new Customer(cusid, name, phone, email, discount);
-            if(CustomerDAO.update(cus, name, phone, email, discount) != 0)
+            Customer cus = new Customer(cusid, name, phone, email, discount, 0);
+            if(CustomerDAO.update(cus, name, phone, email, discount, 0) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Update customer successful!");
             }
@@ -3501,11 +3603,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             setCustomerControl(false);
             modelCustomer.getDataVector().removeAllElements();
             modelCustomer.fireTableDataChanged();
-            dsCustomer = CustomerDAO.getList();
+            dsCustomer = CustomerDAO.getListAll();
             modelCustomer.setRowCount(0);
             for(Customer d:dsCustomer)
             {
-                if(!(d.getName().contains("N/A")))
+                if(d.getDeleted() == 0)
                 {
                     modelCustomer.addRow(d.toVector());
                 }
@@ -3553,9 +3655,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 //                }
 //            }
             
-            Customer cus = new Customer(cus_id, name, phone, email, discount);
+            Customer cus = new Customer(cus_id, name, phone, email, discount, 0);
             
-            if(CustomerDAO.update(cus, "N/A " + name, "N/A " + phone, "N/A " + email, 0)!= 0)
+            if(CustomerDAO.update(cus, "(deleted) " + name, "N/A " + phone, "N/A " + email, 0, 1)!= 0)
             {
                 JOptionPane.showMessageDialog(null, "Delete customer successful!");
             }
@@ -3566,7 +3668,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
         modelCustomer.getDataVector().removeAllElements();
         modelCustomer.fireTableDataChanged();
-        dsCustomer = CustomerDAO.getList();
+        dsCustomer = CustomerDAO.getListAll();
         for(Customer d:dsCustomer)
         {
             modelCustomer.addRow(d.toVector());
@@ -3591,11 +3693,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         
         modelCustomer.getDataVector().removeAllElements();
         modelCustomer.fireTableDataChanged();
-        dsCustomer = CustomerDAO.getList();
+        dsCustomer = CustomerDAO.getListAll();
         modelCustomer.setRowCount(0);
         for(Customer d:dsCustomer)
         {
-            if(!(d.getName().contains("N/A")))
+            if(d.getDeleted() == 0)
             {
                 modelCustomer.addRow(d.toVector());
             }
@@ -3774,28 +3876,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
         modelFood.getDataVector().removeAllElements();
         modelFood.fireTableDataChanged();
-        dsFood = FoodDAO.getList();
+        dsFood = FoodDAO.getListAll();
         for(Food d:dsFood)
         {
-            Vector v = new Vector();
-            v.add(d.getFood_id());
-            v.add(d.getName());
-            v.add(d.getInfo());
-            v.add(d.getPrice());
-            if(d.getIsdrink() == 0)
+            if(d.getDeleted() == 0)
             {
-                v.add("Uống");
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
+                //v.add(d.getIsdrink());
+                modelFood.addRow(v);
             }
-            if(d.getIsdrink() == 1)
-            {
-                v.add("Ăn");
-            }
-            if(d.getIsdrink() == 2)
-            {
-                v.add("Khác");
-            }
-            //v.add(d.getIsdrink());
-            modelFood.addRow(v);
         }
         sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
     }//GEN-LAST:event_btnResetFoodActionPerformed
@@ -3809,6 +3914,12 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
         
         String foodid = txtIDFood.getText().trim();
+        String name = txtNameFood.getText().trim();
+        String info = txtInfoFood.getText().trim();
+        float price = Float.parseFloat(txtPriceFood.getText().trim());
+        byte isdrink = (byte) cboTypeFood.getSelectedIndex();
+        
+        Food food = new Food(foodid, name, info, price, isdrink, 0);
         
         int option = JOptionPane.showConfirmDialog(null, "Do you want to delete this food?\nThis action will be delete ALL food details!\nReally to delete?", "Really?", JOptionPane.YES_OPTION);
         if(option == JOptionPane.YES_OPTION)
@@ -3820,7 +3931,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     FoodDetailsDAO.delete(d.getFd_id());
                 }
             }
-            if(FoodDAO.delete(foodid) != 0)
+            if(FoodDAO.update(food, "(deleted) " + name, info, price, isdrink, 1) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Delete food successful!");
             }
@@ -3891,8 +4002,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
             byte isdrink = (byte) cboTypeFood.getSelectedIndex();
 
-            Food food = new Food(foodid, name, info, price, isdrink);
-            if(FoodDAO.update(food, name, info, price, isdrink) != 0)
+            Food food = new Food(foodid, name, info, price, isdrink, 0);
+            if(FoodDAO.update(food, name, info, price, isdrink, 0) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Update food successful!");
             }
@@ -3912,28 +4023,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             setFoodControl(false);
             modelFood.getDataVector().removeAllElements();
             modelFood.fireTableDataChanged();
-            dsFood = FoodDAO.getList();
+            dsFood = FoodDAO.getListAll();
             for(Food d:dsFood)
             {
-                Vector v = new Vector();
-                v.add(d.getFood_id());
-                v.add(d.getName());
-                v.add(d.getInfo());
-                v.add(d.getPrice());
-                if(d.getIsdrink() == 0)
+                if(d.getDeleted() == 0)
                 {
-                    v.add("Uống");
+                    Vector v = new Vector();
+                    v.add(d.getFood_id());
+                    v.add(d.getName());
+                    v.add(d.getInfo());
+                    v.add(d.getPrice());
+                    if(d.getIsdrink() == 0)
+                    {
+                        v.add("Uống");
+                    }
+                    if(d.getIsdrink() == 1)
+                    {
+                        v.add("Ăn");
+                    }
+                    if(d.getIsdrink() == 2)
+                    {
+                        v.add("Khác");
+                    }
+                    //v.add(d.getIsdrink());
+                    modelFood.addRow(v);
                 }
-                if(d.getIsdrink() == 1)
-                {
-                    v.add("Ăn");
-                }
-                if(d.getIsdrink() == 2)
-                {
-                    v.add("Khác");
-                }
-                //v.add(d.getIsdrink());
-                modelFood.addRow(v);
             }
             sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
         }
@@ -3985,28 +4099,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
         modelFood.getDataVector().removeAllElements();
         modelFood.fireTableDataChanged();
-        dsFood = FoodDAO.getList();
+        dsFood = FoodDAO.getListAll();
         for(Food d:dsFood)
         {
-            Vector v = new Vector();
-            v.add(d.getFood_id());
-            v.add(d.getName());
-            v.add(d.getInfo());
-            v.add(d.getPrice());
-            if(d.getIsdrink() == 0)
+            if(d.getDeleted() == 0)
             {
-                v.add("Uống");
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
+                //v.add(d.getIsdrink());
+                modelFood.addRow(v);
             }
-            if(d.getIsdrink() == 1)
-            {
-                v.add("Ăn");
-            }
-            if(d.getIsdrink() == 2)
-            {
-                v.add("Khác");
-            }
-            //v.add(d.getIsdrink());
-            modelFood.addRow(v);
         }
         sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
     }//GEN-LAST:event_btnResetFDActionPerformed
@@ -4142,28 +4259,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
             modelFood.getDataVector().removeAllElements();
             modelFood.fireTableDataChanged();
-            dsFood = FoodDAO.getList();
+            dsFood = FoodDAO.getListAll();
             for(Food d:dsFood)
             {
-                Vector v = new Vector();
-                v.add(d.getFood_id());
-                v.add(d.getName());
-                v.add(d.getInfo());
-                v.add(d.getPrice());
-                if(d.getIsdrink() == 0)
+                if(d.getDeleted() == 0)
                 {
-                    v.add("Uống");
+                    Vector v = new Vector();
+                    v.add(d.getFood_id());
+                    v.add(d.getName());
+                    v.add(d.getInfo());
+                    v.add(d.getPrice());
+                    if(d.getIsdrink() == 0)
+                    {
+                        v.add("Uống");
+                    }
+                    if(d.getIsdrink() == 1)
+                    {
+                        v.add("Ăn");
+                    }
+                    if(d.getIsdrink() == 2)
+                    {
+                        v.add("Khác");
+                    }
+                    //v.add(d.getIsdrink());
+                    modelFood.addRow(v);
                 }
-                if(d.getIsdrink() == 1)
-                {
-                    v.add("Ăn");
-                }
-                if(d.getIsdrink() == 2)
-                {
-                    v.add("Khác");
-                }
-                //v.add(d.getIsdrink());
-                modelFood.addRow(v);
             }
             sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
         }
@@ -4522,7 +4642,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
             
             FoodMaterial fm = new FoodMaterial(fmid, name, info, fmtype, unitbuy, supplier, usefor, standardprice);
-            if(FoodMaterialDAO.update(fm, name, info, usefor, fmtype, unitbuy, supplier, standardprice) != 0)
+            if(FoodMaterialDAO.update(fm, name, info, usefor, fmtype, unitbuy, supplier, standardprice, 0) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Update food material succesful!");
             }
@@ -4590,6 +4710,15 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
         
         String fmid = txtIDFM.getText().trim();
+        String name = txtNameFM.getText().trim();
+        String info = txtInfoFM.getText().trim();
+        byte usefor = (byte) cboUseForFM.getSelectedIndex();
+        String fmtype = cboTypeFM.getSelectedItem().toString();
+        String unitbuy = cboUnitBuyFM.getSelectedItem().toString();
+        float standardprice = Float.parseFloat(txtStandardPriceFM.getText().trim());
+        String supplier = txtSupplierFM.getText().trim();
+        
+        FoodMaterial fm = new FoodMaterial(fmid, name, info, fmtype, unitbuy, supplier, usefor, standardprice);
         
         int option = JOptionPane.showConfirmDialog(null, "Do you want to delete this customer?\nThis action will be delete ALL food details has contained it!\nReally to delete?", "Really?", JOptionPane.YES_OPTION);
         
@@ -4602,7 +4731,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     FoodDetailsDAO.deletefm(fmid);
                 }
             }
-            if(FoodMaterialDAO.delete(fmid) != 0)
+            if(FoodMaterialDAO.update(fm, name, info, usefor, fmtype, unitbuy, supplier, standardprice, 1) != 0)
             {
                 JOptionPane.showMessageDialog(null, "Delete food material successful!");
             }
@@ -4733,25 +4862,25 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             if (d.getName().toUpperCase().contains(dkFoodName.trim().toUpperCase()) || d.getName().toLowerCase().contains(dkFoodName.trim().toLowerCase()))
             {
-//                Vector v = new Vector();
-//                v.add(d.getFood_id());
-//                v.add(d.getName());
-//                v.add(d.getInfo());
-//                v.add(d.getPrice());
-//                if(d.getIsdrink() == 0)
-//                {
-//                    v.add("Uống");
-//                }
-//                if(d.getIsdrink() == 1)
-//                {
-//                    v.add("Ăn");
-//                }
-//                if(d.getIsdrink() == 2)
-//                {
-//                    v.add("Khác");
-//                }
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
 //                //v.add(d.getIsdrink());
-                modelFood.addRow(d.toVector());
+                modelFood.addRow(v);
             }
         }
     }//GEN-LAST:event_btnSearchFoodNameActionPerformed
@@ -4877,7 +5006,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) this.pnFoodFormInput.getLayout();
         cl.show(pnFoodFormInput, "card3");
 
-        dsFood = FoodDAO.getList();
+        dsFood = FoodDAO.getListAll();
         dsFD = FoodDetailsDAO.getList();
         initDatacboName();
         setFDControl(true);
@@ -4927,7 +5056,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             if(dkm > 12)
             {
                 JOptionPane.showMessageDialog(null, "Time is not valid! Month of year must not be greater than 12!");
-                txtBirthEmp.requestFocus();
+                txtSearchOrderTime.requestFocus();
                 return;
             }
             if(dkm == 2)
@@ -4937,7 +5066,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     if(dkd > 29)
                     {
                         JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 29!");
-                        txtBirthEmp.requestFocus();
+                        txtSearchOrderTime.requestFocus();
                         return;
                     }
                 }
@@ -4946,7 +5075,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     if(dkd > 28)
                     {
                         JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 28!");
-                        txtBirthEmp.requestFocus();
+                        txtSearchOrderTime.requestFocus();
                         return;
                     }
                 }
@@ -4956,7 +5085,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 if(dkd > 30)
                 {
                     JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 30!");
-                    txtBirthEmp.requestFocus();
+                    txtSearchOrderTime.requestFocus();
                     return;
                 }
             }
@@ -4965,7 +5094,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 if(dkd > 31)
                 {
                     JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 31!");
-                    txtBirthEmp.requestFocus();
+                    txtSearchOrderTime.requestFocus();
                     return;
                 }
             }
@@ -5001,6 +5130,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 modelOrder.addRow(v);
             }
         }
+        
+        float todaysale = OrderDAO.getTodaySale(java.sql.Date.valueOf(dkOrderTime));
+        lbTodaySale.setText("That day sale:");
+        txtTodaySale.setText(todaysale + "");
     }//GEN-LAST:event_btnSearchOrderTimeActionPerformed
 
     private void btnResetOrderDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetOrderDataActionPerformed
@@ -5027,6 +5160,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
         modelOD.getDataVector().removeAllElements();
         modelOD.fireTableDataChanged();
+        initDatatxtTodaySale();
     }//GEN-LAST:event_btnResetOrderDataActionPerformed
 
     private void btnResetReceiptDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetReceiptDataActionPerformed
@@ -5219,7 +5353,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         byte isdrink = (byte) cboTypeFood.getSelectedIndex();
 
-        Food food = new Food(foodid, name, info, price, isdrink);
+        Food food = new Food(foodid, name, info, price, isdrink, 0);
         if(FoodDAO.insert(food) != 0)
         {
             JOptionPane.showMessageDialog(null, "Insert food successful!");
@@ -5241,28 +5375,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         setFoodControl(false);
         modelFood.getDataVector().removeAllElements();
         modelFood.fireTableDataChanged();
-        dsFood = FoodDAO.getList();
+        dsFood = FoodDAO.getListAll();
         for(Food d:dsFood)
         {
-            Vector v = new Vector();
-            v.add(d.getFood_id());
-            v.add(d.getName());
-            v.add(d.getInfo());
-            v.add(d.getPrice());
-            if(d.getIsdrink() == 0)
+            if(d.getDeleted() == 0)
             {
-                v.add("Uống");
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
+                //v.add(d.getIsdrink());
+                modelFood.addRow(v);
             }
-            if(d.getIsdrink() == 1)
-            {
-                v.add("Ăn");
-            }
-            if(d.getIsdrink() == 2)
-            {
-                v.add("Khác");
-            }
-            //v.add(d.getIsdrink());
-            modelFood.addRow(v);
         }
         sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
     }//GEN-LAST:event_btnSaveFoodActionPerformed
@@ -5345,6 +5482,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             txtQuanFD.setText("");
             txtUnitUseFD.setText("");
         }
+        txtIDFD.setText(fd.getFd_id());
         btnInsertFD.setEnabled(true);
         btnSaveFD.setVisible(false);
         btnUpdateFD.setEnabled(true);
@@ -5380,28 +5518,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         sorterFD = (TableRowSorter<TableModel>) vwFD.getRowSorter();
         modelFood.getDataVector().removeAllElements();
         modelFood.fireTableDataChanged();
-        dsFood = FoodDAO.getList();
+        dsFood = FoodDAO.getListAll();
         for(Food d:dsFood)
         {
-            Vector v = new Vector();
-            v.add(d.getFood_id());
-            v.add(d.getName());
-            v.add(d.getInfo());
-            v.add(d.getPrice());
-            if(d.getIsdrink() == 0)
+            if(d.getDeleted() == 0)
             {
-                v.add("Uống");
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
+                //v.add(d.getIsdrink());
+                modelFood.addRow(v);
             }
-            if(d.getIsdrink() == 1)
-            {
-                v.add("Ăn");
-            }
-            if(d.getIsdrink() == 2)
-            {
-                v.add("Khác");
-            }
-            //v.add(d.getIsdrink());
-            modelFood.addRow(v);
         }
         sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
     }//GEN-LAST:event_btnSaveFDActionPerformed
@@ -5562,6 +5703,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel lbTodaySale;
     private javax.swing.JMenuItem miExit;
     private javax.swing.JMenuItem miLogout;
     private javax.swing.JPanel pnAdminControl;
@@ -5664,6 +5806,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JTextField txtStandardPriceFM;
     private javax.swing.JTextField txtStartDayEmp;
     private javax.swing.JTextField txtSupplierFM;
+    private javax.swing.JTextField txtTodaySale;
     private javax.swing.JTextField txtTypeOtherFM;
     private javax.swing.JTextField txtUnitBuyOtherFM;
     private javax.swing.JTextField txtUnitUseFD;
@@ -5803,15 +5946,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     TableRowSorter<TableModel> sorterCustomer;
     private void initDatavwCustomer() {
         modelCustomer = (DefaultTableModel) vwCustomer.getModel();
-        dsCustomer = CustomerDAO.getList();
+        dsCustomer = CustomerDAO.getListAll();
         modelCustomer.setRowCount(0);
         for(Customer d:dsCustomer)
         {
-            if(!(d.getName().contains("N/A")))
+            if(d.getDeleted() == 0)
             {
                 modelCustomer.addRow(d.toVector());
             }
-            
         }
         
         sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
@@ -5833,28 +5975,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private void initDatavwFood() {
         modelFood = (DefaultTableModel) vwFood.getModel();
         modelFood.setRowCount(0);
-        dsFood = FoodDAO.getList();
+        dsFood = FoodDAO.getListAll();
         for(Food d:dsFood)
         {
-            Vector v = new Vector();
-            v.add(d.getFood_id());
-            v.add(d.getName());
-            v.add(d.getInfo());
-            v.add(d.getPrice());
-            if(d.getIsdrink() == 0)
+            if(d.getDeleted() == 0)
             {
-                v.add("Uống");
+                Vector v = new Vector();
+                v.add(d.getFood_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                v.add(d.getPrice());
+                if(d.getIsdrink() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getIsdrink() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getIsdrink() == 2)
+                {
+                    v.add("Khác");
+                }
+                //v.add(d.getIsdrink());
+                modelFood.addRow(v);
             }
-            if(d.getIsdrink() == 1)
-            {
-                v.add("Ăn");
-            }
-            if(d.getIsdrink() == 2)
-            {
-                v.add("Khác");
-            }
-            //v.add(d.getIsdrink());
-            modelFood.addRow(v);
         }
         
         sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
@@ -6083,7 +6228,17 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             modelOrder.addRow(v);
         }
         
+        initDatatxtTodaySale();
+        
         sorterOrder = (TableRowSorter<TableModel>) vwOrder.getRowSorter();
+    }
+    
+    private void initDatatxtTodaySale() {
+        lbTodaySale.setText("Today sale:");
+        txtTodaySale.setEnabled(false);
+        LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+        float todaysale = OrderDAO.getTodaySale(java.sql.Date.valueOf(today));
+        txtTodaySale.setText(todaysale + "");
     }
     
     private void initDatavwOD(String order_id)

@@ -148,6 +148,29 @@ public class OrderDAO {
         
         return resultlist;
     }
+    
+    public static float getTodaySale(java.sql.Date indate) {
+        float total = 0;
+        
+        String sql = "SELECT ordertime, SUM(price) FROM tbOrder GROUP BY ordertime HAVING ordertime = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);){
+            
+            st.setDate(1, indate);
+            
+            try (ResultSet rs = st.executeQuery()) {
+                while(rs.next()){
+                    total = rs.getFloat(2);
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return total;
+    }
 
     // WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
     private static String createid(String startid, String number_want_toset, int idsize) {

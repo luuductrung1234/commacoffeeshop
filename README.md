@@ -48,8 +48,8 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
   	+ đã xong : Admin profile information form (giao diện/xem/sửa thông tin) _ không có quyền xóa bất kì admin nào
   	+ ?(sẽ phát triển sau khi đã hoàn thành các phần khác) : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
 	+ ĐẶC BIỆT: phần Salary Note, người được phân công đã không thể hiểu và hoàn thành ở hiện tại. Có lẽ cần phải hướng dẫn lại trong ngày gần nhất có thể. Công việc phần này trước mắt không nhiều nhưng vẫn cần thời gian. Nếu kịp thì có lẽ Đức Anh sẽ làm luôn pần đó để hoàn thành theo đúng tài liệu thiết kế
-	+ Các phần xóa đã hoàn thành, nhưng sẽ bàn lại sau vì code hiện tại đã xong, chạy ổn, nhưng vẫn phải bàn lại, đặc biệt là Employee. Có thể sẽ sửa đổi trong lần gặp tới. Nếu phần xóa này đã ổn thì phần việc của Admin đã hoàn thành.
-	+ Code các phần hiện tại đã ổn. Nhưng Đức Anh sẽ chạy lại database và test thêm vài lần nữa cho chắc.
+	+ **Các phần xóa đã hoàn thành, nhưng sẽ bàn lại sau vì code hiện tại đã xong, chạy ổn, nhưng vẫn phải bàn lại, đặc biệt là Employee. Có thể sẽ sửa đổi trong lần gặp tới. Nếu phần xóa này đã ổn thì phần việc của Admin đã hoàn thành.
+	+ Code các phần hiện tại đã ổn.
 
 
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày

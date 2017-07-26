@@ -9,16 +9,18 @@ public class Food implements java.io.Serializable{
     private String food_id, name, info;
     private float price;
     private Byte isdrink;
+    private int deleted;
 
     public Food() {
     }
 
-    public Food(String food_id, String name, String info, float price, Byte isdrink) {
+    public Food(String food_id, String name, String info, float price, Byte isdrink, int deleted) {
         this.food_id = food_id;
         this.name = name;
         this.info = info;
         this.price = price;
         this.isdrink = isdrink;
+        this.deleted = deleted;
     }
     
     public Vector toVector()
@@ -53,6 +55,10 @@ public class Food implements java.io.Serializable{
         return isdrink;
     }
 
+    public int getDeleted() {
+        return deleted;
+    }
+
     public void setFood_id(String food_id) {
         this.food_id = food_id;
     }
@@ -71,6 +77,10 @@ public class Food implements java.io.Serializable{
 
     public void setIsdrink(Byte isdrink) {
         this.isdrink = isdrink;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
     
 }

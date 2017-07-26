@@ -15,7 +15,7 @@ public class FoodMaterialDAO {
     public static List<FoodMaterial> getList()
     {
         List<FoodMaterial> ds = new ArrayList<>();
-        String sql = "SELECT * FROM tbFoodMaterial";
+        String sql = "SELECT * FROM tbFoodMaterial where deleted = 0";
                 
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql);
@@ -94,7 +94,7 @@ public class FoodMaterialDAO {
             if(rs.next()){
                 int current_number_oftbFoodMaterial = rs.getInt(1);
                 
-                sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                sql = "INSERT tbFoodMaterial VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 int result = 0;
                 do{
                     String newid = createid("FM", String.valueOf(++current_number_oftbFoodMaterial), 10);
@@ -110,6 +110,7 @@ public class FoodMaterialDAO {
                         st2.setString(6, new_fm.getUnit_buy());
                         st2.setFloat(7, new_fm.getStandard_price());
                         st2.setString(8, new_fm.getSupplier());
+                        st2.setInt(9, 0);
 
                         result = st2.executeUpdate();
                     }
@@ -124,9 +125,9 @@ public class FoodMaterialDAO {
         return 0;
     }
     
-    public static int update(FoodMaterial fm, String newname, String newinfo, byte newusefor, String newfmtype, String newunitbuy, String newsupplier, float newstandardprice)
+    public static int update(FoodMaterial fm, String newname, String newinfo, byte newusefor, String newfmtype, String newunitbuy, String newsupplier, float newstandardprice, int newdeleted)
     {
-        String sql = "UPDATE tbFoodMaterial SET name = ?, info = ?, usefor = ?, fmtype = ?, unit_buy = ?, standard_price = ?, supplier = ? WHERE fm_id = ?";
+        String sql = "UPDATE tbFoodMaterial SET name = ?, info = ?, usefor = ?, fmtype = ?, unit_buy = ?, standard_price = ?, supplier = ?, deleted = ? WHERE fm_id = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement pst = cn.prepareStatement(sql);){
@@ -138,7 +139,9 @@ public class FoodMaterialDAO {
             pst.setString(5, fm.getUnit_buy());
             pst.setFloat(6, fm.getStandard_price());
             pst.setString(7, fm.getSupplier());
-            pst.setString(8, fm.getFm_id());
+            pst.setInt(8, newdeleted);
+            pst.setString(9, fm.getFm_id());
+            
             
             return pst.executeUpdate();
             
