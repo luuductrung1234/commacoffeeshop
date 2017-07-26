@@ -35,6 +35,9 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.swing.JRViewer;
 import supportclass.FoodReport;
 import static supportclass.printing.PrintTextForm.localizedFormat;
+import supportclass.printing.PrintWithoutDialog;
+import supportclass.printing.ReportPrintTextForm;
+import supportclass.printing.TableItem;
 
 /**
  *
@@ -296,14 +299,75 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         
         
         
-        // tiến hành in report
-        if(this.cbPrint.isSelected()){
-            // print code
-        }
-        
-        // tiến hành tạo file report pdf
         this.orderlist = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
         this.rnlist = ReceiptNoteDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
+        
+        // tiến hành in report
+        if(this.cbPrint.isSelected()){
+            int totalorder = this.orderlist.size();
+            int totalorderamount = 0;
+            int totalcustomerpay = 0;
+            int totalchange = 0;
+            int totalfoodpurchase = 0;
+            int totalotherpurchase = 0;
+            int beginofday = (int) (this.begincash * 1000);
+            int endofday;
+            int totaldiscount;
+
+            for(Entry<Order, ArrayList<OrderDetails>> iter : this.orderlist.entrySet()){
+                totalorderamount += iter.getKey().getPrice() * 1000;
+                totalcustomerpay += iter.getKey().getCustomerpay() * 1000;
+                totalchange += iter.getKey().getPayback() * 1000;
+            }
+
+
+            for(Entry<ReceiptNote, ArrayList<ReceiptNoteDetails>> iter : this.rnlist.entrySet()){
+                for(ReceiptNoteDetails rnditem : iter.getValue()){
+                    if(rnditem.getFm_id().equals("FM00000000")){
+                        totalotherpurchase += rnditem.getItem_price() * rnditem.getQuan() * 1000;
+                    }else{
+                        totalfoodpurchase += rnditem.getItem_price() * rnditem.getQuan() * 1000;
+                    }
+                }
+            }
+
+            endofday = beginofday + totalcustomerpay - totalchange - (totalfoodpurchase + totalotherpurchase);
+
+            int realamount = 0;
+            for(Entry<Order, ArrayList<OrderDetails>> iter : this.orderlist.entrySet()){
+                for(OrderDetails oditem : iter.getValue()){
+                    for(Food fitem : this.parent.menufood_list){
+                        if(fitem.getFood_id().equals(oditem.getFood_id())){
+                            realamount += fitem.getPrice() * oditem.getQuan() * 1000;
+                            break;
+                        }
+                    }
+                }
+            }
+            totaldiscount = realamount - totalorderamount;
+        
+            
+            
+            ArrayList<TableItem> tabledata = this.toReportTable();
+            ReportPrintTextForm printtext = new ReportPrintTextForm(totalorder, totalorderamount, totalcustomerpay, totalchange, totalfoodpurchase, totalotherpurchase, beginofday, endofday, totaldiscount, dayreport);
+            printtext.prepareTextForPrint();
+            String[] dummy = new String[0];
+            String[] pretext = printtext.getPretext().toArray(dummy);
+            String[] posttext = printtext.getPosttext().toArray(dummy);
+            Integer[] boldline = printtext.getBoldline();
+            
+            
+            if(this.rdLongreport.isSelected()){
+                PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, tabledata, posttext, PrintWithoutDialog.REPORT_PRINT);
+            }else{
+                PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, new ArrayList<>(), posttext, PrintWithoutDialog.REPORT_PRINT);
+            }
+            
+        }
+        
+        
+        
+        // tiến hành tạo file report pdf
         if(this.cbTextfile.isSelected()){
             if(this.rdLongreport.isSelected()){
                 this.generateLongTextReport();
@@ -616,6 +680,67 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             
             dataSource.add(newrecord);
         }
+    }
+    
+    private ArrayList<TableItem> toReportTable() {
+        ArrayList<FoodReport> data = new ArrayList<>();
+        for(Food fitem : this.parent.menufood_list){
+            int quan = 0;
+            int orderamount = 0;
+            
+            FoodReport newitem = new FoodReport();
+            newitem.setName(fitem.getName());                                                   // tên món
+            switch(fitem.getIsdrink()){                                                         // loại món
+                case 0:
+                    newitem.setIsdrink("drink");
+                    break;
+                case 1:
+                    newitem.setIsdrink("food");
+                    break;
+                case 2:
+                    newitem.setIsdrink("other");
+            }
+            
+            for(Entry<Order, ArrayList<OrderDetails>> iter : this.orderlist.entrySet()){
+                for(OrderDetails oditem : iter.getValue()){
+                    if(oditem.getFood_id().equals(fitem.getFood_id())){
+                        quan += oditem.getQuan();
+                    }
+                }
+            }
+            
+            newitem.setQuan(quan);                                                              // số lượng đã order
+            
+            orderamount = (int) (quan * fitem.getPrice() * 1000);                               // tống tiền đẵ order
+            newitem.setOrderamount(orderamount);
+            data.add(newitem);
+        }
+        
+        
+        ArrayList<TableItem> r = new ArrayList<>();
+        
+        // tiêu dề table
+        r.add(new TableItem("Name", "Quan", "", "Amt"));
+        
+        // dữ liệu table
+        for(FoodReport iter : data){
+            TableItem newitem = new TableItem();
+            newitem.setProduct(iter.getName());
+            newitem.setQuan(String.valueOf(iter.getQuan()));
+            String sAmt = localizedFormat("###,###.###", iter.getOrderamount(), Locale.US);
+            newitem.setAmt(sAmt);
+            
+            r.add(newitem);
+        }
+        
+        // tổng kết table
+        int totalamount = 0;
+        for(FoodReport iter : data){
+            totalamount += iter.getOrderamount();
+        }
+        r.add(new TableItem("Total: ", "", "", localizedFormat("###,###.###", totalamount, Locale.US)));
+        
+        return r;
     }
 // END CUSTOM CODE
 }

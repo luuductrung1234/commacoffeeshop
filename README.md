@@ -19,7 +19,9 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
   - **FrLogin**:
     + đã xong : đăng nhập cho nhân viên và quản lý
     + đã xong : cập nhật thêm chức năng thay đổi cấu hình đăng nhập database, sau khi chỉnh sửa và đăng nhập thành công, chương trình tự động lưu dữ liệu của database đó (lần sau không cần điều chỉnh nữa). Thông tin database sẽ được lưu vào databaseinfo.txt
-    
+
+(*) dự kiến thêm khả năng mã hoá mật khẩu trong database
+
   - **FrEmployeeWorkspace**:
     + đã xong : đăng nhập/xuất của nhân viên. Tự động chấm công và phát sinh lịch làm việc trong ngày, bảng lương của tháng hiện tại vào trong database
     + đã xong : Phân chia cửa sổ đã hoàn thành
@@ -32,7 +34,7 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
     + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
     + đã xong : In thêm note của từng món ăn trong bill (kitchen print)
     + đã xong : thêm giá mặc định cho các nguyên liệu (FoodMaterials) => Sẽ cần phải điều chỉnh database, entities class, model class query, giao diện của FrEmployeeWorkspace và FrAdminWorkspace
-    + chưa hoàn thành : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc
+    + đã xong : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc
     + chưa hoàn thành : tách code
     
 
@@ -54,7 +56,9 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
 
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày
 
-(*) tạo file patch mỗi khi update mã nguồn phần mềm để người dùng cập nhật trực tiếp mà không cần phải gửi toàn bộ phần mềm mới
+(*) dự kiến: chuyển tất cả các swing frame thành javafx để tăng độ thẩm mĩ
+
+(*) dự kiến: tạo file patch mỗi khi update mã nguồn phần mềm để người dùng cập nhật trực tiếp mà không cần phải gửi toàn bộ phần mềm mới
   
 # Login Frame
   ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/repo%20picture/login_image.png)

@@ -25,6 +25,7 @@ public class PrintWithoutDialog implements Printable
     public static int TEMPORARY_PRINT = 1;
     public static int KITCHEN_PRINT = 2;
     public static int PAY_PRINT = 3;
+    public static int REPORT_PRINT = 4;
     
     private Integer[] boldline;
     private String[] pretext;
@@ -67,6 +68,9 @@ public class PrintWithoutDialog implements Printable
                 break;
             case 3:
                 this.payPrint(g);
+                break;
+            case 4:
+                this.reportprint(g);
                 break;
         }
         
@@ -247,7 +251,7 @@ public class PrintWithoutDialog implements Printable
         
         /* in phần tổng kết */
         // phần tổng kết mặc định được tạo chung với table
-        // đối với temporary print thì 4 dòng cuối của table là chứ phần tổng kết
+        // đối với pay print thì 4 dòng cuối của table là chứ phần tổng kết
         for(; index < this.table.size(); index++){
             g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
             
@@ -255,6 +259,62 @@ public class PrintWithoutDialog implements Printable
             g.drawString(this.table.get(index).getAmt(), 160, linesize);
             linesize += 11;         // chuyển tọa độ sang dòng khác
         }
+        
+        
+        /* in thông tin cuối bill */
+        for(int i = 0; i < this.posttext.length; i++){
+            g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+            
+            g.drawString(posttext[i], 0, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+    }
+
+    private void reportprint(Graphics g) {
+        /* in thông tin đầu report */
+        int linesize = 10;
+        for(int i = 0; i < this.pretext.length; i++){
+            g.setFont(new Font("Plain", 0, 8));
+            for(Integer iter : this.boldline){
+                if(i == iter){
+                    g.setFont(new Font("Plain", 0, 9).deriveFont(Font.BOLD));
+                    break;
+                }
+            }
+            
+            g.drawString(pretext[i], 0, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+        
+        
+        /* in bảng chi tiết trong report */
+        boolean firstline = true;
+        int index;
+        for(index = 0; index < this.table.size() - 1; index++){
+            if(firstline){
+                g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+                firstline = false;
+            }else{
+                g.setFont(new Font("Plain", 0, 8));
+            }
+            g.drawString(this.table.get(index).getProduct(), 0, linesize);
+            g.drawString(this.table.get(index).getQuan(), 120, linesize);
+            g.drawString(this.table.get(index).getAmt(), 170, linesize);
+            
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+        
+        /* in phần tổng kết */
+        // phần tổng kết mặc định được tạo chung với table
+        // đối với report print thì 1 dòng cuối của table là chứ phần tổng kết
+        for(; index < this.table.size(); index++){
+            g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
+            
+            g.drawString(this.table.get(index).getProduct(), 80, linesize);
+            g.drawString(this.table.get(index).getAmt(), 160, linesize);
+            linesize += 11;         // chuyển tọa độ sang dòng khác
+        }
+        
         
         
         /* in thông tin cuối bill */
