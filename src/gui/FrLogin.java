@@ -81,7 +81,6 @@ public class FrLogin extends javax.swing.JFrame {
         lbPass.setText("Password:");
 
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtUsername.setText("admin_username1");
         txtUsername.setEnabled(false);
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +89,6 @@ public class FrLogin extends javax.swing.JFrame {
         });
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPass.setText("password1");
         txtPass.setEnabled(false);
         txtPass.setRequestFocusEnabled(false);
         txtPass.addActionListener(new java.awt.event.ActionListener() {
