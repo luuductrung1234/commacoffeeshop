@@ -5,6 +5,7 @@
  */
 package gui;
 
+import connection.DBConnect;
 import entities.*;
 import java.awt.CardLayout;
 import java.awt.Graphics;
@@ -12,6 +13,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -19,6 +22,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -459,10 +464,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnEmployeeSearchLayout.setVerticalGroup(
             pnEmployeeSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnEmployeeSearchLayout.createSequentialGroup()
-                .addComponent(btnResetEmployeeData)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(btnSearchEmployeeName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnResetEmployeeData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnShowEmployee.add(pnEmployeeSearch, java.awt.BorderLayout.PAGE_START);
@@ -572,27 +575,19 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnEmployeeInformationLayout.createSequentialGroup()
-                            .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel33)
-                                .addComponent(jLabel46)
-                                .addComponent(jLabel45))
-                            .addGap(58, 58, 58))
-                        .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(120, 120, 120)))
-                    .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
-                        .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(90, 90, 90)))
+                    .addComponent(jLabel33)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel46)
+                    .addComponent(jLabel45)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addGap(58, 58, 58)
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnEmployeeInformationLayout.createSequentialGroup()
                         .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1738,7 +1733,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         jLabel32.setText("Supplier");
 
-        cboTypeFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "khô", "sữa", "rau củ", "vật dụng", "chi phí", "khác" }));
         cboTypeFM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTypeFMActionPerformed(evt);
@@ -1747,7 +1741,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         cboUseForFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Uống", "Ăn", "Không rõ lượng dùng", "Khác" }));
 
-        cboUnitBuyFM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "thùng", "kí", "bịch", "hộp", "lon", "chai", "bình", "trái", "lóc", "cuộn", "lần", "khác" }));
         cboUnitBuyFM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboUnitBuyFMActionPerformed(evt);
@@ -2480,7 +2473,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             if (d.getName().toUpperCase().contains(dkCustomerName.trim().toUpperCase()) || d.getName().toLowerCase().contains(dkCustomerName.trim().toLowerCase()))
             {
-                modelCustomer.addRow(d.toVector());
+                if(!(d.getName().contains("N/A")))
+                {
+                    modelCustomer.addRow(d.toVector());
+                }
             }
         }
     }//GEN-LAST:event_btnSearchCustomerNameActionPerformed
@@ -2607,17 +2603,62 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     txtBirthEmp.requestFocus();
                     return;
                 }
+                if(!(dky <= (today.getYear() - 18)))
+                {
+                    JOptionPane.showMessageDialog(null, "This employee is too young to become employee in coffee shop!");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
                 if(sbirth.charAt(4) != '-' || sbirth.charAt(7) != '-')
                 {
                     JOptionPane.showMessageDialog(null, "Birthday is not valid!\nHint: yyyy-MM-dd");
                     txtBirthEmp.requestFocus();
                     return;
                 }
-                if(!(dky <= (today.getYear() - 18)))
+                if(dkm > 12)
                 {
-                    JOptionPane.showMessageDialog(null, "This employee is too young to become employee in coffee shop!");
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid! Month of year must not be greater than 12!");
                     txtBirthEmp.requestFocus();
                     return;
+                }
+                if(dkm == 2)
+                {
+                    if((dky % 400 == 0) || (dky % 4 == 0 &&  dky % 100 != 0))
+                    {
+                        if(dkd > 29)
+                        {
+                            JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 29!");
+                            txtBirthEmp.requestFocus();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(dkd > 28)
+                        {
+                            JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 28!");
+                            txtBirthEmp.requestFocus();
+                            return;
+                        }
+                    }
+                }
+                if(dkm == 4 || dkm == 6 || dkm == 9 || dkm == 11)
+                {
+                    if(dkd > 30)
+                    {
+                        JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 30!");
+                        txtBirthEmp.requestFocus();
+                        return;
+                    }
+                }
+                if(dkm == 1 || dkm == 3 || dkm == 5 || dkm == 7 || dkm == 8 || dkm == 10 || dkm == 11)
+                {
+                    if(dkd > 31)
+                    {
+                        JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 31!");
+                        txtBirthEmp.requestFocus();
+                        return;
+                    }
                 }
                 birth = LocalDate.of(dky, dkm, dkd);
             }
@@ -2635,35 +2676,81 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 if(sstartday.length() == 0 || sstartday.length() > 10)
                 {
                     JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                    txtBirthEmp.requestFocus();
+                    txtStartDayEmp.requestFocus();
                     return;
                 }
+                dky = Integer.parseInt(sstartday.substring(0, 4));
                 dkm = Integer.parseInt(sstartday.substring(5, 7));
                 dkd = Integer.parseInt(sstartday.substring(8, 10));
-                dky = Integer.parseInt(sstartday.substring(0, 4));
                 if(dky < 0 || dkm < 0 || dkd < 0)
                 {
                     JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                    txtBirthEmp.requestFocus();
+                    txtStartDayEmp.requestFocus();
                     return;
                 }
                 if(sstartday.charAt(4) != '-' || sstartday.charAt(7) != '-')
                 {
                     JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                    txtBirthEmp.requestFocus();
+                    txtStartDayEmp.requestFocus();
                     return;
                 }
-//chỉnh sửa sau                
-                startday = LocalDate.of(dky, dkm, dkd);
-                if((startday.getYear() < today.getYear()))
+                if(dkm > 12)
                 {
-                    
+                    JOptionPane.showMessageDialog(null, "Birthday is not valid! Month of year must not be greater than 12!");
+                    txtStartDayEmp.requestFocus();
+                    return;
+                }
+                if(dkm == 2)
+                {
+                    if((dky % 400 == 0) || (dky % 4 == 0 &&  dky % 100 != 0))
+                    {
+                        if(dkd > 29)
+                        {
+                            JOptionPane.showMessageDialog(null, "Startday is not valid! Day of that month must not be greater than 29!");
+                            txtStartDayEmp.requestFocus();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(dkd > 28)
+                        {
+                            JOptionPane.showMessageDialog(null, "Startday is not valid! Day of that month must not be greater than 28!");
+                            txtStartDayEmp.requestFocus();
+                            return;
+                        }
+                    }
+                }
+                if(dkm == 4 || dkm == 6 || dkm == 9 || dkm == 11)
+                {
+                    if(dkd > 30)
+                    {
+                        JOptionPane.showMessageDialog(null, "Startday is not valid! Day of that month must not be greater than 30!");
+                        txtStartDayEmp.requestFocus();
+                        return;
+                    }
+                }
+                if(dkm == 1 || dkm == 3 || dkm == 5 || dkm == 7 || dkm == 8 || dkm == 10 || dkm == 11)
+                {
+                    if(dkd > 31)
+                    {
+                        JOptionPane.showMessageDialog(null, "Birthday is not valid! Day of that month must not be greater than 31!");
+                        txtStartDayEmp.requestFocus();
+                        return;
+                    }
+                }
+                startday = LocalDate.of(dky, dkm, dkd);
+                if(!(startday.isAfter(today)))
+                {
+                    JOptionPane.showMessageDialog(null, "Start day is not valid! Start day must be after to day!");
+                    txtStartDayEmp.requestFocus();
+                    return;
                 }
             }
             catch(Exception ex)
             {
                 JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                txtBirthEmp.requestFocus();
+                txtStartDayEmp.requestFocus();
                 return;
             }
             
@@ -3286,7 +3373,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             modelCustomer.setRowCount(0);
             for(Customer d:dsCustomer)
             {
-                modelCustomer.addRow(d.toVector());
+                if(!(d.getName().contains("N/A")))
+                {
+                    modelCustomer.addRow(d.toVector());
+                }
             }
             sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
         }
@@ -3414,7 +3504,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             modelCustomer.setRowCount(0);
             for(Customer d:dsCustomer)
             {
-                modelCustomer.addRow(d.toVector());
+                if(!(d.getName().contains("N/A")))
+                {
+                    modelCustomer.addRow(d.toVector());
+                }
             }
             sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
         }
@@ -3478,6 +3571,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             modelCustomer.addRow(d.toVector());
         }
         sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
+        btnResetCusActionPerformed(evt);
     }//GEN-LAST:event_btnDeleteCusActionPerformed
 
     private void btnResetCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetCusActionPerformed
@@ -3500,7 +3594,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelCustomer.setRowCount(0);
         for(Customer d:dsCustomer)
         {
-            modelCustomer.addRow(d.toVector());
+            if(!(d.getName().contains("N/A")))
+            {
+                modelCustomer.addRow(d.toVector());
+            }
         }
         sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
     }//GEN-LAST:event_btnResetCusActionPerformed
@@ -3569,6 +3666,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             cl.show(pnDisplay, "card6");
             
             initDatavwFM();
+            initcboTypeFM();
+            initcboUnitBuyFM();
             setFMControl(false);
             btnResetFMActionPerformed(evt);
         }
@@ -4082,18 +4181,18 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 v.add(d.getFm_id());
                 v.add(d.getName());
                 v.add(d.getInfo());
-                switch(d.getUsefor())
-                {
-                    case 0:
-                        v.add("Uống");
-                    case 1:
-                        v.add("Ăn");
-                    case 2:
-                        v.add("Không rõ lượng dùng");
-                    case 3:
-                        v.add("Khác");
-                }
-                //v.add(d.getUsefor());
+//                switch(d.getUsefor())
+//                {
+//                    case 0:
+//                        v.add("Uống");
+//                    case 1:
+//                        v.add("Ăn");
+//                    case 2:
+//                        v.add("Không rõ lượng dùng");
+//                    case 3:
+//                        v.add("Khác");
+//                }
+                v.add(d.getUsefor());
                 v.add(d.getFmtype());
                 v.add(d.getUnit_buy());
                 v.add(d.getStandard_price());
@@ -4125,6 +4224,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnUpdateFM.setEnabled(true);
         btnUpdateFM.setText("Update");
         btnDeleteFM.setEnabled(true);
+        txtTypeOtherFM.setVisible(false);
+        txtTypeOtherFM.setText("");
+        txtUnitBuyOtherFM.setVisible(false);
+        txtUnitBuyOtherFM.setText("");
         if(row >= 0)
         {
             txtIDFM.setEnabled(false);
@@ -4198,9 +4301,37 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             
             byte usefor = (byte) cboUseForFM.getSelectedIndex();
             
-            String fmtype = cboTypeFM.getSelectedItem().toString();
+            String fmtype;
+            if(cboTypeFM.getSelectedIndex() == 0)
+            {
+                fmtype = txtTypeOtherFM.getText().trim();
+                if(fmtype.length() == 0 || fmtype.length() > 50)
+                {
+                    JOptionPane.showMessageDialog(null, "Food material type is not valid!");
+                    txtTypeOtherFM.requestFocus();
+                    return;
+                }
+            }
+            else
+            {
+                fmtype = cboTypeFM.getSelectedItem().toString();
+            }
             
-            String unitbuy = cboUnitBuyFM.getSelectedItem().toString();
+            String unitbuy;
+            if(cboUnitBuyFM.getSelectedIndex() == 0)
+            {
+                unitbuy = txtUnitBuyOtherFM.getText().trim();
+                if(unitbuy.length() == 0 || unitbuy.length() > 100)
+                {
+                    JOptionPane.showMessageDialog(null, "Unit buy is not valid!");
+                    txtUnitBuyOtherFM.requestFocus();
+                    return;
+                }
+            }
+            else
+            {
+                unitbuy = cboUnitBuyFM.getSelectedItem().toString();
+            }
             
             float standardprice;
             try
@@ -4250,6 +4381,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             btnUpdateFM.setEnabled(true);
             btnDeleteFM.setEnabled(true);
             setFMControl(false);
+            initcboTypeFM();
+            initcboUnitBuyFM();
+            txtTypeOtherFM.setVisible(false);
+            txtTypeOtherFM.setText("");
+            cboTypeFM.setSelectedItem(fm.getFmtype());
+            txtUnitBuyOtherFM.setVisible(false);
+            txtUnitBuyOtherFM.setText("");
+            cboUnitBuyFM.setSelectedItem(fm.getUnit_buy());
             modelFM.getDataVector().removeAllElements();
             modelFM.fireTableDataChanged();
             dsFM = FoodMaterialDAO.getList();
@@ -4284,10 +4423,18 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private void btnUpdateFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFMActionPerformed
         if(btnUpdateFM.getText().equals("Update"))
         {
+            int row = vwFM.getSelectedRow();
+            if(row < 0)
+            {
+                JOptionPane.showMessageDialog(null, "Choose a food material want to update!");
+                return;
+            }
             btnUpdateFM.setText("Save");
             btnInsertFM.setEnabled(false);
             btnDeleteFM.setEnabled(false);
             setFMControl(true);
+            cboTypeFM.setSelectedIndex(0);
+            cboUnitBuyFM.setSelectedIndex(0);
             return;
         }
         if(btnUpdateFM.getText().equals("Save"))
@@ -4315,9 +4462,37 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             
             byte usefor = (byte) cboUseForFM.getSelectedIndex();
             
-            String fmtype = cboTypeFM.getSelectedItem().toString();
+            String fmtype;
+            if(cboTypeFM.getSelectedIndex() == 0)
+            {
+                fmtype = txtTypeOtherFM.getText().trim();
+                if(fmtype.length() == 0 || fmtype.length() > 50)
+                {
+                    JOptionPane.showMessageDialog(null, "Food material type is not valid!");
+                    txtTypeOtherFM.requestFocus();
+                    return;
+                }
+            }
+            else
+            {
+                fmtype = cboTypeFM.getSelectedItem().toString();
+            }
             
-            String unitbuy = cboUnitBuyFM.getSelectedItem().toString();
+            String unitbuy;
+            if(cboUnitBuyFM.getSelectedIndex() == 0)
+            {
+                unitbuy = txtUnitBuyOtherFM.getText().trim();
+                if(unitbuy.length() == 0 || unitbuy.length() > 100)
+                {
+                    JOptionPane.showMessageDialog(null, "Unit buy is not valid!");
+                    txtUnitBuyOtherFM.requestFocus();
+                    return;
+                }
+            }
+            else
+            {
+                unitbuy = cboUnitBuyFM.getSelectedItem().toString();
+            }
             
             float standardprice;
             try
@@ -4366,6 +4541,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             btnInsertFM.setEnabled(true);
             btnDeleteFM.setEnabled(true);
             setFMControl(false);
+            initcboTypeFM();
+            initcboUnitBuyFM();
+            txtTypeOtherFM.setVisible(false);
+            txtTypeOtherFM.setText("");
+            cboTypeFM.setSelectedItem(fm.getFmtype());
+            txtUnitBuyOtherFM.setVisible(false);
+            txtUnitBuyOtherFM.setText("");
+            cboUnitBuyFM.setSelectedItem(fm.getUnit_buy());
             modelFM.getDataVector().removeAllElements();
             modelFM.fireTableDataChanged();
             dsFM = FoodMaterialDAO.getList();
@@ -4436,7 +4619,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtInfoFM.setText("");
         cboUseForFM.setSelectedIndex(0);
         cboTypeFM.setSelectedIndex(0);
+        txtTypeOtherFM.setVisible(false);
+        txtTypeOtherFM.setText("");
         cboUnitBuyFM.setSelectedIndex(0);
+        txtUnitBuyOtherFM.setVisible(false);
+        txtUnitBuyOtherFM.setText("");
         txtStandardPriceFM.setText("");
         txtSupplierFM.setText("");
         btnInsertFM.setEnabled(true);
@@ -4445,6 +4632,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnUpdateFM.setText("Update");
         btnDeleteFM.setEnabled(true);
         setFMControl(false);
+        initcboTypeFM();
+        initcboUnitBuyFM();
         modelFM.getDataVector().removeAllElements();
         modelFM.fireTableDataChanged();
         dsFM = FoodMaterialDAO.getList();
@@ -4473,28 +4662,30 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             modelFM.addRow(d.toVector());
         }
         sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
+        txtTypeOtherFM.setVisible(false);
+        txtUnitBuyOtherFM.setVisible(false);
     }//GEN-LAST:event_btnResetFMActionPerformed
 
     private void cboTypeFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTypeFMActionPerformed
-//        if(cboTypeFM.getSelectedIndex() == 5)
-//        {
-//            txtTypeOtherFM.setVisible(true);
-//        }
-//        else
-//        {
-//            txtTypeOtherFM.setVisible(false);
-//        }
+        if(cboTypeFM.getSelectedIndex() == 0)
+        {
+            txtTypeOtherFM.setVisible(true);
+        }
+        else
+        {
+            txtTypeOtherFM.setVisible(false);
+        }
     }//GEN-LAST:event_cboTypeFMActionPerformed
 
     private void cboUnitBuyFMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboUnitBuyFMActionPerformed
-//        if(cboUnitBuyFM.getSelectedItem().equals("lon"))
-//        {
-//            txtUnitBuyOtherFM.setVisible(true);
-//        }
-//        else
-//        {
-//            txtUnitBuyOtherFM.setVisible(false);
-//        }
+        if(cboUnitBuyFM.getSelectedIndex() == 0)
+        {
+            txtUnitBuyOtherFM.setVisible(true);
+        }
+        else
+        {
+            txtUnitBuyOtherFM.setVisible(false);
+        }
     }//GEN-LAST:event_cboUnitBuyFMActionPerformed
 
     private void vwEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vwEmployeeMouseClicked
@@ -5569,7 +5760,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelCustomer.setRowCount(0);
         for(Customer d:dsCustomer)
         {
-            modelCustomer.addRow(d.toVector());
+            if(!(d.getName().contains("N/A")))
+            {
+                modelCustomer.addRow(d.toVector());
+            }
+            
         }
         
         sorterCustomer = (TableRowSorter<TableModel>) vwCustomer.getRowSorter();
@@ -5755,6 +5950,28 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
     }
 
+    private void initcboTypeFM()
+    {
+        cboTypeFM.removeAllItems();
+        cboTypeFM.addItem("khác");
+        List<String> dsTypeFM = FoodMaterialDAO.getTypeFM();
+        for(String d:dsTypeFM)
+        {
+            cboTypeFM.addItem(d);
+        }
+    }
+    
+    private void initcboUnitBuyFM()
+    {
+        cboUnitBuyFM.removeAllItems();
+        cboUnitBuyFM.addItem("khác");
+        List<String> dsUnitBuyFM = FoodMaterialDAO.getUnit_buy();
+        for(String d:dsUnitBuyFM)
+        {
+            cboUnitBuyFM.addItem(d);
+        }
+    }
+    
     private void setFMControl(boolean b) {
         txtNameFM.setEnabled(b);
         txtInfoFM.setEnabled(b);

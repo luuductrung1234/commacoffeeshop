@@ -44,6 +44,46 @@ public class FoodMaterialDAO {
         return ds;
     }
     
+    public static List<String> getTypeFM()
+    {
+        List<String> ds = new ArrayList<>();
+        String sql = "SELECT DISTINCT fmtype FROM tbFoodMaterial";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();) {
+            while(rs.next())
+            {
+                ds.add(rs.getString(1));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FoodMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ds;
+    }
+    
+    public static List<String> getUnit_buy()
+    {
+        List<String> ds = new ArrayList<>();
+        String sql = "SELECT DISTINCT unit_buy FROM tbFoodMaterial";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();) {
+            while(rs.next())
+            {
+                ds.add(rs.getString(1));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FoodMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ds;
+    }
+    
     public static int insert(FoodMaterial new_fm)
     {
         String sql = "SELECT COUNT(fm_id) FROM tbFoodMaterial";                        // tạo id mới cho foodmaterial cần thêm vào database

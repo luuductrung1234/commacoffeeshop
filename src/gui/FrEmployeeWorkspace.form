@@ -8,19 +8,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mniEndofdayreport">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="End of day report"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniEndofdayreportActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon eodicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/eod_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    eodicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.mniEndofdayreport.setIcon(eodicon);"/>
-              </AuxValues>
-            </MenuItem>
-          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnSystem">
           <Properties>
@@ -34,9 +21,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAddempActionPerformed"/>
               </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon addempicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/addemployee_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    addempicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.miAddemp.setIcon(addempicon);"/>
-              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miLogout">
               <Properties>
@@ -45,9 +29,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miLogoutActionPerformed"/>
               </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon logouticon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/logout_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    logouticon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.miLogout.setIcon(logouticon);"/>
-              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -163,7 +144,7 @@
           <SubComponents>
             <Container class="javax.swing.JPanel" name="pnBlank">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        Image image = null;&#xa;        try{&#xa;            image = ImageIO.read(new File(&quot;src/image/blank_picture.jpg&quot;)).getScaledInstance(830, 680, Image.SCALE_SMOOTH);&#xa;        }catch(IOException ex){&#xa;            ex.printStackTrace();&#xa;        }&#xa;        super.paintComponent(g);&#xa;        g.drawImage(image, 50, 0, this); // see javadoc for more info on the parameters&#xa;    }&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        BufferedImage image = null;&#xa;        try{&#xa;            image = ImageIO.read(new File(&quot;src/image/blank_picture.jpg&quot;));&#xa;        }catch(IOException ex){&#xa;            ex.printStackTrace();&#xa;        }&#xa;        super.paintComponent(g);&#xa;        g.drawImage(image, 100, 0, this); // see javadoc for more info on the parameters&#xa;    }&#xa;}"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -2020,19 +2001,6 @@
                     <Property name="rows" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="btnOtherReceipt">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="cc" green="33" red="0" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="&quot;&lt;html&gt;ORTHER&lt;/br&gt; RECEIPT&lt;/html&gt;&quot;" type="code"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOtherReceiptActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JButton" name="btnReceiptSave">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

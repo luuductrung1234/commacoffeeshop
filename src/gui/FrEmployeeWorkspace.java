@@ -138,14 +138,14 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnBlank = new javax.swing.JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
-                Image image = null;
+                BufferedImage image = null;
                 try{
-                    image = ImageIO.read(new File("src/image/blank_picture.jpg")).getScaledInstance(830, 680, Image.SCALE_SMOOTH);
+                    image = ImageIO.read(new File("src/image/blank_picture.jpg"));
                 }catch(IOException ex){
                     ex.printStackTrace();
                 }
                 super.paintComponent(g);
-                g.drawImage(image, 50, 0, this); // see javadoc for more info on the parameters
+                g.drawImage(image, 100, 0, this); // see javadoc for more info on the parameters
             }
         };
         pnDisplayMenu = new javax.swing.JPanel();
@@ -289,13 +289,11 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tbInvoice = new javax.swing.JTable();
         pnReceiptControl = new javax.swing.JPanel();
-        btnOtherReceipt = new javax.swing.JButton();
         btnReceiptSave = new javax.swing.JButton();
         btnDeleteReceiptItem = new javax.swing.JButton();
         btnReceiptReset = new javax.swing.JButton();
         mnbMain = new javax.swing.JMenuBar();
         mnEdit = new javax.swing.JMenu();
-        mniEndofdayreport = new javax.swing.JMenuItem();
         mnSystem = new javax.swing.JMenu();
         miAddemp = new javax.swing.JMenuItem();
         miLogout = new javax.swing.JMenuItem();
@@ -2655,15 +2653,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnReceiptControl.setPreferredSize(new java.awt.Dimension(428, 70));
         pnReceiptControl.setLayout(new java.awt.GridLayout(1, 0));
 
-        btnOtherReceipt.setBackground(new java.awt.Color(0, 51, 204));
-        btnOtherReceipt.setText("<html>ORTHER</br> RECEIPT</html>");
-        btnOtherReceipt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOtherReceiptActionPerformed(evt);
-            }
-        });
-        pnReceiptControl.add(btnOtherReceipt);
-
         btnReceiptSave.setBackground(new java.awt.Color(0, 153, 0));
         btnReceiptSave.setText("SAVE");
         btnReceiptSave.addActionListener(new java.awt.event.ActionListener() {
@@ -2700,23 +2689,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         getContentPane().add(pnUsing);
 
         mnEdit.setText("Edit");
-
-        mniEndofdayreport.setText("End of day report");
-        mniEndofdayreport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniEndofdayreportActionPerformed(evt);
-            }
-        });
-        mnEdit.add(mniEndofdayreport);
-        ImageIcon eodicon = null;
-        try{
-            Image scaled = ImageIO.read(new File("src/image/eod_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-            eodicon = new ImageIcon(scaled);
-        }catch(IOException io_ex){
-            io_ex.printStackTrace();
-        }
-        this.mniEndofdayreport.setIcon(eodicon);
-
         mnbMain.add(mnEdit);
 
         mnSystem.setText("System");
@@ -2728,14 +2700,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             }
         });
         mnSystem.add(miAddemp);
-        ImageIcon addempicon = null;
-        try{
-            Image scaled = ImageIO.read(new File("src/image/addemployee_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-            addempicon = new ImageIcon(scaled);
-        }catch(IOException io_ex){
-            io_ex.printStackTrace();
-        }
-        this.miAddemp.setIcon(addempicon);
 
         miLogout.setText("Logout");
         miLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -2744,14 +2708,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             }
         });
         mnSystem.add(miLogout);
-        ImageIcon logouticon = null;
-        try{
-            Image scaled = ImageIO.read(new File("src/image/logout_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-            logouticon = new ImageIcon(scaled);
-        }catch(IOException io_ex){
-            io_ex.printStackTrace();
-        }
-        this.miLogout.setIcon(logouticon);
 
         mnbMain.add(mnSystem);
 
@@ -3505,16 +3461,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtCustomernumberActionPerformed
-
-    private void btnOtherReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtherReceiptActionPerformed
-        // TODO add your handling code here:
-        new DiaOrtherReceiptNote((this), true).setVisible(true);
-    }//GEN-LAST:event_btnOtherReceiptActionPerformed
-
-    private void mniEndofdayreportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEndofdayreportActionPerformed
-        // TODO add your handling code here:
-        new DiaEndofdayreport((this), true).setVisible(true);
-    }//GEN-LAST:event_mniEndofdayreportActionPerformed
     
 
 
@@ -3583,7 +3529,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnMenu;
     private javax.swing.JButton btnN;
     private javax.swing.JButton btnO;
-    private javax.swing.JButton btnOtherReceipt;
     private javax.swing.JButton btnOtherthing;
     private javax.swing.JButton btnP;
     private javax.swing.JButton btnPay;
@@ -3669,7 +3614,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JMenu mnEdit;
     private javax.swing.JMenu mnSystem;
     private javax.swing.JMenuBar mnbMain;
-    private javax.swing.JMenuItem mniEndofdayreport;
     private javax.swing.JPanel pnBill;
     private javax.swing.JPanel pnBillBlank;
     private javax.swing.JPanel pnBlank;
@@ -4094,11 +4038,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         
         Pattern p = Pattern.compile(regex);
         for(FoodMaterial itemmaterial : this.menumaterial_list){
-            if(itemmaterial.getFm_id() == "FM00000000"){
-                continue;
-            }
-            
-            
             Matcher m = p.matcher(itemmaterial.getName());
             if(m.matches()){
                 JButton b = new JButton();
