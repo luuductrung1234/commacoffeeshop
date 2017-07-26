@@ -5,7 +5,7 @@
  */
 package supportclass;
 
-import gui.FrEmployeeWorkspace;
+import gui.employee.FrEmployeeWorkspace;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultCellEditor;

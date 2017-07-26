@@ -46,3 +46,8 @@ select COUNT(order_id) from tbOrder
 where ordertime = '2017-07-14'
 go
 
+select * from tbOrder
+where ordertime = convert(date, getdate())
+go
+
+
