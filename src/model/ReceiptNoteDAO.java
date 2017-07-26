@@ -13,7 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import supportclass.Pair;
@@ -95,8 +97,8 @@ public class ReceiptNoteDAO {
     }
 
     
-    public static List<ReceiptNote> getlist_indate(java.sql.Date indate){
-        ArrayList<ReceiptNote> resultlist = new ArrayList<>();
+    public static HashMap<ReceiptNote, ArrayList<ReceiptNoteDetails>> getlist_indate(java.sql.Date indate){
+        HashMap<ReceiptNote,  ArrayList<ReceiptNoteDetails>> resultlist = new HashMap<>();
         String sql  = "SELECT * FROM tbReceiptNote WHERE rday = ?";
         
         try(Connection cn  = new DBConnect().getCon();
@@ -111,7 +113,28 @@ public class ReceiptNoteDAO {
                     newitem.setRday(rs.getDate(3));
                     newitem.setTotal_amount(rs.getFloat(4));
                     
-                    resultlist.add(newitem);
+                    resultlist.put(newitem, new ArrayList<>());
+                }
+            }
+            
+            sql = "SELECT * FROM tbReceiptNoteDetails WHERE rn_id = ?";
+            for(Entry<ReceiptNote, ArrayList<ReceiptNoteDetails>> iter : resultlist.entrySet()){
+                try(PreparedStatement st2 = cn.prepareStatement(sql)){
+                    
+                    st2.setString(1, iter.getKey().getRn_id());
+                    
+                    try(ResultSet rs2 = st2.executeQuery()){
+                        while(rs2.next()){
+                            ReceiptNoteDetails newitem = new ReceiptNoteDetails();
+                            newitem.setRn_id(rs2.getString(1));
+                            newitem.setFm_id(rs2.getString(2));
+                            newitem.setQuan(rs2.getInt(3));
+                            newitem.setItem_price(rs2.getFloat(4));
+                            newitem.setNote(rs2.getString(5));
+                            
+                            iter.getValue().add(newitem);
+                        }
+                    }
                 }
             }
             

@@ -205,7 +205,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnFirstusing">
       <Properties>
-        <Property name="text" type="java.lang.String" value="First Using Check"/>
+        <Property name="text" type="java.lang.String" value="Reset History"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstusingActionPerformed"/>

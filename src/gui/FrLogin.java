@@ -151,7 +151,7 @@ public class FrLogin extends javax.swing.JFrame {
 
         lbPass_warn.setForeground(new java.awt.Color(255, 0, 0));
 
-        btnFirstusing.setText("First Using Check");
+        btnFirstusing.setText("Reset History");
         btnFirstusing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirstusingActionPerformed(evt);

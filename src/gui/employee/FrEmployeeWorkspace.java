@@ -2831,7 +2831,12 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card3");
             this.initEmployeeEditForm();
-
+            
+            this.isDrinkshow = false;
+            this.isEatshow = false;
+            this.isOthershow = false;
+            this.isStockshow = false;
+            
             CardLayout c2 = (CardLayout)(this.pnBill.getLayout());          // buông bàn hiện tại
             c2.show(this.pnBill, "card4");
             this.refreshTable();
@@ -2861,6 +2866,12 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             CardLayout cl = (CardLayout)(this.pnDisplay.getLayout());
             cl.show(this.pnDisplay, "card4");
 
+            this.isDrinkshow = false;
+            this.isEatshow = false;
+            this.isOthershow = false;
+            this.isStockshow = false;
+            
+            
             CardLayout c2 = (CardLayout)(this.pnBill.getLayout());       // buông bàn hiện tại
             c2.show(this.pnBill, "card4");
             this.refreshTable();
@@ -4233,12 +4244,14 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         CardLayout c2 = (CardLayout) this.pnMenuDisplayDetails.getLayout();
                         CardLayout c3 = (CardLayout) this.pnBill.getLayout();
                         c1.show(this.pnDisplay, "card2");
-                        c2.show(this.pnMenuDisplayDetails, "card3");                    // hiện màn hình menu drink
                         c3.show(this.pnBill, "card2");                                  // hiện màn hình nhập Orderbill
-                        this.isDrinkshow = true;
-                        this.isEatshow = false;
-                        this.isStockshow = false;
-                        this.isOthershow = false;
+                        if(!this.isDrinkshow && !this.isEatshow && !this.isStockshow && !this.isOthershow){
+                            c2.show(this.pnMenuDisplayDetails, "card3");                    // hiện màn hình menu drink
+                            this.isDrinkshow = true;
+                            this.isEatshow = false;
+                            this.isStockshow = false;
+                            this.isOthershow = false;
+                        }
                     }else{
                         this.cur_table = 0;
                         b.setBackground(new Color(104, 104, 104));
@@ -4436,9 +4449,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         float totalprice = 0;
         for(int i = 0; i < this.tbmodel.getRowCount(); i++){
             if(i % 2 == 0){
+                int item_quan = (int)this.tbmodel.getValueAt(i, 1);
                 int item_discount = (int)this.tbmodel.getValueAt(i, 2);
                 float item_price = (float)this.tbmodel.getValueAt(i, 3);
-                totalprice += new Float(((100 - item_discount)/100.0) * item_price);
+                totalprice += new Float(((100 - item_discount)/100.0) * item_price * item_quan);
             }
         }
         

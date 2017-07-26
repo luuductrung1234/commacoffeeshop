@@ -271,7 +271,7 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         
         // kiểm tra và lấy dữ liệu reportday
         int day, month, year;
-        if(this.txtDayreport.getText().isEmpty() || this.txtDayreport.getText().length() > 10){
+        if(this.txtDayreport.getText().length() != 10){
             this.lbDayreportState.setText("!");
             this.txtDayreport.requestFocus();
             return;
@@ -296,11 +296,14 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         
         
         
-        // tiến hành tạo report
+        // tiến hành in report
         if(this.cbPrint.isSelected()){
             // print code
         }
         
+        // tiến hành tạo file report pdf
+        this.orderlist = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
+        this.rnlist = ReceiptNoteDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
         if(this.cbTextfile.isSelected()){
             if(this.rdLongreport.isSelected()){
                 this.generateLongTextReport();
@@ -403,8 +406,8 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
     
     
     ArrayList<FoodReport> tabledata;
-    HashMap<Order, ArrayList<OrderDetails>> orderlist = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
-    HashMap<ReceiptNote, ArrayList<ReceiptNoteDetails>> rnlist = ReceiptNoteDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
+    HashMap<Order, ArrayList<OrderDetails>> orderlist;
+    HashMap<ReceiptNote, ArrayList<ReceiptNoteDetails>> rnlist;
 // END CUSTOM VARIABLE REPORT
     
     
@@ -523,9 +526,9 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         for(Entry<ReceiptNote, ArrayList<ReceiptNoteDetails>> iter : this.rnlist.entrySet()){
             for(ReceiptNoteDetails rnditem : iter.getValue()){
                 if(rnditem.getFm_id().equals("FM00000000")){
-                    totalotherpurchase += rnditem.getItem_price() * 1000;
+                    totalotherpurchase += rnditem.getItem_price() * rnditem.getQuan() * 1000;
                 }else{
-                    totalfoodpurchase += rnditem.getItem_price() * 1000;
+                    totalfoodpurchase += rnditem.getItem_price() * rnditem.getQuan() * 1000;
                 }
             }
         }
@@ -537,7 +540,8 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             for(OrderDetails oditem : iter.getValue()){
                 for(Food fitem : this.parent.menufood_list){
                     if(fitem.getFood_id().equals(oditem.getFood_id())){
-                        realamount += fitem.getPrice() * 1000;
+                        realamount += fitem.getPrice() * oditem.getQuan() * 1000;
+                        break;
                     }
                 }
             }
@@ -590,7 +594,7 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             for(Entry<Order, ArrayList<OrderDetails>> iter : this.orderlist.entrySet()){
                 for(OrderDetails oditem : iter.getValue()){
                     if(oditem.getFood_id().equals(fitem.getFood_id())){
-                        quan++;
+                        quan += oditem.getQuan();
                     }
                 }
             }

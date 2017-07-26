@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.logging.Level;
@@ -117,8 +118,8 @@ public class OrderDAO {
         return 0;
     }
     
-    public static List<Order> getlist_indate(java.sql.Date indate){
-        ArrayList<Order> resultlist = new ArrayList<>();
+    public static HashMap<Order, ArrayList<OrderDetails>> getlist_indate(java.sql.Date indate){
+        HashMap<Order, ArrayList<OrderDetails>> resultlist = new HashMap<>();
         String sql = "SELECT * FROM tbOrder WHERE ordertime = ?";
         
         try(Connection cn = new DBConnect().getCon();
@@ -137,7 +138,26 @@ public class OrderDAO {
                     newitem.setCustomerpay(rs.getFloat(6));
                     newitem.setPayback(rs.getFloat(7));
                     
-                    resultlist.add(newitem);
+                    resultlist.put(newitem, new ArrayList<>());
+                }
+            }
+            
+            sql = "SELECT * FROM tbOrderDetails WHERE order_id = ?";
+            for(Entry<Order, ArrayList<OrderDetails>> iter : resultlist.entrySet()){
+                try(PreparedStatement st2 = cn.prepareStatement(sql)){
+                    
+                    st2.setString(1, iter.getKey().getOrder_id());
+                    
+                    try(ResultSet rs2 = st2.executeQuery()){
+                        while(rs2.next()){
+                            OrderDetails newitem = new OrderDetails();
+                            newitem.setOrder_id(rs2.getString(1));
+                            newitem.setFood_id(rs2.getString(2));
+                            newitem.setQuan(rs2.getInt(3));
+
+                            iter.getValue().add(newitem);
+                        }
+                    }
                 }
             }
             
