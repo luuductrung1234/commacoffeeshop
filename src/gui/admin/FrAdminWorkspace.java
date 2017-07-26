@@ -4898,7 +4898,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertFDActionPerformed
 
     private void btnSearchOrderTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchOrderTimeActionPerformed
-        String dkOrderTime, dky, dkm, dkd;
+        String dkOrderTime;
+        int dky, dkm, dkd;
         dkOrderTime = txtSearchOrderTime.getText().trim();
         try
         {
@@ -4908,10 +4909,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 txtSearchOrderTime.requestFocus();
                 return;
             }
-            dkm = dkOrderTime.substring(5, 7);
-            dkd = dkOrderTime.substring(8, 10);
-            dky = dkOrderTime.substring(0, 4);
-            if(Integer.parseInt(dky) < 0 || Integer.parseInt(dkm) < 0 || Integer.parseInt(dkd) < 0)
+            dky = Integer.parseInt(dkOrderTime.substring(0, 4));
+            dkm = Integer.parseInt(dkOrderTime.substring(5, 7));
+            dkd = Integer.parseInt(dkOrderTime.substring(8, 10));
+            if(dky < 0 || dkm < 0 || dkd < 0)
             {
                 JOptionPane.showMessageDialog(null, "Time is not valid!\nHint: yyyy-MM-dd");
                 txtSearchOrderTime.requestFocus();
@@ -4922,6 +4923,51 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Time is not valid!\nHint: yyyy-MM-dd");
                 txtSearchOrderTime.requestFocus();
                 return;
+            }
+            if(dkm > 12)
+            {
+                JOptionPane.showMessageDialog(null, "Time is not valid! Month of year must not be greater than 12!");
+                txtBirthEmp.requestFocus();
+                return;
+            }
+            if(dkm == 2)
+            {
+                if((dky % 400 == 0) || (dky % 4 == 0 &&  dky % 100 != 0))
+                {
+                    if(dkd > 29)
+                    {
+                        JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 29!");
+                        txtBirthEmp.requestFocus();
+                        return;
+                    }
+                }
+                else
+                {
+                    if(dkd > 28)
+                    {
+                        JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 28!");
+                        txtBirthEmp.requestFocus();
+                        return;
+                    }
+                }
+            }
+            if(dkm == 4 || dkm == 6 || dkm == 9 || dkm == 11)
+            {
+                if(dkd > 30)
+                {
+                    JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 30!");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
+            }
+            if(dkm == 1 || dkm == 3 || dkm == 5 || dkm == 7 || dkm == 8 || dkm == 10 || dkm == 11)
+            {
+                if(dkd > 31)
+                {
+                    JOptionPane.showMessageDialog(null, "Time is not valid! Day of that month must not be greater than 31!");
+                    txtBirthEmp.requestFocus();
+                    return;
+                }
             }
         }
         catch(Exception ex)
