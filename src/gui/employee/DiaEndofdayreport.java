@@ -5,17 +5,23 @@
  */
 package gui.employee;
 
+import entities.Food;
 import entities.Order;
+import entities.OrderDetails;
 import entities.ReceiptNote;
+import entities.ReceiptNoteDetails;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.OrderDAO;
 import model.ReceiptNoteDAO;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -27,6 +33,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.swing.JRViewer;
+import supportclass.FoodReport;
+import static supportclass.printing.PrintTextForm.localizedFormat;
 
 /**
  *
@@ -47,8 +55,6 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         initComponents();
         
         initDefaultSetting();
-        
-        this.generateTextReport();
     }
 
     /**
@@ -63,8 +69,8 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         btngStyle = new javax.swing.ButtonGroup();
         pnInput = new javax.swing.JPanel();
         pnControl = new javax.swing.JPanel();
-        btnSave = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnGenerate = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -76,12 +82,8 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         cbTextfile = new javax.swing.JCheckBox();
         pnOption = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         rdShortreport = new javax.swing.JRadioButton();
         rdLongreport = new javax.swing.JRadioButton();
-        cbIncome = new javax.swing.JCheckBox();
-        cbPurchase = new javax.swing.JCheckBox();
-        cbCash = new javax.swing.JCheckBox();
         lbBegincashState = new javax.swing.JLabel();
         lbDayreportState = new javax.swing.JLabel();
         lbTextoutputState = new javax.swing.JLabel();
@@ -94,16 +96,31 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         pnControl.setBackground(new java.awt.Color(0, 0, 0));
         pnControl.setLayout(new java.awt.GridLayout(1, 0));
 
-        btnSave.setBackground(new java.awt.Color(0, 153, 0));
-        btnSave.setText("SAVE");
-        pnControl.add(btnSave);
+        btnGenerate.setBackground(new java.awt.Color(0, 153, 0));
+        btnGenerate.setText("Generate");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
+            }
+        });
+        pnControl.add(btnGenerate);
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 0));
-        jButton1.setText("RESET");
-        pnControl.add(jButton1);
+        btnReset.setBackground(new java.awt.Color(153, 153, 0));
+        btnReset.setText("RESET");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+        pnControl.add(btnReset);
 
         btnClose.setBackground(new java.awt.Color(153, 0, 0));
         btnClose.setText("CLOSE");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
         pnControl.add(btnClose);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -115,7 +132,7 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         jLabel2.setText("Begin of day Cash (kVND):");
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Day report:");
+        jLabel3.setText("Day report (yyyy-mm-dd):");
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Text output:");
@@ -129,19 +146,11 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
 
         jLabel5.setText("Style:");
 
-        jLabel6.setText("Details:");
-
         btngStyle.add(rdShortreport);
         rdShortreport.setText("Short report");
 
         btngStyle.add(rdLongreport);
         rdLongreport.setText("Long report");
-
-        cbIncome.setText("Income");
-
-        cbPurchase.setText("purchase");
-
-        cbCash.setText("cash");
 
         javax.swing.GroupLayout pnOptionLayout = new javax.swing.GroupLayout(pnOption);
         pnOption.setLayout(pnOptionLayout);
@@ -149,22 +158,12 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnOptionLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(34, 34, 34)
-                .addGroup(pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnOptionLayout.createSequentialGroup()
-                        .addComponent(cbIncome)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbPurchase)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbCash))
-                    .addGroup(pnOptionLayout.createSequentialGroup()
-                        .addComponent(rdShortreport)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdLongreport)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel5)
+                .addGap(45, 45, 45)
+                .addComponent(rdShortreport)
+                .addGap(18, 18, 18)
+                .addComponent(rdLongreport)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         pnOptionLayout.setVerticalGroup(
             pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,13 +173,7 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addComponent(rdShortreport)
                     .addComponent(rdLongreport))
-                .addGap(20, 20, 20)
-                .addGroup(pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cbIncome)
-                    .addComponent(cbPurchase)
-                    .addComponent(cbCash))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         lbBegincashState.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -244,9 +237,9 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
                     .addComponent(cbPrint)
                     .addComponent(cbTextfile)
                     .addComponent(lbTextoutputState, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(pnControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -254,6 +247,82 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
+        this.lbBegincashState.setText("");
+        this.lbDayreportState.setText("");
+        this.lbTextoutputState.setText("");
+        
+        // kiểm tra và lấy dữ liệu begincash
+        try{
+            this.begincash = Float.parseFloat(this.txtBegincash.getText());
+            
+            if(this.begincash < 0){
+                this.lbBegincashState.setText("!");
+                this.txtBegincash.requestFocus();
+                return;
+            }
+        }catch(NumberFormatException ex){
+            ex.getStackTrace();
+            this.lbBegincashState.setText("!");
+            this.txtBegincash.requestFocus();
+            return;
+        }
+        
+        // kiểm tra và lấy dữ liệu reportday
+        int day, month, year;
+        if(this.txtDayreport.getText().isEmpty() || this.txtDayreport.getText().length() > 10){
+            this.lbDayreportState.setText("!");
+            this.txtDayreport.requestFocus();
+            return;
+        }
+        try{
+            year = Integer.parseInt(this.txtDayreport.getText().substring(0, 4));
+            month = Integer.parseInt(this.txtDayreport.getText().substring(5, 7));
+            day = Integer.parseInt(this.txtDayreport.getText().substring(8, 10));
+            this.dayreport = LocalDate.of(year, month, day);
+        }catch(NumberFormatException ex){
+            ex.getStackTrace();
+            this.lbDayreportState.setText("!");
+            this.txtDayreport.requestFocus();
+            return;
+        }
+        
+        // kiểu tra chọn hình thức xuất report
+        if(!this.cbPrint.isSelected() && !this.cbTextfile.isSelected()){
+            this.lbTextoutputState.setText("!");
+            return;
+        }
+        
+        
+        
+        // tiến hành tạo report
+        if(this.cbPrint.isSelected()){
+            // print code
+        }
+        
+        if(this.cbTextfile.isSelected()){
+            if(this.rdLongreport.isSelected()){
+                this.generateLongTextReport();
+            }else{
+                this.generateShortTextReport();
+            }
+        }
+        
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btnGenerateActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        this.initDefaultSetting();
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,20 +368,16 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnGenerate;
+    private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup btngStyle;
-    private javax.swing.JCheckBox cbCash;
-    private javax.swing.JCheckBox cbIncome;
     private javax.swing.JCheckBox cbPrint;
-    private javax.swing.JCheckBox cbPurchase;
     private javax.swing.JCheckBox cbTextfile;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbBegincashState;
     private javax.swing.JLabel lbDayreportState;
     private javax.swing.JLabel lbTextoutputState;
@@ -335,12 +400,21 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
     // default setting info
     LocalDate dayreport = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
     float begincash = 2000;
+    
+    
+    ArrayList<FoodReport> tabledata;
+    HashMap<Order, ArrayList<OrderDetails>> orderlist = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
+    HashMap<ReceiptNote, ArrayList<ReceiptNoteDetails>> rnlist = ReceiptNoteDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
 // END CUSTOM VARIABLE REPORT
     
     
     
 // CUSTOM CODE
     private void initDefaultSetting() {
+        this.lbBegincashState.setText("");
+        this.lbDayreportState.setText("");
+        this.lbTextoutputState.setText("");
+        
         this.txtBegincash.setText(String.valueOf(this.begincash));
         this.txtDayreport.setText(String.valueOf(this.dayreport));
         
@@ -348,53 +422,25 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         this.cbTextfile.setSelected(false);
         
         this.rdLongreport.setSelected(true);
-        this.cbCash.setSelected(true);
-        this.cbIncome.setSelected(true);
-        this.cbPurchase.setSelected(true);
+        this.rdShortreport.setSelected(false);
     }
     
-    private void generateTextReport(){
+    private void generateLongTextReport(){
         // lấy dữ liệu là các record từ database
         try{
-            ArrayList<Order> orderlist = (ArrayList<Order>) OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
-            ArrayList<ReceiptNote> rnlist = (ArrayList<ReceiptNote>) ReceiptNoteDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
-
             // tạo datasource cho tập tin report
             List<Map<String, ?>> dataSource = new ArrayList<Map<String, ?>>();
-
+            
             // đưa dữ liệu vào datasource
-            orderlist.forEach((item) -> {
-                // chuyển các record thành map object
-                Map<String, Object> recordmap = new HashMap<String, Object>();
-                recordmap.put("orderid", item.getOrder_id());
-                recordmap.put("cus_id", item.getCus_id());
-                recordmap.put("ordertable", item.getOrdertable());
-                recordmap.put("ordertime", item.getOrdertime().toString());
-                recordmap.put("price", item.getPrice()*1000);
-                recordmap.put("customerpay", item.getCustomerpay()*1000);
-                recordmap.put("payback", item.getPayback()*1000);
-
-                dataSource.add(recordmap);
-            });
-
-            rnlist.forEach((item) -> {
-                Map<String, Object> recordmap = new HashMap<String, Object>();
-                recordmap.put("rn_id", item.getRn_id());
-                recordmap.put("em_id", item.getEm_id());
-                recordmap.put("rday", item.getRday().toString());
-                recordmap.put("total_amount", item.getTotal_amount()*1000);
-
-                dataSource.add(recordmap);
-            });
-
-            Map<String, Object> calmap = this.generateOtherData();
-            dataSource.add(calmap);
+            this.generateTableData(dataSource);
+            this.generateOtherData(dataSource);
+            
             
             
 
             // khởi tạo jasperreport datasource
             JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
-            String reportlink = "src/report/testreport.jrxml";
+            String reportlink = "src/report/eod_report.jrxml";
             
             // biên dịch tập tin jasperreport xml đã được thiết kết trước
             JasperReport report = JasperCompileManager.compileReport(reportlink);
@@ -408,22 +454,164 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             
             
             // xuất report ra file pdf
-            File outDir = new File("C:/jasperoutput");
-            outDir.mkdirs();
+            /*File outDir = new File("C:/jasperoutput");
+            outDir.mkdirs();*/
             JasperExportManager.exportReportToPdfFile(filledReport,
-            "C:/jasperoutput/testreport.pdf");
+            "C:/csystemreport/eodreport" + this.dayreport.toString() +".pdf");
         } catch (JRException ex) {
             Logger.getLogger(DiaEndofdayreport.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Somethings went wrong, can not generate the report file", "REPORT WARNNING", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private void generateShortTextReport(){
+        try{
+            List<Map<String, ?>> dataSource = new ArrayList<Map<String, ?>>();
+            
+            this.generateOtherData(dataSource);
+            
+            // khởi tạo jasperreport datasource
+            JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
+            String reportlink = "src/report/short_eod_report.jrxml";
+            
+            // biên dịch tập tin jasperreport xml đã được thiết kết trước
+            JasperReport report = JasperCompileManager.compileReport(reportlink);
+            
+            // nạp dữ liệu vào tập tin jasperreport xml
+            JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
+            
+            // xuất report trong frame
+            /*this.getContentPane().add(new JRViewer(filledReport));
+            this.pack();*/
+            
+            
+            // xuất report ra file pdf
+            /*File outDir = new File("C:/jasperoutput");
+            outDir.mkdirs();*/
+            JasperExportManager.exportReportToPdfFile(filledReport,
+            "C:/csystemreport/eodreport" + this.dayreport.toString() +".pdf");
+        } catch (JRException ex) {
+            Logger.getLogger(DiaEndofdayreport.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Somethings went wrong, can not generate the report file", "REPORT WARNNING", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
+    
     
     /*
     * this function is generate another field for jasperreport, these field need to calculate/query before add to datasource
     */
-    private Map<String, Object> generateOtherData() {
-        Map<String, Object> calculatemap = new HashMap<String, Object>();
+    private void generateOtherData(List<Map<String, ?>> dataSource) {
+        int totalorder = this.orderlist.size();
+        int totalorderamount = 0;
+        int totalcustomerpay = 0;
+        int totalchange = 0;
+        int totalfoodpurchase = 0;
+        int totalotherpurchase = 0;
+        int beginofday = (int) (this.begincash * 1000);
+        int endofday;
+        int totaldiscount;
         
-        return calculatemap;
+        for(Entry<Order, ArrayList<OrderDetails>> iter : this.orderlist.entrySet()){
+            totalorderamount += iter.getKey().getPrice() * 1000;
+            totalcustomerpay += iter.getKey().getCustomerpay() * 1000;
+            totalchange += iter.getKey().getPayback() * 1000;
+        }
+
+        
+        for(Entry<ReceiptNote, ArrayList<ReceiptNoteDetails>> iter : this.rnlist.entrySet()){
+            for(ReceiptNoteDetails rnditem : iter.getValue()){
+                if(rnditem.getFm_id().equals("FM00000000")){
+                    totalotherpurchase += rnditem.getItem_price() * 1000;
+                }else{
+                    totalfoodpurchase += rnditem.getItem_price() * 1000;
+                }
+            }
+        }
+        
+        endofday = beginofday + totalcustomerpay - totalchange - (totalfoodpurchase + totalotherpurchase);
+        
+        int realamount = 0;
+        for(Entry<Order, ArrayList<OrderDetails>> iter : this.orderlist.entrySet()){
+            for(OrderDetails oditem : iter.getValue()){
+                for(Food fitem : this.parent.menufood_list){
+                    if(fitem.getFood_id().equals(oditem.getFood_id())){
+                        realamount += fitem.getPrice() * 1000;
+                    }
+                }
+            }
+        }
+        totaldiscount = realamount - totalorderamount;
+        
+        
+        
+        // prepare data before add to datasource
+        HashMap<String, Object> calculatefield = new HashMap<String, Object>();
+        calculatefield.put("totalorder", totalorder);
+        calculatefield.put("totalorderamount", totalorderamount);
+        calculatefield.put("totalcustomerpay", totalcustomerpay);
+        calculatefield.put("totalchange", totalchange);
+        calculatefield.put("totalfoodpurchase", totalfoodpurchase);
+        calculatefield.put("totalotherpurchase", totalotherpurchase);
+        calculatefield.put("beginofday", beginofday);
+        calculatefield.put("endofday", endofday);
+        calculatefield.put("dayreport", this.dayreport.toString());
+        calculatefield.put("totaldiscount", totaldiscount);
+        
+        // add data to datasource
+        dataSource.add(calculatefield);
+    }
+    
+    
+    /*
+    * this function is generate field for table in jasperreport
+    */
+    private void generateTableData(List<Map<String, ?>> dataSource) {
+        
+        this.tabledata = new ArrayList<>();
+        for(Food fitem : this.parent.menufood_list){
+            int quan = 0;
+            int orderamount = 0;
+            
+            FoodReport newitem = new FoodReport();
+            newitem.setName(fitem.getName());                                                   // tên món
+            switch(fitem.getIsdrink()){                                                         // loại món
+                case 0:
+                    newitem.setIsdrink("drink");
+                    break;
+                case 1:
+                    newitem.setIsdrink("food");
+                    break;
+                case 2:
+                    newitem.setIsdrink("other");
+            }
+            
+            for(Entry<Order, ArrayList<OrderDetails>> iter : this.orderlist.entrySet()){
+                for(OrderDetails oditem : iter.getValue()){
+                    if(oditem.getFood_id().equals(fitem.getFood_id())){
+                        quan++;
+                    }
+                }
+            }
+            
+            newitem.setQuan(quan);                                                              // số lượng đã order
+            
+            orderamount = (int) (quan * fitem.getPrice() * 1000);                               // tống tiền đẵ order
+            newitem.setOrderamount(orderamount);
+            tabledata.add(newitem);
+        }
+        
+        
+        for(FoodReport item : tabledata){
+            HashMap<String, Object> newrecord = new HashMap<>();
+            newrecord.put("foodname", item.getName());
+            newrecord.put("isdrink", item.getIsdrink());
+            newrecord.put("quan", item.getQuan());
+            newrecord.put("orderamount", item.getOrderamount());
+            
+            dataSource.add(newrecord);
+        }
     }
 // END CUSTOM CODE
 }

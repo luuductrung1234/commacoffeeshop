@@ -3118,6 +3118,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 this.cur_order = this.getOrderofTable(this.cur_table);
                 this.cur_order.getKey().setOrder_id("");
                 this.cur_order.getKey().setCus_id(this.cus_list.get(16).getCus_id());
+                this.cur_order.getKey().setOrdertime(java.sql.Date.valueOf(this.today));
                 this.cur_order.getKey().setPrice(0);
                 this.cur_order.getKey().setCustomerpay(0);
                 this.cur_order.getKey().setPayback(0);
@@ -4278,7 +4279,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             this.tablebtn_list.add(b);
             this.tablestate_list.add(0);
             
-            this.order_list.put(new Order("", this.cus_list.get(16).getCus_id(), Integer.parseInt(b.getText()), java.sql.Date.valueOf(this.today), 0, 0, 0), new ArrayList<>());
+            // mặc định khách hàng của order ban đầu luôn là CUS0000017 normal customer
+            this.order_list.put(new Order("", "CUS0000017", Integer.parseInt(b.getText()), java.sql.Date.valueOf(this.today), 0, 0, 0), new ArrayList<>());
             this.ordernote_list.put(Integer.parseInt(b.getText()), new ArrayList<>());
             this.cusnumber_list.add(0);
         }
