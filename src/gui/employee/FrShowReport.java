@@ -1,9 +1,15 @@
 /*
- * A small dialog show the report pdf file
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package gui.employee;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.sf.jasperreports.swing.JRViewer;
@@ -12,21 +18,18 @@ import net.sf.jasperreports.swing.JRViewer;
  *
  * @author DELL
  */
-public class DiaShowReport extends javax.swing.JDialog {
+public class FrShowReport extends javax.swing.JFrame {
 
     /**
-     * Creates new form DiaShowReport
-     * @param parent
-     * @param modal
+     * Creates new form FrShowReport
      */
-    public DiaShowReport(FrEmployeeWorkspace parent, JRViewer report, boolean modal) {
-        super(parent, modal);
-        this.parent = parent;
-        this.setLocationRelativeTo(this.parent);
-        this.setLocation(100, 100);
-        this.setModal(true);
-        
+    public FrShowReport() {
+        initComponents();
+    }
+    
+    public FrShowReport(JRViewer report){
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setFrameIcon();
         this.setSize(500, 600);
         this.containPane = new JPanel();
         this.containPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -46,7 +49,7 @@ public class DiaShowReport extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,27 +82,20 @@ public class DiaShowReport extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DiaShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DiaShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DiaShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DiaShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrShowReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DiaShowReport dialog = new DiaShowReport(new FrEmployeeWorkspace(null), null, true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new FrShowReport().setVisible(true);
             }
         });
     }
@@ -107,6 +103,19 @@ public class DiaShowReport extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    FrEmployeeWorkspace parent;
+    
+    
     JPanel containPane;
+    
+    
+    
+    private void setFrameIcon() {
+        Image scaled = null;
+        try{
+            scaled = ImageIO.read(new File("src/image/comma_icon.jpg")).getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.setIconImage(scaled);
+    }
 }

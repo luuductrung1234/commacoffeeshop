@@ -516,7 +516,7 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
             
             // xuất report trong frame
-            new DiaShowReport(this.parent, new JRViewer(filledReport), true).setVisible(true);
+            new FrShowReport(new JRViewer(filledReport)).setVisible(true);
             
             
             // xuất report ra file pdf
@@ -545,7 +545,7 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
             
             // xuất report trong frame
-            new DiaShowReport(this.parent, new JRViewer(filledReport), true).setVisible(true);
+            new FrShowReport(new JRViewer(filledReport)).setVisible(true);
             
             
             // xuất report ra file pdf
