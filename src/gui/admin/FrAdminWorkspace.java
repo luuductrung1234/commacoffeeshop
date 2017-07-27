@@ -2239,6 +2239,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnAdminControl.add(btnChangePassAd);
 
         btnInsertNewAd.setText("Insert New Admin");
+        btnInsertNewAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertNewAdActionPerformed(evt);
+            }
+        });
         pnAdminControl.add(btnInsertNewAd);
 
         javax.swing.GroupLayout pnShowAdminLayout = new javax.swing.GroupLayout(pnShowAdmin);
@@ -3039,22 +3044,22 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 if(sstartday.length() == 0 || sstartday.length() > 10)
                 {
                     JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                    txtBirthEmp.requestFocus();
+                    txtStartDayEmp.requestFocus();
                     return;
                 }
+                dky = Integer.parseInt(sstartday.substring(0, 4));
                 dkm = Integer.parseInt(sstartday.substring(5, 7));
                 dkd = Integer.parseInt(sstartday.substring(8, 10));
-                dky = Integer.parseInt(sstartday.substring(0, 4));
                 if(dky < 0 || dkm < 0 || dkd < 0)
                 {
                     JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                    txtBirthEmp.requestFocus();
+                    txtStartDayEmp.requestFocus();
                     return;
                 }
                 if(sstartday.charAt(4) != '-' || sstartday.charAt(7) != '-')
                 {
                     JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                    txtBirthEmp.requestFocus();
+                    txtStartDayEmp.requestFocus();
                     return;
                 }
                 if(dkm > 12)
@@ -3103,15 +3108,17 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     }
                 }
                 startday = LocalDate.of(dky, dkm, dkd);
-                if((startday.getYear() < today.getYear()))
+                if(!(startday.isAfter(today)))
                 {
-                    
+                    JOptionPane.showMessageDialog(null, "Start day is not valid! Start day must be after to day!");
+                    txtStartDayEmp.requestFocus();
+                    return;
                 }
             }
             catch(Exception ex)
             {
                 JOptionPane.showMessageDialog(null, "Start day is not valid!\nHint: yyyy-MM-dd");
-                txtBirthEmp.requestFocus();
+                txtStartDayEmp.requestFocus();
                 return;
             }
             
@@ -4965,6 +4972,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             initDatavwOrder();
 //            txtSearchOrderTime.setSize(0, 0);
 //            btnSearchOrderTime.setText("Search by Order Time");
+            btnResetOrderDataActionPerformed(evt);
         }
         else
         {
@@ -5161,6 +5169,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         modelOD.getDataVector().removeAllElements();
         modelOD.fireTableDataChanged();
         initDatatxtTodaySale();
+        txtSearchOrderTime.setText("");
     }//GEN-LAST:event_btnResetOrderDataActionPerformed
 
     private void btnResetReceiptDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetReceiptDataActionPerformed
@@ -5308,6 +5317,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
             txtNameAd.setEnabled(false);
             btnUpdateAd.setText("Update");
+            this.setTitle("Admin: " + namead);
         }
     }//GEN-LAST:event_btnUpdateAdActionPerformed
 
@@ -5546,6 +5556,87 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
         sorterFood = (TableRowSorter<TableModel>) vwFood.getRowSorter();
     }//GEN-LAST:event_btnSaveFDActionPerformed
+
+    private void btnInsertNewAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertNewAdActionPerformed
+        if(btnInsertNewAd.getText().equals("Insert New Admin"))
+        {
+            if(!(a.getUsername().equals("admin_username3")))
+            {
+                int option = JOptionPane.showConfirmDialog(null, "You need higher permission to insert new admin! Do you want to login another account?", "Warning", JOptionPane.YES_OPTION);
+                if(option == JOptionPane.YES_OPTION)
+                {
+                    this.dispose();
+                    new FrLogin().setVisible(true);
+                }
+            }
+            else
+            {
+                setAdControl(true);
+                txtPassAd.setEnabled(true);
+                txtNameAd.setEnabled(true);
+                txtIDAd.setText("auto");
+                txtUsernameAd.setText("");
+                txtPassAd.setText("");
+                txtNameAd.setText("");
+                btnInsertNewAd.setText("Save");
+                return;
+            }
+        }
+        if(btnInsertNewAd.getText().equals("Save"))
+        {
+            String adid = txtIDAd.getText().trim();
+            
+            String username = txtUsernameAd.getText().trim();
+            if(username.length() == 0 || username.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Username is not valid!");
+                txtUsernameAd.requestFocus();
+                return;
+            }
+            List<Admin> dsAd = AdminDAO.getList();
+            for(Admin d:dsAd)
+            {
+                if(d.getUsername().equals(username))
+                {
+                    JOptionPane.showMessageDialog(null, "Username is already exist!");
+                    txtUsernameAd.requestFocus();
+                    return;
+                }
+            }
+            
+            String pass = new String(txtPassAd.getPassword()).trim();
+            if(pass.length() == 0 || pass.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Password is not valid!");
+                txtPassAd.requestFocus();
+                return;
+            }
+            
+            String name = txtNameAd.getText().trim();
+            if(name.length() == 0 || name.length() > 50)
+            {
+                JOptionPane.showMessageDialog(null, "Name is not valid!");
+                txtNameAd.requestFocus();
+                return;
+            }
+            
+            Admin ad = new Admin(adid, username, pass, name);
+            if(AdminDAO.insert(ad) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Insert new admin successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Insert new admin fail!");
+            }
+            txtIDAd.setText(this.a.getAd_id());
+            txtUsernameAd.setText(this.a.getUsername());
+            txtPassAd.setText(this.a.getPass());
+            txtNameAd.setText(this.a.getName());
+            setAdControl(false);
+            btnInsertNewAd.setText("Insert New Admin");
+        }
+    }//GEN-LAST:event_btnInsertNewAdActionPerformed
 
     /**
      * @param args the command line arguments
