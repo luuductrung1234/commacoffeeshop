@@ -1,10 +1,9 @@
 50
 40
-10
+5
 custard bread tower
 choco muffin
 apple muffin
-greentea muffin
 banana cake
 carrot cake
 french fries
@@ -44,7 +43,6 @@ lemon tea
 apple tea
 milk tea
 peach tea
-matcha latte
 ginger honey latte
 hot choco
 ice choco
@@ -59,4 +57,6 @@ choco cloud
 pepsi
 7up
 -
+matcha latte
+greentea muffin
 -

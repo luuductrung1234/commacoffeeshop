@@ -666,13 +666,15 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         
         
         for(FoodReport item : tabledata){
-            HashMap<String, Object> newrecord = new HashMap<>();
-            newrecord.put("foodname", item.getName());
-            newrecord.put("isdrink", item.getIsdrink());
-            newrecord.put("quan", item.getQuan());
-            newrecord.put("orderamount", item.getOrderamount());
-            
-            dataSource.add(newrecord);
+            if(item.getQuan() > 0){
+                HashMap<String, Object> newrecord = new HashMap<>();
+                newrecord.put("foodname", item.getName());
+                newrecord.put("isdrink", item.getIsdrink());
+                newrecord.put("quan", item.getQuan());
+                newrecord.put("orderamount", item.getOrderamount());
+
+                dataSource.add(newrecord);
+            }
         }
     }
     
@@ -718,13 +720,15 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
         
         // dữ liệu table
         for(FoodReport iter : data){
-            TableItem newitem = new TableItem();
-            newitem.setProduct(iter.getName());
-            newitem.setQuan(String.valueOf(iter.getQuan()));
-            String sAmt = localizedFormat("###,###.###", iter.getOrderamount(), Locale.US);
-            newitem.setAmt(sAmt);
-            
-            r.add(newitem);
+            if(iter.getQuan() > 0){
+                TableItem newitem = new TableItem();
+                newitem.setProduct(iter.getName());
+                newitem.setQuan(String.valueOf(iter.getQuan()));
+                String sAmt = localizedFormat("###,###.###", iter.getOrderamount(), Locale.US);
+                newitem.setAmt(sAmt);
+
+                r.add(newitem);
+            }
         }
         
         // tổng kết table

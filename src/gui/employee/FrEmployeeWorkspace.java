@@ -119,6 +119,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.initSettingForm();
         
         this.loadLastWorkingInfo();
+        this.saveCurrentInfo(false);
     }
 
     /** This method is called from within the constructor to
@@ -220,17 +221,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtEmpAddress = new javax.swing.JTextArea();
-        jPanel4 = new javax.swing.JPanel();
-        btnEmpSaveInfo = new javax.swing.JButton();
-        btnEmpResetInfo = new javax.swing.JButton();
-        lbPassconfirmstate = new javax.swing.JLabel();
-        lbBirthstate = new javax.swing.JLabel();
-        lbUsernamestate = new javax.swing.JLabel();
-        lbEmailstate = new javax.swing.JLabel();
-        lbPhonestate = new javax.swing.JLabel();
-        lbAddressstate = new javax.swing.JLabel();
-        txtEmpPassconfirm = new javax.swing.JPasswordField();
-        lbPassstate1 = new javax.swing.JLabel();
+        btnEmpChangeInfo = new javax.swing.JButton();
         pnDisplaySetting = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -251,9 +242,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         btnSavesetting = new javax.swing.JButton();
         btnResetsetting = new javax.swing.JButton();
-        lbtablenumberstate = new javax.swing.JLabel();
-        lbMenuitemnumberstate = new javax.swing.JLabel();
-        lbDiscountstate = new javax.swing.JLabel();
         lbSettingstate = new javax.swing.JLabel();
         pnUsing = new javax.swing.JPanel();
         pnOrderTable = new javax.swing.JPanel();
@@ -297,6 +285,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         mnbMain = new javax.swing.JMenuBar();
         mnEdit = new javax.swing.JMenu();
         mniEndofdayreport = new javax.swing.JMenuItem();
+        mniSwapTable = new javax.swing.JMenuItem();
         mnSystem = new javax.swing.JMenu();
         miAddemp = new javax.swing.JMenuItem();
         miLogout = new javax.swing.JMenuItem();
@@ -378,7 +367,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         );
         pnBlankLayout.setVerticalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGap(0, 634, Short.MAX_VALUE)
         );
 
         pnDisplay.add(pnBlank, "card5");
@@ -1809,7 +1798,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         );
         pnWaitLayout.setVerticalGroup(
             pnWaitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGap(0, 568, Short.MAX_VALUE)
         );
 
         pnMenuDisplayDetails.add(pnWait, "card7");
@@ -1928,6 +1917,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
         jLabel4.setText("Username:");
 
+        txtEmpUsername.setEditable(false);
         txtEmpUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpUsernameActionPerformed(evt);
@@ -1941,14 +1931,16 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
         jLabel8.setText("Password");
 
+        txtEmpPass.setEditable(false);
         txtEmpPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpPassActionPerformed(evt);
             }
         });
 
-        jLabel9.setText("Birth (yyyy/mm/dd):");
+        jLabel9.setText("Birth :");
 
+        txtEmpBirth.setEditable(false);
         txtEmpBirth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpBirthActionPerformed(evt);
@@ -1957,6 +1949,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
         jLabel11.setText("Phone:");
 
+        txtEmpPhone.setEditable(false);
         txtEmpPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpPhoneActionPerformed(evt);
@@ -1965,6 +1958,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
         jLabel12.setText("Email:");
 
+        txtEmpEmail.setEditable(false);
         txtEmpEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmpEmailActionPerformed(evt);
@@ -1973,56 +1967,20 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
         jLabel13.setText("Address:");
 
+        txtEmpAddress.setEditable(false);
         txtEmpAddress.setColumns(20);
         txtEmpAddress.setRows(5);
         jScrollPane6.setViewportView(txtEmpAddress);
 
-        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
-
-        btnEmpSaveInfo.setBackground(new java.awt.Color(0, 153, 0));
-        btnEmpSaveInfo.setText("SAVE");
-        btnEmpSaveInfo.addActionListener(new java.awt.event.ActionListener() {
+        btnEmpChangeInfo.setBackground(new java.awt.Color(153, 153, 0));
+        btnEmpChangeInfo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnEmpChangeInfo.setForeground(new java.awt.Color(0, 0, 0));
+        btnEmpChangeInfo.setText("Change Information");
+        btnEmpChangeInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmpSaveInfoActionPerformed(evt);
+                btnEmpChangeInfoActionPerformed(evt);
             }
         });
-        jPanel4.add(btnEmpSaveInfo);
-
-        btnEmpResetInfo.setBackground(new java.awt.Color(153, 153, 0));
-        btnEmpResetInfo.setText("RESET");
-        btnEmpResetInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmpResetInfoActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnEmpResetInfo);
-
-        lbPassconfirmstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbPassconfirmstate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbBirthstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbBirthstate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbUsernamestate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbUsernamestate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbEmailstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbEmailstate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbPhonestate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbPhonestate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbAddressstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbAddressstate.setForeground(new java.awt.Color(204, 0, 0));
-
-        txtEmpPassconfirm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmpPassconfirmActionPerformed(evt);
-            }
-        });
-
-        lbPassstate1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbPassstate1.setForeground(new java.awt.Color(204, 0, 0));
 
         javax.swing.GroupLayout pnDisplayEmployeeLayout = new javax.swing.GroupLayout(pnDisplayEmployee);
         pnDisplayEmployee.setLayout(pnDisplayEmployeeLayout);
@@ -2030,7 +1988,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
                 .addComponent(pnEmpdefaultinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(btnEmpChangeInfo)
+                .addGap(0, 234, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
                 .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
@@ -2051,82 +2011,50 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                                 .addComponent(txtEmpPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                                 .addComponent(txtEmpBirth)
                                 .addComponent(txtEmpEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))
-                        .addGap(42, 42, 42)
-                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
-                                .addComponent(lbPassstate1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtEmpPassconfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
-                            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
-                                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbBirthstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbEmailstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbPhonestate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbAddressstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbUsernamestate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(202, 202, 202)))
-                .addGap(37, 37, 37)
-                .addComponent(lbPassconfirmstate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222))
+                .addGap(118, 118, 118))
         );
         pnDisplayEmployeeLayout.setVerticalGroup(
             pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnEmpdefaultinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtEmpUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbUsernamestate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
-                                .addComponent(txtEmpPassconfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22))
-                            .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
-                                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel8)
-                                        .addComponent(txtEmpPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lbPassstate1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                        .addComponent(pnEmpdefaultinfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
-                        .addComponent(lbPassconfirmstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)))
+                        .addGap(70, 70, 70)
+                        .addComponent(btnEmpChangeInfo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtEmpUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtEmpPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtEmpBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbBirthstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmpBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(txtEmpPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbPhonestate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmpPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtEmpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbEmailstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(lbAddressstate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jLabel13))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pnDisplay.add(pnDisplayEmployee, "card3");
@@ -2134,7 +2062,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         pnDisplaySetting.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel15.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel15.setText("Max table number (> 50):");
+        jLabel15.setText("Table Number:");
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 204, 0));
@@ -2142,10 +2070,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         jLabel16.setText("SETTING");
 
         jLabel17.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel17.setText("Max menu item number (>40):");
+        jLabel17.setText("Maximum Menu Item:");
 
         jLabel18.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel18.setText("Today discount (%):");
+        jLabel18.setText("Today Discount (%):");
 
         jScrollPane7.setViewportView(listFood);
         this.listFood.setDragEnabled(true);
@@ -2189,7 +2117,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         });
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel5.setLayout(new java.awt.GridLayout());
 
         btnSavesetting.setBackground(new java.awt.Color(0, 153, 0));
         btnSavesetting.setText("SAVE");
@@ -2209,16 +2137,8 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         });
         jPanel5.add(btnResetsetting);
 
-        lbtablenumberstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbtablenumberstate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbMenuitemnumberstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbMenuitemnumberstate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbDiscountstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbDiscountstate.setForeground(new java.awt.Color(204, 0, 0));
-
-        lbSettingstate.setForeground(new java.awt.Color(204, 0, 0));
+        lbSettingstate.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbSettingstate.setForeground(new java.awt.Color(255, 0, 0));
         lbSettingstate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnDisplaySettingLayout = new javax.swing.GroupLayout(pnDisplaySetting);
@@ -2241,28 +2161,24 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                         .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtMenutablenumber, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(txtMenuitemnumber)
-                            .addComponent(txtTodaydiscount))
-                        .addGap(34, 34, 34)
-                        .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbtablenumberstate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lbDiscountstate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                                .addComponent(lbMenuitemnumberstate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtTodaydiscount)))
                     .addGroup(pnDisplaySettingLayout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnDisplaySettingLayout.createSequentialGroup()
-                                .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnAddAlltodiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnRemovefromdiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnRemoveAllfromdiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAddtodiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(27, 27, 27)
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbSettingstate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnAddAlltodiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemovefromdiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemoveAllfromdiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAddtodiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnDisplaySettingLayout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(lbSettingstate, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(255, Short.MAX_VALUE))
         );
         pnDisplaySettingLayout.setVerticalGroup(
@@ -2273,18 +2189,15 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(txtMenutablenumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbtablenumberstate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMenutablenumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(txtMenuitemnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbMenuitemnumberstate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMenuitemnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(txtTodaydiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbDiscountstate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTodaydiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jLabel19)
                 .addGroup(pnDisplaySettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2303,7 +2216,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     .addGroup(pnDisplaySettingLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(lbSettingstate, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2354,7 +2267,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         );
         pnBillBlankLayout.setVerticalGroup(
             pnBillBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 617, Short.MAX_VALUE)
+            .addGap(0, 623, Short.MAX_VALUE)
         );
 
         pnBill.add(pnBillBlank, "card4");
@@ -2445,7 +2358,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
+                false, true, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2612,7 +2525,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                     .addGroup(pnReceitpInputLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         this.rlbShowReceiptBill.setText("Invoice Note" + " --------- Day:" + this.today);
@@ -2717,6 +2630,22 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             io_ex.printStackTrace();
         }
         this.mniEndofdayreport.setIcon(eodicon);
+
+        mniSwapTable.setText("Swap table");
+        mniSwapTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSwapTableActionPerformed(evt);
+            }
+        });
+        mnEdit.add(mniSwapTable);
+        ImageIcon swaptableicon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/swaptable_icon.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            swaptableicon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.mniSwapTable.setIcon(swaptableicon);
 
         mnbMain.add(mnEdit);
 
@@ -3189,15 +3118,25 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReceiptResetActionPerformed
 
     private void btnReceiptSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceiptSaveActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        
         if(this.tbInvoicemodel.getRowCount() != 0){         // nếu hoá đơn đã có nguyên liệu nhập
-            // tiến hành nhập thông tin đơn hàng vào database
-            ReceiptNoteDAO.insert(this.cur_invoice);
-            
-            // reset đơn hàng mới
-            this.initInvoice();
-            this.ShowCurrentInvoice();
-            this.saveCurrentInfo(false);
+            // kiểm tra xác nhập người nhập hoá đơn
+            this.checkpassword = "";
+            new DiaComfirmPassword(this, ispay).setVisible(true);
+            for(Employee iter : this.working_emp){
+                if(iter.getEm_id().equals(this.cur_invoice.getFirst().getEm_id())){
+                    if(iter.getPass().equals(this.checkpassword)){
+                        // tiến hành nhập thông tin đơn hàng vào database
+                        ReceiptNoteDAO.insert(this.cur_invoice);
+
+                        // reset đơn hàng mới
+                        this.initInvoice();
+                        this.ShowCurrentInvoice();
+                        this.saveCurrentInfo(false);
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_btnReceiptSaveActionPerformed
 
@@ -3223,115 +3162,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.initEmployeeEditForm();
     }//GEN-LAST:event_cboEmpNameActionPerformed
 
-    private void btnEmpSaveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpSaveInfoActionPerformed
-        this.lbUsernamestate.setText("");
-        this.lbPassstate1.setText("");
-        this.lbPassconfirmstate.setText("");
-        this.lbBirthstate.setText("");
-        this.lbPhonestate.setText("");
-        this.lbEmailstate.setText("");
-        this.lbAddressstate.setText("");
-        
-        String username, pass, phone, email, address;
-        LocalDate birth;
-        
-        username = this.txtEmpUsername.getText();
-        pass = new String(this.txtEmpPass.getPassword());
-        phone = this.txtEmpPhone.getText();
-        email = this.txtEmpEmail.getText();
-        address = this.txtEmpAddress.getText();
-        
-        if(username.isEmpty() || username.length() > 50){
-            this.lbUsernamestate.setText("!");
-            this.txtEmpUsername.requestFocus();
-            return;
-        }
-        
-        if(pass.isEmpty() || pass.length() > 50){
-            this.lbPassstate1.setText("!");
-            this.txtEmpPass.requestFocus();
-            return;
-        }
-        if(!pass.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getPass())){
-            String passconfirm = new String(this.txtEmpPassconfirm.getPassword());
-            if(!pass.equals(passconfirm)){
-                this.lbPassconfirmstate.setText("!");
-                this.txtEmpPassconfirm.requestFocus();
-                return;
-            }
-        }
-        
-        if(phone.length() > 20){
-            this.lbPhonestate.setText("!");
-            this.txtEmpPhone.requestFocus();
-            return;
-        }
-        
-        Pattern emailpt = Pattern.compile("[\\w]+[@][\\w]+[.][\\w]+");
-        Matcher emailmatch = emailpt.matcher(email);
-        if(!emailmatch.matches()){
-            this.lbEmailstate.setText("!");
-            this.txtEmpEmail.requestFocus();
-            return;
-        }
-        if(email.length() > 50){
-            this.lbEmailstate.setText("!");
-            this.txtEmpEmail.requestFocus();
-            return;
-        }
-        
-        if(address.length() > 200){
-            this.lbAddressstate.setText("!");
-            this.txtEmpAddress.requestFocus();
-            return;
-        }
-        
-        try{
-            String sbirth = this.txtEmpBirth.getText();
-            String[] s = sbirth.split("-");
-            int year = Integer.parseInt(s[0]);
-            int month = Integer.parseInt(s[1]);
-            int day = Integer.parseInt(s[2]);
-            birth = LocalDate.of(year, month, day);
-            if(this.today.getYear() - birth.getYear() < 18){
-                this.lbBirthstate.setText("!");
-                this.txtEmpBirth.requestFocus();
-                return;
-            }
-        }catch(DateTimeException ex){
-            ex.getStackTrace();
-            this.lbBirthstate.setText("!");
-            this.txtEmpBirth.requestFocus();
-            return;
-        }
-        
-        
-        Employee cur_emp = this.working_emp.get(this.cboEmpName.getSelectedIndex());
-        
-        // save new data to database
-        int result = EmployeeDAO.selfupdate(cur_emp, username, pass, java.sql.Date.valueOf(birth), phone, email, address);
-        
-        // update current employee
-        if(result != 0){
-            cur_emp.setUsername(username);
-            cur_emp.setPass(pass);
-            cur_emp.setBirth(java.sql.Date.valueOf(birth));
-            cur_emp.setPhone(phone);
-            cur_emp.setEmail(email);
-            cur_emp.setAddr(address);
-            
-            this.initEmployeeEditForm();
-        }else{
-            JOptionPane.showMessageDialog(null, "Can not update new employee data to database", "DATABASE WARNING", JOptionPane.WARNING_MESSAGE);
-            this.initEmployeeEditForm();
-        }
-    }//GEN-LAST:event_btnEmpSaveInfoActionPerformed
-
-    private void btnEmpResetInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpResetInfoActionPerformed
-        // TODO add your handling code here:
-        this.initEmployeeEditForm();
-    }//GEN-LAST:event_btnEmpResetInfoActionPerformed
-
     
     private void txtEmpUsernamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtEmpUsernamePropertyChange
         // TODO add your handling code here:
@@ -3340,58 +3170,23 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     
     private void txtEmpUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpUsernameActionPerformed
         // TODO add your handling code here:
-        String username = this.txtEmpUsername.getText();
-        if(!username.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getUsername())){
-            this.btnEmpSaveInfo.setEnabled(true);
-        }
     }//GEN-LAST:event_txtEmpUsernameActionPerformed
 
     private void txtEmpPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpPassActionPerformed
         // TODO add your handling code here:
-        String pass = new String(this.txtEmpPass.getPassword());
-        if(!pass.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getPass())){
-            this.txtEmpPassconfirm.setEditable(true);
-        }else{
-            this.txtEmpPassconfirm.setText("");
-            this.txtEmpPassconfirm.setEditable(false);
-        }
     }//GEN-LAST:event_txtEmpPassActionPerformed
 
     private void txtEmpBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpBirthActionPerformed
         // TODO add your handling code here:
-        this.lbBirthstate.setText("");
-        Pattern p = Pattern.compile("[\\d]{4}-[\\d]{2}-[\\d]{2}");
-        Matcher m = p.matcher(this.txtEmpBirth.getText());
-        if(m.matches()){
-            String birth = this.txtEmpBirth.getText();
-            if(!this.working_emp.get(this.cboEmpName.getSelectedIndex()).getBirth().toString().equals(birth))
-                this.btnEmpSaveInfo.setEnabled(true);
-        }else{
-            this.lbBirthstate.setText("!");
-            this.txtEmpBirth.requestFocus();
-        }
     }//GEN-LAST:event_txtEmpBirthActionPerformed
 
     private void txtEmpPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpPhoneActionPerformed
         // TODO add your handling code here:
-        String phone = this.txtEmpPhone.getText();
-        if(!phone.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getPhone())){
-            this.btnEmpSaveInfo.setEnabled(true);
-        }
     }//GEN-LAST:event_txtEmpPhoneActionPerformed
 
     private void txtEmpEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpEmailActionPerformed
         // TODO add your handling code here:
-        String email = this.txtEmpEmail.getText();
-        if(!email.equals(this.working_emp.get(this.cboEmpName.getSelectedIndex()).getEmail())){
-            this.btnEmpSaveInfo.setEnabled(true);
-        }
     }//GEN-LAST:event_txtEmpEmailActionPerformed
-
-    private void txtEmpPassconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpPassconfirmActionPerformed
-        // TODO add your handling code here:
-        this.btnEmpSaveInfo.setEnabled(true);
-    }//GEN-LAST:event_txtEmpPassconfirmActionPerformed
 
     private void btnAddtodiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtodiscountActionPerformed
         // TODO add your handling code here:
@@ -3441,56 +3236,52 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
     private void btnSavesettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavesettingActionPerformed
         // TODO add your handling code here:
-        this.lbtablenumberstate.setText("");
-        this.lbMenuitemnumberstate.setText("");
-        this.lbDiscountstate.setText("");
-        
         int tbnumber;
         int itemnumber;
         int dis;
         
         try{
             tbnumber = Integer.parseInt(this.txtMenutablenumber.getText());
+            if(tbnumber < 40){
+                JOptionPane.showMessageDialog(null, "Table number must more than 40!", "INPUT WARNING", JOptionPane.WARNING_MESSAGE);
+                this.txtMenutablenumber.requestFocus();
+                return;
+            }
         }catch(NumberFormatException ex){
             ex.getStackTrace();
-            JOptionPane.showMessageDialog(null, "number is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Table number is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
             this.txtMenutablenumber.requestFocus();
             return;
         }
         
         try{
             itemnumber = Integer.parseInt(this.txtMenuitemnumber.getText());
+            if(itemnumber < 40){
+                JOptionPane.showMessageDialog(null, "The maximum menu item must more than 40!", "INPUT WARNING", JOptionPane.WARNING_MESSAGE);
+                this.txtMenuitemnumber.requestFocus();
+                return;
+            }
         }catch(NumberFormatException ex){
             ex.getStackTrace();
-            JOptionPane.showMessageDialog(null, "number is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Item number is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
             this.txtMenuitemnumber.requestFocus();
             return;
         }
         
         try{
             dis = Integer.parseInt(this.txtTodaydiscount.getText());
+            if(dis < 0 || dis > 100){
+                JOptionPane.showMessageDialog(null, "0% < Discount < 100%", "INPUT WARNING", JOptionPane.WARNING_MESSAGE);
+                this.txtTodaydiscount.requestFocus();
+                return;
+            }
         }catch(NumberFormatException ex){
             ex.getStackTrace();
-            JOptionPane.showMessageDialog(null, "number is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Discount is not correct. Please input it again", "INPUT WARNING", JOptionPane.ERROR_MESSAGE);
             this.txtTodaydiscount.requestFocus();
             return;
         }
         
-        if(tbnumber < 50){
-            this.lbtablenumberstate.setText("!");
-            this.txtMenutablenumber.requestFocus();
-            return;
-        }
-        if(itemnumber < 40){
-            this.lbMenuitemnumberstate.setText("!");
-            this.txtMenuitemnumber.requestFocus();
-            return;
-        }
-        if(dis < 0){
-            this.lbDiscountstate.setText("!");
-            this.txtTodaydiscount.requestFocus();
-            return;
-        }
         
         this.savesetting();
         this.lbSettingstate.setText("You need to reset the application for active the setting");
@@ -3528,6 +3319,28 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         // TODO add your handling code here:
         new DiaEndofdayreport((this), true).setVisible(true);
     }//GEN-LAST:event_mniEndofdayreportActionPerformed
+    
+    String checkpassword;
+    private void btnEmpChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpChangeInfoActionPerformed
+
+        Employee cur_emp = this.working_emp.get(this.cboEmpName.getSelectedIndex());
+        // kiểm tra trước khi cho phép thay đổi thông tin
+        this.checkpassword = "";
+        new DiaComfirmPassword(this, true).setVisible(true);
+        if(cur_emp.getPass().equals(this.checkpassword)){
+            new DiaEmpChangeInfo(this, cur_emp, true).setVisible(true);
+            this.initEmployeeEditForm();
+        }
+    }//GEN-LAST:event_btnEmpChangeInfoActionPerformed
+
+    private void mniSwapTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSwapTableActionPerformed
+        new DiaSwapTable(this, true).setVisible(true);
+        
+        this.refreshTable();
+        this.cur_table = 0;
+        this.ShowCurrentOrderBill();
+        this.saveCurrentInfo(false);
+    }//GEN-LAST:event_mniSwapTableActionPerformed
     
 
 
@@ -3581,8 +3394,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnDrink;
     private javax.swing.JButton btnE;
     private javax.swing.JButton btnEat;
-    private javax.swing.JButton btnEmpResetInfo;
-    private javax.swing.JButton btnEmpSaveInfo;
+    private javax.swing.JButton btnEmpChangeInfo;
     private javax.swing.JToggleButton btnEmployee;
     private javax.swing.JButton btnF;
     private javax.swing.JButton btnG;
@@ -3646,7 +3458,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -3656,25 +3467,15 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JLabel lbAddressstate;
     private javax.swing.JLabel lbAvatar;
-    private javax.swing.JLabel lbBirthstate;
     private javax.swing.JLabel lbCustomer;
-    private javax.swing.JLabel lbDiscountstate;
-    private javax.swing.JLabel lbEmailstate;
     private javax.swing.JLabel lbEmpRole;
     private javax.swing.JLabel lbEmpStartday;
     private javax.swing.JLabel lbEmphourwage;
     private javax.swing.JLabel lbManager;
-    private javax.swing.JLabel lbMenuitemnumberstate;
-    private javax.swing.JLabel lbPassconfirmstate;
-    private javax.swing.JLabel lbPassstate1;
-    private javax.swing.JLabel lbPhonestate;
     private javax.swing.JLabel lbSettingstate;
     private supportclass.RollLabel lbShowOrderTable;
     private javax.swing.JLabel lbTotalAmount;
-    private javax.swing.JLabel lbUsernamestate;
-    private javax.swing.JLabel lbtablenumberstate;
     private javax.swing.JList<String> listFood;
     private javax.swing.JList<String> listFoodDiscount;
     private javax.swing.JMenuItem miAddemp;
@@ -3683,6 +3484,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JMenu mnSystem;
     private javax.swing.JMenuBar mnbMain;
     private javax.swing.JMenuItem mniEndofdayreport;
+    private javax.swing.JMenuItem mniSwapTable;
     private javax.swing.JPanel pnBill;
     private javax.swing.JPanel pnBillBlank;
     private javax.swing.JPanel pnBlank;
@@ -3718,7 +3520,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmpBirth;
     private javax.swing.JTextField txtEmpEmail;
     private javax.swing.JPasswordField txtEmpPass;
-    private javax.swing.JPasswordField txtEmpPassconfirm;
     private javax.swing.JTextField txtEmpPhone;
     private javax.swing.JTextField txtEmpUsername;
     private javax.swing.JTextField txtMenuitemnumber;
@@ -4289,9 +4090,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             b.setForeground(new Color(106, 158, 237));
             this.pnShowTable.add(b);
             
+            
             this.tablebtn_list.add(b);
             this.tablestate_list.add(0);
-            
             // mặc định khách hàng của order ban đầu luôn là CUS0000017 normal customer
             this.order_list.put(new Order("", "CUS0000017", Integer.parseInt(b.getText()), java.sql.Date.valueOf(this.today), 0, 0, 0), new ArrayList<>());
             this.ordernote_list.put(Integer.parseInt(b.getText()), new ArrayList<>());
@@ -4517,9 +4318,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     
 // EMPLOYEE EDIT INFORMATION FORM
     private void initEmployeeEditForm() {
-        this.txtEmpPassconfirm.setText("");
-        this.txtEmpPassconfirm.setEditable(false);
-        this.btnEmpSaveInfo.setEnabled(false);
         Employee cur_emp = this.working_emp.get(this.cboEmpName.getSelectedIndex());
         
         // hiển thị avatar
