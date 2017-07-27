@@ -35,6 +35,8 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
     + đã xong : In thêm note của từng món ăn trong bill (kitchen print)
     + đã xong : thêm giá mặc định cho các nguyên liệu (FoodMaterials) => Sẽ cần phải điều chỉnh database, entities class, model class query, giao diện của FrEmployeeWorkspace và FrAdminWorkspace
     + đã xong : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc (cần cập nhật thêm)
+    + chưa hoàn thành : swap/merge table
+    + chưa hoàn thành : cho phép nhân viên chỉnh sửa trực tiếp quantity trong order form
     + chưa hoàn thành : tách code
     
 
