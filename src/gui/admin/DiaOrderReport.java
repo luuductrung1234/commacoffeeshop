@@ -11,7 +11,7 @@ import entities.Food;
 import entities.Order;
 import entities.OrderDetails;
 import gui.employee.DiaEndofdayreport;
-import gui.employee.DiaShowReport;
+import gui.employee.FrShowReport;
 import model.CustomerDAO;
 import model.FoodDAO;
 import model.OrderDAO;
