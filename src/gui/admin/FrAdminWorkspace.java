@@ -315,6 +315,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnResetOrderData = new javax.swing.JButton();
         txtTodaySale = new javax.swing.JTextField();
         lbTodaySale = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         pnShowOrder = new javax.swing.JPanel();
         pnvwOrder = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -484,7 +485,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Username", "Password", "Name", "Birth", "Start Day", "Hour Wage", "Address", "Email", "Phone", "Role", "Manager"
+                "Employee ID", "Username", "Password", "Name", "Birth", "Start Day", "Hour Wage", "Address", "Email", "Phone", "Session", "Manager"
             }
         ) {
             Class[] types = new Class [] {
@@ -562,7 +563,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         jLabel9.setText("Phone");
 
-        jLabel10.setText("Role");
+        jLabel10.setText("Session");
 
         cboRoleEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quầy Nước", "Quầy Bếp" }));
 
@@ -2067,6 +2068,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         lbTodaySale.setText("Today sale:");
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Export Order");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnOrderSearchLayout = new javax.swing.GroupLayout(pnOrderSearch);
         pnOrderSearch.setLayout(pnOrderSearchLayout);
         pnOrderSearchLayout.setHorizontalGroup(
@@ -2082,15 +2091,17 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(lbTodaySale)
                 .addGap(18, 18, 18)
                 .addComponent(txtTodaySale, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
         pnOrderSearchLayout.setVerticalGroup(
             pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnResetOrderData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(txtTodaySale, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                .addComponent(lbTodaySale))
+                .addComponent(txtTodaySale)
+                .addComponent(lbTodaySale)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(txtSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -5638,6 +5649,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInsertNewAdActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new DiaOrderReport(null, false).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -5733,6 +5748,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboTypeFood;
     private javax.swing.JComboBox<String> cboUnitBuyFM;
     private javax.swing.JComboBox<String> cboUseForFM;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -6381,8 +6397,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         sorterReceipt = (TableRowSorter<TableModel>) vwOrder.getRowSorter();
     }
     
-    private void initDatavwRD(String rn_id)
-    {
+    private void initDatavwRD(String rn_id) {
 //        modelOD = (DefaultTableModel) vwOD.getModel();
 //        modelOD.setRowCount(0);
         modelRD.getDataVector().removeAllElements();
@@ -6422,8 +6437,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     DefaultTableModel modelEmpSche;
     List<EmpSchedule> dsEmpSche;
     TableRowSorter<TableModel> sorterEmpSche;
-    private void initDatavwEmpSche(String em_name, String month)
-    {
+    private void initDatavwEmpSche(String em_name, String month) {
         modelEmpSche.getDataVector().removeAllElements();
         modelEmpSche.fireTableDataChanged();
         modelEmpSche.setRowCount(0);

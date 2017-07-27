@@ -342,7 +342,7 @@
                                 <Column editable="false" title="Address" type="java.lang.String"/>
                                 <Column editable="false" title="Email" type="java.lang.String"/>
                                 <Column editable="false" title="Phone" type="java.lang.String"/>
-                                <Column editable="false" title="Role" type="java.lang.Integer"/>
+                                <Column editable="false" title="Session" type="java.lang.Integer"/>
                                 <Column editable="false" title="Manager" type="java.lang.String"/>
                               </Table>
                             </Property>
@@ -619,7 +619,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Role"/>
+                        <Property name="text" type="java.lang.String" value="Session"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtUsernameEmp">
@@ -2979,7 +2979,8 @@
                           <Component id="lbTodaySale" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="txtTodaySale" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace pref="181" max="32767" attributes="0"/>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2988,8 +2989,9 @@
                       <Component id="btnSearchOrderTime" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnResetOrderData" max="32767" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="txtTodaySale" alignment="3" pref="31" max="32767" attributes="0"/>
+                          <Component id="txtTodaySale" alignment="3" max="32767" attributes="0"/>
                           <Component id="lbTodaySale" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtSearchOrderTime" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -3031,6 +3033,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Today sale:"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton1">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Export Order"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
