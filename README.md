@@ -19,6 +19,7 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
   - **FrLogin**:
     + đã xong : đăng nhập cho nhân viên và quản lý
     + đã xong : cập nhật thêm chức năng thay đổi cấu hình đăng nhập database, sau khi chỉnh sửa và đăng nhập thành công, chương trình tự động lưu dữ liệu của database đó (lần sau không cần điều chỉnh nữa). Thông tin database sẽ được lưu vào databaseinfo.txt
+    + chưa hoàn thành : cho phép người dùng mở cả frame admin và frame employee song song, nhưng mỗi frame chỉ được mở một lần 
 
 (*) dự kiến thêm khả năng mã hoá mật khẩu trong database
 

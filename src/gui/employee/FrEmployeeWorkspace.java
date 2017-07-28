@@ -3068,7 +3068,6 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 this.cur_ordernote = this.getNoteofTable(this.cur_table);
                 this.cur_ordernote.setValue(new ArrayList<String>());
 
-               
                 ImageIcon icon = null;
                 try{
                     Image scaled = ImageIO.read(new File("src/image/table_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
@@ -4126,12 +4125,59 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         return null;
     }
     
+    public void setOrderofTable(int tablenumber, Entry<Order, ArrayList<OrderDetails>> newtableorder){
+        for(Entry<Order, ArrayList<OrderDetails>> iter : this.order_list.entrySet()){
+            if(iter.getKey().getOrdertable() == tablenumber){
+                    
+                    Order neworder = new Order();
+                    neworder.setCus_id(newtableorder.getKey().getCus_id());
+                    neworder.setOrder_id(newtableorder.getKey().getOrder_id());
+                    neworder.setOrdertable(iter.getKey().getOrdertable());
+                    neworder.setOrdertime(newtableorder.getKey().getOrdertime());
+                    neworder.setPrice(newtableorder.getKey().getPrice());
+                    neworder.setCustomerpay(newtableorder.getKey().getCustomerpay());
+                    neworder.setPayback(newtableorder.getKey().getPayback());
+                    
+                    
+                    ArrayList<OrderDetails> newdetails = new ArrayList<>();
+                    for(OrderDetails oditem : newtableorder.getValue()){
+                        newdetails.add(oditem);
+                    }
+                    
+                    this.order_list.remove(iter.getKey());
+                    this.order_list.put(neworder, newdetails);
+                    
+                    break;
+            }
+        }
+    }
+    
     public Entry<Integer, ArrayList<String>> getNoteofTable(int tablenumber){
         for(Entry<Integer, ArrayList<String>> iter : this.ordernote_list.entrySet()){
             if(iter.getKey() == tablenumber)
                 return iter;
         }
         return null;
+    }
+    
+    public void setNoteofTable(int tablenumber, Entry<Integer, ArrayList<String>> newtablenote){
+        for(Entry<Integer, ArrayList<String>> iter : this.ordernote_list.entrySet()){
+            if(iter.getKey() == tablenumber){
+                iter.setValue(new ArrayList<>());
+                for(String note : newtablenote.getValue()){
+                    iter.getValue().add(note);
+                }
+                break;
+            }
+        }
+    }
+    
+    public int getTableCustomerNumber(int tablenumber){
+        return this.cusnumber_list.get(tablenumber - 1);
+    }
+    
+    public void setTableCustomerNumber(int tablenumber, int newnum){
+        this.cusnumber_list.set(tablenumber-1, newnum);
     }
     
     public void refreshTable(){

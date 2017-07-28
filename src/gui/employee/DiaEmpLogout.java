@@ -139,10 +139,14 @@ public class DiaEmpLogout extends javax.swing.JDialog {
                 ishave_workingtable = true;
         }
         
-        if(slrows.length >= this.parent.working_emp.size() && ishave_workingtable){
-            int r = JOptionPane.showConfirmDialog(null, "There still have working table! Are you sure to logout?");
-            if(r == JOptionPane.NO_OPTION){
-                return;
+        if(slrows.length >= this.parent.working_emp.size()){
+            if(ishave_workingtable){
+                int r = JOptionPane.showConfirmDialog(null, "There still have working table! Are you sure to logout?");
+                if(r == JOptionPane.NO_OPTION){
+                    return;
+                }else{
+                    this.parent.saveCurrentInfo(true);
+                }
             }else{
                 this.parent.saveCurrentInfo(true);
             }
