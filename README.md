@@ -7,6 +7,7 @@ Phần mềm quản lý cửa hàng (các dịch vụ ăn uống, kho trữ,...)
     + Employee: thực hiện order, điều chỉnh tài khoản của bản thân, nhập hoá đơn nguyên liệu nhập kho, thực hiện order cho khách hàng,...
     + Admin: quản lý nhân viên, lương, lịch làm việc, nguyên liệu trong kho, menu sản phẩm (món ăn,...), tài khoản các admin khác
   - Thống kê Thu chi theo tuần/tháng/năm
+
 Phần mềm được viết trên nền tảng JAVA với giao diện đồ hoạ JAVA SWING. Kết hợp một số thư viện mở như Jasper report, JFreechart,...
 Đây là phiên bản thử nghiệm, dự kiến trong thời gian tới sẽ phát triển các phiên bản tốt hơn về hiệu xuất, tính năng cũng như giao diện (điển hình là JAVAFX, ITEXT report, processing,....)
 
