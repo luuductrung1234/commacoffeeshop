@@ -35,11 +35,12 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
     + đã xong : xây dựng của sổ Setting cho các tuỳ chỉnh trong EmployeeWorkspace, các tuỳ chỉnh lưu vào settinginfo.txt
     + đã xong : xây dựng cửa sổ Empoyee Info cho phép nhân viên chỉnh sủa tài khoản cá nhân
     + đã xong : In bill thông qua printer. Tính năng tuỳ chỉnh hiển thị văn bản in trước khi in
-    + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
     + đã xong : In thêm note của từng món ăn trong bill (kitchen print)
     + đã xong : thêm giá mặc định cho các nguyên liệu (FoodMaterials) => Sẽ cần phải điều chỉnh database, entities class, model class query, giao diện của FrEmployeeWorkspace và FrAdminWorkspace
     + đã xong : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc (cần cập nhật thêm)
-    + chưa hoàn thành : swap/merge table (chức năng swap vẫn trong tình trạng thử nghiệm, có thể sẽ phát sinh lỗi chưa biết trước)
+    + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
+    + đã xong : swap/merge table (chức năng swap/merge vẫn trong tình trạng thử nghiệm, có thể sẽ phát sinh lỗi chưa biết trước)
+    + chưa hoàn thành : xuất bill dưới dạng pdf
     + chưa hoàn thành : cho phép nhân viên chỉnh sửa trực tiếp quantity trong order form
     + chưa hoàn thành : tách code
     

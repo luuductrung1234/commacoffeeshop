@@ -2987,6 +2987,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         if(this.cur_table != 0 && this.getTableState(this.cur_table) != 0){
             // làm mới trạng thái bàn hiện tại
             this.setTableState(this.cur_table, 0);
+            
+            // làm mới số khách bàn hiện tại
+            this.setTableCustomerNumber(this.cur_table, 0);
 
             // làm mới order và orderdetails bàn hiện tại
             this.cur_order = this.getOrderofTable(this.cur_table);
@@ -3053,6 +3056,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
                 // làm mới trạng thái bàn hiện tại
                 this.setTableState(this.cur_table, 0);
+                
+                // làm mới số khách bàn hiện tại
+                this.setTableCustomerNumber(this.cur_table, 0);
 
                 // làm mới order và orderdetails bàn hiện tại
                 this.cur_order = this.getOrderofTable(this.cur_table);

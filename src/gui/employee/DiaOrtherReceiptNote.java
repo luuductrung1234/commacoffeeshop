@@ -258,8 +258,9 @@ public class DiaOrtherReceiptNote extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    String checkpassword;
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
+        
         if(this.txtNote.getText().isEmpty() || this.txtNote.getText().length() > 300){
             JOptionPane.showMessageDialog(null, "Note is not correct", "INPUT WARNING", JOptionPane.WARNING_MESSAGE);
             this.txtNote.requestFocus();
@@ -271,6 +272,13 @@ public class DiaOrtherReceiptNote extends javax.swing.JDialog {
         ReceiptNote new_rn = null;
         for(Employee iter : this.parent.working_emp){
             if(iter.getName().equals( this.cboEmployee.getSelectedItem())){
+                this.parent.checkpassword = "";
+                new DiaComfirmPassword(this.parent, true).setVisible(true);
+                if(!this.parent.checkpassword.equals(iter.getPass())){
+                    return;
+                }
+                
+                
                 new_rn = new ReceiptNote("", iter.getEm_id(), java.sql.Date.valueOf(this.parent.today), Float.parseFloat(this.txtTotalAmount.getText()));
                 break;
             }
