@@ -290,7 +290,7 @@ public class PrintWithoutDialog implements Printable
         /* in bảng chi tiết trong report */
         boolean firstline = true;
         int index;
-        for(index = 0; index < this.table.size() - 1; index++){
+        for(index = 0; index < this.table.size() - 2; index++){
             if(firstline){
                 g.setFont(new Font("Plain", 0, 8).deriveFont(Font.BOLD));
                 firstline = false;

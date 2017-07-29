@@ -50,4 +50,5 @@ select * from tbOrder
 where ordertime = convert(date, getdate())
 go
 
-
+select * from tbFood
+go

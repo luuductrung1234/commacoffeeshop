@@ -50,6 +50,19 @@ public class OrderDAO {
                     
                     st2.executeUpdate();
                     
+                    
+                    
+                    for(int i = 0; i < new_order.getValue().size()-1; i++){
+                        for(int j = i + 1; j < new_order.getValue().size(); j++){
+                            // nếu trùng order details thì hợp lại
+                            if(new_order.getValue().get(i).getFood_id() == new_order.getValue().get(j).getFood_id() && new_order.getValue().get(i).getOrder_id() == new_order.getValue().get(j).getOrder_id()){
+                                new_order.getValue().get(i).setQuan(new_order.getValue().get(i).getQuan() + new_order.getValue().get(j).getQuan());
+                                new_order.getValue().remove(j);
+                                j--;
+                            }
+                        }
+                    }
+                    
                     sql = "INSERT INTO tbOrderDetails VALUES (?, ?, ?)";
                     try(PreparedStatement st3 = cn.prepareStatement(sql)){
                         for(OrderDetails iter : new_order.getValue()){

@@ -737,6 +737,7 @@ public class DiaEndofdayreport extends javax.swing.JDialog {
             totalamount += iter.getOrderamount();
         }
         r.add(new TableItem("Total: ", "", "", localizedFormat("###,###.###", totalamount, Locale.US)));
+        r.add(new TableItem("", "", "", ""));
         
         return r;
     }

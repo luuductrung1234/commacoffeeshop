@@ -193,13 +193,6 @@ public class DiaSwapTable extends javax.swing.JDialog {
             }
             
             
-            
-            // buông 2 bàn đã swap
-            this.selectedtable_list.get(0).setSelected(false);
-            this.selectedtable_list.get(1).setSelected(false);
-            this.selectedtable_list.remove(0);
-            this.selectedtable_list.remove(0);
-            
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.dispose();
         }
@@ -216,13 +209,107 @@ public class DiaSwapTable extends javax.swing.JDialog {
                 return;
             }
             
+            
+            // dữ liệu bàn 1
+            int table1_state = this.parent.getTableState(table1);
+            Entry<Order, ArrayList<OrderDetails>> table1_order = this.parent.getOrderofTable(table1);
+            Entry<Integer, ArrayList<String>> table1_ordernote = this.parent.getNoteofTable(table1);
+            int table1_cusnumber = this.parent.getTableCustomerNumber(table1);
+            // dữ liệu bàn 2
+            int table2_state = this.parent.getTableState(table2);
+            Entry<Order, ArrayList<OrderDetails>> table2_order = this.parent.getOrderofTable(table2);
+            Entry<Integer, ArrayList<String>> table2_ordernote = this.parent.getNoteofTable(table2);
+            int table2_cusnumber = this.parent.getTableCustomerNumber(table2);
+            
+            // kiểm tra bàn có trống không
+            if(table1_state == 0 || table2_state == 0){
+                return;
+            }
+            
             int mergetable = Integer.parseInt(result);
             if(mergetable == table1){
+                // chỉnh lại trạng thái cho table1
+                this.parent.setTableState(table1, 1);
                 
+                // xáp nhập order details
+                for(OrderDetails iter : table2_order.getValue()){
+                    table1_order.getValue().add(iter);
+                }
+                
+                // xáp nhập order note
+                for(String note : table2_ordernote.getValue()){
+                    table1_ordernote.getValue().add(note);
+                }
+                
+                // xáp nhập customer number
+                this.parent.setTableCustomerNumber(table1, table1_cusnumber + table2_cusnumber);
+                
+                // làm mới table2
+                this.parent.setTableState(table2, 0);
+                this.parent.setTableCustomerNumber(table2, 0);
+                // làm mới order và orderdetails bàn hiện tại
+                table2_order.getKey().setOrder_id("");
+                table2_order.getKey().setCus_id("CUS0000017");
+                table2_order.getKey().setPrice(0);
+                table2_order.getKey().setCustomerpay(0);
+                table2_order.getKey().setPayback(0);
+                table2_order.setValue(new ArrayList<OrderDetails>());
+                // làm mới note bàn hiện tại
+                table2_ordernote.setValue(new ArrayList<String>());
+
+                ImageIcon icon = null;
+                try{
+                    Image scaled = ImageIO.read(new File("src/image/table_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(scaled);
+                }catch(IOException io_ex){
+                    io_ex.printStackTrace();
+                }
+                this.parent.tablebtn_list.get(table2-1).setIcon(icon);
+                this.parent.tablebtn_list.get(table1-1).setIcon(icon);
             }
             if(mergetable == table2){
+                // chỉnh lại trạng thái cho table2
+                this.parent.setTableState(table2, 1);
                 
+                // xáp nhập order details
+                for(OrderDetails iter : table1_order.getValue()){
+                    table2_order.getValue().add(iter);
+                }
+                
+                // xáp nhập order note
+                for(String note : table1_ordernote.getValue()){
+                    table2_ordernote.getValue().add(note);
+                }
+                
+                // xáp nhập customer number
+                this.parent.setTableCustomerNumber(table2, table1_cusnumber + table2_cusnumber);
+                
+                // làm mới table1
+                this.parent.setTableState(table1, 0);
+                this.parent.setTableCustomerNumber(table1, 0);
+                // làm mới order và orderdetails bàn hiện tại
+                table1_order.getKey().setOrder_id("");
+                table1_order.getKey().setCus_id("CUS0000017");
+                table1_order.getKey().setPrice(0);
+                table1_order.getKey().setCustomerpay(0);
+                table1_order.getKey().setPayback(0);
+                table1_order.setValue(new ArrayList<OrderDetails>());
+                // làm mới note bàn hiện tại
+                table1_ordernote.setValue(new ArrayList<String>());
+
+                ImageIcon icon = null;
+                try{
+                    Image scaled = ImageIO.read(new File("src/image/table_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(scaled);
+                }catch(IOException io_ex){
+                    io_ex.printStackTrace();
+                }
+                this.parent.tablebtn_list.get(table1-1).setIcon(icon);
+                this.parent.tablebtn_list.get(table2-1).setIcon(icon);
             }
+            
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            this.dispose();
         }
         
     }//GEN-LAST:event_btnMergeActionPerformed
@@ -319,7 +406,7 @@ public class DiaSwapTable extends javax.swing.JDialog {
                 Image scaled = ImageIO.read(new File("src/image/table_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
                 icon = new ImageIcon(scaled);
                 
-                scaled = ImageIO.read(new File("src/image/swaptable_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
+                scaled = ImageIO.read(new File("src/image/selected_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
                 slicon = new ImageIcon(scaled);
             }catch(IOException io_ex){
                 io_ex.printStackTrace();
