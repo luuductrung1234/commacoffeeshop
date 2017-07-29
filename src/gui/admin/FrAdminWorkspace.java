@@ -4320,18 +4320,23 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 v.add(d.getFm_id());
                 v.add(d.getName());
                 v.add(d.getInfo());
-//                switch(d.getUsefor())
-//                {
-//                    case 0:
-//                        v.add("Uống");
-//                    case 1:
-//                        v.add("Ăn");
-//                    case 2:
-//                        v.add("Không rõ lượng dùng");
-//                    case 3:
-//                        v.add("Khác");
-//                }
-                v.add(d.getUsefor());
+                if(d.getUsefor() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getUsefor() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getUsefor() == 2)
+                {
+                    v.add("Không rõ lượng dùng");
+                }
+                if(d.getUsefor() == 3)
+                {
+                    v.add("Khác");
+                }
+//                v.add(d.getUsefor());
                 v.add(d.getFmtype());
                 v.add(d.getUnit_buy());
                 v.add(d.getStandard_price());
@@ -4373,18 +4378,18 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             txtIDFM.setText(modelFM.getValueAt(row, 0).toString());
             txtNameFM.setText(modelFM.getValueAt(row, 1).toString());
             txtInfoFM.setText(modelFM.getValueAt(row, 2).toString());
-            switch(Integer.parseInt(modelFM.getValueAt(row, 3).toString()))
+            switch(modelFM.getValueAt(row, 3).toString())
             {
-                case 0:
+                case "Uống":
                     cboUseForFM.setSelectedIndex(0);
                     break;
-                case 1:
+                case "Ăn":
                     cboUseForFM.setSelectedIndex(1);
                     break;
-                case 2:
+                case "Không rõ lượng dùng":
                     cboUseForFM.setSelectedIndex(2);
                     break;
-                case 3:
+                case "Khác":
                     cboUseForFM.setSelectedIndex(3);
             }
             cboTypeFM.setSelectedItem(modelFM.getValueAt(row, 4).toString());
@@ -4533,27 +4538,32 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             dsFM = FoodMaterialDAO.getList();
             for(FoodMaterial d:dsFM)
             {
-    //            Vector v = new Vector();
-    //            v.add(d.getFm_id());
-    //            v.add(d.getName());
-    //            v.add(d.getInfo());
-    //            switch(d.getUsefor())
-    //            {
-    //                case 0:
-    //                    v.add("Uống");
-    //                case 1:
-    //                    v.add("Ăn");
-    //                case 2:
-    //                    v.add("Không rõ lượng dùng");
-    //                case 3:
-    //                    v.add("Khác");
-    //            }
-    //            v.add(d.getUsefor());
-    //            v.add(d.getFmtype());
-    //            v.add(d.getUnit_buy());
-    //            v.add(d.getStandard_price());
-    //            v.add(d.getSupplier());
-                modelFM.addRow(d.toVector());
+                Vector v = new Vector();
+                v.add(d.getFm_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                if(d.getUsefor() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getUsefor() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getUsefor() == 2)
+                {
+                    v.add("Không rõ lượng dùng");
+                }
+                if(d.getUsefor() == 3)
+                {
+                    v.add("Khác");
+                }
+//                v.add(d.getUsefor());
+                v.add(d.getFmtype());
+                v.add(d.getUnit_buy());
+                v.add(d.getStandard_price());
+                v.add(d.getSupplier());
+                modelFM.addRow(v);
             }
             sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
         }
@@ -4693,27 +4703,32 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             dsFM = FoodMaterialDAO.getList();
             for(FoodMaterial d:dsFM)
             {
-    //            Vector v = new Vector();
-    //            v.add(d.getFm_id());
-    //            v.add(d.getName());
-    //            v.add(d.getInfo());
-    //            switch(d.getUsefor())
-    //            {
-    //                case 0:
-    //                    v.add("Uống");
-    //                case 1:
-    //                    v.add("Ăn");
-    //                case 2:
-    //                    v.add("Không rõ lượng dùng");
-    //                case 3:
-    //                    v.add("Khác");
-    //            }
-    //            v.add(d.getUsefor());
-    //            v.add(d.getFmtype());
-    //            v.add(d.getUnit_buy());
-    //            v.add(d.getStandard_price());
-    //            v.add(d.getSupplier());
-                modelFM.addRow(d.toVector());
+                Vector v = new Vector();
+                v.add(d.getFm_id());
+                v.add(d.getName());
+                v.add(d.getInfo());
+                if(d.getUsefor() == 0)
+                {
+                    v.add("Uống");
+                }
+                if(d.getUsefor() == 1)
+                {
+                    v.add("Ăn");
+                }
+                if(d.getUsefor() == 2)
+                {
+                    v.add("Không rõ lượng dùng");
+                }
+                if(d.getUsefor() == 3)
+                {
+                    v.add("Khác");
+                }
+//                v.add(d.getUsefor());
+                v.add(d.getFmtype());
+                v.add(d.getUnit_buy());
+                v.add(d.getStandard_price());
+                v.add(d.getSupplier());
+                modelFM.addRow(v);
             }
             sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
         }
@@ -4787,27 +4802,32 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         dsFM = FoodMaterialDAO.getList();
         for(FoodMaterial d:dsFM)
         {
-//            Vector v = new Vector();
-//            v.add(d.getFm_id());
-//            v.add(d.getName());
-//            v.add(d.getInfo());
-//            switch(d.getUsefor())
-//            {
-//                case 0:
-//                    v.add("Uống");
-//                case 1:
-//                    v.add("Ăn");
-//                case 2:
-//                    v.add("Không rõ lượng dùng");
-//                case 3:
-//                    v.add("Khác");
-//            }
+            Vector v = new Vector();
+            v.add(d.getFm_id());
+            v.add(d.getName());
+            v.add(d.getInfo());
+            if(d.getUsefor() == 0)
+            {
+                v.add("Uống");
+            }
+            if(d.getUsefor() == 1)
+            {
+                v.add("Ăn");
+            }
+            if(d.getUsefor() == 2)
+            {
+                v.add("Không rõ lượng dùng");
+            }
+            if(d.getUsefor() == 3)
+            {
+                v.add("Khác");
+            }
 //            v.add(d.getUsefor());
-//            v.add(d.getFmtype());
-//            v.add(d.getUnit_buy());
-//            v.add(d.getStandard_price());
-//            v.add(d.getSupplier());
-            modelFM.addRow(d.toVector());
+            v.add(d.getFmtype());
+            v.add(d.getUnit_buy());
+            v.add(d.getStandard_price());
+            v.add(d.getSupplier());
+            modelFM.addRow(v);
         }
         sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
         txtTypeOtherFM.setVisible(false);
@@ -6223,27 +6243,32 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         dsFM = FoodMaterialDAO.getList();
         for(FoodMaterial d:dsFM)
         {
-//            Vector v = new Vector();
-//            v.add(d.getFm_id());
-//            v.add(d.getName());
-//            v.add(d.getInfo());
-//            switch(d.getUsefor())
-//            {
-//                case 0:
-//                    v.add("Uống");
-//                case 1:
-//                    v.add("Ăn");
-//                case 2:
-//                    v.add("Không rõ lượng dùng");
-//                case 3:
-//                    v.add("Khác");
-//            }
+            Vector v = new Vector();
+            v.add(d.getFm_id());
+            v.add(d.getName());
+            v.add(d.getInfo());
+            if(d.getUsefor() == 0)
+            {
+                v.add("Uống");
+            }
+            if(d.getUsefor() == 1)
+            {
+                v.add("Ăn");
+            }
+            if(d.getUsefor() == 2)
+            {
+                v.add("Không rõ lượng dùng");
+            }
+            if(d.getUsefor() == 3)
+            {
+                v.add("Khác");
+            }
 //            v.add(d.getUsefor());
-//            v.add(d.getFmtype());
-//            v.add(d.getUnit_buy());
-//            v.add(d.getStandard_price());
-//            v.add(d.getSupplier());
-            modelFM.addRow(d.toVector());
+            v.add(d.getFmtype());
+            v.add(d.getUnit_buy());
+            v.add(d.getStandard_price());
+            v.add(d.getSupplier());
+            modelFM.addRow(v);
         }
         
         sorterFM = (TableRowSorter<TableModel>) vwFM.getRowSorter();
