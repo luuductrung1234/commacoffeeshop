@@ -24,8 +24,8 @@
 		<groupExpression><![CDATA[$F{isdrink}]]></groupExpression>
 		<groupHeader>
 			<band height="34">
-				<textField>
-					<reportElement mode="Opaque" x="68" y="14" width="117" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="156eecd6-f9e4-452a-a59d-f97e7551fac0"/>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="68" y="14" width="117" height="20" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#006666" uuid="156eecd6-f9e4-452a-a59d-f97e7551fac0"/>
 					<textElement>
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -35,8 +35,9 @@
 		</groupHeader>
 		<groupFooter>
 			<band height="29">
+				<printWhenExpression><![CDATA[$V{foodorderamount} != null && $V{foodorderamount} != 0]]></printWhenExpression>
 				<staticText>
-					<reportElement mode="Opaque" x="270" y="9" width="100" height="20" backcolor="#999900" uuid="b8bb9e68-6e3a-4513-829b-fe578e958290"/>
+					<reportElement mode="Opaque" x="270" y="9" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#999900" uuid="b8bb9e68-6e3a-4513-829b-fe578e958290"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -45,8 +46,8 @@
 				<line>
 					<reportElement x="270" y="8" width="285" height="1" uuid="98cd6838-7487-48a5-87cf-d33fc9970759"/>
 				</line>
-				<textField pattern="##,###,### (VND)">
-					<reportElement x="400" y="9" width="120" height="20" uuid="4168745d-6531-463f-b293-ccb1efba5506"/>
+				<textField pattern="##,###,### (VND)" isBlankWhenNull="true">
+					<reportElement x="400" y="9" width="120" height="20" isRemoveLineWhenBlank="true" uuid="4168745d-6531-463f-b293-ccb1efba5506"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
@@ -99,22 +100,22 @@
 	</columnHeader>
 	<detail>
 		<band height="25" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="185" height="20" uuid="d3cb87a9-e54f-4bb5-be2b-8cce3a126a80"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="185" height="20" isRemoveLineWhenBlank="true" uuid="d3cb87a9-e54f-4bb5-be2b-8cce3a126a80"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{foodname}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="270" y="5" width="130" height="20" uuid="e19550ac-d25c-4b5a-9236-5322dc2fc935"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="5" width="130" height="20" isRemoveLineWhenBlank="true" uuid="e19550ac-d25c-4b5a-9236-5322dc2fc935"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{quan}]]></textFieldExpression>
 			</textField>
-			<textField pattern="##,###,###">
-				<reportElement x="400" y="5" width="120" height="20" uuid="a1de54f9-23c1-4400-acec-0b632984746b"/>
+			<textField pattern="##,###,###" isBlankWhenNull="true">
+				<reportElement x="400" y="5" width="120" height="20" isRemoveLineWhenBlank="true" uuid="a1de54f9-23c1-4400-acec-0b632984746b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="false"/>
 				</textElement>

@@ -162,16 +162,16 @@ public class DiaSwapTable extends javax.swing.JDialog {
             this.parent.setTableCustomerNumber(table2, temp1_cusnumber);
             
             // nếu đã print rồi thì chuyển trạng thái để yêu cầu print lại sau khi swap bàn
-            if(temp1_state == 2){
+            if(this.parent.getTableState(table1) == 2){
                 this.parent.setTableState(table1, 1);
             }
-            if(temp2_state == 2){
+            if(this.parent.getTableState(table2) == 2){
                 this.parent.setTableState(table2, 1);
             }
             
             
             // bản chất là bàn chưa print
-            if(temp1_state != 2){
+            if(this.parent.getTableState(table1) != 2){
                 ImageIcon icon = null;
                 try{
                     Image scaled = ImageIO.read(new File("src/image/table_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);
@@ -181,7 +181,7 @@ public class DiaSwapTable extends javax.swing.JDialog {
                 }
                 this.parent.tablebtn_list.get(table2-1).setIcon(icon);
             }
-            if(temp2_state != 2){
+            if(this.parent.getTableState(table2) != 2){
                 ImageIcon icon = null;
                 try{
                     Image scaled = ImageIO.read(new File("src/image/table_icon.png")).getScaledInstance(90, 50, Image.SCALE_SMOOTH);

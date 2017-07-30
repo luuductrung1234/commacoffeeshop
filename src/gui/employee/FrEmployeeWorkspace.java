@@ -286,6 +286,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         mnEdit = new javax.swing.JMenu();
         mniEndofdayreport = new javax.swing.JMenuItem();
         mniSwapTable = new javax.swing.JMenuItem();
+        mniGeneratePDFBill = new javax.swing.JCheckBoxMenuItem();
         mnSystem = new javax.swing.JMenu();
         miAddemp = new javax.swing.JMenuItem();
         miLogout = new javax.swing.JMenuItem();
@@ -2117,7 +2118,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         });
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel5.setLayout(new java.awt.GridLayout());
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
         btnSavesetting.setBackground(new java.awt.Color(0, 153, 0));
         btnSavesetting.setText("SAVE");
@@ -2647,6 +2648,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         }
         this.mniSwapTable.setIcon(swaptableicon);
 
+        mniGeneratePDFBill.setText("Generate PDF Bill");
+        mnEdit.add(mniGeneratePDFBill);
+
         mnbMain.add(mnEdit);
 
         mnSystem.setText("System");
@@ -2937,6 +2941,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, table, posttext, PrintWithoutDialog.TEMPORARY_PRINT);
             
+            if(this.mniGeneratePDFBill.isSelected()){
+                GenerateOrderReport.generateTemporaryBill(ptext, this.cur_order, this.getTableCustomerNumber(this.cur_table), this.working_emp.size());
+            }
             
             this.setTableState(this.cur_table, 2);
             this.refreshTable();
@@ -2980,6 +2987,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
             
             printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, bartable, posttext, PrintWithoutDialog.KITCHEN_PRINT);
             
+            if(this.mniGeneratePDFBill.isSelected()){
+                GenerateOrderReport.generateKitchenBill(ptext, this.cur_order, this.cur_ordernote, this.getTableCustomerNumber(this.cur_table));
+            }
         }
     }//GEN-LAST:event_btnKitchenPrintActionPerformed
 
@@ -3048,7 +3058,10 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 ArrayList<TableItem> table = this.toPayTable(cur_order);
 
                 PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, table, posttext, PrintWithoutDialog.PAY_PRINT);
-
+                
+                if(this.mniGeneratePDFBill.isSelected()){
+                    GenerateOrderReport.generateReceiptBill(ptext, this.cur_order, this.getTableCustomerNumber(this.cur_table), this.working_emp.size());
+                }
                 
                 // thêm dữ liệu vào database
                 OrderDAO.insert(this.getOrderofTable(this.cur_table));
@@ -3489,6 +3502,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
     private javax.swing.JMenu mnSystem;
     private javax.swing.JMenuBar mnbMain;
     private javax.swing.JMenuItem mniEndofdayreport;
+    private javax.swing.JCheckBoxMenuItem mniGeneratePDFBill;
     private javax.swing.JMenuItem mniSwapTable;
     private javax.swing.JPanel pnBill;
     private javax.swing.JPanel pnBillBlank;

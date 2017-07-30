@@ -31,6 +31,11 @@
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon swaptableicon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/swaptable_icon.png&quot;)).getScaledInstance(20, 20, Image.SCALE_SMOOTH);&#xa;    swaptableicon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.mniSwapTable.setIcon(swaptableicon);"/>
               </AuxValues>
             </MenuItem>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="mniGeneratePDFBill">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Generate PDF Bill"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnSystem">
