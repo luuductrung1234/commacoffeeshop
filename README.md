@@ -59,6 +59,8 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
 	+ ĐẶC BIỆT: phần Salary Note, người được phân công đã không thể hiểu và hoàn thành ở hiện tại. Có lẽ cần phải hướng dẫn lại trong ngày gần nhất có thể. Công việc phần này trước mắt không nhiều nhưng vẫn cần thời gian. Nếu kịp thì có lẽ Đức Anh sẽ làm luôn pần đó để hoàn thành theo đúng tài liệu thiết kế
 	+ **Các phần xóa đã hoàn thành, nhưng sẽ bàn lại sau vì code hiện tại đã xong, chạy ổn, nhưng vẫn phải bàn lại, đặc biệt là Employee. Có thể sẽ sửa đổi trong lần gặp tới. Nếu phần xóa này đã ổn thì phần việc của Admin đã hoàn thành.
 	+ Code các phần hiện tại đã ổn.
+	+ Đã cập nhật các phần có thiết kế thay đổi trong Comma Review(các phần có dấu ** là phần đã update), chúng ta sẽ update review 3, nộp chung với CD và hướng dấn cài đặt vào ngày mai, tiêu đề là "REVIEW 3 Update", cũng in ra 2 bản rồi phải có cả chữ kí của cô nữa.
+	+ Tình hình hiện tại, Đức Anh vẫn chưa thể code được, chỉ làm được review thôi
 
 
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày
