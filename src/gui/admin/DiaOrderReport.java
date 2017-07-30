@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,9 +42,16 @@ import net.sf.jasperreports.swing.JRViewer;
 public class DiaOrderReport extends javax.swing.JDialog {
 
     /** Creates new form DiaOrderReport */
-    public DiaOrderReport(java.awt.Frame parent, boolean modal) {
+    public DiaOrderReport(FrAdminWorkspace parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
+        this.setLocationRelativeTo(this.parent);
+        this.setLocation(300, 150);
+        this.setModal(true);
+        
         initComponents();
+        
+        this.initDefaultConfig();
     }
 
     /** This method is called from within the constructor to
@@ -55,45 +63,166 @@ public class DiaOrderReport extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        btnExportOrder = new javax.swing.JButton();
+        btngStyle = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pnOption = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        rbLongreport = new javax.swing.JRadioButton();
+        rbShortreport = new javax.swing.JRadioButton();
+        pnControl = new javax.swing.JPanel();
+        btnGenerate = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtDatereport = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnExportOrder.setText("Export Order");
-        btnExportOrder.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("REPORT ORDER INFORMATION");
+
+        pnOption.setBackground(new java.awt.Color(153, 153, 153));
+        pnOption.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Option", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 153, 0))); // NOI18N
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Style:");
+
+        btngStyle.add(rbLongreport);
+        rbLongreport.setText("Long report");
+
+        btngStyle.add(rbShortreport);
+        rbShortreport.setText("Shortreport");
+
+        javax.swing.GroupLayout pnOptionLayout = new javax.swing.GroupLayout(pnOption);
+        pnOption.setLayout(pnOptionLayout);
+        pnOptionLayout.setHorizontalGroup(
+            pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnOptionLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(47, 47, 47)
+                .addComponent(rbLongreport)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(rbShortreport)
+                .addGap(24, 24, 24))
+        );
+        pnOptionLayout.setVerticalGroup(
+            pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnOptionLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(pnOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(rbLongreport)
+                    .addComponent(rbShortreport))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        pnControl.setBackground(new java.awt.Color(102, 102, 102));
+        pnControl.setLayout(new java.awt.GridLayout());
+
+        btnGenerate.setBackground(new java.awt.Color(0, 204, 0));
+        btnGenerate.setText("Generate");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportOrderActionPerformed(evt);
+                btnGenerateActionPerformed(evt);
             }
         });
+        pnControl.add(btnGenerate);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(btnExportOrder)
-                .addGap(65, 65, 65))
+        btnCancel.setBackground(new java.awt.Color(153, 153, 0));
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        pnControl.add(btnCancel);
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Date:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDatereport, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExportOrder))
-                .addContainerGap(149, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDatereport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(pnOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExportOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportOrderActionPerformed
-        genarateOrderReportText();
-    }//GEN-LAST:event_btnExportOrderActionPerformed
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
+        // TODO add your handling code here:
+        // kiểm tra và lấy dữ liệu reportday
+        int day, month, year;
+        if(this.txtDatereport.getText().length() != 10){
+            JOptionPane.showMessageDialog(null, "The Day to report is not correct!", "INPUT WARNING", JOptionPane.WARNING_MESSAGE);
+            this.txtDatereport.requestFocus();
+            return;
+        }
+        try{
+            year = Integer.parseInt(this.txtDatereport.getText().substring(0, 4));
+            month = Integer.parseInt(this.txtDatereport.getText().substring(5, 7));
+            day = Integer.parseInt(this.txtDatereport.getText().substring(8, 10));
+            this.dayreport = LocalDate.of(year, month, day);
+        }catch(NumberFormatException ex){
+            ex.getStackTrace();
+            JOptionPane.showMessageDialog(null, "The Day to report is not correct!", "INPUT WARNING", JOptionPane.WARNING_MESSAGE);
+            this.txtDatereport.requestFocus();
+            return;
+        }
+        
+        
+        if(this.rbLongreport.isSelected()){
+            this.generateLongReport();
+        }
+        
+        if(this.rbShortreport.isSelected()){
+            this.generateShortReport();
+        }
+        
+        
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btnGenerateActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,7 +254,7 @@ public class DiaOrderReport extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DiaOrderReport dialog = new DiaOrderReport(new javax.swing.JFrame(), true);
+                DiaOrderReport dialog = new DiaOrderReport(new FrAdminWorkspace(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -138,19 +267,47 @@ public class DiaOrderReport extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnExportOrder;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnGenerate;
+    private javax.swing.ButtonGroup btngStyle;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnControl;
+    private javax.swing.JPanel pnOption;
+    private javax.swing.JRadioButton rbLongreport;
+    private javax.swing.JRadioButton rbShortreport;
+    private javax.swing.JTextField txtDatereport;
     // End of variables declaration//GEN-END:variables
 
+    
+    
+    
+// CUSTOM VARIABLE DECLARATION
+    FrAdminWorkspace parent;
     LocalDate dayreport = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
-//    HashMap<Order, ArrayList<OrderDetails>> dsOOD = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
+    //HashMap<Order, ArrayList<OrderDetails>> dsOOD = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
     List<OrderReport> dsOReport;
     List<OrderDetailsReport> dsODReport;
-    private void genarateOrderReportText() {
+// END CUSTOM VARIABLE DECLARATION
+    
+    
+    
+    
+// CUSTOM CODE
+    private void initDefaultConfig(){
+        this.txtDatereport.setText(dayreport.toString());
+        this.rbLongreport.setSelected(true);
+        this.rbShortreport.setSelected(false);
+    }
+    
+    
+    private void generateLongReport(){
         try{
             List<Map<String, ?>> dataSource = new ArrayList<Map<String, ?>>();
             
-            this.generateOrderReportData(dataSource);
+            this.createLongTableData(dataSource);
             
             // khởi tạo jasperreport datasource
             JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
@@ -163,77 +320,69 @@ public class DiaOrderReport extends javax.swing.JDialog {
             JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
             
             // xuất report trong frame
-            //new DiaShowReport(this.parent, new JRViewer(filledReport), true).setVisible(true);
+            new FrShowReport(new JRViewer(filledReport)).setVisible(true);
             
-            
-            // xuất report ra file pdf
-            /*JasperExportManager.exportReportToPdfFile(filledReport,
-            "C:/csystemreport/eodreport" + this.dayreport.toString() +".pdf");*/
-        } catch (JRException ex) {
+        }catch(JRException ex){
             Logger.getLogger(DiaEndofdayreport.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Somethings went wrong, can not generate the report file", "REPORT WARNNING", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    private void generateOrderReportData(List<Map<String, ?>> dataSource) {
-        for(Order oitem:OrderDAO.getList()){
-            if(oitem.getOrdertime().toLocalDate().isEqual(dayreport))
-            {
-                OrderReport or = new OrderReport();
-                or.setOrder_id(oitem.getOrder_id());
-                for(Customer cusitem:CustomerDAO.getListAll())
-                {
-                    if(oitem.getCus_id().equals(cusitem.getCus_id()))
-                    {
-                        or.setCus_name(cusitem.getName());
-                        or.setDiscount(cusitem.getDiscount());
-                    }
-                }
-                or.setPrice(oitem.getPrice());
-                or.setCustomerpay(oitem.getCustomerpay());
-                or.setPayback(oitem.getPayback());
-                dsOReport.add(or);
-                
-                for(OrderDetails oditem:OrderDetailsDAO.getList())
-                {
-                    if(oditem.getOrder_id().equals(oitem.getOrder_id()))
-                    {
-                        OrderDetailsReport odr = new OrderDetailsReport();
-                        odr.setOrder_id(oditem.getOrder_id());
-                        for(Food food:FoodDAO.getListAll())
-                        {
-                            if(food.getFood_id().equals(oditem.getFood_id()))
-                            {
-                                odr.setFood_name(food.getName());
-                            }
-                        }
-                        odr.setQuan(oditem.getQuan());
-                        dsODReport.add(odr);
-                    }
-                }
-            }
-        }
-        for(OrderReport d:dsOReport)
-        {
-            HashMap<String, Object> genero = new HashMap<String, Object>();
-            genero.put("order_id", d.getOrder_id());
-            genero.put("cus_name", d.getCus_name());
-            genero.put("discount", d.getDiscount());
-            genero.put("price", d.getPrice());
-            genero.put("customerpay", d.getCustomerpay());
-            genero.put("payback", d.getPayback());
-            
-            dataSource.add(genero);
-        }
-        
-        for(OrderDetailsReport d:dsODReport)
-        {
-            HashMap<String, Object> generod = new HashMap<String, Object>();
-            generod.put("food_name", d.getFood_name());
-            generod.put("quan", d.getQuan());
-            
-            dataSource.add(generod);
-        }
+    
+    private void generateShortReport(){
         
     }
+    
+    private void createLongTableData(List<Map<String, ?>> dataSource){
+        HashMap<Order, ArrayList<OrderDetails>> orderlist = OrderDAO.getlist_indate(java.sql.Date.valueOf(this.dayreport));
+        ArrayList<Customer> cuslist = (ArrayList<Customer>) CustomerDAO.getList();
+        ArrayList<Food> foodlist = (ArrayList<Food>) FoodDAO.getList();
+        
+        for(Entry<Order, ArrayList<OrderDetails>> orderitem : orderlist.entrySet()){
+            int discount = 0;
+            String cusname = "";
+            for(Customer cusitem : cuslist){
+                if(cusitem.getCus_id().equals(orderitem.getKey().getCus_id())){
+                    cusname = cusitem.getName();
+                    discount = cusitem.getDiscount();
+                    break;
+                }
+            }
+            
+            HashMap<String, Object> orderrecord = new HashMap<>();
+            orderrecord.put("order_id", orderitem.getKey().getOrder_id());
+            orderrecord.put("cus_name", cusname);
+            orderrecord.put("discount", discount);
+            orderrecord.put("price", (int)(orderitem.getKey().getPrice() * 1000));
+            orderrecord.put("customerpay", (int)(orderitem.getKey().getCustomerpay() * 1000));
+            orderrecord.put("payback", (int)(orderitem.getKey().getPayback() * 1000));
+            
+            dataSource.add(orderrecord);
+            
+            for(OrderDetails detailsitem : orderitem.getValue()){
+                String foodname = "";
+                for(Food fitem : foodlist){
+                    if(fitem.getFood_id().equals(detailsitem.getFood_id())){
+                        foodname = fitem.getName();
+                        break;
+                    }
+                }
+                
+                HashMap<String, Object> detailsrecord = new HashMap<>();
+                detailsrecord.put("order_id", orderitem.getKey().getOrder_id());
+                detailsrecord.put("food_name", foodname);
+                detailsrecord.put("quan", detailsitem.getQuan());
+                
+                dataSource.add(detailsrecord);
+            }
+        }
+        
+        HashMap<String, Object> date = new HashMap<>();
+        date.put("dayreport", this.dayreport.toString());
+        dataSource.add(date);
+    }
+    
+    private void createShortTableData(List<Map<String, ?>> dataSource){
+        
+    }
+// END CUSTOM CODE
 }

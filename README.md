@@ -40,7 +40,7 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
     + đã xong : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc (cần cập nhật thêm)
     + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
     + đã xong : swap/merge table (chức năng swap/merge vẫn trong tình trạng thử nghiệm, có thể sẽ phát sinh lỗi chưa biết trước)
-    + chưa hoàn thành : xuất bill dưới dạng pdf
+    + đã xong : xuất bill dưới dạng pdf (nhưng vẫn ở mức chấp nhận được)
     + chưa hoàn thành : cho phép nhân viên chỉnh sửa trực tiếp quantity trong order form
     + chưa hoàn thành : tách code
     

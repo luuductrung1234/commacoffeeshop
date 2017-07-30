@@ -315,7 +315,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnResetOrderData = new javax.swing.JButton();
         txtTodaySale = new javax.swing.JTextField();
         lbTodaySale = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnExportReportOrder = new javax.swing.JButton();
         pnShowOrder = new javax.swing.JPanel();
         pnvwOrder = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -1071,7 +1071,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnCustomerInformationLayout.createSequentialGroup()
                         .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addComponent(txtDiscountCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCustomerInformationLayout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -1159,7 +1159,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnCustomerFormLayout.setVerticalGroup(
             pnCustomerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCustomerFormLayout.createSequentialGroup()
-                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnCustomerInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1790,7 +1790,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                             .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtStandardPriceFM))
-                        .addGap(0, 25, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         pnFMInformationLayout.setVerticalGroup(
@@ -1877,7 +1877,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnFMFormLayout.setVerticalGroup(
             pnFMFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFMFormLayout.createSequentialGroup()
-                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnFMInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -2068,11 +2068,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         lbTodaySale.setText("Today sale:");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Export Order");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnExportReportOrder.setBackground(new java.awt.Color(255, 255, 255));
+        btnExportReportOrder.setText("Export Order");
+        btnExportReportOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnExportReportOrderActionPerformed(evt);
             }
         });
 
@@ -2092,7 +2092,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtTodaySale, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addComponent(btnExportReportOrder))
         );
         pnOrderSearchLayout.setVerticalGroup(
             pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2101,7 +2101,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(txtTodaySale)
                 .addComponent(lbTodaySale)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnExportReportOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(txtSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -5669,9 +5669,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInsertNewAdActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new DiaOrderReport(null, false).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnExportReportOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportReportOrderActionPerformed
+        new DiaOrderReport(this, false).setVisible(true);
+    }//GEN-LAST:event_btnExportReportOrderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -5720,6 +5720,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteFM;
     private javax.swing.JButton btnDeleteFood;
     private javax.swing.JToggleButton btnEmployee;
+    private javax.swing.JButton btnExportReportOrder;
     private javax.swing.JToggleButton btnFood;
     private javax.swing.JToggleButton btnFoodMaterial;
     private javax.swing.JButton btnInsertCus;
@@ -5768,7 +5769,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboTypeFood;
     private javax.swing.JComboBox<String> cboUnitBuyFM;
     private javax.swing.JComboBox<String> cboUseForFM;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

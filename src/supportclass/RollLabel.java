@@ -19,7 +19,7 @@ public class RollLabel extends JLabel{
     private Timer tm;
     
     private String str_labeltext;
-    private final String str_space = "                       ";
+    private final String str_space = "                               ";
     
     
     public RollLabel() {

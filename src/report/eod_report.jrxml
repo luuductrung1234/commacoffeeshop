@@ -68,6 +68,10 @@
 				</textElement>
 				<text><![CDATA[END OF DAY REPORT]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="523" y="0" width="32" height="34" uuid="04d93c3d-39ff-41f0-9cbc-065b959510b0"/>
+				<imageExpression><![CDATA["C:\\Users\\DELL\\Documents\\NetBeansProjects\\CSystemDemo\\src\\image\\comma_icon.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -108,7 +112,7 @@
 				<textFieldExpression><![CDATA[$F{foodname}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="270" y="5" width="130" height="20" isRemoveLineWhenBlank="true" uuid="e19550ac-d25c-4b5a-9236-5322dc2fc935"/>
+				<reportElement x="270" y="0" width="130" height="20" isRemoveLineWhenBlank="true" uuid="e19550ac-d25c-4b5a-9236-5322dc2fc935"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
