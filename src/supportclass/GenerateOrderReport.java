@@ -46,7 +46,15 @@ public class GenerateOrderReport {
 			// truy xuất và xử lý dữ liệu, đưa vào dataSource
 			createOtherData_TB(ptext, cur_order, cusnumber, empnumber, dataSource);
 			createTableData_TB(ptext, cur_order, dataSource);
-
+                        // tạo parameter cho report
+                        String wifi = "cafe comma1/ cafe comma2";
+                        String password = "123456789";
+                        int price  = (int) (cur_order.getKey().getPrice() * 1000);
+                        Map<String, Object> parameters = new HashMap<>();
+                        parameters.put("price", price);
+                        parameters.put("wifi", wifi);
+                        parameters.put("password", password);
+                        
 
 			// khởi tạo jasperreport dataSource
 			JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
@@ -54,7 +62,7 @@ public class GenerateOrderReport {
 			String filepath = "src/report/TemporaryBill.jrxml";
 			JasperReport report = JasperCompileManager.compileReport(filepath);
 			// nạp dataSource vào report
-			JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
+			JasperPrint filledReport = JasperFillManager.fillReport(report, parameters, jrdata);
 
 			// xuất report trong frame
 			new FrShowReport(new JRViewer(filledReport)).setVisible(true);
@@ -71,7 +79,16 @@ public class GenerateOrderReport {
             // truy xuất và xử lý dữ liệu, đưa vào dataSource
             createOtherData_RB(ptext, cur_order, cusnumber, empnumber, dataSource);
             createTableData_RB(ptext, cur_order, dataSource);
-
+            // tạo parameter cho report
+            String wifi = "cafe comma1/ cafe comma2";
+            String password = "123456789";
+            int customerpay = (int) (cur_order.getKey().getCustomerpay() * 1000);
+            int price  = (int) (cur_order.getKey().getPrice() * 1000);
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("customerpay", customerpay);
+            parameters.put("price", price);
+            parameters.put("wifi", wifi);
+            parameters.put("password", password);
 
             // khởi tạo jasperreport dataSource
             JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
@@ -79,7 +96,7 @@ public class GenerateOrderReport {
             String filepath = "src/report/ReceiptBill.jrxml";
             JasperReport report = JasperCompileManager.compileReport(filepath);
             // nạp dataSource vào report
-            JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
+            JasperPrint filledReport = JasperFillManager.fillReport(report, parameters, jrdata);
 
             // xuất report trong frame
             new FrShowReport(new JRViewer(filledReport)).setVisible(true);
@@ -121,8 +138,6 @@ public class GenerateOrderReport {
         // truy xuất và xử lý dữ liệu
         String address = "653 st.Le Van Luong, w.Tan Phong, d.7";
         String phone = "0862622858";
-        String wifi = "cafe comma1/ cafe comma2";
-        String password = "123456789";
         int table = cur_order.getKey().getOrdertable();
         int customernumber = cusnumber;
         int employeenumber = empnumber;
@@ -141,8 +156,6 @@ public class GenerateOrderReport {
         HashMap<String, Object> calculatefield = new HashMap<String, Object>();
         calculatefield.put("address", address);
         calculatefield.put("phone", phone);
-        calculatefield.put("wifi", wifi);
-        calculatefield.put("password", password);
         calculatefield.put("table", table);
         calculatefield.put("customernumber", customernumber);
         calculatefield.put("employeenumber", employeenumber);
@@ -187,7 +200,7 @@ public class GenerateOrderReport {
             }
         }
         String orderid = cur_order.getKey().getOrder_id();
-        int customerpay = (int) (cur_order.getKey().getCustomerpay() * 1000);
+        //int customerpay = (int) (cur_order.getKey().getCustomerpay() * 1000);
         
         // đưa dữ liệu và dataSource
         HashMap<String, Object> calculatefield = new HashMap<String, Object>();
@@ -200,7 +213,7 @@ public class GenerateOrderReport {
         calculatefield.put("employeenumber", employeenumber);
         calculatefield.put("discount", discount);
         calculatefield.put("orderid", orderid);
-        calculatefield.put("customerpay", customerpay);
+        //calculatefield.put("customerpay", customerpay);
 
         dataSource.add(calculatefield);
     }

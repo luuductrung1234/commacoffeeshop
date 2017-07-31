@@ -98,7 +98,7 @@
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="510" y="0" width="45" height="39" uuid="a1d7a8fd-25f9-4ae5-ba3f-b62d79de1c1e"/>
-				<imageExpression><![CDATA["C:\\Users\\DELL\\Documents\\NetBeansProjects\\CSystemDemo\\src\\image\\comma_icon.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["src\\image\\comma_icon.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

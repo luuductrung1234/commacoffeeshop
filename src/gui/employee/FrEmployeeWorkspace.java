@@ -3059,9 +3059,9 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
 
                 PrintWithoutDialog printer = new PrintWithoutDialog("BIXOLON SRP-350II", boldline, pretext, table, posttext, PrintWithoutDialog.PAY_PRINT);
                 
-                /*if(this.mniGeneratePDFBill.isSelected()){
+                if(this.mniGeneratePDFBill.isSelected()){
                     GenerateOrderReport.generateReceiptBill(ptext, this.cur_order, this.getTableCustomerNumber(this.cur_table), this.working_emp.size());
-                }*/
+                }
                 
                 // thêm dữ liệu vào database
                 OrderDAO.insert(this.getOrderofTable(this.cur_table));

@@ -25,6 +25,10 @@
 				</textElement>
 				<text><![CDATA[END OF DAY REPORT]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="510" y="0" width="45" height="39" uuid="2de4403c-ec7c-43a1-9b72-12ed6d351e72"/>
+				<imageExpression><![CDATA["src\\image\\comma_icon.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

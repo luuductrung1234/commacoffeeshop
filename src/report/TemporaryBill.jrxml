@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="price" class="java.lang.Integer"/>
+	<parameter name="wifi" class="java.lang.String"/>
+	<parameter name="password" class="java.lang.String"/>
 	<field name="address" class="java.lang.String"/>
 	<field name="phone" class="java.lang.String"/>
 	<field name="table" class="java.lang.Integer"/>
@@ -138,8 +141,8 @@
 	<pageHeader>
 		<band height="42" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="226" y="0" width="59" height="35" uuid="66523fc0-acfd-4022-b82c-16ee507bc06d"/>
-				<imageExpression><![CDATA["C:\\Users\\DELL\\Documents\\NetBeansProjects\\CSystemDemo\\src\\image\\comma_icon.jpg"]]></imageExpression>
+				<reportElement x="253" y="0" width="32" height="35" uuid="66523fc0-acfd-4022-b82c-16ee507bc06d"/>
+				<imageExpression><![CDATA["src\\image\\comma_icon.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
@@ -209,18 +212,18 @@
 	<summary>
 		<band height="112" splitType="Stretch">
 			<staticText>
-				<reportElement x="35" y="40" width="223" height="20" uuid="ff3d7ff2-27ed-4fb7-bd37-14b65163e957"/>
+				<reportElement x="35" y="40" width="73" height="20" uuid="ff3d7ff2-27ed-4fb7-bd37-14b65163e957"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Wifi: cafe comma1/ cafe comma2]]></text>
+				<text><![CDATA[Wifi:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="35" y="60" width="223" height="20" uuid="34817c9e-1b90-437e-bf03-efd0047f9ccd"/>
+				<reportElement x="35" y="60" width="73" height="20" uuid="34817c9e-1b90-437e-bf03-efd0047f9ccd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Password:  123456789]]></text>
+				<text><![CDATA[Password: ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="96" y="0" width="100" height="20" uuid="e13ebb35-be99-4163-a234-5581cf2c5767"/>
@@ -230,11 +233,25 @@
 				<text><![CDATA[Total Amount:]]></text>
 			</staticText>
 			<textField pattern="###,###,###">
-				<reportElement x="196" y="0" width="89" height="20" uuid="a801ba32-a2b1-425c-adfe-e1e9d30633b2"/>
+				<reportElement x="196" y="0" width="89" height="20" uuid="8d081205-110e-48a7-8c96-7387acb7c2d0"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="11"/>
+					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{totalamount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="40" width="155" height="20" uuid="16f857e5-4502-4a83-aa65-acb2a5e35ed4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{wifi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="60" width="155" height="20" uuid="093421d3-daf4-4d77-8ca6-045fd4be8bf2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{password}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

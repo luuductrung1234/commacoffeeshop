@@ -23,7 +23,7 @@
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="244" y="0" width="46" height="39" uuid="21786722-8fea-4fbb-ae52-f5d658c98a39"/>
-				<imageExpression><![CDATA["C:\\Users\\DELL\\Documents\\NetBeansProjects\\CSystemDemo\\src\\image\\comma_icon.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["src\\image\\comma_icon.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="13" y="55" width="82" height="20" uuid="78642959-e291-4347-980d-e8895bf6c147"/>
