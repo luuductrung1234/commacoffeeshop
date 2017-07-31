@@ -16,6 +16,7 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
  - file "nn" là file rỗng, bù nhìn, giúp giữ cho folder tồn tại khi mà folder không chưa file nào khác
  - Nếu bạn tham gia phát triển cùng chúng tôi xin hãy xem kĩ phần code style requirement
  - Khi clone project về máy, lấy code dữ liệu từ folder chứa source code "src" và link các thư viện "java" (jdk) và "lib" vào project
+ - Phần precession trong readme.md dùng để báo cáo tiến độ phát triển, do các thành phiên được phân chia để code và cập nhật các trạng thái mới nhất của project (có thể báo các phần đã xong, chưa hoàn thành, gặp khó khăn, yêu cầu bàn luận giúp đỡ, lỗi, vướng mắt,.....). Các phần phân công được chia ra rõ ràng vì vậy khi cập nhật tiến trình cho phần nào thì chỉ viết nội dung liên quan đến phần đó, nếu ngoài lề sẽ bị xoá
 
 
 # Project's procession:
@@ -40,7 +41,7 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
     + đã xong : In report (theo dạng tài liệu pdf hoặc dạng hoá đơn liệt kê) sau một ngày làm việc (cần cập nhật thêm)
     + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
     + đã xong : swap/merge table (chức năng swap/merge vẫn trong tình trạng thử nghiệm, có thể sẽ phát sinh lỗi chưa biết trước)
-    + đã xong : xuất bill dưới dạng pdf (nhưng vẫn ở mức chấp nhận được)
+    + đã xong : xuất bill dưới dạng pdf
     + chưa hoàn thành : cho phép nhân viên chỉnh sửa trực tiếp quantity trong order form
     + chưa hoàn thành : tách code
     
@@ -49,18 +50,17 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
 
   - **FrAdminWorkspace**:
   	+ đã xong : Employee information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
-  	+ ? : Salary Note information form (giao diện/xem/xoá**/sửa thông tin)
   	+ đã xong : Customer information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Food information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Food Materials information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Order information form (giao diện/xem/tìm kiếm(theo ngày, ?))
   	+ đã xong : Admin profile information form (giao diện/xem/sửa thông tin) _ không có quyền xóa bất kì admin nào
-  	+ ?(sẽ phát triển sau khi đã hoàn thành các phần khác) : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
-	+ ĐẶC BIỆT: phần Salary Note, người được phân công đã không thể hiểu và hoàn thành ở hiện tại. Có lẽ cần phải hướng dẫn lại trong ngày gần nhất có thể. Công việc phần này trước mắt không nhiều nhưng vẫn cần thời gian. Nếu kịp thì có lẽ Đức Anh sẽ làm luôn pần đó để hoàn thành theo đúng tài liệu thiết kế
+
+  	+ chưa hoàn thành : Salary Note information form (giao diện/xem/xoá**/sửa thông tin)
+  	+ chưa hoàn thành : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
 	+ **Các phần xóa đã hoàn thành, nhưng sẽ bàn lại sau vì code hiện tại đã xong, chạy ổn, nhưng vẫn phải bàn lại, đặc biệt là Employee. Có thể sẽ sửa đổi trong lần gặp tới. Nếu phần xóa này đã ổn thì phần việc của Admin đã hoàn thành.
-	+ Code các phần hiện tại đã ổn.
-	+ Đã cập nhật các phần có thiết kế thay đổi trong Comma Review(các phần có dấu ** là phần đã update), chúng ta sẽ update review 3, nộp chung với CD và hướng dấn cài đặt vào ngày mai, tiêu đề là "REVIEW 3 Update", cũng in ra 2 bản rồi phải có cả chữ kí của cô nữa.
-	+ Tình hình hiện tại, Đức Anh vẫn chưa thể code được, chỉ làm được review thôi
+	+ Đã cập nhật các phần có thiết kế thay đổi trong file Comma Review(các phần có dấu ** là phần đã update)
+	+ chưa hoàn thành : xuất report cho dữ liệu order/order details, receiptnote/receiptnote details
 
 
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày
