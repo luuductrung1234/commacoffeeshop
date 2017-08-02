@@ -288,8 +288,6 @@ public class DiaOrderReport extends javax.swing.JDialog {
     FrAdminWorkspace parent;
     LocalDate dayreport = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
     //HashMap<Order, ArrayList<OrderDetails>> dsOOD = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
-    List<OrderReport> dsOReport;
-    List<OrderDetailsReport> dsODReport;
 // END CUSTOM VARIABLE DECLARATION
     
     
@@ -329,7 +327,32 @@ public class DiaOrderReport extends javax.swing.JDialog {
     }
     
     private void generateShortReport(){
-        
+        try{
+            List<Map<String, ?>> dataSource = new ArrayList<Map<String, ?>>();
+            
+            this.createShortTableData(dataSource);
+            
+            // khởi tạo jasperreport datasource  (dữ liệu cho bảng)
+            JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
+            String reportlink = "src/report/shortorderreport.jrxml";
+            
+            // khởi tạo jasperreport parameter (dữ liệu từ chương trình, và không reset trong report)
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("dayreport", this.dayreport.toString());
+            
+            // biên dịch tập tin jasperreport xml đã được thiết kết trước
+            JasperReport report = JasperCompileManager.compileReport(reportlink);
+            
+            // nạp dữ liệu vào tập tin jasperreport xml
+            JasperPrint filledReport = JasperFillManager.fillReport(report, parameters, jrdata);
+            
+            // xuất report trong frame
+            new FrShowReport(new JRViewer(filledReport)).setVisible(true);
+            
+        }catch(JRException ex){
+            Logger.getLogger(DiaEndofdayreport.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Somethings went wrong, can not generate the report file", "REPORT WARNNING", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void createLongTableData(List<Map<String, ?>> dataSource){
@@ -382,7 +405,30 @@ public class DiaOrderReport extends javax.swing.JDialog {
     }
     
     private void createShortTableData(List<Map<String, ?>> dataSource){
+        HashMap<Order, ArrayList<OrderDetails>> orderlist = OrderDAO.getlist_indate(java.sql.Date.valueOf(this.dayreport));
+        ArrayList<Customer> cuslist = (ArrayList<Customer>) CustomerDAO.getList();
         
+        for(Entry<Order, ArrayList<OrderDetails>> orderitem : orderlist.entrySet()){
+            int discount = 0;
+            String cusname = "";
+            for(Customer cusitem : cuslist){
+                if(cusitem.getCus_id().equals(orderitem.getKey().getCus_id())){
+                    cusname = cusitem.getName();
+                    discount = cusitem.getDiscount();
+                    break;
+                }
+            }
+            
+            HashMap<String, Object> orderrecord = new HashMap<>();
+            orderrecord.put("orderid", orderitem.getKey().getOrder_id());
+            orderrecord.put("customername", cusname);
+            orderrecord.put("discount", discount);
+            orderrecord.put("price", (int)(orderitem.getKey().getPrice() * 1000));
+            orderrecord.put("customerpay", (int)(orderitem.getKey().getCustomerpay() * 1000));
+            orderrecord.put("payback", (int)(orderitem.getKey().getPayback() * 1000));
+            
+            dataSource.add(orderrecord);
+        }
     }
 // END CUSTOM CODE
 }

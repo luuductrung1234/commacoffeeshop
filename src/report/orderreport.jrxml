@@ -13,75 +13,138 @@
 	<field name="quan" class="java.lang.Integer"/>
 	<field name="dayreport" class="java.lang.String"/>
 	<variable name="ordernumber" class="java.lang.Integer" calculation="Count">
-		<variableExpression><![CDATA[$F{order_id}]]></variableExpression>
+		<variableExpression><![CDATA[$F{price}]]></variableExpression>
 	</variable>
 	<variable name="totalamount" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{price}]]></variableExpression>
 	</variable>
 	<group name="orderid">
-		<groupExpression><![CDATA[$V{PAGE_NUMBER}]]></groupExpression>
+		<groupExpression><![CDATA[$F{order_id}]]></groupExpression>
 		<groupHeader>
-			<band height="51">
+			<band height="83">
 				<textField isBlankWhenNull="true">
-					<reportElement x="0" y="0" width="124" height="20" isRemoveLineWhenBlank="true" uuid="a2f03b26-81cd-4aff-8552-f25cee68afed"/>
+					<reportElement x="0" y="23" width="101" height="20" isRemoveLineWhenBlank="true" uuid="6df32444-545f-4d4c-bcae-7d07d81f8b3b"/>
 					<textElement>
-						<font size="14"/>
+						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{order_id}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="124" y="0" width="146" height="20" isRemoveLineWhenBlank="true" uuid="d07cd07e-ad6c-4aa6-9a40-b53600896b0e"/>
+					<reportElement x="101" y="23" width="137" height="20" isRemoveLineWhenBlank="true" uuid="31da94be-0b71-4436-a1e2-e0036f840e92"/>
 					<textElement>
-						<font size="14"/>
+						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cus_name}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="270" y="0" width="62" height="20" isRemoveLineWhenBlank="true" uuid="2db27e61-9a5a-41d5-a6d2-560ed32f869a"/>
+					<reportElement x="244" y="23" width="65" height="20" isRemoveLineWhenBlank="true" uuid="69483e94-e356-400d-8965-687a2dc4a281"/>
 					<textElement>
-						<font size="14"/>
+						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{discount}]]></textFieldExpression>
 				</textField>
 				<textField pattern="###,###,###" isBlankWhenNull="true">
-					<reportElement x="335" y="0" width="65" height="20" isRemoveLineWhenBlank="true" uuid="24046322-45ad-47b1-9dca-94a87ef93cdc"/>
+					<reportElement x="319" y="23" width="65" height="20" isRemoveLineWhenBlank="true" uuid="a777895f-b5c1-4d9c-8e17-47a6228d88aa"/>
 					<textElement>
-						<font size="14"/>
+						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
 				</textField>
 				<textField pattern="###,###,###" isBlankWhenNull="true">
-					<reportElement x="500" y="0" width="55" height="20" isRemoveLineWhenBlank="true" uuid="46d5405f-a587-452c-8345-5eba3e2b3339"/>
+					<reportElement x="400" y="23" width="84" height="20" isRemoveLineWhenBlank="true" uuid="a1bdac51-3835-4c6d-bb2f-ff0b6e32e2ac"/>
 					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{payback}]]></textFieldExpression>
-				</textField>
-				<textField pattern="###,###,###" isBlankWhenNull="true">
-					<reportElement x="400" y="0" width="100" height="20" isRemoveLineWhenBlank="true" uuid="b64807e2-da22-48ca-a7cf-9cf6bc23bf7d"/>
-					<textElement>
-						<font size="14"/>
+						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{customerpay}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement x="270" y="27" width="146" height="20" uuid="64bd7fc2-bfba-431f-9c5e-170acc6a9c3f"/>
+				<textField pattern="###,###,###" isBlankWhenNull="true">
+					<reportElement x="500" y="23" width="55" height="20" isRemoveLineWhenBlank="true" uuid="50da8d08-2488-499c-bfba-2883328a83a3"/>
 					<textElement>
-						<font size="14" isBold="true"/>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{payback}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="254" y="63" width="146" height="20" isRemoveLineWhenBlank="true" uuid="324e4ea1-9f18-4e96-a798-d7de0f313c33">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="14" isBold="true" isItalic="false"/>
 					</textElement>
 					<text><![CDATA[Food Name]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="416" y="27" width="120" height="20" uuid="e3f10377-4248-4178-b32e-35c6555d2adf"/>
+					<reportElement x="416" y="63" width="120" height="20" isRemoveLineWhenBlank="true" uuid="32140609-72ef-45b5-89cc-9fd1170b0bdd">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
 					<textElement>
 						<font size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Quantity]]></text>
 				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="101" height="23" isRemoveLineWhenBlank="true" uuid="dea78a31-34fc-4da5-92ea-0bd2fb974d2a">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement markup="none">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Order ID]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="0" width="137" height="23" isRemoveLineWhenBlank="true" uuid="61d4f55f-a0fd-4305-b7e6-0ada5aa41d3e">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Customer Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="244" y="0" width="65" height="23" isRemoveLineWhenBlank="true" uuid="df60d7eb-007f-40ee-8c94-48f33e2e8fff">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Discount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="319" y="0" width="65" height="23" isRemoveLineWhenBlank="true" uuid="9acc8ef6-0d11-428c-8de6-a41e0dffbb5d">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="400" y="0" width="84" height="23" isRemoveLineWhenBlank="true" uuid="df1813bd-3b36-4354-a6dd-3064f1cffbbf">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Due Pay]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="500" y="0" width="55" height="23" isRemoveLineWhenBlank="true" uuid="8f57e52f-74df-43ad-9804-a8ca22d44e90">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Change]]></text>
+				</staticText>
+				<line>
+					<reportElement x="238" y="57" width="317" height="1" uuid="d1aa2fe3-4c5f-4806-bff3-2b1219b55443">
+						<printWhenExpression><![CDATA[$F{order_id} != null && $F{order_id}.length() != 0]]></printWhenExpression>
+					</reportElement>
+				</line>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="25"/>
+			<band height="32"/>
 		</groupFooter>
 	</group>
 	<background>
@@ -106,72 +169,26 @@
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="23" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="124" height="23" uuid="dea78a31-34fc-4da5-92ea-0bd2fb974d2a"/>
-				<textElement markup="none">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Order ID]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="124" y="0" width="146" height="23" uuid="61d4f55f-a0fd-4305-b7e6-0ada5aa41d3e"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Customer Name]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="270" y="0" width="65" height="23" uuid="df60d7eb-007f-40ee-8c94-48f33e2e8fff"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Discount]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="335" y="0" width="65" height="23" uuid="9acc8ef6-0d11-428c-8de6-a41e0dffbb5d"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Amount]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="400" y="0" width="100" height="23" uuid="df1813bd-3b36-4354-a6dd-3064f1cffbbf"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Customer Pay]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="500" y="0" width="55" height="23" uuid="8f57e52f-74df-43ad-9804-a8ca22d44e90"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Change]]></text>
-			</staticText>
-		</band>
+		<band height="1" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="26" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="270" y="0" width="146" height="20" isRemoveLineWhenBlank="true" uuid="24915dc1-c324-4b19-a9f1-44c0188b3112"/>
+				<reportElement x="254" y="5" width="146" height="20" isRemoveLineWhenBlank="true" uuid="24915dc1-c324-4b19-a9f1-44c0188b3112"/>
 				<textElement>
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{food_name}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="416" y="0" width="120" height="20" isRemoveLineWhenBlank="true" uuid="c081968b-6025-435b-b0d4-754b632f7393"/>
+				<reportElement x="416" y="5" width="120" height="20" isRemoveLineWhenBlank="true" uuid="c081968b-6025-435b-b0d4-754b632f7393"/>
 				<textElement>
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{quan}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="19" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="21" splitType="Stretch">
 			<textField>

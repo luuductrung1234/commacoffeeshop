@@ -238,7 +238,7 @@ insert into tbCustomer values
 ('CUS0000014', N'Hà Nguyễn Nhật Minh',	'',		'',		20, 0),
 ('CUS0000015', N'Phan Hữu Tiến',		'',		'',		20, 0),
 ('CUS0000016', N'Ngô Thanh Hiếu',		'',		'',		20, 0),
-('CUS0000017', N'Normal customer',		'',		'',		0, 0)
+('CUS0000017', N'Guest',		'',		'',		0, 0)
 go
 
 
