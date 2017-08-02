@@ -55,12 +55,13 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
   	+ đã xong : Food Materials information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Order information form (giao diện/xem/tìm kiếm(theo ngày, ?))
   	+ đã xong : Admin profile information form (giao diện/xem/sửa thông tin) _ không có quyền xóa bất kì admin nào
+  	+ đã xong :  xuất report cho dữ liệu order/order details
 
   	+ chưa hoàn thành : Salary Note information form (giao diện/xem/xoá**/sửa thông tin)
   	+ chưa hoàn thành : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
 	+ **Các phần xóa đã hoàn thành, nhưng sẽ bàn lại sau vì code hiện tại đã xong, chạy ổn, nhưng vẫn phải bàn lại, đặc biệt là Employee. Có thể sẽ sửa đổi trong lần gặp tới. Nếu phần xóa này đã ổn thì phần việc của Admin đã hoàn thành.
 	+ Đã cập nhật các phần có thiết kế thay đổi trong file Comma Review(các phần có dấu ** là phần đã update)
-	+ chưa hoàn thành : xuất report cho dữ liệu order/order details, receiptnote/receiptnote details
+	+ chưa hoàn thành : xuất report cho dữ liệu receiptnote/receiptnote details
 
 
 (*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày
