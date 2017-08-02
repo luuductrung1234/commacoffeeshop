@@ -42,11 +42,12 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
     + đã xong : thêm chức năng lưu nhật kí phòng trường hợp chương trình bị đóng đột ngột (Nhưng lưu thông tin nhân viên thì chưa khả thi)
     + đã xong : swap/merge table (chức năng swap/merge vẫn trong tình trạng thử nghiệm, có thể sẽ phát sinh lỗi chưa biết trước)
     + đã xong : xuất bill dưới dạng pdf
+    + chưa hoàn thành : cho phép chia bill ra để thanh toán theo từng đợt
     + chưa hoàn thành : cho phép nhân viên chỉnh sửa trực tiếp quantity trong order form
     + chưa hoàn thành : tách code
     
 
-(*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc, thêm chức năng gửi nhận tin nhắn qua mạng internet
+(*) dự kiến : sẽ thêm chức năng Internationalization (cho ngôn ngữ Anh, Việt, Hàn), tạo hiệu ứng annimation trong quá trình chờ load chương trình (bằng processing). Bổ sung thông tin khách hàng, thêm chức năng xuất thông tin và hình ảnh nhận diện khách hàng quen thuộc, khi xuất danh sách khách hàng cho nhân viên xem có thể sort theo số lần khách hàng đã đến quán, thêm chức năng gửi nhận tin nhắn qua mạng internet
 
   - **FrAdminWorkspace**:
   	+ đã xong : Employee information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
@@ -64,7 +65,7 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
 	+ chưa hoàn thành : xuất report cho dữ liệu receiptnote/receiptnote details
 
 
-(*)  - FrAudit dùng để thực hiện các chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). Có chức năng xuất 1 report cuối ngày list ra tất cả các món với số lượng đã được bán trong ngày
+(*) dự kiến : Chức năng cho phép admin thêm lịch làm việc cho nhân viên hằng tuần, và nhân viên chỉ có thể login trong khung giờ mà admin đã sắp xếp (nếu login trễ hơn tức là đã đi làm trễ, logout sớm hơn giờ đã định => thông báo cho admin, trừ lương). Chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). 
 
 (*) dự kiến: chuyển tất cả các swing frame thành javafx để tăng độ thẩm mĩ
 
@@ -81,8 +82,3 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
 # Admin Workspace Frame  
   ![alt text](https://github.com/luuductrung1234/commacoffeeshop/blob/master/repo%20picture/admin_workspace.png)
   
-  
-# Audit Frame
-  ---update soon---
-  
-  ![alt text]()
