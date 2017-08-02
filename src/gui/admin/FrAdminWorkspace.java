@@ -161,6 +161,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnScheNext = new javax.swing.JButton();
         txtvwMonth = new javax.swing.JTextField();
         btnSearchEmpSche = new javax.swing.JButton();
+        btnExportReportSalaryNote = new javax.swing.JButton();
+        btnShowChartSalaryNote = new javax.swing.JButton();
         pnvwNote = new javax.swing.JPanel();
         pnvwEmpSche = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -316,6 +318,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtTodaySale = new javax.swing.JTextField();
         lbTodaySale = new javax.swing.JLabel();
         btnExportReportOrder = new javax.swing.JButton();
+        btnShowChartOrder = new javax.swing.JButton();
         pnShowOrder = new javax.swing.JPanel();
         pnvwOrder = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -742,6 +745,21 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
         });
 
+        btnExportReportSalaryNote.setBackground(new java.awt.Color(255, 255, 255));
+        btnExportReportSalaryNote.setText("Export");
+        btnExportReportSalaryNote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportReportSalaryNoteActionPerformed(evt);
+            }
+        });
+
+        btnShowChartSalaryNote.setText("Show Chart");
+        btnShowChartSalaryNote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowChartSalaryNoteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnSalarySearchLayout = new javax.swing.GroupLayout(pnSalarySearch);
         pnSalarySearch.setLayout(pnSalarySearchLayout);
         pnSalarySearchLayout.setHorizontalGroup(
@@ -756,7 +774,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(btnScheNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(682, 682, 682))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 513, Short.MAX_VALUE)
+                .addComponent(btnShowChartSalaryNote)
+                .addGap(18, 18, 18)
+                .addComponent(btnExportReportSalaryNote)
+                .addContainerGap())
         );
         pnSalarySearchLayout.setVerticalGroup(
             pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -766,9 +788,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtvwMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnSalarySearchLayout.createSequentialGroup()
-                .addComponent(cboEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(cboEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnExportReportSalaryNote)
+                .addComponent(btnShowChartSalaryNote))
         );
 
         pnShowSalary.add(pnSalarySearch, java.awt.BorderLayout.PAGE_START);
@@ -823,7 +846,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwEmpScheLayout.setVerticalGroup(
             pnvwEmpScheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
         );
 
         pnvwNote.add(pnvwEmpSche);
@@ -925,7 +948,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnvwSalaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(txtIsPaidSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(pnSalaryControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -2033,7 +2056,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnReceiptNoteDetails.setLayout(pnReceiptNoteDetailsLayout);
         pnReceiptNoteDetailsLayout.setHorizontalGroup(
             pnReceiptNoteDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
         );
         pnReceiptNoteDetailsLayout.setVerticalGroup(
             pnReceiptNoteDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2069,10 +2092,17 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         lbTodaySale.setText("Today sale:");
 
         btnExportReportOrder.setBackground(new java.awt.Color(255, 255, 255));
-        btnExportReportOrder.setText("Export Order");
+        btnExportReportOrder.setText("Export");
         btnExportReportOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExportReportOrderActionPerformed(evt);
+            }
+        });
+
+        btnShowChartOrder.setText("Show Chart");
+        btnShowChartOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowChartOrderActionPerformed(evt);
             }
         });
 
@@ -2091,8 +2121,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(lbTodaySale)
                 .addGap(18, 18, 18)
                 .addComponent(txtTodaySale, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                .addComponent(btnExportReportOrder))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addComponent(btnShowChartOrder)
+                .addGap(18, 18, 18)
+                .addComponent(btnExportReportOrder)
+                .addContainerGap())
         );
         pnOrderSearchLayout.setVerticalGroup(
             pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2101,7 +2134,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(txtTodaySale)
                 .addComponent(lbTodaySale)
-                .addComponent(btnExportReportOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnExportReportOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnShowChartOrder))
             .addComponent(txtSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -2161,7 +2195,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwOrderLayout.setVerticalGroup(
             pnvwOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOrder);
@@ -2214,7 +2248,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwODLayout.setVerticalGroup(
             pnvwODLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOD);
@@ -5670,8 +5704,21 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsertNewAdActionPerformed
 
     private void btnExportReportOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportReportOrderActionPerformed
-        new DiaOrderReport(this, false).setVisible(true);
+        new DiaOrderReport(this, true).setVisible(true);
     }//GEN-LAST:event_btnExportReportOrderActionPerformed
+
+    private void btnExportReportSalaryNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportReportSalaryNoteActionPerformed
+        // TODO add your handling code here:
+        new DiaSalaryNoteReport(this, true).setVisible(true);
+    }//GEN-LAST:event_btnExportReportSalaryNoteActionPerformed
+
+    private void btnShowChartSalaryNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartSalaryNoteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnShowChartSalaryNoteActionPerformed
+
+    private void btnShowChartOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartOrderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnShowChartOrderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -5721,6 +5768,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteFood;
     private javax.swing.JToggleButton btnEmployee;
     private javax.swing.JButton btnExportReportOrder;
+    private javax.swing.JButton btnExportReportSalaryNote;
     private javax.swing.JToggleButton btnFood;
     private javax.swing.JToggleButton btnFoodMaterial;
     private javax.swing.JButton btnInsertCus;
@@ -5754,6 +5802,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchFoodName;
     private javax.swing.JButton btnSearchOrderTime;
     private javax.swing.JButton btnSearchReceiptTime;
+    private javax.swing.JButton btnShowChartOrder;
+    private javax.swing.JButton btnShowChartSalaryNote;
     private javax.swing.JButton btnUpdateAd;
     private javax.swing.JButton btnUpdateCus;
     private javax.swing.JButton btnUpdateEmp;

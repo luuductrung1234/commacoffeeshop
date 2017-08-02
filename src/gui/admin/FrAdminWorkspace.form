@@ -760,7 +760,11 @@
                               <Component id="btnScheNext" min="-2" pref="50" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnSearchEmpSche" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="682" max="-2" attributes="0"/>
+                              <EmptySpace pref="513" max="32767" attributes="0"/>
+                              <Component id="btnShowChartSalaryNote" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnExportReportSalaryNote" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -773,9 +777,10 @@
                               <Component id="txtvwMonth" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="btnSearchEmpSche" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="cboEmployee" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="cboEmployee" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="btnExportReportSalaryNote" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnShowChartSalaryNote" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -825,6 +830,25 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchEmpScheActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JButton" name="btnExportReportSalaryNote">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Export"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportReportSalaryNoteActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnShowChartSalaryNote">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Show Chart"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowChartSalaryNoteActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="pnvwNote">
@@ -857,7 +881,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane10" alignment="0" pref="485" max="32767" attributes="0"/>
+                              <Component id="jScrollPane10" alignment="0" pref="475" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -1037,7 +1061,7 @@
                                       <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtIsPaidSalary" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="140" max="32767" attributes="0"/>
+                                  <EmptySpace pref="85" max="32767" attributes="0"/>
                                   <Component id="pnSalaryControl" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2870,7 +2894,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane9" alignment="0" pref="558" max="32767" attributes="0"/>
+                          <Component id="jScrollPane9" alignment="0" pref="572" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -2979,8 +3003,11 @@
                           <Component id="lbTodaySale" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="txtTodaySale" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace pref="181" max="32767" attributes="0"/>
+                          <EmptySpace pref="104" max="32767" attributes="0"/>
+                          <Component id="btnShowChartOrder" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnExportReportOrder" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2992,6 +3019,7 @@
                           <Component id="txtTodaySale" alignment="3" max="32767" attributes="0"/>
                           <Component id="lbTodaySale" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnExportReportOrder" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btnShowChartOrder" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtSearchOrderTime" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -3039,10 +3067,18 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Export Order"/>
+                    <Property name="text" type="java.lang.String" value="Export"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportReportOrderActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnShowChartOrder">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Show Chart"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowChartOrderActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -3076,7 +3112,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane6" alignment="1" pref="474" max="32767" attributes="0"/>
+                          <Component id="jScrollPane6" alignment="1" pref="473" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -3181,7 +3217,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane7" alignment="0" pref="474" max="32767" attributes="0"/>
+                          <Component id="jScrollPane7" alignment="0" pref="473" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>

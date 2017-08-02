@@ -52,3 +52,16 @@ go
 
 select * from tbFood
 go
+
+
+select * from tbEmpSchedule
+where workday = '2017-07-31'
+go
+
+select * from tbSalaryNote
+where for_month = 7 and for_year = 2017
+go
+
+select * from tbSalaryNote
+where em_id = 'EM00000001' and for_year = 2017
+go

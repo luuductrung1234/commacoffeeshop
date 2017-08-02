@@ -287,7 +287,7 @@ public class DiaOrderReport extends javax.swing.JDialog {
 // CUSTOM VARIABLE DECLARATION
     FrAdminWorkspace parent;
     LocalDate dayreport = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
-    //HashMap<Order, ArrayList<OrderDetails>> dsOOD = OrderDAO.getlist_indate(java.sql.Date.valueOf(dayreport));
+    
 // END CUSTOM VARIABLE DECLARATION
     
     

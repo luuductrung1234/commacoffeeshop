@@ -5,15 +5,11 @@ custard bread tower
 choco muffin
 apple muffin
 banana cake
-carrot cake
 french fries
 french toast
-tiramisu cake
 cheese hotdog
-cereal & milk
 honey butter bread
 pumpkin soup
-chilli fries
 tortillas nachos
 chicken melt
 comma's club
@@ -58,5 +54,9 @@ pepsi
 7up
 matcha latte
 greentea muffin
+carrot cake
+tiramisu cake
+cereal & milk
+chilli fries
 -
 -
