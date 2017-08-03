@@ -18,11 +18,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import model.EmpScheduleDAO;
+import model.EmployeeDAO;
 import model.SalaryNoteDAO;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -252,6 +254,8 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
             case 2:
                 this.generateDayReport();
                 break;
+            default:
+                break;
         }
         
         
@@ -278,6 +282,8 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
             
             this.cbDayReport.setSelected(false);
             this.cbMonthReport.setSelected(false);
+            
+            this.reportMode = NONREPORT_MODE;
         }
     }//GEN-LAST:event_cbYearReportActionPerformed
 
@@ -295,6 +301,8 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
             this.txtDayReport.setEditable(false);
             
             this.cbDayReport.setSelected(false);
+            
+            this.reportMode = YEARREPORT_MODE;
         }
     }//GEN-LAST:event_cbMonthReportActionPerformed
 
@@ -313,6 +321,8 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
             this.txtDayReport.setEditable(false);
             
             this.txtDayReport.setEditable(false);
+            
+            this.reportMode = MONTHREPORT_MODE;
         }
     }//GEN-LAST:event_cbDayReportActionPerformed
 
@@ -386,6 +396,7 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
     static int YEARREPORT_MODE = 0;
     static int MONTHREPORT_MODE = 1;
     static int DAYREPORT_MODE = 2;
+    static int NONREPORT_MODE = 3;
     int reportMode;
 // END CUSTOM VARIABLE DECLARATION
 
@@ -407,7 +418,7 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
         this.txtYearReport.setEditable(true);
         
         // mặc định report theo ngày
-        this.reportMode = 1;
+        this.reportMode = 2;
     }
     
     private void generateDayReport(){
@@ -420,11 +431,15 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
             JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
             String reportlink = "src/report/daysalaryreport.jrxml";
             
+            //khởi tạo jasperreport parameter
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("forday", this.dayreport.toString());
+            
             // biên dịch tập tin jasperreport xml đã được thiết kết trước
             JasperReport report = JasperCompileManager.compileReport(reportlink);
             
             // nạp dữ liệu vào tập tin jasperreport xml
-            JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
+            JasperPrint filledReport = JasperFillManager.fillReport(report, parameters, jrdata);
             
             // xuất report trong frame
             new FrShowReport(new JRViewer(filledReport)).setVisible(true);
@@ -445,11 +460,15 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
             JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
             String reportlink = "src/report/monthsalaryreport.jrxml";
             
+            // khởi tạo jasperreport parameters
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("formonth", String.valueOf(this.dayreport.getYear()) + "-" + this.dayreport.getMonth());
+            
             // biên dịch tập tin jasperreport xml đã được thiết kết trước
             JasperReport report = JasperCompileManager.compileReport(reportlink);
             
             // nạp dữ liệu vào tập tin jasperreport xml
-            JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
+            JasperPrint filledReport = JasperFillManager.fillReport(report, parameters, jrdata);
             
             // xuất report trong frame
             new FrShowReport(new JRViewer(filledReport)).setVisible(true);
@@ -471,11 +490,15 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
             JRDataSource jrdata = new JRBeanCollectionDataSource(dataSource);
             String reportlink = "src/report/yearsalaryreport.jrxml";
             
+            // khởi tạo jasperreport parameters
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("foryear", this.dayreport.getYear());
+            
             // biên dịch tập tin jasperreport xml đã được thiết kết trước
             JasperReport report = JasperCompileManager.compileReport(reportlink);
             
             // nạp dữ liệu vào tập tin jasperreport xml
-            JasperPrint filledReport = JasperFillManager.fillReport(report, null, jrdata);
+            JasperPrint filledReport = JasperFillManager.fillReport(report, parameters, jrdata);
             
             // xuất report trong frame
             new FrShowReport(new JRViewer(filledReport)).setVisible(true);
@@ -491,24 +514,90 @@ public class DiaSalaryNoteReport extends javax.swing.JDialog {
     
     private void createDayTableData(List<Map<String, ?>> dataSource){
         ArrayList<EmpSchedule> daydata = (ArrayList<EmpSchedule>) EmpScheduleDAO.getlist_inday(java.sql.Date.valueOf(this.dayreport));
+        ArrayList<Employee> emplist = (ArrayList<Employee>) EmployeeDAO.getList();
         
-        
+        for(EmpSchedule iter : daydata){
+            String employeename = "";
+            int hourwage = 0;
+            for(Employee empiter : emplist){
+                if(empiter.getEm_id().equals(iter.getEm_id())){
+                    employeename = empiter.getName();
+                    hourwage = empiter.getHour_wage();
+                    break;
+                }
+            }
+            
+            HashMap<String, Object> newrecord = new HashMap<>();
+            newrecord.put("sche_id", iter.getSche_id());
+            newrecord.put("employeename", employeename);
+            newrecord.put("workday", iter.getWorkday().toString());
+            newrecord.put("starthour", iter.getStarthour());
+            newrecord.put("startminute", iter.getStartminute());
+            newrecord.put("endhour", iter.getEndhour());
+            newrecord.put("endminute", iter.getEndminute());
+            newrecord.put("empid", iter.getEm_id());
+            newrecord.put("empwage", hourwage);
+            float workhour = (iter.getEndhour() - iter.getStarthour()) + (iter.getEndminute() - iter.getStartminute())/(float)(60);
+            float salary = workhour * hourwage * 1000;
+            newrecord.put("workhour", workhour);
+            newrecord.put("salary", salary);
+            
+            dataSource.add(newrecord);
+        }
     }
     
     
     
     private void createMonthTableData(List<Map<String, ?>> dataSource){
         ArrayList<SalaryNote> monthdata = (ArrayList<SalaryNote>) SalaryNoteDAO.getlist_inmonth(this.dayreport.getMonth().getValue(), this.dayreport.getYear());
-    
-    
+        ArrayList<Employee> emplist = (ArrayList<Employee>) EmployeeDAO.getList();
+        
+        for(SalaryNote iter : monthdata){
+            String employeename = "";
+            for(Employee empiter : emplist){
+                if(empiter.getEm_id().equals(iter.getEm_id())){
+                    employeename = empiter.getName();
+                    break;
+                }
+            }
+            
+            HashMap<String, Object> newrecord = new HashMap<>();
+            newrecord.put("snid", iter.getSn_id());
+            newrecord.put("employeename", employeename);
+            newrecord.put("datepay", (iter.getDate_pay() == null)? "" : iter.getDate_pay().toString());
+            newrecord.put("salaryvalue", (int)(iter.getSalary_value() * 1000));
+            newrecord.put("workhour", iter.getWork_hour());
+            newrecord.put("ispaid", (iter.getIs_paid() == 1)? "Yes" : "No");
+            
+            dataSource.add(newrecord);
+        }
     }
     
     
     
     private void createYearTableData(List<Map<String, ?>> dataSource){
-        HashMap<Employee, ArrayList<SalaryNote>> yeardata = (HashMap<Employee, ArrayList<SalaryNote>>) SalaryNoteDAO.getlist_inyear(this.dayreport.getYear());
+        ArrayList<SalaryNote> yeardata = SalaryNoteDAO.getlist_inyear(this.dayreport.getYear());
+        ArrayList<Employee> emplist = (ArrayList<Employee>) EmployeeDAO.getList();
         
-        
+        for(SalaryNote snitem : yeardata){
+            String employeename = "";
+            for(Employee empitem : emplist){
+                if(empitem.getEm_id().equals(snitem.getEm_id())){
+                    employeename = empitem.getName();
+                    break;
+                }
+            }
+            
+            
+            HashMap<String, Object> newrecord = new HashMap<>();
+            newrecord.put("snid", snitem.getSn_id());
+            newrecord.put("empid", snitem.getEm_id());
+            newrecord.put("employeename", employeename);
+            newrecord.put("salaryvalue", (int)(snitem.getSalary_value() * 1000));
+            newrecord.put("workhour", snitem.getWork_hour());
+               
+            dataSource.add(newrecord);
+        }
     }
 // END CUSTOM CODE
 }

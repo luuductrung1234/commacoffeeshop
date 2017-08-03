@@ -120,54 +120,27 @@ public class SalaryNoteDAO {
     }
     
     
-    public static Map<Employee, ArrayList<SalaryNote>> getlist_inyear(int year){
-        HashMap<Employee, ArrayList<SalaryNote>> resultmap = new HashMap<>();
-        String sql = "SELECT * FROM tbEmployee";
+    public static ArrayList<SalaryNote> getlist_inyear(int year){
+        ArrayList<SalaryNote> resultlist = new ArrayList<>();
+        String sql = "SELECT * FROM tbSalaryNote WHERE for_year = ?";
         
         try(Connection cn = new DBConnect().getCon();
-                PreparedStatement st = cn.prepareStatement(sql);
-                ResultSet rs = st.executeQuery()){
+                PreparedStatement st = cn.prepareStatement(sql)){
+            st.setInt(1, year);
             
-            while(rs.next()){
-                Employee newitem = new Employee();
-                newitem.setEm_id(rs.getString(1));
-                newitem.setUsername(rs.getString(2));
-                newitem.setPass(rs.getString(3));
-                newitem.setName(rs.getString(4));
-                newitem.setBirth(rs.getDate(5));
-                newitem.setStartday(rs.getDate(6));
-                newitem.setHour_wage(rs.getInt(7));
-                newitem.setAddr(rs.getString(8));
-                newitem.setEmail(rs.getString(9));
-                newitem.setPhone(rs.getString(10));
-                newitem.setEm_role(rs.getInt(11));
-                newitem.setManager(rs.getString(12));
-                
-                resultmap.put(newitem, new ArrayList<>());
-            }
-            
-            
-            sql = "SELECT * FROM tbSalaryNote WHERE em_id = ? AND for_year = ?";
-            try(PreparedStatement st2 = cn.prepareStatement(sql)){
-                for(Entry<Employee, ArrayList<SalaryNote>> iter : resultmap.entrySet()){
-                    st2.setString(1, iter.getKey().getEm_id());
-                    st2.setInt(2, year);
+            try(ResultSet rs = st.executeQuery()){
+                while(rs.next()){
+                    SalaryNote newitem = new SalaryNote();
+                    newitem.setSn_id(rs.getString(1));
+                    newitem.setEm_id(rs.getString(2));
+                    newitem.setDate_pay(rs.getDate(3));
+                    newitem.setSalary_value(rs.getFloat(4));
+                    newitem.setWork_hour(rs.getFloat(5));
+                    newitem.setFor_month(rs.getInt(6));
+                    newitem.setFor_year(rs.getInt(7));
+                    newitem.setIs_paid(rs.getByte(8));
                     
-                    try(ResultSet rs2 = st2.executeQuery()){
-                        while(rs2.next()){
-                            SalaryNote newitem = new SalaryNote();
-                            newitem.setSn_id(rs.getString(1));
-                            newitem.setEm_id(rs.getString(2));
-                            newitem.setDate_pay(rs.getDate(3));
-                            newitem.setSalary_value(rs.getFloat(4));
-                            newitem.setWork_hour(rs.getFloat(5));
-                            newitem.setFor_month(rs.getInt(6));
-                            newitem.setFor_year(rs.getInt(7));
-                            newitem.setIs_paid(rs.getByte(8));
-                            
-                            iter.getValue().add(newitem);
-                        }
-                    }
+                    resultlist.add(newitem);
                 }
             }
             
@@ -176,7 +149,7 @@ public class SalaryNoteDAO {
         }
         
         
-        return resultmap;
+        return resultlist;
     }
     
     

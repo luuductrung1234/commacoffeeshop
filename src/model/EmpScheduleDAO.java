@@ -69,7 +69,7 @@ public class EmpScheduleDAO {
             
             st.setDate(1, date);
             try(ResultSet rs = st.executeQuery()){
-                if(rs.next()){
+                while(rs.next()){
                     EmpSchedule newitem = new EmpSchedule();
                     newitem.setSche_id(rs.getString(1));
                     newitem.setEm_id(rs.getString(2));

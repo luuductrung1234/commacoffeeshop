@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6a82d654-18e2-4e0b-9536-9d4422c3a63d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="formonth" class="java.lang.String"/>
+	<field name="snid" class="java.lang.String"/>
+	<field name="employeename" class="java.lang.String"/>
+	<field name="datepay" class="java.lang.String"/>
+	<field name="salaryvalue" class="java.lang.Integer"/>
+	<field name="workhour" class="java.lang.Float"/>
+	<field name="ispaid" class="java.lang.String"/>
+	<variable name="totalemployeeworking" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{snid}]]></variableExpression>
+	</variable>
+	<variable name="totalpurchase" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{salaryvalue}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement x="104" y="0" width="384" height="46" forecolor="#CC0000" uuid="ab8957ce-b45b-47cb-ae35-acc1d6bf4e50"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTH SALARY REPORT]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="548" y="0" width="37" height="34" uuid="16aee1b5-56d8-47ca-8e4d-3698e9ee621c"/>
+				<imageExpression><![CDATA["src\\image\\comma_icon.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="71" y="56" width="72" height="20" uuid="096320d4-e856-4111-b9f8-9cc89b1072d2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[For Month:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="143" y="56" width="100" height="20" uuid="22a7f57a-c4c6-45fc-bdc7-1f22fb71e936"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{formonth}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="0" width="83" height="20" uuid="adc76241-56f9-41d8-a339-dce82a5fdc2c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SalaryNote ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="0" width="116" height="20" uuid="75f6979f-1c94-412c-91fb-6f3f5a59da4c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="0" width="83" height="20" uuid="6bd74c2f-6022-4329-9039-9eaa3be6f60f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date pay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="0" width="99" height="20" uuid="5196126c-625f-4bdc-890d-010ed7974092"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salary (VND)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="0" width="87" height="20" uuid="51ca8356-460e-448d-8f15-6eb3555c56fc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Work Hour]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="525" y="0" width="60" height="20" uuid="1b54acce-3a55-4d26-b2ef-3bd2dffd266e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Is Paid]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="11" y="0" width="83" height="20" isRemoveLineWhenBlank="true" uuid="00a44fcf-a6a1-40f5-b9ee-5429c6eedb8d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{snid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="0" width="116" height="20" isRemoveLineWhenBlank="true" uuid="1d75374a-4106-4437-a200-441953a28650"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{employeename}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="228" y="0" width="83" height="20" isRemoveLineWhenBlank="true" uuid="ee251bf1-8935-40b0-ad56-6ac2a06e1b4b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datepay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###,###.###" isBlankWhenNull="true">
+				<reportElement x="324" y="0" width="99" height="20" isRemoveLineWhenBlank="true" uuid="e979dd20-4226-40c7-ba34-ecd5a3d365be"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salaryvalue}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="435" y="0" width="87" height="20" isRemoveLineWhenBlank="true" uuid="55cdb321-a0a0-4941-9069-2e9b87755c39"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{workhour}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="525" y="0" width="60" height="20" isRemoveLineWhenBlank="true" uuid="6f74814b-58d4-409c-8058-5024b2b7f9b2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ispaid}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="465" y="34" width="80" height="20" uuid="6cc17999-624f-41da-9487-709cc832f004"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="545" y="34" width="40" height="20" uuid="aeab4190-84ba-471b-9f13-35d14b9336fb"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="11" y="0" width="109" height="30" forecolor="#CCCCCC" backcolor="#666600" uuid="e7c5932d-aa0e-4117-abe4-3989ea9d4ad6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUMARY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="54" width="172" height="20" uuid="b9bc906f-bba5-46ab-922b-e76a438243d2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[- Total Employee Working:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="85" width="172" height="20" uuid="7fcaa046-2f88-45dc-abd9-bc1262b84455"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[- Total Salary Purchase (VND):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="270" y="54" width="123" height="20" uuid="609391bb-84fb-4941-90d0-2f313f14c822"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalemployeeworking}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###,###.###">
+				<reportElement x="270" y="85" width="123" height="20" uuid="919ceb7d-4512-4d09-b1ab-4e294da1018d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalpurchase}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
