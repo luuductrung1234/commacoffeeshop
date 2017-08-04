@@ -36,6 +36,7 @@ public class EmpSchedule implements java.io.Serializable{
         Vector v = new Vector();
         v.add(this.sche_id);
         v.add(this.em_id);
+        v.add(this.workday);
         v.add(this.starthour);
         v.add(this.startminute);
         v.add(this.endhour);

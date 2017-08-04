@@ -75,6 +75,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         initDatavwReceipt();
         //salary note
         initDatacboEmployee();
+        LocalDate yearmonth = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+        initDatavwMonth(yearmonth.getYear(), yearmonth.getMonthValue());
         setSalaryControl(false);
         
         this.setFrameIcon();
@@ -722,6 +724,13 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnShowSalary.setLayout(new java.awt.BorderLayout());
 
+        cboEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--" }));
+        cboEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEmployeeActionPerformed(evt);
+            }
+        });
+
         btnSchePre.setBackground(new java.awt.Color(255, 255, 255));
         btnSchePre.setToolTipText("Search by Food Name");
         btnSchePre.addActionListener(new java.awt.event.ActionListener() {
@@ -769,12 +778,12 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnSchePre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtvwMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtvwMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnScheNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 563, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 508, Short.MAX_VALUE)
                 .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExportReportSalaryNote)
@@ -790,9 +799,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtvwMonth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnExportReportSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExportReportSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         ImageIcon salarycharticon = null;
@@ -813,20 +822,20 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         vwEmpSche.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Scheduled ID", "Employee ID", "Workday", "Start Hour", "Start Minute", "End Hour", "End Minute"
+                "Scheduled ID", "Employee ID", "Workday", "Start Hour", "Start Minute", "End Hour", "End Minute", "Result Salary"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -845,6 +854,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             vwEmpSche.getColumnModel().getColumn(1).setMinWidth(0);
             vwEmpSche.getColumnModel().getColumn(1).setPreferredWidth(0);
             vwEmpSche.getColumnModel().getColumn(1).setMaxWidth(0);
+            vwEmpSche.getColumnModel().getColumn(7).setMinWidth(0);
+            vwEmpSche.getColumnModel().getColumn(7).setPreferredWidth(0);
+            vwEmpSche.getColumnModel().getColumn(7).setMaxWidth(0);
         }
         this.vwEmpSche.setRowHeight(25);
 
@@ -958,7 +970,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnvwSalaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(txtIsPaidSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
                 .addComponent(pnSalaryControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1104,7 +1116,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnCustomerInformationLayout.createSequentialGroup()
                         .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addComponent(txtDiscountCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCustomerInformationLayout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -1192,7 +1204,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnCustomerFormLayout.setVerticalGroup(
             pnCustomerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCustomerFormLayout.createSequentialGroup()
-                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnCustomerInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1823,7 +1835,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                             .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtStandardPriceFM))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 25, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         pnFMInformationLayout.setVerticalGroup(
@@ -1910,7 +1922,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnFMFormLayout.setVerticalGroup(
             pnFMFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFMFormLayout.createSequentialGroup()
-                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnFMInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -2141,11 +2153,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnResetOrderData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(btnShowChartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(txtTodaySale)
                 .addComponent(lbTodaySale)
-                .addComponent(btnExportReportOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnShowChartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnExportReportOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(txtSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -5349,6 +5361,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             cl.show(pnDisplay, "card10");
             
             initDatacboEmployee();
+            LocalDate yearmonth = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+            initDatavwMonth(yearmonth.getYear(), yearmonth.getMonthValue());
             setSalaryControl(false);
         }
         else
@@ -5360,15 +5374,40 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalaryNoteActionPerformed
 
     private void btnScheNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScheNextActionPerformed
-        // TODO add your handling code here:
+        String yearmonth = txtvwMonth.getText().trim();
+        int dky, dkm;
+        dky = Integer.parseInt(yearmonth.substring(0, 4));
+        dkm = Integer.parseInt(yearmonth.substring(5, 7));
+        if(dkm == 12)
+        {
+            dky++;
+            dkm = 0;
+        }
+        dkm++;
+        initDatavwMonth(dky, dkm);
+        yearmonth = txtvwMonth.getText().trim();
+        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
     }//GEN-LAST:event_btnScheNextActionPerformed
 
     private void btnSchePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSchePreActionPerformed
-        // TODO add your handling code here:
+        String yearmonth = txtvwMonth.getText().trim();
+        int dky, dkm;
+        dky = Integer.parseInt(yearmonth.substring(0, 4));
+        dkm = Integer.parseInt(yearmonth.substring(5, 7));
+        if(dkm == 1)
+        {
+            dky--;
+            dkm = 13;
+        }
+        dkm--;
+        initDatavwMonth(dky, dkm);
+        yearmonth = txtvwMonth.getText().trim();
+        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
     }//GEN-LAST:event_btnSchePreActionPerformed
 
     private void btnSearchEmpScheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmpScheActionPerformed
-        
+        String yearmonth = txtvwMonth.getText().trim();
+        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
     }//GEN-LAST:event_btnSearchEmpScheActionPerformed
 
     private void btnChangePassAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassAdActionPerformed
@@ -5732,14 +5771,19 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportReportSalaryNoteActionPerformed
 
     private void btnShowChartSalaryNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartSalaryNoteActionPerformed
-        // TODO add your handling code here:
+        
         
     }//GEN-LAST:event_btnShowChartSalaryNoteActionPerformed
 
     private void btnShowChartOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartOrderActionPerformed
-        // TODO add your handling code here:
         new DiaOrderChart(this, true).setVisible(true);
     }//GEN-LAST:event_btnShowChartOrderActionPerformed
+
+    private void cboEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmployeeActionPerformed
+        
+        String yearmonth = txtvwMonth.getText().trim();
+        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
+    }//GEN-LAST:event_cboEmployeeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -6523,6 +6567,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
     //salary
     private void initDatacboEmployee() {
+        cboEmployee.removeAllItems();
         cboEmployee.addItem("--");
         
         for(Employee d:dsEmployee)
@@ -6530,16 +6575,42 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             cboEmployee.addItem(d.getName());
         }
     }
+    
+    private void initDatavwMonth(int year, int month) {
+        if(month < 10)
+        {
+            txtvwMonth.setText(year + "-" + "0" + month);
+        }
+        else
+        {
+            txtvwMonth.setText(year + "-" + month);
+        }
+    }
+    
     DefaultTableModel modelEmpSche;
     List<EmpSchedule> dsEmpSche;
     TableRowSorter<TableModel> sorterEmpSche;
-    private void initDatavwEmpSche(String em_name, String month) {
-        modelEmpSche.getDataVector().removeAllElements();
-        modelEmpSche.fireTableDataChanged();
+    private void initDatavwEmpSche(String em_name, String yearmonth) {
+        int dky, dkm;
+        dky = Integer.parseInt(yearmonth.substring(0, 4));
+        dkm = Integer.parseInt(yearmonth.substring(5, 7));
+        modelEmpSche = (DefaultTableModel) vwEmpSche.getModel();
+//        modelEmpSche.getDataVector().removeAllElements();
+//        modelEmpSche.fireTableDataChanged();
         modelEmpSche.setRowCount(0);
+        dsEmpSche = EmpScheduleDAO.getList();
         for(EmpSchedule d:dsEmpSche)
         {
-            
+            for(Employee demp:dsEmployee)
+            {
+                if(demp.getName().equals(em_name))
+                {
+                    if(demp.getEm_id().equals(d.getEm_id()) && (d.getWorkday().toLocalDate().getMonthValue() == dkm && d.getWorkday().toLocalDate().getYear() == dky))
+                    {
+                        modelEmpSche.addRow(d.toVector());
+                    }
+                }
+            }
         }
     }
 
