@@ -760,7 +760,7 @@
                               <Component id="btnScheNext" min="-2" pref="50" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnSearchEmpSche" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace pref="508" max="32767" attributes="0"/>
+                              <EmptySpace pref="513" max="32767" attributes="0"/>
                               <Component id="btnShowChartSalaryNote" min="-2" pref="58" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnExportReportSalaryNote" min="-2" max="-2" attributes="0"/>
@@ -790,16 +790,15 @@
                   <SubComponents>
                     <Component class="javax.swing.JComboBox" name="cboEmployee">
                       <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="1">
-                            <StringItem index="0" value="--"/>
-                          </StringArray>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(currentemployee_name)" type="code"/>
                         </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboEmployeeActionPerformed"/>
                       </Events>
                       <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;Employee&gt; emplist = (ArrayList&lt;Employee&gt;) EmployeeDAO.getList();&#xa;String[] currentemployee_name = new String[emplist.size()];&#xa;for(int i = 0; i &lt; emplist.size(); i++){&#xa;    currentemployee_name[i] = emplist.get(i).getName();&#xa;}"/>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
@@ -1345,7 +1344,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="pnCustomerInformation" pref="516" max="32767" attributes="0"/>
+                          <Component id="pnCustomerInformation" pref="505" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="pnCustomerInformationControl" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1375,7 +1374,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                                      <EmptySpace pref="85" max="32767" attributes="0"/>
                                       <Component id="txtDiscountCus" min="-2" pref="150" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -2476,7 +2475,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="pnFMInformation" pref="516" max="32767" attributes="0"/>
+                          <Component id="pnFMInformation" pref="505" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="pnFMInformationControl" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -2538,7 +2537,7 @@
                                           <Component id="cboUnitBuyFM" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtStandardPriceFM" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>

@@ -69,3 +69,7 @@ go
 select * from tbSalaryNote
 where for_year = 2017
 go
+
+select sum(price) from tbOrder
+where year(ordertime) = 2017 and month(ordertime) = 7
+go
