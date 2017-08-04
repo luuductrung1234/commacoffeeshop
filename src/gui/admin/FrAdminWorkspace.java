@@ -433,7 +433,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnBlankLayout.setVerticalGroup(
             pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addGap(0, 553, Short.MAX_VALUE)
         );
 
         pnDisplay.add(pnBlank, "card2");
@@ -537,9 +537,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwEmployeeLayout.setVerticalGroup(
             pnvwEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGap(0, 513, Short.MAX_VALUE)
             .addGroup(pnvwEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
         );
 
         pnShowEmployee.add(pnvwEmployee, java.awt.BorderLayout.CENTER);
@@ -666,7 +666,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnEmployeeInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(cboRoleEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         btnInsertEmp.setText("Insert");
@@ -753,7 +753,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
         });
 
-        btnShowChartSalaryNote.setText("Show Chart");
+        btnShowChartSalaryNote.setToolTipText("show chart");
         btnShowChartSalaryNote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowChartSalaryNoteActionPerformed(evt);
@@ -774,9 +774,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(btnScheNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 513, Short.MAX_VALUE)
-                .addComponent(btnShowChartSalaryNote)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 563, Short.MAX_VALUE)
+                .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExportReportSalaryNote)
                 .addContainerGap())
         );
@@ -784,15 +784,25 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnScheNext, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSchePre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSalarySearchLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtvwMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(cboEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnExportReportSalaryNote)
-                .addComponent(btnShowChartSalaryNote))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSalarySearchLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtvwMonth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnExportReportSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
+
+        ImageIcon salarycharticon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/charticon.png")).getScaledInstance(40, 35, Image.SCALE_SMOOTH);
+            salarycharticon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnShowChartSalaryNote.setIcon(salarycharticon);
 
         pnShowSalary.add(pnSalarySearch, java.awt.BorderLayout.PAGE_START);
 
@@ -846,7 +856,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwEmpScheLayout.setVerticalGroup(
             pnvwEmpScheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         pnvwNote.add(pnvwEmpSche);
@@ -948,7 +958,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnvwSalaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(txtIsPaidSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(pnSalaryControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -964,7 +974,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnSalaryNoteLayout.setVerticalGroup(
             pnSalaryNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnShowSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+            .addComponent(pnShowSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
         );
 
         pnDisplay.add(pnSalaryNote, "card10");
@@ -1062,9 +1072,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwCustomerLayout.setVerticalGroup(
             pnvwCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGap(0, 513, Short.MAX_VALUE)
             .addGroup(pnvwCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
         );
 
         pnShowCustomer.add(pnvwCustomer, java.awt.BorderLayout.CENTER);
@@ -1182,7 +1192,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnCustomerFormLayout.setVerticalGroup(
             pnCustomerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCustomerFormLayout.createSequentialGroup()
-                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnCustomerInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1352,9 +1362,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwFDLayout.setVerticalGroup(
             pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 154, Short.MAX_VALUE)
+            .addGap(0, 173, Short.MAX_VALUE)
             .addGroup(pnvwFDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
         );
 
         pnvw.add(pnvwFD, java.awt.BorderLayout.CENTER);
@@ -1448,7 +1458,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFoodInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(cboTypeFood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         btnSaveFood.setText("Save");
@@ -1587,7 +1597,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFDInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUnitUseFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         btnSaveFD.setText("Save");
@@ -1737,7 +1747,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwFMLayout.setVerticalGroup(
             pnvwFMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
         );
 
         pnShowFM.add(pnvwFM, java.awt.BorderLayout.CENTER);
@@ -1855,7 +1865,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnFMInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
                     .addComponent(txtSupplierFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         btnInsertFM.setText("Insert");
@@ -1900,7 +1910,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnFMFormLayout.setVerticalGroup(
             pnFMFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFMFormLayout.createSequentialGroup()
-                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnFMInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -2002,7 +2012,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwReceiptNoteLayout.setVerticalGroup(
             pnvwReceiptNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
 
         pnShowReceipt.add(pnvwReceiptNote);
@@ -2060,7 +2070,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnReceiptNoteDetailsLayout.setVerticalGroup(
             pnReceiptNoteDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
 
         pnShowReceipt.add(pnReceiptNoteDetails);
@@ -2099,7 +2109,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
         });
 
-        btnShowChartOrder.setText("Show Chart");
+        btnShowChartOrder.setToolTipText("show chart");
         btnShowChartOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowChartOrderActionPerformed(evt);
@@ -2121,9 +2131,9 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(lbTodaySale)
                 .addGap(18, 18, 18)
                 .addComponent(txtTodaySale, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(btnShowChartOrder)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addComponent(btnShowChartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExportReportOrder)
                 .addContainerGap())
         );
@@ -2134,10 +2144,19 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnOrderSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(txtTodaySale)
                 .addComponent(lbTodaySale)
-                .addComponent(btnExportReportOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnShowChartOrder))
+                .addComponent(btnExportReportOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnShowChartOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(txtSearchOrderTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        ImageIcon ordercharticon = null;
+        try{
+            Image scaled = ImageIO.read(new File("src/image/charticon.png")).getScaledInstance(40, 35, Image.SCALE_SMOOTH);
+            ordercharticon = new ImageIcon(scaled);
+        }catch(IOException io_ex){
+            io_ex.printStackTrace();
+        }
+        this.btnShowChartOrder.setIcon(ordercharticon);
 
         pnOrder.add(pnOrderSearch, java.awt.BorderLayout.PAGE_START);
 
@@ -2195,7 +2214,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwOrderLayout.setVerticalGroup(
             pnvwOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOrder);
@@ -2248,7 +2267,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwODLayout.setVerticalGroup(
             pnvwODLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         pnShowOrder.add(pnvwOD);
@@ -2337,7 +2356,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     .addComponent(txtNameAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnAdminControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnProfileLayout = new javax.swing.GroupLayout(pnProfile);
@@ -5714,10 +5733,12 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
     private void btnShowChartSalaryNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartSalaryNoteActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnShowChartSalaryNoteActionPerformed
 
     private void btnShowChartOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartOrderActionPerformed
         // TODO add your handling code here:
+        new DiaOrderChart(this, true).setVisible(true);
     }//GEN-LAST:event_btnShowChartOrderActionPerformed
 
     /**

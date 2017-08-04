@@ -56,7 +56,7 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
   	+ đã xong : Food Materials information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Order information form (giao diện/xem/tìm kiếm(theo ngày, ?))
   	+ đã xong : Admin profile information form (giao diện/xem/sửa thông tin) _ không có quyền xóa bất kì admin nào
-  	+ đã xong :  xuất report cho dữ liệu order/order details
+  	+ đã xong :  xuất report cho dữ liệu order/order details, empschedule/salarynote
 
   	+ chưa hoàn thành : Salary Note information form (giao diện/xem/xoá**/sửa thông tin)
   	+ chưa hoàn thành : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))

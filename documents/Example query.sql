@@ -65,3 +65,7 @@ go
 select * from tbSalaryNote
 where em_id = 'EM00000001' and for_year = 2017
 go
+
+select * from tbSalaryNote
+where for_year = 2017
+go
