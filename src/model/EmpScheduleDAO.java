@@ -58,7 +58,35 @@ public class EmpScheduleDAO {
         return 0;
     }
     
-    
+    public static List<EmpSchedule> getList() {
+        List<EmpSchedule> ds = new ArrayList<>();
+        String sql = "SELECT * FROM tbEmpSchedule";
+                
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();){
+
+            while(rs.next())
+            {
+                EmpSchedule newitem = new EmpSchedule();
+                newitem.setSche_id(rs.getString(1));
+                newitem.setEm_id(rs.getString(2));
+                newitem.setWorkday(rs.getDate(3));
+                newitem.setStarthour(rs.getInt(4));
+                newitem.setStartminute(rs.getInt(5));
+                newitem.setEndhour(rs.getInt(6));
+                newitem.setEndminute(rs.getInt(7));
+                newitem.setResult_salary(rs.getString(8));
+                
+                ds.add(newitem);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ds;
+    }
     
     public static List<EmpSchedule> getlist_inday(java.sql.Date date){
         ArrayList<EmpSchedule> resultlist = new ArrayList<>();
