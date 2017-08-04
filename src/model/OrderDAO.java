@@ -13,8 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -203,6 +205,93 @@ public class OrderDAO {
         }
         
         return total;
+    }
+    
+    
+    public static Map<Integer, Float> getlist_dayinmonth(int year, int month){
+        HashMap<Integer, Float> resultmap = new HashMap<>();
+        String sql = "SELECT SUM(price) FROM tbOrder WHERE YEAR(ordertime) = ? AND MONTH(ordertime) = ? AND DAY(ordertime) = ?";
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, 1);
+        int dayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            
+            for(int i = 1; i <= dayOfMonth; i++){
+                st.setInt(1, year);
+                st.setInt(2, month);
+                st.setInt(3, i);
+                
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        resultmap.put(i, rs.getFloat(1));
+                    }else{
+                        resultmap.put(i, new Float(0));
+                    }
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return resultmap;
+    }
+    
+    public static Map<Integer, Float> getlist_monthinyear(int year){
+        HashMap<Integer, Float> resultmap = new HashMap<>();
+        String sql = "SELECT SUM(price) FROM tbOrder WHERE YEAR(ordertime) = ? AND MONTH(ordertime) = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            
+            for(int i = 1; i <= 12; i++){
+                st.setInt(1, year);
+                st.setInt(2, i);
+                
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        resultmap.put(i, rs.getFloat(1));
+                    }else{
+                        resultmap.put(i, new Float(0));
+                    }
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultmap;
+    }
+    
+    public static HashMap<Integer, Float> getlist_yeartoyear(int year){
+        HashMap<Integer, Float> resultmap = new HashMap<>();
+        String sql = "SELECT SUM(price) FROM tbOrder WHERE YEAR(ordertime) = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            
+            for(int i = year - 2; i < year + 2; i++){
+                st.setInt(1, i);
+                
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        resultmap.put(i, rs.getFloat(1));
+                    }else{
+                        resultmap.put(i, new Float(0));
+                    }
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultmap;
     }
 
     // WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table

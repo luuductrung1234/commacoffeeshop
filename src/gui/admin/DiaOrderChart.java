@@ -9,6 +9,7 @@ import entities.Customer;
 import entities.Food;
 import entities.Order;
 import entities.OrderDetails;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Image;
@@ -28,7 +29,10 @@ import model.OrderDAO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import supportclass.chart.ChartDrawingSupplier;
 
@@ -62,17 +66,24 @@ public class DiaOrderChart extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngOrderStyle = new javax.swing.ButtonGroup();
         pnMain = new javax.swing.JPanel();
         pnControl = new javax.swing.JPanel();
         btnExecuteStatistic = new javax.swing.JButton();
         btnExecuteIncome = new javax.swing.JButton();
-        btnExecuteOrderTiming = new javax.swing.JButton();
         pnDisplay = new javax.swing.JPanel();
         pnShowStatistic = new javax.swing.JPanel();
         pnFoodAndDrink = new javax.swing.JPanel();
         pnFoodDrinkAvg = new javax.swing.JPanel();
         pnShowIncome = new javax.swing.JPanel();
-        pnShowOrderTiming = new javax.swing.JPanel();
+        rbDayinmonth = new javax.swing.JRadioButton();
+        rbMonthinyear = new javax.swing.JRadioButton();
+        rbYeartoyear = new javax.swing.JRadioButton();
+        pnShowControl = new javax.swing.JPanel();
+        pnDayinmonth = new javax.swing.JPanel();
+        pnMonthinyear = new javax.swing.JPanel();
+        pnYeartoyear = new javax.swing.JPanel();
+        pnBlank = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,22 +125,6 @@ public class DiaOrderChart extends javax.swing.JDialog {
         }
         this.btnExecuteIncome.setIcon(incomeicon);
 
-        btnExecuteOrderTiming.setToolTipText("Order Timing");
-        btnExecuteOrderTiming.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExecuteOrderTimingActionPerformed(evt);
-            }
-        });
-        pnControl.add(btnExecuteOrderTiming);
-        ImageIcon ordertimingicon = null;
-        try{
-            Image scaled = ImageIO.read(new File("src/image/barcharticon.png")).getScaledInstance(27, 23, Image.SCALE_SMOOTH);
-            ordertimingicon = new ImageIcon(scaled);
-        }catch(IOException io_ex){
-            io_ex.printStackTrace();
-        }
-        this.btnExecuteOrderTiming.setIcon(ordertimingicon);
-
         pnMain.add(pnControl);
 
         pnDisplay.setBackground(new java.awt.Color(153, 153, 153));
@@ -150,33 +145,85 @@ public class DiaOrderChart extends javax.swing.JDialog {
 
         pnShowIncome.setBackground(new java.awt.Color(204, 204, 204));
 
+        btngOrderStyle.add(rbDayinmonth);
+        rbDayinmonth.setText("Day in month");
+        rbDayinmonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDayinmonthActionPerformed(evt);
+            }
+        });
+
+        btngOrderStyle.add(rbMonthinyear);
+        rbMonthinyear.setText("Month in year");
+        rbMonthinyear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbMonthinyearActionPerformed(evt);
+            }
+        });
+
+        btngOrderStyle.add(rbYeartoyear);
+        rbYeartoyear.setText("Year to year");
+        rbYeartoyear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbYeartoyearActionPerformed(evt);
+            }
+        });
+
+        pnShowControl.setLayout(new java.awt.CardLayout());
+
+        pnDayinmonth.setLayout(new java.awt.BorderLayout());
+        pnShowControl.add(pnDayinmonth, "card2");
+
+        pnMonthinyear.setLayout(new java.awt.BorderLayout());
+        pnShowControl.add(pnMonthinyear, "card3");
+
+        pnYeartoyear.setLayout(new java.awt.BorderLayout());
+        pnShowControl.add(pnYeartoyear, "card4");
+
+        javax.swing.GroupLayout pnBlankLayout = new javax.swing.GroupLayout(pnBlank);
+        pnBlank.setLayout(pnBlankLayout);
+        pnBlankLayout.setHorizontalGroup(
+            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 751, Short.MAX_VALUE)
+        );
+        pnBlankLayout.setVerticalGroup(
+            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 289, Short.MAX_VALUE)
+        );
+
+        pnShowControl.add(pnBlank, "card5");
+
         javax.swing.GroupLayout pnShowIncomeLayout = new javax.swing.GroupLayout(pnShowIncome);
         pnShowIncome.setLayout(pnShowIncomeLayout);
         pnShowIncomeLayout.setHorizontalGroup(
             pnShowIncomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnShowIncomeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rbDayinmonth, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rbMonthinyear)
+                .addGap(18, 18, 18)
+                .addComponent(rbYeartoyear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(201, 201, 201))
+            .addGroup(pnShowIncomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnShowControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnShowIncomeLayout.setVerticalGroup(
             pnShowIncomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGroup(pnShowIncomeLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(pnShowIncomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbDayinmonth)
+                    .addComponent(rbMonthinyear)
+                    .addComponent(rbYeartoyear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnShowControl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pnDisplay.add(pnShowIncome, "card3");
-
-        pnShowOrderTiming.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout pnShowOrderTimingLayout = new javax.swing.GroupLayout(pnShowOrderTiming);
-        pnShowOrderTiming.setLayout(pnShowOrderTimingLayout);
-        pnShowOrderTimingLayout.setHorizontalGroup(
-            pnShowOrderTimingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
-        );
-        pnShowOrderTimingLayout.setVerticalGroup(
-            pnShowOrderTimingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
-        );
-
-        pnDisplay.add(pnShowOrderTiming, "card4");
 
         pnMain.add(pnDisplay);
 
@@ -197,11 +244,89 @@ public class DiaOrderChart extends javax.swing.JDialog {
         this.initDisplayData();
     }//GEN-LAST:event_btnExecuteIncomeActionPerformed
 
-    private void btnExecuteOrderTimingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteOrderTimingActionPerformed
-        // TODO add your handling code here:
-        this.show_mode = ORDERTIMING_SHOW;
-        this.initDisplayData();
-    }//GEN-LAST:event_btnExecuteOrderTimingActionPerformed
+    private void rbDayinmonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDayinmonthActionPerformed
+
+        if(this.rbDayinmonth.isSelected()){
+            // lấy dữ liệu từ database
+            HashMap<Integer, Float> incomeDayofMonth = (HashMap<Integer, Float>) OrderDAO.getlist_dayinmonth(this.day.getYear(), this.day.getMonth().getValue());
+
+            // khởi tạo dataset cho chart
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for(Entry<Integer, Float> iter : incomeDayofMonth.entrySet()){
+                dataset.addValue(iter.getValue(), "Income", String.valueOf(iter.getKey()));
+            }
+
+            // tạo chart
+            JFreeChart chart = ChartFactory.createLineChart("Total Day of "+ this.day.getYear() + "-" + this.day.getMonth() + " Income", "Day", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            CategoryPlot plot = (CategoryPlot) chart.getPlot();
+            int seriesCount = plot.getRendererCount();
+            for (int i = 0; i < seriesCount; i++) {
+                plot.getRenderer().setSeriesStroke(i, new BasicStroke(2));
+            }
+            
+            ChartPanel pndayinmonthchart = new ChartPanel(chart);
+            this.pnDayinmonth.add(pndayinmonthchart, BorderLayout.CENTER);
+            CardLayout c = (CardLayout) this.pnShowControl.getLayout();
+            c.show(this.pnShowControl, "card5");
+            c.show(this.pnShowControl, "card2");
+        }
+    }//GEN-LAST:event_rbDayinmonthActionPerformed
+
+    private void rbMonthinyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMonthinyearActionPerformed
+        
+        if(this.rbMonthinyear.isSelected()){
+            // lấy dữ liệu từ database
+            HashMap<Integer, Float> incomeMonthofYear = (HashMap<Integer, Float>) OrderDAO.getlist_monthinyear(this.day.getYear());
+            
+            // khởi tạo dataset cho chart
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for(Entry<Integer, Float> iter : incomeMonthofYear.entrySet()){
+                dataset.addValue(iter.getValue(), "Income", String.valueOf(iter.getKey()));
+            }
+
+            // tạo chart
+            JFreeChart chart = ChartFactory.createLineChart("Total Month of "+ this.day.getYear() + " Income", "Month", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            CategoryPlot plot = (CategoryPlot) chart.getPlot();
+            int seriesCount = plot.getRendererCount();
+            for (int i = 0; i < seriesCount; i++) {
+                plot.getRenderer().setSeriesStroke(i, new BasicStroke(2));
+            }
+            
+            ChartPanel pnmonthinyearchart = new ChartPanel(chart);
+            this.pnMonthinyear.add(pnmonthinyearchart, BorderLayout.CENTER);
+            CardLayout c = (CardLayout) this.pnShowControl.getLayout();
+            c.show(this.pnShowControl, "card5");
+            c.show(this.pnShowControl, "card3");
+        }
+    }//GEN-LAST:event_rbMonthinyearActionPerformed
+
+    private void rbYeartoyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbYeartoyearActionPerformed
+        
+        if(this.rbYeartoyear.isSelected()){
+            // lấy dữ liệu từ database
+            HashMap<Integer, Float> incomeYeartoyear = (HashMap<Integer, Float>) OrderDAO.getlist_yeartoyear(this.day.getYear());
+            
+            // khởi tạo dataset cho chart
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for(Entry<Integer, Float> iter : incomeYeartoyear.entrySet()){
+                dataset.addValue(iter.getValue(), "Income", String.valueOf(iter.getKey()));
+            }
+
+            // tạo chart
+            JFreeChart chart = ChartFactory.createLineChart("Total Year Income", "Year", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            CategoryPlot plot = (CategoryPlot) chart.getPlot();
+            int seriesCount = plot.getRendererCount();
+            for (int i = 0; i < seriesCount; i++) {
+                plot.getRenderer().setSeriesStroke(i, new BasicStroke(2));
+            }
+            
+            ChartPanel pnyeartoyearchart = new ChartPanel(chart);
+            this.pnYeartoyear.add(pnyeartoyearchart, BorderLayout.CENTER);
+            CardLayout c = (CardLayout) this.pnShowControl.getLayout();
+            c.show(this.pnShowControl, "card5");
+            c.show(this.pnShowControl, "card4");
+        }
+    }//GEN-LAST:event_rbYeartoyearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,16 +373,23 @@ public class DiaOrderChart extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExecuteIncome;
-    private javax.swing.JButton btnExecuteOrderTiming;
     private javax.swing.JButton btnExecuteStatistic;
+    private javax.swing.ButtonGroup btngOrderStyle;
+    private javax.swing.JPanel pnBlank;
     private javax.swing.JPanel pnControl;
+    private javax.swing.JPanel pnDayinmonth;
     private javax.swing.JPanel pnDisplay;
     private javax.swing.JPanel pnFoodAndDrink;
     private javax.swing.JPanel pnFoodDrinkAvg;
     private javax.swing.JPanel pnMain;
+    private javax.swing.JPanel pnMonthinyear;
+    private javax.swing.JPanel pnShowControl;
     private javax.swing.JPanel pnShowIncome;
-    private javax.swing.JPanel pnShowOrderTiming;
     private javax.swing.JPanel pnShowStatistic;
+    private javax.swing.JPanel pnYeartoyear;
+    private javax.swing.JRadioButton rbDayinmonth;
+    private javax.swing.JRadioButton rbMonthinyear;
+    private javax.swing.JRadioButton rbYeartoyear;
     // End of variables declaration//GEN-END:variables
 
 
@@ -286,12 +418,6 @@ public class DiaOrderChart extends javax.swing.JDialog {
             case 1:
                 c = (CardLayout) this.pnDisplay.getLayout();
                 c.show(this.pnDisplay,"card3");
-                this.defaultIncome();
-                break;
-            case 2:
-                c = (CardLayout) this.pnDisplay.getLayout();
-                c.show(this.pnDisplay,"card4");
-                this.defaultOrdertiming();
                 break;
         }
     }
@@ -378,21 +504,13 @@ public class DiaOrderChart extends javax.swing.JDialog {
         dataset2.setValue("Others", othercount);
         
         // tạo chart
-        JFreeChart chart2 = ChartFactory.createPieChart("Today Total Number", dataset2, true, true, false);
+        JFreeChart chart2 = ChartFactory.createPieChart("Today Order Number", dataset2, true, true, false);
         Plot chartplot2 = chart2.getPlot();
         chartplot2.setDrawingSupplier(new ChartDrawingSupplier());
         
         // tạo chart panel
         JPanel pnchart2 = new ChartPanel(chart2);
         this.pnFoodDrinkAvg.add(pnchart2, BorderLayout.CENTER);
-    }
-    
-    private void defaultIncome(){
-        
-    }
-    
-    private void defaultOrdertiming(){
-        
     }
 // END CUSTOM CODE
 }
