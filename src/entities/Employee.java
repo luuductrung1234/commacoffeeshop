@@ -10,6 +10,7 @@ public class Employee implements java.io.Serializable{
     private java.sql.Date birth, startday;
     private int hour_wage;
     private int em_role;
+    private int deleted = 0;
 
     public Employee() {
     }
@@ -146,6 +147,14 @@ public class Employee implements java.io.Serializable{
 
     public void setEm_role(int em_role) {
         this.em_role = em_role;
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
 
     

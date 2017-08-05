@@ -257,7 +257,7 @@ public class DiaOrderChart extends javax.swing.JDialog {
             }
 
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Total Day of "+ this.day.getYear() + "-" + this.day.getMonth() + " Income", "Day", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Days of "+ this.day.getYear() + "-" + this.day.getMonth() + " Total Income", "Day", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = (CategoryPlot) chart.getPlot();
             int seriesCount = plot.getRendererCount();
             for (int i = 0; i < seriesCount; i++) {
@@ -285,7 +285,7 @@ public class DiaOrderChart extends javax.swing.JDialog {
             }
 
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Total Month of "+ this.day.getYear() + " Income", "Month", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Months of "+ this.day.getYear() + " Total Income", "Month", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = (CategoryPlot) chart.getPlot();
             int seriesCount = plot.getRendererCount();
             for (int i = 0; i < seriesCount; i++) {
@@ -313,7 +313,7 @@ public class DiaOrderChart extends javax.swing.JDialog {
             }
 
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Total Year Income", "Year", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Year Total Income", "Year", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = (CategoryPlot) chart.getPlot();
             int seriesCount = plot.getRendererCount();
             for (int i = 0; i < seriesCount; i++) {

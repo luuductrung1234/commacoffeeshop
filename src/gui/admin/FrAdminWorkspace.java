@@ -5777,8 +5777,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportReportSalaryNoteActionPerformed
 
     private void btnShowChartSalaryNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartSalaryNoteActionPerformed
-        
-        
+        new DiaSalaryNoteChart(this, true).setVisible(true);
     }//GEN-LAST:event_btnShowChartSalaryNoteActionPerformed
 
     private void btnShowChartOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartOrderActionPerformed

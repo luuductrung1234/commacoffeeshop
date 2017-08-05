@@ -56,13 +56,15 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
   	+ đã xong : Food Materials information form (giao diện/xem/xoá**/sửa thông tin/tìm kiếm(theo tên, ?))
   	+ đã xong : Order information form (giao diện/xem/tìm kiếm(theo ngày, ?))
   	+ đã xong : Admin profile information form (giao diện/xem/sửa thông tin) _ không có quyền xóa bất kì admin nào
-  	+ đã xong :  xuất report cho dữ liệu order/order details, empschedule/salarynote
+  	+ đã xong : xuất report cho dữ liệu order/order details, empschedule/salarynote
+	+ đã xong : hiển thị data chart cho order/order details, empschedule/salarynote
 
   	+ chưa hoàn thành : Salary Note information form (giao diện/xem/xoá**/sửa thông tin)
   	+ chưa hoàn thành : Receipt Note information form (giao diện/xem/tìm kiếm(theo ngày, ?))
 	+ **Các phần xóa đã hoàn thành, nhưng sẽ bàn lại sau vì code hiện tại đã xong, chạy ổn, nhưng vẫn phải bàn lại, đặc biệt là Employee. Có thể sẽ sửa đổi trong lần gặp tới. Nếu phần xóa này đã ổn thì phần việc của Admin đã hoàn thành.
 	+ Đã cập nhật các phần có thiết kế thay đổi trong file Comma Review(các phần có dấu ** là phần đã update)
 	+ chưa hoàn thành : xuất report cho dữ liệu receiptnote/receiptnote details
+	+ chưa hoàn thành : hiển thị data chart cho receiptnote/receiptnote details
 
 
 (*) dự kiến : Chức năng cho phép admin thêm lịch làm việc cho nhân viên hằng tuần, và nhân viên chỉ có thể login trong khung giờ mà admin đã sắp xếp (nếu login trễ hơn tức là đã đi làm trễ, logout sớm hơn giờ đã định => thông báo cho admin, trừ lương). Chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). 

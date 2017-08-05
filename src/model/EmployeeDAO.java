@@ -171,6 +171,41 @@ public class EmployeeDAO {
         return ds;
     }
     
+    public static List<Employee> getAllList(){
+        List<Employee> ds = new ArrayList<>();
+        String sql = "SELECT * FROM tbEmployee";
+                
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();){
+
+            while(rs.next())
+            {
+                Employee newitem = new Employee();
+                newitem.setEm_id(rs.getString(1));
+                newitem.setUsername(rs.getString(2));
+                newitem.setPass(rs.getString(3));
+                newitem.setName(rs.getString(4));
+                newitem.setBirth(rs.getDate(5));
+                newitem.setStartday(rs.getDate(6));
+                newitem.setHour_wage(rs.getInt(7));
+                newitem.setAddr(rs.getString(8));
+                newitem.setEmail(rs.getString(9));
+                newitem.setPhone(rs.getString(10));
+                newitem.setEm_role(rs.getInt(11));
+                newitem.setManager(rs.getString(12));
+                newitem.setDeleted(rs.getInt(13));
+                
+                ds.add(newitem);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ds;
+    }
+    
     public static int changeHourWage(String em_id, int newhourwage){
         String sql = "UPDATE tbEmployee SET hour_wage = ? WHERE em_id = ?";
         try(Connection cn = new DBConnect().getCon();

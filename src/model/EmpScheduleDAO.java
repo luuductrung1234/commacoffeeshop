@@ -12,7 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -120,7 +123,94 @@ public class EmpScheduleDAO {
         return resultlist;
     }
     
+    public static Map<Integer, Float> gethour_dayinmonth(String empid, int year, int month){
+        HashMap<Integer, Float> resultmap = new HashMap<>();
+        String sql = "select sum((endhour-starthour) + (endminute-startminute)/convert(float,60)) from tbEmpSchedule\n" +
+                        "where em_id = ? and year(workday) = ? and month(workday) = ? and day(workday) = ?";
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, 1);
+        int dayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            for(int i = 1; i <= dayOfMonth; i++){
+                st.setString(1, empid);
+                st.setInt(2, year);
+                st.setInt(3, month);
+                st.setInt(4, i);
+                
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        resultmap.put(i, rs.getFloat(1));
+                    }else{
+                        resultmap.put(i, new Float(0));
+                    }
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpScheduleDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultmap;
+    }
     
+    public static Map<Integer, Float> gethour_monthinyear(String empid, int year){
+        HashMap<Integer, Float> resultmap = new HashMap<>();
+        String sql = "select sum((endhour-starthour) + (endminute-startminute)/convert(float,60)) from tbEmpSchedule\n" +
+                        "where em_id = ? and year(workday) = ? and month(workday) = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            for(int i = 1; i <= 12; i++){
+                st.setString(1, empid);
+                st.setInt(2, year);
+                st.setInt(3, i);
+                
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        resultmap.put(i, rs.getFloat(1));
+                    }else{
+                        resultmap.put(i, new Float(0));
+                    }
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpScheduleDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultmap;
+    }
+    
+    public static Map<Integer, Float> gethour_yeartoyear(String empid, int year){
+        HashMap<Integer, Float> resultmap = new HashMap<>();
+        String sql = "select sum((endhour-starthour) + (endminute-startminute)/convert(float,60)) from tbEmpSchedule\n" +
+                        "where em_id = ? and year(workday) = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            for(int i = year - 2; i <= year + 2; i++){
+                st.setString(1, empid);
+                st.setInt(2, i);
+                
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        resultmap.put(i, rs.getFloat(1));
+                    }else{
+                        resultmap.put(i, new Float(0));
+                    }
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpScheduleDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return resultmap;
+    }
     
     // WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
     private static String createid(String startid, String number_want_toset, int idsize) {

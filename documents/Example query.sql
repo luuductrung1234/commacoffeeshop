@@ -73,3 +73,7 @@ go
 select sum(price) from tbOrder
 where year(ordertime) = 2017 and month(ordertime) = 7
 go
+
+select sum((endhour-starthour) + (endminute-startminute)/convert(float,60)) from tbEmpSchedule
+where em_id = 'EM00000001' and year(workday) = 2017 and month(workday) = 7 and day(workday) = 30
+go
