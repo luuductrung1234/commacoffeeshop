@@ -66,6 +66,8 @@ Phần mềm được viết trên nền tảng JAVA với giao diện đồ ho�
 	+ chưa hoàn thành : xuất report cho dữ liệu receiptnote/receiptnote details
 	+ chưa hoàn thành : hiển thị data chart cho receiptnote/receiptnote details
 
+	+ Salary Note -> ComboBox Is Paid: dự định là dùng để lọc ra những ai đã paid(yes) và những ai chưa paid(no), nhưng vẫn chưa thực hiện được, vì còn phải tính toán lại cho hợp lí. Từ giờ đến sáng mai vẫn chưa code tiếp được
+
 
 (*) dự kiến : Chức năng cho phép admin thêm lịch làm việc cho nhân viên hằng tuần, và nhân viên chỉ có thể login trong khung giờ mà admin đã sắp xếp (nếu login trễ hơn tức là đã đi làm trễ, logout sớm hơn giờ đã định => thông báo cho admin, trừ lương). Chức năng kiểm toán thu chi theo ngày/tháng/năm. Chức năng đồ hoạ vẽ biểu đồ thu nhập (bằng JFreeChart, datascient library). 
 
