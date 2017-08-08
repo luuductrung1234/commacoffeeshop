@@ -1207,6 +1207,9 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Update Date Pay"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateSalaryActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1402,7 +1405,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="pnCustomerInformation" pref="505" max="32767" attributes="0"/>
+                          <Component id="pnCustomerInformation" pref="516" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="pnCustomerInformationControl" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1432,7 +1435,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="85" max="32767" attributes="0"/>
+                                      <EmptySpace pref="92" max="32767" attributes="0"/>
                                       <Component id="txtDiscountCus" min="-2" pref="150" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -2533,7 +2536,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="pnFMInformation" pref="505" max="32767" attributes="0"/>
+                          <Component id="pnFMInformation" pref="516" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="pnFMInformationControl" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -2595,7 +2598,7 @@
                                           <Component id="cboUnitBuyFM" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtStandardPriceFM" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -2820,10 +2823,6 @@
                           <Component id="btnSearchReceiptTime" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnResetReceiptData" min="-2" pref="150" max="-2" attributes="0"/>
-                          <EmptySpace pref="451" max="32767" attributes="0"/>
-                          <Component id="btnShowChartReceiptNote" min="-2" pref="58" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnExportReportReceiptNote" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -2832,14 +2831,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnSearchReceiptTime" max="32767" attributes="0"/>
                       <Component id="btnResetReceiptData" max="32767" attributes="0"/>
-                      <Component id="txtSearchReceiptTime" alignment="0" pref="47" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnExportReportReceiptNote" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="btnShowChartReceiptNote" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtSearchReceiptTime" alignment="0" pref="31" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2866,28 +2858,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetReceiptDataActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnShowChartReceiptNote">
-                  <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="show chart"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowChartReceiptNoteActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ImageIcon receiptcharticon = null;&#xa;try{&#xa;    Image scaled = ImageIO.read(new File(&quot;src/image/charticon.png&quot;)).getScaledInstance(40, 35, Image.SCALE_SMOOTH);&#xa;    receiptcharticon = new ImageIcon(scaled);&#xa;}catch(IOException io_ex){&#xa;    io_ex.printStackTrace();&#xa;}&#xa;this.btnShowChartReceiptNote.setIcon(receiptcharticon);"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnExportReportReceiptNote">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Export"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportReportReceiptNoteActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -2921,7 +2891,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane8" alignment="1" pref="482" max="32767" attributes="0"/>
+                          <Component id="jScrollPane8" alignment="1" pref="498" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -3008,7 +2978,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane9" alignment="1" pref="482" max="32767" attributes="0"/>
+                          <Component id="jScrollPane9" alignment="1" pref="498" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>

@@ -308,8 +308,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         txtSearchReceiptTime = new javax.swing.JTextField();
         btnSearchReceiptTime = new javax.swing.JButton();
         btnResetReceiptData = new javax.swing.JButton();
-        btnShowChartReceiptNote = new javax.swing.JButton();
-        btnExportReportReceiptNote = new javax.swing.JButton();
         pnShowReceipt = new javax.swing.JPanel();
         pnvwReceiptNote = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -942,6 +940,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         jLabel44.setText("For Year");
 
         btnUpdateSalary.setText("Update Date Pay");
+        btnUpdateSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateSalaryActionPerformed(evt);
+            }
+        });
         pnSalaryControl.add(btnUpdateSalary);
 
         javax.swing.GroupLayout pnvwSalaryLayout = new javax.swing.GroupLayout(pnvwSalary);
@@ -1165,7 +1168,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGroup(pnCustomerInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnCustomerInformationLayout.createSequentialGroup()
                         .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addComponent(txtDiscountCus, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnCustomerInformationLayout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -1253,7 +1256,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnCustomerFormLayout.setVerticalGroup(
             pnCustomerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCustomerFormLayout.createSequentialGroup()
-                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(pnCustomerInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnCustomerInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1884,7 +1887,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                             .addComponent(cboTypeFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboUnitBuyFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtStandardPriceFM))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 25, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         pnFMInformationLayout.setVerticalGroup(
@@ -1971,7 +1974,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         pnFMFormLayout.setVerticalGroup(
             pnFMFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFMFormLayout.createSequentialGroup()
-                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(pnFMInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnFMInformationControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1998,21 +2001,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
         });
 
-        btnShowChartReceiptNote.setToolTipText("show chart");
-        btnShowChartReceiptNote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowChartReceiptNoteActionPerformed(evt);
-            }
-        });
-
-        btnExportReportReceiptNote.setBackground(new java.awt.Color(255, 255, 255));
-        btnExportReportReceiptNote.setText("Export");
-        btnExportReportReceiptNote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportReportReceiptNoteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnReceiptSearchLayout = new javax.swing.GroupLayout(pnReceiptSearch);
         pnReceiptSearch.setLayout(pnReceiptSearchLayout);
         pnReceiptSearchLayout.setHorizontalGroup(
@@ -2024,32 +2012,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(btnSearchReceiptTime, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnResetReceiptData, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
-                .addComponent(btnShowChartReceiptNote, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExportReportReceiptNote)
                 .addContainerGap())
         );
         pnReceiptSearchLayout.setVerticalGroup(
             pnReceiptSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnSearchReceiptTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnResetReceiptData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(txtSearchReceiptTime, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-            .addGroup(pnReceiptSearchLayout.createSequentialGroup()
-                .addGroup(pnReceiptSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnExportReportReceiptNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnShowChartReceiptNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(txtSearchReceiptTime, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
-
-        ImageIcon receiptcharticon = null;
-        try{
-            Image scaled = ImageIO.read(new File("src/image/charticon.png")).getScaledInstance(40, 35, Image.SCALE_SMOOTH);
-            receiptcharticon = new ImageIcon(scaled);
-        }catch(IOException io_ex){
-            io_ex.printStackTrace();
-        }
-        this.btnShowChartReceiptNote.setIcon(receiptcharticon);
 
         pnReceiptNote.add(pnReceiptSearch, java.awt.BorderLayout.PAGE_START);
 
@@ -2107,7 +2077,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnvwReceiptNoteLayout.setVerticalGroup(
             pnvwReceiptNoteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
         );
 
         pnShowReceipt.add(pnvwReceiptNote);
@@ -2165,7 +2135,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         );
         pnReceiptNoteDetailsLayout.setVerticalGroup(
             pnReceiptNoteDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
         );
 
         pnShowReceipt.add(pnReceiptNoteDetails);
@@ -3995,7 +3965,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             txtQuanFD.setText(modelFD.getValueAt(row, 5).toString());
             txtUnitUseFD.setText(modelFD.getValueAt(row, 6).toString());
         }
-        
     }//GEN-LAST:event_vwFDMouseClicked
 
     private void btnResetFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFoodActionPerformed
@@ -5519,10 +5488,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
             cl.show(pnDisplay, "card10");
             
-            initDatacboEmployee();
-            LocalDate yearmonth = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
-            initDatavwMonth(yearmonth.getYear(), yearmonth.getMonthValue());
+            LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+            initDatavwMonth(today.getYear(), today.getMonthValue());
             setSalaryControl(false);
+            initDatacboEmployee();
+            btnUpdateSalary.setText("Update Date Pay");
         }
         else
         {
@@ -5971,7 +5941,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
     private void cboEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmployeeActionPerformed
         String yearmonth = txtvwMonth.getText().trim();
-        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
+        try
+        {
+            initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
+        }
+        catch(Exception ex)
+        {
+            
+        }
     }//GEN-LAST:event_cboEmployeeActionPerformed
 
     private void cboEmployeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboEmployeeMousePressed
@@ -6021,14 +5998,116 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_vwEmpScheMouseClicked
 
-    private void btnShowChartReceiptNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartReceiptNoteActionPerformed
-        // TODO add your handling code here:
-        new DiaReceiptNoteChart(this, true).setVisible(true);
-    }//GEN-LAST:event_btnShowChartReceiptNoteActionPerformed
-
-    private void btnExportReportReceiptNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportReportReceiptNoteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExportReportReceiptNoteActionPerformed
+    private void btnUpdateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSalaryActionPerformed
+        setSalaryControl(true);
+        if(btnUpdateSalary.getText().equals("Update Date Pay"))
+        {
+            btnUpdateSalary.setText("Save");
+        }
+        if(btnUpdateSalary.getText().equals("Save"))
+        {
+            String sn_id = txtIDSalary.getText().trim();
+            String em_id = txtIDEmpSalary.getText().trim();
+            
+            LocalDate datepay;
+            String sdatepay = txtBirthEmp.getText().trim();
+            int dky, dkm, dkd;
+            LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+            try
+            {
+                if(sdatepay.length() == 0 || sdatepay.length() > 10)
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                dky = Integer.parseInt(sdatepay.substring(0, 4));
+                dkm = Integer.parseInt(sdatepay.substring(5, 7));
+                dkd = Integer.parseInt(sdatepay.substring(8, 10));
+                if(dky < 0 || dkm < 0 || dkd < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                if(sdatepay.charAt(4) != '-' || sdatepay.charAt(7) != '-')
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                if(dkm > 12)
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid! Month of year must not be greater than 12!");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                if(dkm == 2)
+                {
+                    if((dky % 400 == 0) || (dky % 4 == 0 &&  dky % 100 != 0))
+                    {
+                        if(dkd > 29)
+                        {
+                            JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 29!");
+                            txtDatePaySalary.requestFocus();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(dkd > 28)
+                        {
+                            JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 28!");
+                            txtDatePaySalary.requestFocus();
+                            return;
+                        }
+                    }
+                }
+                if(dkm == 4 || dkm == 6 || dkm == 9 || dkm == 11)
+                {
+                    if(dkd > 30)
+                    {
+                        JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 30!");
+                        txtDatePaySalary.requestFocus();
+                        return;
+                    }
+                }
+                if(dkm == 1 || dkm == 3 || dkm == 5 || dkm == 7 || dkm == 8 || dkm == 10 || dkm == 11)
+                {
+                    if(dkd > 31)
+                    {
+                        JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 31!");
+                        txtDatePaySalary.requestFocus();
+                        return;
+                    }
+                }
+                datepay = LocalDate.of(dky, dkm, dkd);
+                if(!(datepay.isAfter(today)))
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid! Date Pay must be after to day!");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                txtDatePaySalary.requestFocus();
+                return;
+            }
+            if(SalaryNoteDAO.updateDatePay(java.sql.Date.valueOf(datepay), sn_id, em_id) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update Date Pay successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update Date Pay successful!");
+                txtDatePaySalary.setText("");
+            }
+            setSalaryControl(false);
+            btnUpdateSalary.setText("Update Date Pay");
+        }
+    }//GEN-LAST:event_btnUpdateSalaryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -6078,7 +6157,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteFood;
     private javax.swing.JToggleButton btnEmployee;
     private javax.swing.JButton btnExportReportOrder;
-    private javax.swing.JButton btnExportReportReceiptNote;
     private javax.swing.JButton btnExportReportSalaryNote;
     private javax.swing.JToggleButton btnFood;
     private javax.swing.JToggleButton btnFoodMaterial;
@@ -6115,7 +6193,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchOrderTime;
     private javax.swing.JButton btnSearchReceiptTime;
     private javax.swing.JButton btnShowChartOrder;
-    private javax.swing.JButton btnShowChartReceiptNote;
     private javax.swing.JButton btnShowChartSalaryNote;
     private javax.swing.JButton btnUpdateAd;
     private javax.swing.JButton btnUpdateCus;
@@ -6543,7 +6620,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }
 
     private void initDatavwFood(String txtIDFood) {
-//        sorterFD.setRowFilter(RowFilter.regexFilter(txtIDFood, 1));
         modelFD.getDataVector().removeAllElements();
         modelFD.fireTableDataChanged();
         for (FoodDetails d:dsFD)
@@ -6828,10 +6904,16 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private void initDatacboEmployee() {
         cboEmployee.removeAllItems();
         cboEmployee.addItem("--");
-        
-        for(Employee d:dsEmployee)
+        List<String> dscboEmp = EmpScheduleDAO.getListDoneEmpSche();
+        for(String d:dscboEmp)
         {
-            cboEmployee.addItem(d.getName());
+            for(Employee ds:dsEmployee)
+            {
+                if(ds.getEm_id().equals(d))
+                {
+                    cboEmployee.addItem(ds.getName());
+                }
+            }
         }
     }
     
@@ -6886,6 +6968,37 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     if(demp.getEm_id().equals(d.getEm_id()) && (d.getWorkday().toLocalDate().getMonthValue() == dkm && d.getWorkday().toLocalDate().getYear() == dky))
                     {
                         modelEmpSche.addRow(d.toVector());
+                    }
+                }
+            }
+        }
+        for(SalaryNote d:SalaryNoteDAO.getlist_inmonth(dkm, dky))
+        {
+            for(Employee ds:dsEmployee)
+            {
+                if(ds.getName().equals(em_name) && d.getEm_id().equals(ds.getEm_id()))
+                {
+                    txtIDSalary.setText(d.getSn_id());
+                    txtIDEmpSalary.setText(d.getEm_id());
+                    txtEmpNameSalary.setText(cboEmployee.getSelectedItem().toString());
+                    try
+                    {
+                        txtDatePaySalary.setText(d.getDate_pay().toString());
+                    }
+                    catch(NullPointerException ex)
+                    {
+                        txtDatePaySalary.setText("");
+                    }
+                    txtSalarySalary.setText(d.getSalary_value() + "");
+                    txtForMonthSalary.setText(d.getFor_month() + "");
+                    txtForYearSalary.setText(d.getFor_year() + "");
+                    if(d.getIs_paid() == 0)
+                    {
+                        txtIsPaidSalary.setText("No");
+                    }
+                    else
+                    {
+                        txtIsPaidSalary.setText("Yes");
                     }
                 }
             }
