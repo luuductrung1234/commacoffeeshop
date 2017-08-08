@@ -225,4 +225,23 @@ public class EmpScheduleDAO {
         
         return str_result;
     }
+
+    public static List<String> getListDoneEmpSche() {
+        List<String> ds = new ArrayList<>();
+        String sql = "SELECT DISTINCT em_id FROM tbEmpSchedule";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);
+                ResultSet rs = st.executeQuery();) {
+            while(rs.next())
+            {
+                ds.add(rs.getString(1));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FoodMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ds;
+    }
 }

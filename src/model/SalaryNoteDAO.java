@@ -152,6 +152,26 @@ public class SalaryNoteDAO {
         return resultlist;
     }
     
+    public static int updateDatePay(java.sql.Date date_pay, String sn_id, String em_id)
+    {
+        String sql = "UPDATE tbSalaryNote SET date_pay = ? WHERE sn_id = ? and em_id = ?";
+        
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql);){
+            
+            st.setDate(1, date_pay);
+            st.setString(2, sn_id);
+            st.setString(3, em_id);
+            
+            return st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(EmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
+    }
+    
     
 // WARNING: những DAO có dùng hàm createid thì các record đã tạo rồi sẽ không xoá. Tức là ko nên tạo method delete() để xoá record trong table
     private static String createid(String startid, String number_want_toset, int idsize) {

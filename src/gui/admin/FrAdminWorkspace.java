@@ -940,6 +940,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         jLabel44.setText("For Year");
 
         btnUpdateSalary.setText("Update Date Pay");
+        btnUpdateSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateSalaryActionPerformed(evt);
+            }
+        });
         pnSalaryControl.add(btnUpdateSalary);
 
         javax.swing.GroupLayout pnvwSalaryLayout = new javax.swing.GroupLayout(pnvwSalary);
@@ -3960,7 +3965,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             txtQuanFD.setText(modelFD.getValueAt(row, 5).toString());
             txtUnitUseFD.setText(modelFD.getValueAt(row, 6).toString());
         }
-        
     }//GEN-LAST:event_vwFDMouseClicked
 
     private void btnResetFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFoodActionPerformed
@@ -5484,10 +5488,11 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             CardLayout cl = (CardLayout) this.pnDisplay.getLayout();
             cl.show(pnDisplay, "card10");
             
-            initDatacboEmployee();
-            LocalDate yearmonth = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
-            initDatavwMonth(yearmonth.getYear(), yearmonth.getMonthValue());
+            LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+            initDatavwMonth(today.getYear(), today.getMonthValue());
             setSalaryControl(false);
+            initDatacboEmployee();
+            btnUpdateSalary.setText("Update Date Pay");
         }
         else
         {
@@ -5936,7 +5941,14 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
     private void cboEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmployeeActionPerformed
         String yearmonth = txtvwMonth.getText().trim();
-        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
+        try
+        {
+            initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
+        }
+        catch(Exception ex)
+        {
+            
+        }
     }//GEN-LAST:event_cboEmployeeActionPerformed
 
     private void cboEmployeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboEmployeeMousePressed
@@ -5985,6 +5997,117 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_vwEmpScheMouseClicked
+
+    private void btnUpdateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSalaryActionPerformed
+        setSalaryControl(true);
+        if(btnUpdateSalary.getText().equals("Update Date Pay"))
+        {
+            btnUpdateSalary.setText("Save");
+        }
+        if(btnUpdateSalary.getText().equals("Save"))
+        {
+            String sn_id = txtIDSalary.getText().trim();
+            String em_id = txtIDEmpSalary.getText().trim();
+            
+            LocalDate datepay;
+            String sdatepay = txtBirthEmp.getText().trim();
+            int dky, dkm, dkd;
+            LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+            try
+            {
+                if(sdatepay.length() == 0 || sdatepay.length() > 10)
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                dky = Integer.parseInt(sdatepay.substring(0, 4));
+                dkm = Integer.parseInt(sdatepay.substring(5, 7));
+                dkd = Integer.parseInt(sdatepay.substring(8, 10));
+                if(dky < 0 || dkm < 0 || dkd < 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                if(sdatepay.charAt(4) != '-' || sdatepay.charAt(7) != '-')
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                if(dkm > 12)
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid! Month of year must not be greater than 12!");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+                if(dkm == 2)
+                {
+                    if((dky % 400 == 0) || (dky % 4 == 0 &&  dky % 100 != 0))
+                    {
+                        if(dkd > 29)
+                        {
+                            JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 29!");
+                            txtDatePaySalary.requestFocus();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if(dkd > 28)
+                        {
+                            JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 28!");
+                            txtDatePaySalary.requestFocus();
+                            return;
+                        }
+                    }
+                }
+                if(dkm == 4 || dkm == 6 || dkm == 9 || dkm == 11)
+                {
+                    if(dkd > 30)
+                    {
+                        JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 30!");
+                        txtDatePaySalary.requestFocus();
+                        return;
+                    }
+                }
+                if(dkm == 1 || dkm == 3 || dkm == 5 || dkm == 7 || dkm == 8 || dkm == 10 || dkm == 11)
+                {
+                    if(dkd > 31)
+                    {
+                        JOptionPane.showMessageDialog(null, "Date Pay is not valid! Day of that month must not be greater than 31!");
+                        txtDatePaySalary.requestFocus();
+                        return;
+                    }
+                }
+                datepay = LocalDate.of(dky, dkm, dkd);
+                if(!(datepay.isAfter(today)))
+                {
+                    JOptionPane.showMessageDialog(null, "Date Pay is not valid! Date Pay must be after to day!");
+                    txtDatePaySalary.requestFocus();
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Date Pay is not valid!\nHint: yyyy-MM-dd");
+                txtDatePaySalary.requestFocus();
+                return;
+            }
+            if(SalaryNoteDAO.updateDatePay(java.sql.Date.valueOf(datepay), sn_id, em_id) != 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update Date Pay successful!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update Date Pay successful!");
+                txtDatePaySalary.setText("");
+            }
+            setSalaryControl(false);
+            btnUpdateSalary.setText("Update Date Pay");
+        }
+    }//GEN-LAST:event_btnUpdateSalaryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -6497,7 +6620,6 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }
 
     private void initDatavwFood(String txtIDFood) {
-//        sorterFD.setRowFilter(RowFilter.regexFilter(txtIDFood, 1));
         modelFD.getDataVector().removeAllElements();
         modelFD.fireTableDataChanged();
         for (FoodDetails d:dsFD)
@@ -6782,10 +6904,16 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private void initDatacboEmployee() {
         cboEmployee.removeAllItems();
         cboEmployee.addItem("--");
-        
-        for(Employee d:dsEmployee)
+        List<String> dscboEmp = EmpScheduleDAO.getListDoneEmpSche();
+        for(String d:dscboEmp)
         {
-            cboEmployee.addItem(d.getName());
+            for(Employee ds:dsEmployee)
+            {
+                if(ds.getEm_id().equals(d))
+                {
+                    cboEmployee.addItem(ds.getName());
+                }
+            }
         }
     }
     
@@ -6840,6 +6968,37 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     if(demp.getEm_id().equals(d.getEm_id()) && (d.getWorkday().toLocalDate().getMonthValue() == dkm && d.getWorkday().toLocalDate().getYear() == dky))
                     {
                         modelEmpSche.addRow(d.toVector());
+                    }
+                }
+            }
+        }
+        for(SalaryNote d:SalaryNoteDAO.getlist_inmonth(dkm, dky))
+        {
+            for(Employee ds:dsEmployee)
+            {
+                if(ds.getName().equals(em_name) && d.getEm_id().equals(ds.getEm_id()))
+                {
+                    txtIDSalary.setText(d.getSn_id());
+                    txtIDEmpSalary.setText(d.getEm_id());
+                    txtEmpNameSalary.setText(cboEmployee.getSelectedItem().toString());
+                    try
+                    {
+                        txtDatePaySalary.setText(d.getDate_pay().toString());
+                    }
+                    catch(NullPointerException ex)
+                    {
+                        txtDatePaySalary.setText("");
+                    }
+                    txtSalarySalary.setText(d.getSalary_value() + "");
+                    txtForMonthSalary.setText(d.getFor_month() + "");
+                    txtForYearSalary.setText(d.getFor_year() + "");
+                    if(d.getIs_paid() == 0)
+                    {
+                        txtIsPaidSalary.setText("No");
+                    }
+                    else
+                    {
+                        txtIsPaidSalary.setText("Yes");
                     }
                 }
             }

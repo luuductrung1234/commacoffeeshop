@@ -1207,6 +1207,9 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Update Date Pay"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateSalaryActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
