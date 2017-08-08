@@ -5,7 +5,6 @@
  */
 package gui.admin;
 
-import entities.Employee;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,16 +13,15 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import javax.swing.JPanel;
-import model.EmpScheduleDAO;
-import model.EmployeeDAO;
+import model.ReceiptNoteDAO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -34,13 +32,14 @@ import org.jfree.ui.RectangleEdge;
  *
  * @author DELL
  */
-public class DiaSalaryNoteChart extends javax.swing.JDialog {
+public class DiaReceiptNoteChart extends javax.swing.JDialog {
 
     /**
-     * Creates new form DiaSalaryNoteChart
+     * Creates new form DiaReceiptNoteChart
      */
-    public DiaSalaryNoteChart(FrAdminWorkspace parent, boolean modal) {
+    public DiaReceiptNoteChart(FrAdminWorkspace parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         this.setLocationRelativeTo(this.parent);
         this.setLocation(300, 150);
         this.setModal(true);
@@ -60,42 +59,20 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btngChartType = new javax.swing.ButtonGroup();
         pnMain = new javax.swing.JPanel();
         pnControl = new javax.swing.JPanel();
-        cbEmployeename = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         lbDayofMonth = new javax.swing.JLabel();
         lbMonthofYear = new javax.swing.JLabel();
         lbYeartoyear = new javax.swing.JLabel();
         pnDisplay = new javax.swing.JPanel();
         pnShowChart = new javax.swing.JPanel();
-        pnBlank = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("History Working Chart");
-        setPreferredSize(new java.awt.Dimension(900, 450));
+        setTitle("Purchase Chart");
 
-        pnMain.setBackground(new java.awt.Color(204, 204, 204));
         pnMain.setLayout(new javax.swing.BoxLayout(pnMain, javax.swing.BoxLayout.LINE_AXIS));
 
-        pnControl.setBackground(new java.awt.Color(51, 51, 51));
-        pnControl.setPreferredSize(new java.awt.Dimension(150, 105));
-
-        String[] empname = new String[this.emplist.size()];
-        for(int i = 0; i < this.emplist.size(); i++){
-            empname[i] = this.emplist.get(i).getName();
-        }
-        cbEmployeename.setModel(new javax.swing.DefaultComboBoxModel<>(empname));
-        cbEmployeename.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEmployeenameActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Employee:");
+        pnControl.setBackground(new java.awt.Color(58, 58, 79));
 
         lbDayofMonth.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         lbDayofMonth.setForeground(new java.awt.Color(204, 204, 204));
@@ -149,67 +126,53 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
         pnControl.setLayout(pnControlLayout);
         pnControlLayout.setHorizontalGroup(
             pnControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbMonthofYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnControlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnControlLayout.createSequentialGroup()
-                        .addGroup(pnControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(cbEmployeename, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lbMonthofYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbDayofMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbYeartoyear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbDayofMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(lbYeartoyear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnControlLayout.setVerticalGroup(
             pnControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnControlLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbEmployeename, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(117, 117, 117)
                 .addComponent(lbDayofMonth)
                 .addGap(18, 18, 18)
                 .addComponent(lbMonthofYear)
                 .addGap(18, 18, 18)
                 .addComponent(lbYeartoyear)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         pnMain.add(pnControl);
 
-        pnDisplay.setPreferredSize(new java.awt.Dimension(500, 385));
-        pnDisplay.setLayout(new java.awt.CardLayout());
+        pnDisplay.setBackground(new java.awt.Color(0, 8, 35));
+        pnDisplay.setForeground(new java.awt.Color(204, 204, 204));
 
+        pnShowChart.setBackground(new java.awt.Color(0, 8, 35));
         pnShowChart.setLayout(new java.awt.BorderLayout());
-        pnDisplay.add(pnShowChart, "card2");
 
-        javax.swing.GroupLayout pnBlankLayout = new javax.swing.GroupLayout(pnBlank);
-        pnBlank.setLayout(pnBlankLayout);
-        pnBlankLayout.setHorizontalGroup(
-            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnDisplayLayout = new javax.swing.GroupLayout(pnDisplay);
+        pnDisplay.setLayout(pnDisplayLayout);
+        pnDisplayLayout.setHorizontalGroup(
+            pnDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnShowChart, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
         );
-        pnBlankLayout.setVerticalGroup(
-            pnBlankLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 385, Short.MAX_VALUE)
+        pnDisplayLayout.setVerticalGroup(
+            pnDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnDisplayLayout.createSequentialGroup()
+                .addComponent(pnShowChart, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        pnDisplay.add(pnBlank, "card3");
 
         pnMain.add(pnDisplay);
+        this.pnShowChart.setSize(700, 500);
 
         getContentPane().add(pnMain, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbEmployeenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmployeenameActionPerformed
-        // TODO add your handling code here:
-        this.refreshpnShowChart();
-    }//GEN-LAST:event_cbEmployeenameActionPerformed
 
     private void lbDayofMonthMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDayofMonthMouseEntered
         // TODO add your handling code here:
@@ -267,6 +230,7 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
         this.selectedMonthinYear = true;
         this.selectedYeartoyear = false;
         this.refreshpnShowChart();
+
     }//GEN-LAST:event_lbMonthofYearMouseClicked
 
     private void lbYeartoyearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbYeartoyearMouseClicked
@@ -279,7 +243,9 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
         this.selectedYeartoyear = true;
         this.refreshpnShowChart();
     }//GEN-LAST:event_lbYeartoyearMouseClicked
-
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -297,20 +263,20 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DiaSalaryNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaReceiptNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DiaSalaryNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaReceiptNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DiaSalaryNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaReceiptNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DiaSalaryNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiaReceiptNoteChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DiaSalaryNoteChart dialog = new DiaSalaryNoteChart(new FrAdminWorkspace(), true);
+                DiaReceiptNoteChart dialog = new DiaReceiptNoteChart(new FrAdminWorkspace(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -323,85 +289,75 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup btngChartType;
-    private javax.swing.JComboBox<String> cbEmployeename;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbDayofMonth;
     private javax.swing.JLabel lbMonthofYear;
     private javax.swing.JLabel lbYeartoyear;
-    private javax.swing.JPanel pnBlank;
     private javax.swing.JPanel pnControl;
     private javax.swing.JPanel pnDisplay;
     private javax.swing.JPanel pnMain;
     private javax.swing.JPanel pnShowChart;
     // End of variables declaration//GEN-END:variables
 
-    
-    
+
 // CUSTOM VARIABLE DECLARATION
     FrAdminWorkspace parent;
-    LocalDate day = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
-    ArrayList<Employee> emplist = (ArrayList<Employee>) EmployeeDAO.getAllList();
+    LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
     
-    Employee curemp;
     
-    boolean selectedDayinMonth = false;
-    boolean selectedMonthinYear = false;
-    boolean selectedYeartoyear = false;
+    boolean selectedDayinMonth;
+    boolean selectedMonthinYear;
+    boolean selectedYeartoyear;
 // END CUSTOM VARIABLE DECLARATION
-    
     
     
     
     
 // CUSTOM CODE
     private void initDefaultConfig(){
-        this.cbEmployeename.setSelectedIndex(0);
         this.selectedDayinMonth = true;
         this.lbDayofMonth.setForeground(new Color(0, 109, 97));
     }
     
-    
     private void refreshpnShowChart(){
-        this.curemp = this.emplist.get(this.cbEmployeename.getSelectedIndex());
-        
         if(this.selectedDayinMonth){
-            HashMap<Integer, Float> dayinmonth_data = (HashMap<Integer, Float>) EmpScheduleDAO.gethour_dayinmonth(this.curemp.getEm_id(), this.day.getYear(), this.day.getMonth().getValue());
-        
+            HashMap<Integer, ArrayList<Integer>> daydata = (HashMap<Integer, ArrayList<Integer>>) ReceiptNoteDAO.getpurchase_dayinmonth(this.today.getYear(), this.today.getMonth().getValue());
+            
             // khởi tạo dataset cho chart
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            for(Entry<Integer, Float> iter : dayinmonth_data.entrySet()){
-                dataset.addValue(iter.getValue(), "Working Hour", iter.getKey());
+            for(Entry<Integer, ArrayList<Integer>> iter : daydata.entrySet()){
+                dataset.addValue(iter.getValue().get(0), "Food Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(1), "Drink Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(2), "Non-food Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(3), "Other Purchase", iter.getKey());
             }
                     
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Days of " + this.day.getYear() + "-" + this.day.getMonth() + " Total Working Hour", "Day", "Hour", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Days of " + this.today.getYear() + "-" + this.today.getMonth() + " Total Purchase", "Day", "Money (VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = chart.getCategoryPlot();
-            if(this.curemp.getDeleted() == 1){
-                plot.setBackgroundPaint(new Color(83, 62, 0));
-                plot.setRangeGridlinePaint(new Color(251, 188, 5));
-                
-                // thêm subtitle
-                TextTitle subtitle = new TextTitle("(This employee was deleted)");
-                subtitle.setFont(new Font("SansSerif", Font.PLAIN, 11));
-                subtitle.setPaint(new Color(83, 62, 0));
-                subtitle.setPosition(RectangleEdge.BOTTOM);
-                subtitle.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-                chart.addSubtitle(subtitle);
-            }else{
-                plot.setBackgroundPaint(new Color(0, 83, 80));
-                plot.setRangeGridlinePaint(new Color(49, 168, 163));
-            }
             
             // điều chỉnh chart
+            plot.setBackgroundPaint(new Color(0, 83, 80));
+            plot.setRangeGridlinePaint(new Color(49, 168, 163));
             LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
             renderer.setDrawOutlines(true);
             renderer.setUseFillPaint(true);
             // màu của line
-            renderer.setSeriesPaint(0, new Color(253, 23, 29));
+            renderer.setSeriesPaint(0, new Color(11, 214, 0));
             renderer.setSeriesStroke(0, new BasicStroke(4));
             renderer.setSeriesShapesFilled(0, true);
             renderer.setSeriesShapesVisible(0, true);
+            renderer.setSeriesPaint(1, new Color(0, 181, 126));
+            renderer.setSeriesStroke(1, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(1, true);
+            renderer.setSeriesShapesVisible(1, true);
+            renderer.setSeriesPaint(2, new Color(255, 89, 0));
+            renderer.setSeriesStroke(2, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(2, true);
+            renderer.setSeriesShapesVisible(2, true);
+            renderer.setSeriesPaint(3, new Color(253, 0, 6));
+            renderer.setSeriesStroke(3, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(3, true);
+            renderer.setSeriesShapesVisible(3, true);
             
             
             // hiển thị chart
@@ -412,42 +368,45 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
         }
         
         if(this.selectedMonthinYear){
-            HashMap<Integer, Float> monthinyear_data = (HashMap<Integer, Float>) EmpScheduleDAO.gethour_monthinyear(this.curemp.getEm_id(), this.day.getYear());
+            HashMap<Integer, ArrayList<Integer>> monthdata = (HashMap<Integer, ArrayList<Integer>>) ReceiptNoteDAO.getpurchase_monthinyear(this.today.getYear());
         
             // khởi tạo dataset cho chart
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            for(Entry<Integer, Float> iter : monthinyear_data.entrySet()){
-                dataset.addValue(iter.getValue(), "Working Hour", iter.getKey());
+            for(Entry<Integer, ArrayList<Integer>> iter : monthdata.entrySet()){
+                dataset.addValue(iter.getValue().get(0), "Food Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(1), "Drink Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(2), "Non-food Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(3), "Other Purchase", iter.getKey());
             }
                     
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Months of " +this.day.getYear()+ " Total Working Hour", "Month", "Hour", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Months of " + this.today.getYear() + " Total Purchase", "Month", "Money (VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = chart.getCategoryPlot();
-            if(this.curemp.getDeleted() == 1){
-                plot.setBackgroundPaint(new Color(83, 62, 0));
-                plot.setRangeGridlinePaint(new Color(251, 188, 5));
-                
-                // thêm subtitle
-                TextTitle subtitle = new TextTitle("(This employee was deleted)");
-                subtitle.setFont(new Font("SansSerif", Font.PLAIN, 11));
-                subtitle.setPaint(new Color(83, 62, 0));
-                subtitle.setPosition(RectangleEdge.BOTTOM);
-                subtitle.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-                chart.addSubtitle(subtitle);
-            }else{
-                plot.setBackgroundPaint(new Color(0, 83, 80));
-                plot.setRangeGridlinePaint(new Color(49, 168, 163));
-            }
             
             // điều chỉnh chart
+            plot.setBackgroundPaint(new Color(0, 83, 80));
+            plot.setRangeGridlinePaint(new Color(49, 168, 163));
             LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
             renderer.setDrawOutlines(true);
             renderer.setUseFillPaint(true);
             // màu của line
-            renderer.setSeriesPaint(0, new Color(253, 23, 29));
+            renderer.setSeriesPaint(0, new Color(11, 214, 0));
             renderer.setSeriesStroke(0, new BasicStroke(4));
             renderer.setSeriesShapesFilled(0, true);
             renderer.setSeriesShapesVisible(0, true);
+            renderer.setSeriesPaint(1, new Color(0, 181, 126));
+            renderer.setSeriesStroke(1, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(1, true);
+            renderer.setSeriesShapesVisible(1, true);
+            renderer.setSeriesPaint(2, new Color(255, 89, 0));
+            renderer.setSeriesStroke(2, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(2, true);
+            renderer.setSeriesShapesVisible(2, true);
+            renderer.setSeriesPaint(3, new Color(253, 0, 6));
+            renderer.setSeriesStroke(3, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(3, true);
+            renderer.setSeriesShapesVisible(3, true);
+            
             
             // hiển thị chart
             this.pnShowChart.removeAll();
@@ -457,42 +416,45 @@ public class DiaSalaryNoteChart extends javax.swing.JDialog {
         }
         
         if(this.selectedYeartoyear){
-            HashMap<Integer, Float> yeartoyear_data = (HashMap<Integer, Float>) EmpScheduleDAO.gethour_yeartoyear(this.curemp.getEm_id(), this.day.getYear());
+            HashMap<Integer, ArrayList<Integer>> yeardata = (HashMap<Integer, ArrayList<Integer>>) ReceiptNoteDAO.getpurchase_yeartoyear(this.today.getYear());
         
             // khởi tạo dataset cho chart
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            for(Entry<Integer, Float> iter : yeartoyear_data.entrySet()){
-                dataset.addValue(iter.getValue(), "Working Hour", iter.getKey());
+            for(Entry<Integer, ArrayList<Integer>> iter : yeardata.entrySet()){
+                dataset.addValue(iter.getValue().get(0), "Food Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(1), "Drink Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(2), "Non-food Materials", iter.getKey());
+                dataset.addValue(iter.getValue().get(3), "Other Purchase", iter.getKey());
             }
                     
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Years Total Working Hour", "Year", "Hour", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Years Total Purchase", "Month", "Money (VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = chart.getCategoryPlot();
-            if(this.curemp.getDeleted() == 1){
-                plot.setBackgroundPaint(new Color(83, 62, 0));
-                plot.setRangeGridlinePaint(new Color(251, 188, 5));
-                
-                // thêm subtitle
-                TextTitle subtitle = new TextTitle("(This employee was deleted)");
-                subtitle.setFont(new Font("SansSerif", Font.PLAIN, 11));
-                subtitle.setPaint(new Color(83, 62, 0));
-                subtitle.setPosition(RectangleEdge.BOTTOM);
-                subtitle.setHorizontalAlignment(HorizontalAlignment.RIGHT);
-                chart.addSubtitle(subtitle);
-            }else{
-                plot.setBackgroundPaint(new Color(0, 83, 80));
-                plot.setRangeGridlinePaint(new Color(49, 168, 163));
-            }
             
             // điều chỉnh chart
+            plot.setBackgroundPaint(new Color(0, 83, 80));
+            plot.setRangeGridlinePaint(new Color(49, 168, 163));
             LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
             renderer.setDrawOutlines(true);
             renderer.setUseFillPaint(true);
             // màu của line
-            renderer.setSeriesPaint(0, new Color(253, 23, 29));
+            renderer.setSeriesPaint(0, new Color(11, 214, 0));
             renderer.setSeriesStroke(0, new BasicStroke(4));
             renderer.setSeriesShapesFilled(0, true);
             renderer.setSeriesShapesVisible(0, true);
+            renderer.setSeriesPaint(1, new Color(0, 181, 126));
+            renderer.setSeriesStroke(1, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(1, true);
+            renderer.setSeriesShapesVisible(1, true);
+            renderer.setSeriesPaint(2, new Color(255, 89, 0));
+            renderer.setSeriesStroke(2, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(2, true);
+            renderer.setSeriesShapesVisible(2, true);
+            renderer.setSeriesPaint(3, new Color(253, 0, 6));
+            renderer.setSeriesStroke(3, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(3, true);
+            renderer.setSeriesShapesVisible(3, true);
+            
             
             // hiển thị chart
             this.pnShowChart.removeAll();

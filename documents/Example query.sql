@@ -77,3 +77,10 @@ go
 select sum((endhour-starthour) + (endminute-startminute)/convert(float,60)) from tbEmpSchedule
 where em_id = 'EM00000001' and year(workday) = 2017 and month(workday) = 7 and day(workday) = 30
 go
+
+
+select sum(item_price * quan * 1000) from tbReceiptNoteDetails
+where rn_id in (select rn_id from tbReceiptNote 
+					where day(rday) = 8 and month(rday) = 8 and year(rday) = 2017)
+				and fm_id in (select fm_id from tbFoodMaterial where usefor = 0)
+go

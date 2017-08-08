@@ -243,7 +243,7 @@ go
 
 
 insert into tbFoodMaterial values
-('FM00000000',	N'Non Food purchase',		N'',		3,	N'chi phí',		N'lần',		0,		N'', 0),
+('FM00000000',	N'Other purchase',			N'',		3,	N'chi phí',		N'lần',		0,		N'', 0),
 ('FM00000001',	N'pepsi', 					N'',		0,	N'khô',			N'thùng',	130,	N'chị Kiều: 01648360321', 0),
 ('FM00000002',	N'aquafina', 				N'',		0,	N'khô',			N'thùng',	90,		N'chị Kiều: 01648360321', 0),
 ('FM00000003',	N'7up', 					N'',		0,	N'khô',			N'thùng',	150,	N'chị Kiều: 01648360321', 0),

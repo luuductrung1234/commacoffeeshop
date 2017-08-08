@@ -13,8 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -136,6 +138,204 @@ public class ReceiptNoteDAO {
                         }
                     }
                 }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceiptNoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultlist;
+    }
+    
+    
+
+    public static Map<Integer, ArrayList<Integer>> getpurchase_dayinmonth(int year, int month){
+        HashMap<Integer, ArrayList<Integer>> resultlist = new HashMap<>();
+        
+        String sql = "select sum(item_price * quan * 1000) from tbReceiptNoteDetails " +
+                        "where rn_id in (select rn_id from tbReceiptNote where day(rday) = ? and month(rday) = ? and year(rday) = ?) " +
+                        "and fm_id in (select fm_id from tbFoodMaterial where usefor = ?)";
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, 1);
+        int dayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            
+            for(int i = 1; i <= dayOfMonth; i++){
+                ArrayList<Integer> thisday_record = new ArrayList<>();
+                st.setInt(1, i);
+                st.setInt(2, month);
+                st.setInt(3, year);
+                
+                // lấy tổng tiền nhập nguyên liệu thức ăn
+                st.setByte(4, (byte) 1);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisday_record.add(rs.getInt(1));
+                    }else{
+                        thisday_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền nhập nguyên liệu thức uống
+                st.setByte(4, (byte) 0);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisday_record.add(rs.getInt(1));
+                    }else{
+                        thisday_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền nhập nguyên liệu không phải thức ăn/uống
+                st.setByte(4, (byte) 2);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisday_record.add(rs.getInt(1));
+                    }else{
+                        thisday_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền chi trả khác
+                st.setByte(4, (byte) 3);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisday_record.add(rs.getInt(1));
+                    }else{
+                        thisday_record.add(0);
+                    }
+                }
+                
+                resultlist.put(i, thisday_record);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceiptNoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultlist;
+    }
+    
+    
+    public static Map<Integer, ArrayList<Integer>> getpurchase_monthinyear(int year){
+        HashMap<Integer, ArrayList<Integer>> resultlist = new HashMap<>();
+        
+        String sql = "select sum(item_price * quan * 1000) from tbReceiptNoteDetails " +
+                        "where rn_id in (select rn_id from tbReceiptNote where month(rday) = ? and year(rday) = ?) " +
+                        "and fm_id in (select fm_id from tbFoodMaterial where usefor = ?)";
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            
+            for(int i = 1; i <= 12; i++){
+                ArrayList<Integer> thismonth_record = new ArrayList<>();
+                st.setInt(1, i);
+                st.setInt(2, year);
+                
+                // lấy tổng tiền nhập nguyên liệu thức ăn
+                st.setByte(3, (byte) 1);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thismonth_record.add(rs.getInt(1));
+                    }else{
+                        thismonth_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền nhập nguyên liệu thức uống
+                st.setByte(3, (byte) 0);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thismonth_record.add(rs.getInt(1));
+                    }else{
+                        thismonth_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền nhập nguyên liệu không phải thức ăn/uống
+                st.setByte(3, (byte) 2);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thismonth_record.add(rs.getInt(1));
+                    }else{
+                        thismonth_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền chi trả khác
+                st.setByte(3, (byte) 3);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thismonth_record.add(rs.getInt(1));
+                    }else{
+                        thismonth_record.add(0);
+                    }
+                }
+                
+                resultlist.put(i, thismonth_record);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceiptNoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultlist;
+    }
+    
+    public static Map<Integer, ArrayList<Integer>> getpurchase_yeartoyear(int year){
+        HashMap<Integer, ArrayList<Integer>> resultlist = new HashMap<>();
+        
+        String sql = "select sum(item_price * quan * 1000) from tbReceiptNoteDetails " +
+                        "where rn_id in (select rn_id from tbReceiptNote where year(rday) = ?) " +
+                        "and fm_id in (select fm_id from tbFoodMaterial where usefor = ?)";
+        try(Connection cn = new DBConnect().getCon();
+                PreparedStatement st = cn.prepareStatement(sql)){
+            
+            for(int i = year - 2; i <= year + 2; i++){
+                ArrayList<Integer> thisyear_record = new ArrayList<>();
+                st.setInt(1, i);
+                
+                // lấy tổng tiền nhập nguyên liệu thức ăn
+                st.setByte(2, (byte) 1);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisyear_record.add(rs.getInt(1));
+                    }else{
+                        thisyear_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền nhập nguyên liệu thức uống
+                st.setByte(2, (byte) 0);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisyear_record.add(rs.getInt(1));
+                    }else{
+                        thisyear_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền nhập nguyên liệu không phải thức ăn/uống
+                st.setByte(2, (byte) 2);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisyear_record.add(rs.getInt(1));
+                    }else{
+                        thisyear_record.add(0);
+                    }
+                }
+                
+                // lấy tổng tiền chi trả khác
+                st.setByte(2, (byte) 3);
+                try(ResultSet rs = st.executeQuery()){
+                    if(rs.next()){
+                        thisyear_record.add(rs.getInt(1));
+                    }else{
+                        thisyear_record.add(0);
+                    }
+                }
+                
+                resultlist.put(i, thisyear_record);
             }
             
         } catch (SQLException ex) {

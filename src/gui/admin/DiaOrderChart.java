@@ -12,6 +12,7 @@ import entities.OrderDetails;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -29,9 +30,12 @@ import model.OrderDAO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import supportclass.chart.ChartDrawingSupplier;
@@ -86,12 +90,14 @@ public class DiaOrderChart extends javax.swing.JDialog {
         pnBlank = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("History Order Chart");
 
         pnMain.setLayout(new javax.swing.BoxLayout(pnMain, javax.swing.BoxLayout.PAGE_AXIS));
 
         pnControl.setBackground(new java.awt.Color(0, 0, 0));
+        pnControl.setName(""); // NOI18N
         pnControl.setPreferredSize(new java.awt.Dimension(0, 30));
-        pnControl.setLayout(new java.awt.GridLayout());
+        pnControl.setLayout(new java.awt.GridLayout(1, 0));
 
         btnExecuteStatistic.setToolTipText("Common Statistic");
         btnExecuteStatistic.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +108,7 @@ public class DiaOrderChart extends javax.swing.JDialog {
         pnControl.add(btnExecuteStatistic);
         ImageIcon statisticicon = null;
         try{
-            Image scaled = ImageIO.read(new File("src/image/piecharticon.png")).getScaledInstance(27, 23, Image.SCALE_SMOOTH);
+            Image scaled = ImageIO.read(new File("src/image/piecharticon.png")).getScaledInstance(25, 20, Image.SCALE_SMOOTH);
             statisticicon = new ImageIcon(scaled);
         }catch(IOException io_ex){
             io_ex.printStackTrace();
@@ -131,7 +137,7 @@ public class DiaOrderChart extends javax.swing.JDialog {
         pnDisplay.setPreferredSize(new java.awt.Dimension(694, 400));
         pnDisplay.setLayout(new java.awt.CardLayout());
 
-        pnShowStatistic.setLayout(new java.awt.GridLayout());
+        pnShowStatistic.setLayout(new java.awt.GridLayout(1, 0));
 
         pnFoodAndDrink.setBackground(new java.awt.Color(204, 204, 204));
         pnFoodAndDrink.setLayout(new java.awt.BorderLayout());
@@ -257,13 +263,23 @@ public class DiaOrderChart extends javax.swing.JDialog {
             }
 
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Days of "+ this.day.getYear() + "-" + this.day.getMonth() + " Total Income", "Day", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Days of "+ this.day.getYear() + "-" + this.day.getMonth() + " Total Income", "Day", "Money (VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = (CategoryPlot) chart.getPlot();
-            int seriesCount = plot.getRendererCount();
-            for (int i = 0; i < seriesCount; i++) {
-                plot.getRenderer().setSeriesStroke(i, new BasicStroke(2));
-            }
             
+            // điều chỉnh chart
+            plot.setBackgroundPaint(new Color(53, 0, 113));
+            plot.setRangeGridlinePaint(new Color(49, 168, 163));
+            LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+            renderer.setDrawOutlines(true);
+            renderer.setUseFillPaint(true);
+            // màu của line
+            renderer.setSeriesPaint(0, new Color(0, 220, 251));
+            renderer.setSeriesStroke(0, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(0, true);
+            renderer.setSeriesShapesVisible(0, true);
+            
+            
+            // hiện thị chart
             ChartPanel pndayinmonthchart = new ChartPanel(chart);
             this.pnDayinmonth.add(pndayinmonthchart, BorderLayout.CENTER);
             CardLayout c = (CardLayout) this.pnShowControl.getLayout();
@@ -285,13 +301,27 @@ public class DiaOrderChart extends javax.swing.JDialog {
             }
 
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Months of "+ this.day.getYear() + " Total Income", "Month", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Months of "+ this.day.getYear() + " Total Income", "Month", "Money (VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = (CategoryPlot) chart.getPlot();
             int seriesCount = plot.getRendererCount();
             for (int i = 0; i < seriesCount; i++) {
                 plot.getRenderer().setSeriesStroke(i, new BasicStroke(2));
             }
             
+            // điều chỉnh chart
+            plot.setBackgroundPaint(new Color(53, 0, 113));
+            plot.setRangeGridlinePaint(new Color(49, 168, 163));
+            LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+            renderer.setDrawOutlines(true);
+            renderer.setUseFillPaint(true);
+            // màu của line
+            renderer.setSeriesPaint(0, new Color(0, 220, 251));
+            renderer.setSeriesStroke(0, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(0, true);
+            renderer.setSeriesShapesVisible(0, true);
+            
+            
+            // hiện thị chart
             ChartPanel pnmonthinyearchart = new ChartPanel(chart);
             this.pnMonthinyear.add(pnmonthinyearchart, BorderLayout.CENTER);
             CardLayout c = (CardLayout) this.pnShowControl.getLayout();
@@ -313,13 +343,27 @@ public class DiaOrderChart extends javax.swing.JDialog {
             }
 
             // tạo chart
-            JFreeChart chart = ChartFactory.createLineChart("Year Total Income", "Year", "kVND", dataset, PlotOrientation.VERTICAL, true, true, false);
+            JFreeChart chart = ChartFactory.createLineChart("Year Total Income", "Year", "Money (VND)", dataset, PlotOrientation.VERTICAL, true, true, false);
             CategoryPlot plot = (CategoryPlot) chart.getPlot();
             int seriesCount = plot.getRendererCount();
             for (int i = 0; i < seriesCount; i++) {
                 plot.getRenderer().setSeriesStroke(i, new BasicStroke(2));
             }
             
+            // điều chỉnh chart
+            plot.setBackgroundPaint(new Color(53, 0, 113));
+            plot.setRangeGridlinePaint(new Color(49, 168, 163));
+            LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+            renderer.setDrawOutlines(true);
+            renderer.setUseFillPaint(true);
+            // màu của line
+            renderer.setSeriesPaint(0, new Color(0, 220, 251));
+            renderer.setSeriesStroke(0, new BasicStroke(4));
+            renderer.setSeriesShapesFilled(0, true);
+            renderer.setSeriesShapesVisible(0, true);
+            
+            
+            // hiện thị chart
             ChartPanel pnyeartoyearchart = new ChartPanel(chart);
             this.pnYeartoyear.add(pnyeartoyearchart, BorderLayout.CENTER);
             CardLayout c = (CardLayout) this.pnShowControl.getLayout();
@@ -488,10 +532,18 @@ public class DiaOrderChart extends javax.swing.JDialog {
         
         // tạo chart
         JFreeChart chart = ChartFactory.createPieChart("Today Total Amount", dataset, true, true, false);
-        Plot chartplot = chart.getPlot();
+        PiePlot chartplot = (PiePlot) chart.getPlot();
         chartplot.setDrawingSupplier(new ChartDrawingSupplier());
         
-        // tạo chart panel
+        // điều chỉnh chart
+        chartplot.setOutlineVisible(false);
+        chartplot.setIgnoreNullValues(true);
+        chartplot.setIgnoreZeroValues(true);
+        StandardPieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator("{0} : {2}");
+        chartplot.setLabelGenerator(gen);
+        chartplot.setExplodePercent("Food Amt", 0.12);
+        
+        // hiện thị chart panel
         JPanel pnchart = new ChartPanel(chart);
         this.pnFoodAndDrink.add(pnchart, BorderLayout.CENTER);
         
@@ -505,10 +557,17 @@ public class DiaOrderChart extends javax.swing.JDialog {
         
         // tạo chart
         JFreeChart chart2 = ChartFactory.createPieChart("Today Order Number", dataset2, true, true, false);
-        Plot chartplot2 = chart2.getPlot();
+        PiePlot chartplot2 = (PiePlot) chart2.getPlot();
         chartplot2.setDrawingSupplier(new ChartDrawingSupplier());
         
-        // tạo chart panel
+        // điều chỉnh chart
+        chartplot2.setOutlineVisible(false);
+        chartplot2.setIgnoreNullValues(true);
+        chartplot2.setIgnoreZeroValues(true);
+        chartplot2.setLabelGenerator(gen);
+        chartplot2.setExplodePercent("Foods", 0.12);
+        
+        // hiện thị chart panel
         JPanel pnchart2 = new ChartPanel(chart2);
         this.pnFoodDrinkAvg.add(pnchart2, BorderLayout.CENTER);
     }

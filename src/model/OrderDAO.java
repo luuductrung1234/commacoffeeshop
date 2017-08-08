@@ -210,7 +210,7 @@ public class OrderDAO {
     
     public static Map<Integer, Float> getlist_dayinmonth(int year, int month){
         HashMap<Integer, Float> resultmap = new HashMap<>();
-        String sql = "SELECT SUM(price) FROM tbOrder WHERE YEAR(ordertime) = ? AND MONTH(ordertime) = ? AND DAY(ordertime) = ?";
+        String sql = "SELECT SUM(price * 1000) FROM tbOrder WHERE YEAR(ordertime) = ? AND MONTH(ordertime) = ? AND DAY(ordertime) = ?";
         
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, 1);
@@ -243,7 +243,7 @@ public class OrderDAO {
     
     public static Map<Integer, Float> getlist_monthinyear(int year){
         HashMap<Integer, Float> resultmap = new HashMap<>();
-        String sql = "SELECT SUM(price) FROM tbOrder WHERE YEAR(ordertime) = ? AND MONTH(ordertime) = ?";
+        String sql = "SELECT SUM(price * 1000) FROM tbOrder WHERE YEAR(ordertime) = ? AND MONTH(ordertime) = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql)){
@@ -270,7 +270,7 @@ public class OrderDAO {
     
     public static HashMap<Integer, Float> getlist_yeartoyear(int year){
         HashMap<Integer, Float> resultmap = new HashMap<>();
-        String sql = "SELECT SUM(price) FROM tbOrder WHERE YEAR(ordertime) = ?";
+        String sql = "SELECT SUM(price  * 1000) FROM tbOrder WHERE YEAR(ordertime) = ?";
         
         try(Connection cn = new DBConnect().getCon();
                 PreparedStatement st = cn.prepareStatement(sql)){
