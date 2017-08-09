@@ -306,7 +306,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Employee List">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -427,6 +427,12 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="9a" green="b3" red="33" type="rgb"/>
+                            </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
@@ -471,7 +477,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Employee Information">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -929,7 +935,7 @@
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="Employee Scheduled">
-                              <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                              <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                               <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                             </TitledBorder>
                           </Border>
@@ -1015,6 +1021,12 @@
                                     </Column>
                                   </TableColumnModel>
                                 </Property>
+                                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="66" green="66" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="9a" green="b3" red="33" type="rgb"/>
+                                </Property>
                                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                 </Property>
@@ -1032,7 +1044,7 @@
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="Salary Note">
-                              <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                              <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                               <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                             </TitledBorder>
                           </Border>
@@ -1289,7 +1301,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Customer List">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -1374,6 +1386,12 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="9a" green="b3" red="33" type="rgb"/>
+                            </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
@@ -1418,7 +1436,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Customer Information">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -1664,7 +1682,7 @@
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="Food List">
-                              <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                              <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                               <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                             </TitledBorder>
                           </Border>
@@ -1746,6 +1764,12 @@
                                     </Column>
                                   </TableColumnModel>
                                 </Property>
+                                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="66" green="66" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="9a" green="b3" red="33" type="rgb"/>
+                                </Property>
                                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                 </Property>
@@ -1763,7 +1787,7 @@
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="Food Details List">
-                              <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                              <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                               <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                             </TitledBorder>
                           </Border>
@@ -1853,6 +1877,12 @@
                                       <Renderer/>
                                     </Column>
                                   </TableColumnModel>
+                                </Property>
+                                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="66" green="66" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="9a" green="b3" red="33" type="rgb"/>
                                 </Property>
                                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -1964,7 +1994,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Food Information">
-                                  <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                                  <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                                   <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -2414,7 +2444,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Food Material List">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -2505,6 +2535,12 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="9a" green="b3" red="33" type="rgb"/>
+                            </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
@@ -2549,7 +2585,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Food Material Information">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -2909,7 +2945,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Receipt Note">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -2976,6 +3012,12 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="9a" green="b3" red="33" type="rgb"/>
+                            </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
@@ -2993,7 +3035,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Receipt Note Details">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -3068,6 +3110,12 @@
                                   <Renderer/>
                                 </Column>
                               </TableColumnModel>
+                            </Property>
+                            <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="9a" green="b3" red="33" type="rgb"/>
                             </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -3212,7 +3260,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Order List">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -3297,6 +3345,12 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="9a" green="b3" red="33" type="rgb"/>
+                            </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
@@ -3314,7 +3368,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Order Details List">
-                          <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
+                          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
                           <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
                         </TitledBorder>
                       </Border>
@@ -3378,6 +3432,12 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="9a" green="b3" red="33" type="rgb"/>
+                            </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
@@ -3415,7 +3475,9 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Admin Profile"/>
+                    <TitledBorder title="Admin Profile">
+                      <Font PropertyName="font" name="Dialog" size="14" style="1"/>
+                    </TitledBorder>
                   </Border>
                 </Property>
               </Properties>
@@ -3477,7 +3539,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="pnAdminControl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="328" max="32767" attributes="0"/>
+                          <EmptySpace pref="325" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
