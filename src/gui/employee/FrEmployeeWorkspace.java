@@ -1911,7 +1911,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 204));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("EMPLOYEE INFOMATION");
@@ -1993,31 +1993,28 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
                 .addComponent(btnEmpChangeInfo)
                 .addGap(0, 234, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
-                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13))
-                        .addGap(71, 71, 71)
-                        .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtEmpUsername)
-                                .addComponent(txtEmpPass)
-                                .addComponent(txtEmpPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                                .addComponent(txtEmpBirth)
-                                .addComponent(txtEmpEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnDisplayEmployeeLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(202, 202, 202)))
-                .addGap(118, 118, 118))
+                .addGap(148, 148, 148)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addGap(71, 71, 71)
+                .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtEmpUsername)
+                        .addComponent(txtEmpPass)
+                        .addComponent(txtEmpPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                        .addComponent(txtEmpBirth)
+                        .addComponent(txtEmpEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))
+                .addContainerGap(415, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDisplayEmployeeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(304, 304, 304))
         );
         pnDisplayEmployeeLayout.setVerticalGroup(
             pnDisplayEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2065,7 +2062,7 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(204, 255, 255));
         jLabel15.setText("Table Number:");
 
-        jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 204, 0));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("SETTING");
@@ -2868,12 +2865,14 @@ public class FrEmployeeWorkspace extends javax.swing.JFrame {
         this.showStockmenu("[\\w ]*");
     }//GEN-LAST:event_btnStockActionPerformed
 
+    String namesearching;
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         String regex = "[\\w ]*"; 
-        String str = JOptionPane.showInputDialog("Input the name you want to search");
-        if(str != null){
-            regex += str;
+        this.namesearching = "";
+        new DiaSearch(this, true).setVisible(true);
+        if(this.namesearching != null){
+            regex += this.namesearching;
             regex += "[\\w ]*";
         }
         

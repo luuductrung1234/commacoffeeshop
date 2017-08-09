@@ -40,123 +40,81 @@ public class DiaComfirmPassword extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnMain = new javax.swing.JPanel();
+        lbIcon = new javax.swing.JLabel();
         lbMessage = new javax.swing.JLabel();
         txtConfirmpass = new javax.swing.JPasswordField();
-        lbIcon = new javax.swing.JLabel();
-        btnOk = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Confirm your password");
-        setBackground(new java.awt.Color(102, 102, 102));
+        setTitle("Password Confirm");
+        setBackground(new java.awt.Color(80, 4, 4));
+
+        pnMain.setBackground(new java.awt.Color(80, 4, 4));
 
         lbMessage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lbMessage.setForeground(new java.awt.Color(0, 153, 0));
+        lbMessage.setForeground(new java.awt.Color(255, 176, 176));
         lbMessage.setText("Please retype your password:");
 
-        txtConfirmpass.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtConfirmpass.setBackground(new java.awt.Color(80, 4, 4));
+        txtConfirmpass.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtConfirmpass.setForeground(new java.awt.Color(255, 176, 176));
+        txtConfirmpass.setBorder(null);
         txtConfirmpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtConfirmpassActionPerformed(evt);
             }
         });
 
-        btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
-        btnOk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnOkKeyPressed(evt);
-            }
-        });
-
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtConfirmpass, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtConfirmpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOk)
-                    .addComponent(btnCancel))
+        javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
+        pnMain.setLayout(pnMainLayout);
+        pnMainLayout.setHorizontalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtConfirmpass, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
+        );
+        pnMainLayout.setVerticalGroup(
+            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnMainLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnMainLayout.createSequentialGroup()
+                        .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtConfirmpass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         ImageIcon icon = null;
         try{
-            Image scaled = ImageIO.read(new File("src/image/confirmpass_icon.png")).getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+            Image scaled = ImageIO.read(new File("src/image/confirmpass_icon.png")).getScaledInstance(50, 50, Image.SCALE_SMOOTH);
             icon = new ImageIcon(scaled);
         }catch(IOException io_ex){
             io_ex.printStackTrace();
         }
         this.lbIcon.setIcon(icon);
 
+        getContentPane().add(pnMain, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+    private void txtConfirmpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmpassActionPerformed
         // TODO add your handling code here:
         this.parent.checkpassword = new String(this.txtConfirmpass.getPassword());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_btnOkActionPerformed
-
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-        this.parent.checkpassword = "";
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void txtConfirmpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmpassActionPerformed
-        // TODO add your handling code here:
-        this.btnOk.requestFocus();
     }//GEN-LAST:event_txtConfirmpassActionPerformed
-
-    private void btnOkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnOkKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.parent.checkpassword = new String(this.txtConfirmpass.getPassword());
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            this.dispose();
-        }
-    }//GEN-LAST:event_btnOkKeyPressed
 
     /**
      * @param args the command line arguments
@@ -201,10 +159,10 @@ public class DiaComfirmPassword extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbMessage;
+    private javax.swing.JPanel pnMain;
     private javax.swing.JPasswordField txtConfirmpass;
     // End of variables declaration//GEN-END:variables
 

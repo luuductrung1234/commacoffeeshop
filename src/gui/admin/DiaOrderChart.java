@@ -58,6 +58,7 @@ public class DiaOrderChart extends javax.swing.JDialog {
         
         initComponents();
         
+        this.setDefaultConfig();
         this.initDisplayData();
     }
 
@@ -73,8 +74,10 @@ public class DiaOrderChart extends javax.swing.JDialog {
         btngOrderStyle = new javax.swing.ButtonGroup();
         pnMain = new javax.swing.JPanel();
         pnControl = new javax.swing.JPanel();
-        btnExecuteStatistic = new javax.swing.JButton();
-        btnExecuteIncome = new javax.swing.JButton();
+        btnExecutStatistic = new javax.swing.JPanel();
+        lbExeStatistic = new javax.swing.JLabel();
+        btnExecuteIncome = new javax.swing.JPanel();
+        lbExeIncome = new javax.swing.JLabel();
         pnDisplay = new javax.swing.JPanel();
         pnShowStatistic = new javax.swing.JPanel();
         pnFoodAndDrink = new javax.swing.JPanel();
@@ -99,37 +102,73 @@ public class DiaOrderChart extends javax.swing.JDialog {
         pnControl.setPreferredSize(new java.awt.Dimension(0, 30));
         pnControl.setLayout(new java.awt.GridLayout(1, 0));
 
-        btnExecuteStatistic.setToolTipText("Common Statistic");
-        btnExecuteStatistic.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExecuteStatisticActionPerformed(evt);
+        btnExecutStatistic.setBackground(new java.awt.Color(1, 52, 82));
+        btnExecutStatistic.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExecutStatisticMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnExecutStatisticMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExecutStatisticMouseExited(evt);
             }
         });
-        pnControl.add(btnExecuteStatistic);
-        ImageIcon statisticicon = null;
-        try{
-            Image scaled = ImageIO.read(new File("src/image/piecharticon.png")).getScaledInstance(25, 20, Image.SCALE_SMOOTH);
-            statisticicon = new ImageIcon(scaled);
-        }catch(IOException io_ex){
-            io_ex.printStackTrace();
-        }
-        this.btnExecuteStatistic.setIcon(statisticicon);
 
-        btnExecuteIncome.setToolTipText("Income");
-        btnExecuteIncome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExecuteIncomeActionPerformed(evt);
+        lbExeStatistic.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbExeStatistic.setForeground(new java.awt.Color(0, 99, 72));
+        lbExeStatistic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbExeStatistic.setText("Today Statistic");
+
+        javax.swing.GroupLayout btnExecutStatisticLayout = new javax.swing.GroupLayout(btnExecutStatistic);
+        btnExecutStatistic.setLayout(btnExecutStatisticLayout);
+        btnExecutStatisticLayout.setHorizontalGroup(
+            btnExecutStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnExecutStatisticLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbExeStatistic, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnExecutStatisticLayout.setVerticalGroup(
+            btnExecutStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbExeStatistic, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+        );
+
+        pnControl.add(btnExecutStatistic);
+
+        btnExecuteIncome.setBackground(new java.awt.Color(1, 52, 82));
+        btnExecuteIncome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExecuteIncomeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnExecuteIncomeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExecuteIncomeMouseExited(evt);
             }
         });
+
+        lbExeIncome.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbExeIncome.setForeground(new java.awt.Color(0, 99, 72));
+        lbExeIncome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbExeIncome.setText("Income");
+
+        javax.swing.GroupLayout btnExecuteIncomeLayout = new javax.swing.GroupLayout(btnExecuteIncome);
+        btnExecuteIncome.setLayout(btnExecuteIncomeLayout);
+        btnExecuteIncomeLayout.setHorizontalGroup(
+            btnExecuteIncomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnExecuteIncomeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbExeIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        btnExecuteIncomeLayout.setVerticalGroup(
+            btnExecuteIncomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbExeIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+        );
+
         pnControl.add(btnExecuteIncome);
-        ImageIcon incomeicon = null;
-        try{
-            Image scaled = ImageIO.read(new File("src/image/linecharticon.png")).getScaledInstance(27, 23, Image.SCALE_SMOOTH);
-            incomeicon = new ImageIcon(scaled);
-        }catch(IOException io_ex){
-            io_ex.printStackTrace();
-        }
-        this.btnExecuteIncome.setIcon(incomeicon);
 
         pnMain.add(pnControl);
 
@@ -237,18 +276,6 @@ public class DiaOrderChart extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnExecuteStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteStatisticActionPerformed
-        // TODO add your handling code here:
-        this.show_mode = STATISTIC_SHOW;
-        this.initDisplayData();
-    }//GEN-LAST:event_btnExecuteStatisticActionPerformed
-
-    private void btnExecuteIncomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteIncomeActionPerformed
-        // TODO add your handling code here:
-        this.show_mode = INCOME_SHOW;
-        this.initDisplayData();
-    }//GEN-LAST:event_btnExecuteIncomeActionPerformed
 
     private void rbDayinmonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDayinmonthActionPerformed
 
@@ -372,6 +399,68 @@ public class DiaOrderChart extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_rbYeartoyearActionPerformed
 
+    private void btnExecutStatisticMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExecutStatisticMouseEntered
+        // TODO add your handling code here:
+        if(!this.selectedExeStatistic){
+            this.btnExecutStatistic.setBackground(new Color(11, 135, 208));
+            this.lbExeStatistic.setForeground(new Color(0, 224, 162));
+        }
+    }//GEN-LAST:event_btnExecutStatisticMouseEntered
+
+    private void btnExecutStatisticMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExecutStatisticMouseExited
+        // TODO add your handling code here:
+        if(!this.selectedExeStatistic){
+            this.btnExecutStatistic.setBackground(new Color(1, 52, 82));
+            this.lbExeStatistic.setForeground(new Color(0, 99, 72));
+        }
+    }//GEN-LAST:event_btnExecutStatisticMouseExited
+
+    private void btnExecutStatisticMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExecutStatisticMouseClicked
+        // TODO add your handling code here:
+        if(!this.selectedExeStatistic){
+            this.selectedExeStatistic = true;
+            this.selectedExeIncome = false;
+            this.btnExecutStatistic.setBackground(new Color(4, 112, 176));
+            this.lbExeStatistic.setForeground(new Color(0, 169, 157));
+            this.btnExecuteIncome.setBackground(new Color(1, 52, 82));
+            this.lbExeIncome.setForeground(new Color(0, 99, 72));
+            
+            this.show_mode = this.STATISTIC_SHOW;
+            this.initDisplayData();
+        }
+    }//GEN-LAST:event_btnExecutStatisticMouseClicked
+
+    private void btnExecuteIncomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExecuteIncomeMouseEntered
+        // TODO add your handling code here:
+        if(!this.selectedExeIncome){
+            this.btnExecuteIncome.setBackground(new Color(11, 135, 208));
+            this.lbExeIncome.setForeground(new Color(0, 224, 162));
+        }
+    }//GEN-LAST:event_btnExecuteIncomeMouseEntered
+
+    private void btnExecuteIncomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExecuteIncomeMouseExited
+        // TODO add your handling code here:
+        if(!this.selectedExeIncome){
+            this.btnExecuteIncome.setBackground(new Color(1, 52, 82));
+            this.lbExeIncome.setForeground(new Color(0, 99, 72));
+        }
+    }//GEN-LAST:event_btnExecuteIncomeMouseExited
+
+    private void btnExecuteIncomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExecuteIncomeMouseClicked
+        // TODO add your handling code here:
+        if(!this.selectedExeIncome){
+            this.selectedExeStatistic = false;
+            this.selectedExeIncome = true;
+            this.btnExecutStatistic.setBackground(new Color(1, 52, 82));
+            this.lbExeStatistic.setForeground(new Color(0, 99, 72));
+            this.btnExecuteIncome.setBackground(new Color(4, 112, 176));
+            this.lbExeIncome.setForeground(new Color(0, 169, 157));
+            
+            this.show_mode = this.INCOME_SHOW;
+            this.initDisplayData();
+        }
+    }//GEN-LAST:event_btnExecuteIncomeMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -416,9 +505,11 @@ public class DiaOrderChart extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnExecuteIncome;
-    private javax.swing.JButton btnExecuteStatistic;
+    private javax.swing.JPanel btnExecutStatistic;
+    private javax.swing.JPanel btnExecuteIncome;
     private javax.swing.ButtonGroup btngOrderStyle;
+    private javax.swing.JLabel lbExeIncome;
+    private javax.swing.JLabel lbExeStatistic;
     private javax.swing.JPanel pnBlank;
     private javax.swing.JPanel pnControl;
     private javax.swing.JPanel pnDayinmonth;
@@ -445,12 +536,25 @@ public class DiaOrderChart extends javax.swing.JDialog {
     int STATISTIC_SHOW = 0;
     int INCOME_SHOW = 1;
     int ORDERTIMING_SHOW = 2;
-    int show_mode = 0;
+    int show_mode;
+    
+    boolean selectedExeStatistic;
+    boolean selectedExeIncome;
 // END CUSTOM VARIABLE DECLARATION
 
 
 
 // CUSTOM CODE
+    private void setDefaultConfig(){
+        this.show_mode = this.STATISTIC_SHOW;
+        this.selectedExeStatistic = true;
+        this.selectedExeIncome = false;
+        this.btnExecutStatistic.setBackground(new Color(4, 112, 176));
+        this.lbExeStatistic.setForeground(new Color(0, 169, 157));
+        this.btnExecuteIncome.setBackground(new Color(1, 52, 82));
+        this.lbExeIncome.setForeground(new Color(0, 99, 72));
+    }
+    
     private void initDisplayData(){
         CardLayout c;
         switch(this.show_mode){
