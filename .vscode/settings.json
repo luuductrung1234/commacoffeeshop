@@ -1,8 +1,8 @@
 {
-    "gitTreeCompare.autoRefresh": true,
-    "gitTreeCompare.openChanges": true,
-    "gitTreeCompare.includeFilesOutsideWorkspaceRoot": true,
-    "githd.committedFiles.inExplorerView": true,
-    "githd.explorerView.withFolder": true,
-    "githd.logView.commitsCount": 200
+    //"gitTreeCompare.autoRefresh": true,
+    //"gitTreeCompare.openChanges": true,
+    //"gitTreeCompare.includeFilesOutsideWorkspaceRoot": true
+    //"githd.committedFiles.inExplorerView": true,
+    //"githd.explorerView.withFolder": true,
+    //"githd.logView.commitsCount": 200
 }

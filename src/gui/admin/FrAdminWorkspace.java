@@ -168,6 +168,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         btnShowChartSalaryNote = new javax.swing.JButton();
         jLabel48 = new javax.swing.JLabel();
         cboIsPaid = new javax.swing.JComboBox<>();
+        btnResetSalaryData = new javax.swing.JButton();
+        btnUpdateAllEmp = new javax.swing.JButton();
         pnvwNote = new javax.swing.JPanel();
         pnvwEmpSche = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -495,7 +497,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnShowEmployee.add(pnEmployeeSearch, java.awt.BorderLayout.PAGE_START);
 
-        pnvwEmployee.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwEmployee.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         vwEmployee.setAutoCreateRowSorter(true);
         vwEmployee.setModel(new javax.swing.table.DefaultTableModel(
@@ -524,7 +526,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwEmployee.setGridColor(new java.awt.Color(102, 102, 102));
+        vwEmployee.setGridColor(new java.awt.Color(153, 153, 153));
         vwEmployee.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -568,7 +570,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnEmployeeForm.setPreferredSize(new java.awt.Dimension(325, 452));
 
-        pnEmployeeInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnEmployeeInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         jLabel1.setText("Username");
 
@@ -803,6 +805,22 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         cboIsPaid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "No", "Yes" }));
 
+        btnResetSalaryData.setBackground(new java.awt.Color(255, 255, 255));
+        btnResetSalaryData.setToolTipText("Reset Data");
+        btnResetSalaryData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetSalaryDataActionPerformed(evt);
+            }
+        });
+
+        btnUpdateAllEmp.setBackground(new java.awt.Color(255, 255, 255));
+        btnUpdateAllEmp.setText("Update for all Employee");
+        btnUpdateAllEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateAllEmpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnSalarySearchLayout = new javax.swing.GroupLayout(pnSalarySearch);
         pnSalarySearch.setLayout(pnSalarySearchLayout);
         pnSalarySearchLayout.setHorizontalGroup(
@@ -815,13 +833,17 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addComponent(txtvwMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnScheNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(83, 83, 83)
                 .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel48)
                     .addComponent(cboIsPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
+                .addComponent(btnResetSalaryData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(btnUpdateAllEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExportReportSalaryNote))
@@ -830,23 +852,25 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSalarySearchLayout.createSequentialGroup()
                 .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnResetSalaryData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSchePre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnScheNext, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnSalarySearchLayout.createSequentialGroup()
-                            .addComponent(jLabel48)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cboIsPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(cboEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnSearchEmpSche, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnSalarySearchLayout.createSequentialGroup()
+                        .addComponent(cboEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnSalarySearchLayout.createSequentialGroup()
+                        .addComponent(jLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboIsPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtvwMonth))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnSalarySearchLayout.createSequentialGroup()
-                .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnSalarySearchLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtvwMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnExportReportSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnUpdateAllEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnSalarySearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnExportReportSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnShowChartSalaryNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -863,7 +887,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnvwNote.setLayout(new javax.swing.BoxLayout(pnvwNote, javax.swing.BoxLayout.LINE_AXIS));
 
-        pnvwEmpSche.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee Scheduled", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwEmpSche.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee Scheduled", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         pnvwEmpSche.setToolTipText("");
 
         vwEmpSche.setModel(new javax.swing.table.DefaultTableModel(
@@ -892,7 +916,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwEmpSche.setGridColor(new java.awt.Color(102, 102, 102));
+        vwEmpSche.setGridColor(new java.awt.Color(153, 153, 153));
         vwEmpSche.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwEmpSche.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -926,7 +950,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnvwNote.add(pnvwEmpSche);
 
-        pnvwSalary.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salary Note", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwSalary.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salary Note", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         pnvwSalary.setPreferredSize(new java.awt.Dimension(325, 569));
 
         jLabel37.setText("Salary Note ID");
@@ -1087,7 +1111,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnShowCustomer.add(pnCustomerSearch, java.awt.BorderLayout.PAGE_START);
 
-        pnvwCustomer.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Customer List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwCustomer.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Customer List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         vwCustomer.setAutoCreateRowSorter(true);
         vwCustomer.setModel(new javax.swing.table.DefaultTableModel(
@@ -1116,7 +1140,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwCustomer.setGridColor(new java.awt.Color(102, 102, 102));
+        vwCustomer.setGridColor(new java.awt.Color(153, 153, 153));
         vwCustomer.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1155,7 +1179,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnCustomerForm.setPreferredSize(new java.awt.Dimension(325, 452));
 
-        pnCustomerInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Customer Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnCustomerInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Customer Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         pnCustomerInformation.setPreferredSize(new java.awt.Dimension(325, 421));
 
         jLabel11.setText("Name");
@@ -1315,7 +1339,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnvw.setLayout(new java.awt.BorderLayout());
 
-        pnvwFood.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwFood.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         vwFood.setAutoCreateRowSorter(true);
         vwFood.setModel(new javax.swing.table.DefaultTableModel(
@@ -1344,7 +1368,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwFood.setGridColor(new java.awt.Color(102, 102, 102));
+        vwFood.setGridColor(new java.awt.Color(153, 153, 153));
         vwFood.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwFood.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1378,7 +1402,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnvw.add(pnvwFood, java.awt.BorderLayout.PAGE_START);
 
-        pnvwFD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Details List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwFD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Details List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         vwFD.setAutoCreateRowSorter(true);
         vwFD.setModel(new javax.swing.table.DefaultTableModel(
@@ -1407,7 +1431,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwFD.setGridColor(new java.awt.Color(102, 102, 102));
+        vwFD.setGridColor(new java.awt.Color(153, 153, 153));
         vwFD.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwFD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1478,7 +1502,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnFoodFormCL.setPreferredSize(new java.awt.Dimension(320, 460));
 
-        pnFoodInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnFoodInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         jLabel15.setText("Name");
 
@@ -1773,7 +1797,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnShowFM.add(pnFMSearch, java.awt.BorderLayout.PAGE_START);
 
-        pnvwFM.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Material List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwFM.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Material List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         vwFM.setAutoCreateRowSorter(true);
         vwFM.setModel(new javax.swing.table.DefaultTableModel(
@@ -1802,7 +1826,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwFM.setGridColor(new java.awt.Color(102, 102, 102));
+        vwFM.setGridColor(new java.awt.Color(153, 153, 153));
         vwFM.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwFM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1834,7 +1858,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnFMForm.setPreferredSize(new java.awt.Dimension(325, 487));
 
-        pnFMInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Material Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnFMInformation.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Food Material Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         pnFMInformation.setPreferredSize(new java.awt.Dimension(325, 421));
 
         jLabel26.setText("Name");
@@ -2059,20 +2083,20 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        ImageIcon receiptcharticon = null;
+        ImageIcon receiptnoteChartIcon = null;
         try{
             Image scaled = ImageIO.read(new File("src/image/charticon.png")).getScaledInstance(40, 35, Image.SCALE_SMOOTH);
-            receiptcharticon = new ImageIcon(scaled);
+            receiptnoteChartIcon = new ImageIcon(scaled);
         }catch(IOException io_ex){
             io_ex.printStackTrace();
         }
-        this.btnShowChartReceiptNote.setIcon(receiptcharticon);
+        this.btnShowChartReceiptNote.setIcon(receiptnoteChartIcon);
 
         pnReceiptNote.add(pnReceiptSearch, java.awt.BorderLayout.PAGE_START);
 
         pnShowReceipt.setLayout(new javax.swing.BoxLayout(pnShowReceipt, javax.swing.BoxLayout.LINE_AXIS));
 
-        pnvwReceiptNote.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Receipt Note", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwReceiptNote.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Receipt Note", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         vwReceipt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2100,7 +2124,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwReceipt.setGridColor(new java.awt.Color(102, 102, 102));
+        vwReceipt.setGridColor(new java.awt.Color(153, 153, 153));
         vwReceipt.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwReceipt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2131,7 +2155,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnShowReceipt.add(pnvwReceiptNote);
 
-        pnReceiptNoteDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Receipt Note Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnReceiptNoteDetails.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Receipt Note Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         pnReceiptNoteDetails.setPreferredSize(new java.awt.Dimension(570, 467));
 
         vwRD.setModel(new javax.swing.table.DefaultTableModel(
@@ -2160,7 +2184,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwRD.setGridColor(new java.awt.Color(102, 102, 102));
+        vwRD.setGridColor(new java.awt.Color(153, 153, 153));
         vwRD.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwRD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2278,7 +2302,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnShowOrder.setLayout(new javax.swing.BoxLayout(pnShowOrder, javax.swing.BoxLayout.LINE_AXIS));
 
-        pnvwOrder.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Order List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwOrder.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Order List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
 
         vwOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2306,7 +2330,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwOrder.setGridColor(new java.awt.Color(102, 102, 102));
+        vwOrder.setGridColor(new java.awt.Color(153, 153, 153));
         vwOrder.setSelectionBackground(new java.awt.Color(51, 179, 154));
         vwOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2337,7 +2361,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnShowOrder.add(pnvwOrder);
 
-        pnvwOD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Order Details List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        pnvwOD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Order Details List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         pnvwOD.setPreferredSize(new java.awt.Dimension(350, 457));
 
         vwOD.setModel(new javax.swing.table.DefaultTableModel(
@@ -2366,7 +2390,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        vwOD.setGridColor(new java.awt.Color(102, 102, 102));
+        vwOD.setGridColor(new java.awt.Color(153, 153, 153));
         vwOD.setSelectionBackground(new java.awt.Color(51, 179, 154));
         jScrollPane7.setViewportView(vwOD);
         if (vwOD.getColumnModel().getColumnCount() > 0) {
@@ -2396,7 +2420,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
 
         pnDisplay.add(pnOrder, "card8");
 
-        pnShowAdmin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Admin Profile", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+        pnShowAdmin.setBorder(javax.swing.BorderFactory.createTitledBorder("Admin Profile"));
 
         jLabel2.setText("Admin ID");
 
@@ -2476,7 +2500,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
                     .addComponent(txtNameAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnAdminControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnProfileLayout = new javax.swing.GroupLayout(pnProfile);
@@ -2669,6 +2693,10 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private void btnSearchCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerNameActionPerformed
         String dkCustomerName = JOptionPane.showInputDialog("Input an customer name want to search");
 //        sorterCustomer.setRowFilter(RowFilter.regexFilter(dkCustomerName.trim(), 1));
+        if(dkCustomerName == null){
+            dkCustomerName = "";
+        }
+
         modelCustomer.getDataVector().removeAllElements();
         modelCustomer.fireTableDataChanged();
         for (Customer d:dsCustomer)
@@ -5958,8 +5986,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportReportSalaryNoteActionPerformed
 
     private void btnSearchEmpScheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEmpScheActionPerformed
-        String yearmonth = txtvwMonth.getText().trim();
-        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), yearmonth);
+        
     }//GEN-LAST:event_btnSearchEmpScheActionPerformed
 
     private void btnScheNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScheNextActionPerformed
@@ -6054,10 +6081,31 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     }//GEN-LAST:event_vwEmpScheMouseClicked
 
     private void btnUpdateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSalaryActionPerformed
-        setSalaryControl(true);
+        LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
         if(btnUpdateSalary.getText().equals("Update Date Pay"))
         {
+            if(txtIDSalary.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Please choose an employee you want to pay salary!");
+                return;
+            }
+            if(!(txtDatePaySalary.getText().equals("")))
+            {
+                int opt = JOptionPane.showConfirmDialog(null, "Are you sure to update date pay of \"" + txtEmpNameSalary.getText() + "\" into other date?", "Warning!", JOptionPane.YES_NO_OPTION);
+                if(opt == JOptionPane.YES_OPTION)
+                {
+                    btnUpdateSalary.setText("Save");
+                    setSalaryControl(true);
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
             btnUpdateSalary.setText("Save");
+            setSalaryControl(true);
+            return;
         }
         if(btnUpdateSalary.getText().equals("Save"))
         {
@@ -6065,9 +6113,8 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             String em_id = txtIDEmpSalary.getText().trim();
             
             LocalDate datepay;
-            String sdatepay = txtBirthEmp.getText().trim();
+            String sdatepay = txtDatePaySalary.getText().trim();
             int dky, dkm, dkd;
-            LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
             try
             {
                 if(sdatepay.length() == 0 || sdatepay.length() > 10)
@@ -6156,13 +6203,43 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Update Date Pay successful!");
+                JOptionPane.showMessageDialog(null, "Update Date Pay fail!");
                 txtDatePaySalary.setText("");
             }
             setSalaryControl(false);
             btnUpdateSalary.setText("Update Date Pay");
         }
     }//GEN-LAST:event_btnUpdateSalaryActionPerformed
+
+    private void btnResetSalaryDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetSalaryDataActionPerformed
+        setCustomerControl(false);
+        txtIDEmpSalary.setText("");
+        txtIDSalary.setText("");
+        txtEmpNameSalary.setText("");
+        txtDatePaySalary.setText("");
+        txtSalarySalary.setText("");
+        txtWorkHourSalary.setText("");
+        txtForMonthSalary.setText("");
+        txtForYearSalary.setText("");
+        txtIsPaidSalary.setText("");
+        
+        btnUpdateSalary.setEnabled(true);
+        btnUpdateSalary.setText("Update Date Pay");
+        
+        LocalDate today = LocalDate.now( ZoneId.of( "Asia/Ho_Chi_Minh" ) );
+        initDatavwMonth(today.getYear(), today.getMonthValue());
+        initDatacboEmployee();
+        initDatavwEmpSche(cboEmployee.getSelectedItem().toString(), txtvwMonth.getText().trim());
+       
+    }//GEN-LAST:event_btnResetSalaryDataActionPerformed
+
+    private void btnUpdateAllEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateAllEmpActionPerformed
+        int opt = JOptionPane.showConfirmDialog(null, "Do you want to pay salary for all employee of " + txtvwMonth.getText().trim() + " in once?", "Warning", JOptionPane.YES_NO_OPTION);
+        if(opt == JOptionPane.YES_OPTION)
+        {
+            new DiaUpdateAllSalary(this, true, a, txtvwMonth.getText().trim()).setVisible(true);
+        }
+    }//GEN-LAST:event_btnUpdateAllEmpActionPerformed
 
     private void btnShowChartReceiptNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowChartReceiptNoteActionPerformed
         // TODO add your handling code here:
@@ -6184,7 +6261,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -6245,6 +6322,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnResetFoodData;
     private javax.swing.JButton btnResetOrderData;
     private javax.swing.JButton btnResetReceiptData;
+    private javax.swing.JButton btnResetSalaryData;
     private javax.swing.JToggleButton btnSalaryNote;
     private javax.swing.JButton btnSaveFD;
     private javax.swing.JButton btnSaveFood;
@@ -6261,6 +6339,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
     private javax.swing.JButton btnShowChartReceiptNote;
     private javax.swing.JButton btnShowChartSalaryNote;
     private javax.swing.JButton btnUpdateAd;
+    private javax.swing.JButton btnUpdateAllEmp;
     private javax.swing.JButton btnUpdateCus;
     private javax.swing.JButton btnUpdateEmp;
     private javax.swing.JButton btnUpdateFD;
@@ -6498,6 +6577,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         this.btnResetFMData.setIcon(Reseticon);
         this.btnResetOrderData.setIcon(Reseticon);
         this.btnResetReceiptData.setIcon(Reseticon);
+        this.btnResetSalaryData.setIcon(Reseticon);
 
         ImageIcon Nexticon = null;
         try{
@@ -6975,7 +7055,7 @@ public class FrAdminWorkspace extends javax.swing.JFrame {
         {
             for(Employee ds:dsEmployee)
             {
-                if(ds.getEm_id().equals(d))
+                if(ds.getEm_id().equals(d) && ds.getManager().equals(a.getAd_id()))
                 {
                     cboEmployee.addItem(ds.getName());
                 }
