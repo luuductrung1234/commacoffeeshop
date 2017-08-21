@@ -531,11 +531,11 @@ public class FrLogin extends javax.swing.JFrame {
             LineNumberReader in = new LineNumberReader(instream);
             String line;
             line = in.readLine();
-            if(line.equals("0")){       // đọc dòng đầu tiên kiểm tra đã có dữ liệu về database sẵn chưa
+            if(line.equals("0")){       // doc dong dau tien de kiem tra database da co du lieu chua
                 this.txtUsername.setEnabled(false);
                 this.txtPass.setEnabled(false);
                 this.btnSubmit.setEnabled(false);
-            }else{                      // nếu chưa có sẵn
+            }else{                      // neu chua co san
                 this.txtUsername.setEnabled(true);
                 this.txtPass.setEnabled(true);
                 this.btnSubmit.setEnabled(true);
